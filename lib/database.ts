@@ -1,16 +1,17 @@
-import 'server-only'
-import { Kysely } from 'kysely'
+import { Generated, Kysely } from 'kysely'
 import { PlanetScaleDialect } from 'kysely-planetscale'
 
-// interface User {
-//   id: Generated<number>
-//   name: string
-//   username: string
-//   email: string
-// }
+interface Company {
+  id: Generated<number>
+  name: string
+  slug: string
+  number: string
+  created: Date
+  updated: Date
+}
 
 export interface Database {
-  // users: User
+  company: Company
 }
 
 export const db = new Kysely<Database>({
