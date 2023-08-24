@@ -5,8 +5,12 @@ export async function up(db: Kysely<any>): Promise<void> {
     .createTable('company')
     .addColumn('id', 'serial', (col) => col.primaryKey())
     .addColumn('name', 'varchar(255)', (col) => col.notNull())
-    .addColumn('number', 'varchar(255)', (col) => col.notNull())
+    .addColumn('slug', 'varchar(255)', (col) => col.notNull().unique())
+    .addColumn('number', 'varchar(255)', (col) => col.notNull().unique())
     .addColumn('created', 'timestamp', (col) =>
+      col.defaultTo(sql`now()`).notNull()
+    )
+    .addColumn('updated', 'timestamp', (col) =>
       col.defaultTo(sql`now()`).notNull()
     )
     .execute()
