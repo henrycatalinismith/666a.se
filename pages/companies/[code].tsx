@@ -1,7 +1,6 @@
 import _ from 'lodash'
 import Link from 'next/link'
 
-import Layout from '../../app/layout'
 import { lookupCasesByCompanyId } from '../../lib/case'
 import { fetchAllCompanyCodes, lookupCompanyByCode } from '../../lib/company'
 import { Company } from '../../lib/database'

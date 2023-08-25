@@ -1,4 +1,5 @@
 import _ from 'lodash'
+import Link from 'next/link'
 
 import { fetchAllCaseCodes, lookupCaseByCode } from '../../lib/case'
 import { lookupCompanyById } from '../../lib/company'
@@ -13,7 +14,9 @@ export default function Case(props: any) {
     <>
       <h1>{c.code}</h1>
       <p>{c.name}</p>
-      <p>{company.name}</p>
+      <p>
+        <Link href={`/companies/${company.code}`}>{company.name}</Link>
+      </p>
 
       <h2>Filing History</h2>
       <table>
