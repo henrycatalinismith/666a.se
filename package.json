@@ -4,9 +4,7 @@
   "private": true,
   "scripts": {
     "company:import": "yarn ts-node -r dotenv/config tasks/company:import.ts",
-    "company:list": "yarn ts-node -r dotenv/config tasks/company:list.ts",
     "county:import": "yarn ts-node -r dotenv/config tasks/county:import.ts",
-    "county:list": "yarn ts-node -r dotenv/config tasks/county:list.ts",
     "document:import": "yarn ts-node -r dotenv/config tasks/document:import.ts",
     "kysely:migrate": "yarn ts-node tasks/kysely:migrate.ts",
     "municipality:import": "yarn ts-node -r dotenv/config tasks/municipality:import.ts",
