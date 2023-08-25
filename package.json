@@ -17,6 +17,7 @@
     "next:lint": "next lint",
     "planetscale:connect": "yarn ts-node tasks/planetscale:connect.ts",
     "planetscale:dump": "yarn ts-node tasks/planetscale:dump.ts",
+    "scrape:all": "yarn ts-node -r dotenv/config tasks/scrape:all.ts",
     "scrape:company": "yarn ts-node -r dotenv/config tasks/scrape:company.ts",
     "scrape:document": "yarn ts-node -r dotenv/config tasks/scrape:document.ts",
     "scrape:search": "yarn ts-node -r dotenv/config tasks/scrape:search.ts"
