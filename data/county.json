@@ -86,7 +86,7 @@
   },
   {
     "name": "Västmanland",
-    "slug": "vastmanlands",
+    "slug": "vastmanland",
     "code": "19"
   },
   {
@@ -100,8 +100,8 @@
     "code": "18"
   },
   {
-    "name": "Östergötaland",
-    "slug": "ostergotaland",
+    "name": "Östergötland",
+    "slug": "ostergotland",
     "code": "05"
   }
 ]
