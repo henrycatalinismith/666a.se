@@ -2,6 +2,11 @@ import slugify from 'slugify'
 
 import { Company, db } from '../lib/database'
 
+export async function fetchAllCompanies(): Promise<Company[]> {
+  const companies = await db.selectFrom('company').selectAll().execute()
+  return companies as any as Company[]
+}
+
 export async function lookupCompanyByCode(code: string): Promise<Company> {
   const company = await db
     .selectFrom('company')
