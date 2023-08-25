@@ -13,6 +13,19 @@ export async function fetchAllCompanyCodes(): Promise<string[]> {
   return _.map(codes, 'code')
 }
 
+export async function lookupCompanyById({
+  id,
+}: {
+  id: number
+}): Promise<Company> {
+  const company = await db
+    .selectFrom('company')
+    .selectAll()
+    .where('id', '=', id)
+    .executeTakeFirst()
+  return company as any as Company
+}
+
 export async function lookupCompanyByCode({
   code,
 }: {

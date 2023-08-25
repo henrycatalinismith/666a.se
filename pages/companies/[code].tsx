@@ -1,4 +1,5 @@
 import _ from 'lodash'
+import Link from 'next/link'
 
 import Layout from '../../app/layout'
 import { lookupCasesByCompanyId } from '../../lib/case'
@@ -12,28 +13,28 @@ export default function Company(props: any) {
 
   return (
     <>
-      <Layout>
-        <h1>{company.name}</h1>
-        <p>{company.code}</p>
+      <h1>{company.name}</h1>
+      <p>{company.code}</p>
 
-        <h2>Cases</h2>
-        <table>
-          <thead>
-            <tr>
-              <th className="text-left">Case ID</th>
-              <th className="text-left">Topic</th>
+      <h2>Case History</h2>
+      <table>
+        <thead>
+          <tr>
+            <th className="text-left">Case ID</th>
+            <th className="text-left">Topic</th>
+          </tr>
+        </thead>
+        <tbody>
+          {cases.map((c) => (
+            <tr key={c.id}>
+              <td>
+                <Link href={`/cases/${c.code}`}>{c.code}</Link>
+              </td>
+              <td>{c.name}</td>
             </tr>
-          </thead>
-          <tbody>
-            {cases.map((c) => (
-              <tr key={c.id}>
-                <td>{c.code}</td>
-                <td>{c.name}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </Layout>
+          ))}
+        </tbody>
+      </table>
     </>
   )
 }
