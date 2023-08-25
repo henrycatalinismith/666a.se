@@ -4,7 +4,7 @@ import { createCompany } from '../lib/company'
   companies.forEach((company) => {
     createCompany({
       name: company.name,
-      number: company.id,
+      code: company.id,
     })
   })
 })()

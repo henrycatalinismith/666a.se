@@ -4,10 +4,10 @@ import { db } from '../lib/database'
 
 export async function createCompany({
   name,
-  number,
+  code,
 }: {
   name: string
-  number: string
+  code: string
 }) {
   db.insertInto('company')
     .values({
@@ -15,7 +15,7 @@ export async function createCompany({
       slug: slugify(name, {
         lower: true,
       }),
-      number,
+      code,
       created: new Date(),
       updated: new Date(),
     })

@@ -3,18 +3,18 @@ import { PlanetScaleDialect } from 'kysely-planetscale'
 
 interface Company {
   id: Generated<number>
+  code: string
   name: string
   slug: string
-  number: string
   created: Date
   updated: Date
 }
 
 interface County {
   id: Generated<number>
+  code: string
   name: string
   slug: string
-  code: string
   created: Date
   updated: Date
 }
@@ -22,9 +22,21 @@ interface County {
 interface Municipality {
   id: Generated<number>
   county_id: number
+  code: string
   name: string
   slug: string
+  created: Date
+  updated: Date
+}
+
+interface Document {
+  id: Generated<number>
+  county_id: number
+  municipality_id: number
+  case_id: number
   code: string
+  topic: string
+  type: string
   created: Date
   updated: Date
 }
