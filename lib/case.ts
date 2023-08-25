@@ -1,4 +1,11 @@
+import _ from 'lodash'
+
 import { Case, db } from '../lib/database'
+
+export async function fetchAllCaseCodes(): Promise<string[]> {
+  const codes = await db.selectFrom('case').select('code').execute()
+  return _.map(codes, 'code')
+}
 
 export async function lookupCasesByCompanyId({
   companyId,
@@ -13,7 +20,11 @@ export async function lookupCasesByCompanyId({
   return cases as any as Case[]
 }
 
-export async function loopupCaseByCode(code: string): Promise<Case | null> {
+export async function lookupCaseByCode({
+  code,
+}: {
+  code: string
+}): Promise<Case | null> {
   const c = await db
     .selectFrom('case')
     .selectAll()
@@ -45,5 +56,5 @@ export async function createCase({
     })
     .execute()
 
-  return loopupCaseByCode(code) as any as Case
+  return lookupCaseByCode({ code }) as any as Case
 }

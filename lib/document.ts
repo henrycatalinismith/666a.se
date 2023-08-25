@@ -2,7 +2,7 @@ import _ from 'lodash'
 
 import { db } from '../lib/database'
 
-import { createCase, loopupCaseByCode } from './case'
+import { createCase, lookupCaseByCode } from './case'
 import { lookupCompanyByCode } from './company'
 import { lookupMunicipality } from './municipality'
 import { DocumentScrapeResult } from './scraper'
@@ -28,7 +28,7 @@ export async function importDocumentFromJson(document: {
   const filed = new Date(Date.parse(document.date))
 
   const [caseCode] = document.id.match(/....\/....../)!
-  let c = await loopupCaseByCode(caseCode)
+  let c = await lookupCaseByCode({ code: caseCode })
   if (!c) {
     c = await createCase({
       code: caseCode,
@@ -74,7 +74,7 @@ export async function importScrapedDocument(
   const filed = new Date(Date.parse(document.filed))
 
   const [caseCode] = document.code.match(/....\/....../)!
-  let c = await loopupCaseByCode(caseCode)
+  let c = await lookupCaseByCode({ code: caseCode })
   if (!c) {
     c = await createCase({
       code: caseCode,
@@ -120,4 +120,17 @@ export async function filterOutExistingDocumentCodes(
     .where('code', 'in', codes)
     .execute()
   return _.difference(codes, _.map(matches, 'code'))
+}
+
+export async function lookupDocumentsByCaseId({
+  caseId,
+}: {
+  caseId: number
+}): Promise<Document[]> {
+  const documents = await db
+    .selectFrom('document')
+    .selectAll()
+    .where('case_id', '=', caseId)
+    .execute()
+  return documents as any as Document[]
 }
