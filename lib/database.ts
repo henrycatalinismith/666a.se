@@ -10,8 +10,18 @@ interface Company {
   updated: Date
 }
 
+interface County {
+  id: Generated<number>
+  name: string
+  slug: string
+  code: string
+  created: Date
+  updated: Date
+}
+
 export interface Database {
   company: Company
+  county: County
 }
 
 export const db = new Kysely<Database>({
