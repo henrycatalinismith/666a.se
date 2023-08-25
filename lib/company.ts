@@ -21,7 +21,8 @@ export async function createCompany({
   name: string
   code: string
 }) {
-  db.insertInto('company')
+  await db
+    .insertInto('company')
     .values({
       name,
       slug: slugify(name, {
