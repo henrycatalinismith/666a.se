@@ -1,5 +1,4 @@
 import * as _ from 'lodash'
-import * as puppeteer from 'puppeteer'
 import { Browser } from 'puppeteer-core'
 
 import {
