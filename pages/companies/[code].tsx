@@ -24,7 +24,7 @@ export default function Company(props: any) {
           </tr>
         </thead>
         <tbody>
-          {cases.map((c) => (
+          {cases.map((c: any) => (
             <tr key={c.id}>
               <td>
                 <Link href={`/cases/${c.code}`}>{c.code}</Link>
