@@ -1,7 +1,7 @@
 import { Generated, Kysely } from 'kysely'
 import { PlanetScaleDialect } from 'kysely-planetscale'
 
-interface Company {
+export interface Company {
   id: Generated<number>
   code: string
   name: string
@@ -10,7 +10,7 @@ interface Company {
   updated: Date
 }
 
-interface County {
+export interface County {
   id: Generated<number>
   code: string
   name: string
@@ -19,7 +19,7 @@ interface County {
   updated: Date
 }
 
-interface Municipality {
+export interface Municipality {
   id: Generated<number>
   county_id: number
   code: string
@@ -29,22 +29,29 @@ interface Municipality {
   updated: Date
 }
 
-interface Document {
+export interface Document {
   id: Generated<number>
+  // case_id: number
+  company_id: number
   county_id: number
   municipality_id: number
-  case_id: number
   code: string
-  topic: string
   type: string
+  cfar: string
+  workplace: string
+  direction: 'incoming' | 'outgoing' | 'blank'
+  status: 'ongoing' | 'complete'
+  filed: Date
   created: Date
   updated: Date
+  case_topic: string
 }
 
 export interface Database {
   company: Company
   county: County
   municipality: Municipality
+  document: Document
 }
 
 export const db = new Kysely<Database>({
