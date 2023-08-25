@@ -31,7 +31,7 @@ export interface Municipality {
 
 export interface Document {
   id: Generated<number>
-  // case_id: number
+  case_id: number
   company_id: number
   county_id: number
   municipality_id: number
@@ -44,10 +44,19 @@ export interface Document {
   filed: Date
   created: Date
   updated: Date
-  case_topic: string
+}
+
+export interface Case {
+  id: Generated<number>
+  company_id: number
+  code: string
+  name: string
+  created: Date
+  updated: Date
 }
 
 export interface Database {
+  case: Case
   company: Company
   county: County
   municipality: Municipality

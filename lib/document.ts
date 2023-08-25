@@ -1,5 +1,6 @@
 import { db } from '../lib/database'
 
+import { createCase, loopupCaseByCode } from './case'
 import { lookupCompanyByCode } from './company'
 import { lookupMunicipality } from './municipality'
 
@@ -23,8 +24,20 @@ export async function importDocument(document: {
   const municipalityId = municipality.id as any as number
   const filed = new Date(Date.parse(document.date))
 
+  const [caseCode] = document.id.match(/....\/....../)!
+  let c = await loopupCaseByCode(caseCode)
+  if (!c) {
+    c = await createCase({
+      code: caseCode,
+      name: document.topic,
+      companyId: companyId,
+    })
+  }
+  const caseId = c.id as any as number
+
   db.insertInto('document')
     .values({
+      case_id: caseId,
       company_id: companyId,
       county_id: municipality.county_id,
       municipality_id: municipalityId,
@@ -44,7 +57,6 @@ export async function importDocument(document: {
       filed,
       created: new Date(),
       updated: new Date(),
-      case_topic: document.topic,
     })
     .execute()
 }

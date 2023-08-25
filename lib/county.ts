@@ -9,7 +9,8 @@ export async function createCounty({
   code: string
   slug: string
 }) {
-  db.insertInto('county')
+  await db
+    .insertInto('county')
     .values({
       name,
       code,
