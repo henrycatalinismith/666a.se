@@ -8,6 +8,8 @@
     "county:import": "yarn ts-node -r dotenv/config tasks/county:import.ts",
     "county:list": "yarn ts-node -r dotenv/config tasks/county:list.ts",
     "kysely:migrate": "yarn ts-node tasks/kysely:migrate.ts",
+    "municipality:import": "yarn ts-node -r dotenv/config tasks/municipality:import.ts",
+    "municipality:list": "yarn ts-node -r dotenv/config tasks/municipality:list.ts",
     "next:dev": "next dev",
     "next:build": "next build",
     "next:start": "next start",

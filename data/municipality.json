@@ -1,0 +1,1161 @@
+[{
+  "code": "0114",
+  "municipality": "Upplands Väsby",
+  "county": "Stockholm"
+}, {
+  "code": "0115",
+  "municipality": "Vallentuna",
+  "county": "Stockholm"
+}, {
+  "code": "0117",
+  "municipality": "Österåker",
+  "county": "Stockholm"
+}, {
+  "code": "0120",
+  "municipality": "Värmdö",
+  "county": "Stockholm"
+}, {
+  "code": "0123",
+  "municipality": "Järfälla",
+  "county": "Stockholm"
+}, {
+  "code": "0125",
+  "municipality": "Ekerö",
+  "county": "Stockholm"
+}, {
+  "code": "0126",
+  "municipality": "Huddinge",
+  "county": "Stockholm"
+}, {
+  "code": "0127",
+  "municipality": "Botkyrka",
+  "county": "Stockholm"
+}, {
+  "code": "0128",
+  "municipality": "Salem",
+  "county": "Stockholm"
+}, {
+  "code": "0136",
+  "municipality": "Haninge",
+  "county": "Stockholm"
+}, {
+  "code": "0138",
+  "municipality": "Tyresö",
+  "county": "Stockholm"
+}, {
+  "code": "0139",
+  "municipality": "Upplands-Bro",
+  "county": "Stockholm"
+}, {
+  "code": "0140",
+  "municipality": "Nykvarn",
+  "county": "Stockholm"
+}, {
+  "code": "0160",
+  "municipality": "Täby",
+  "county": "Stockholm"
+}, {
+  "code": "0162",
+  "municipality": "Danderyd",
+  "county": "Stockholm"
+}, {
+  "code": "0163",
+  "municipality": "Sollentuna",
+  "county": "Stockholm"
+}, {
+  "code": "0180",
+  "municipality": "Stockholm",
+  "county": "Stockholm"
+}, {
+  "code": "0181",
+  "municipality": "Södertälje",
+  "county": "Stockholm"
+}, {
+  "code": "0182",
+  "municipality": "Nacka",
+  "county": "Stockholm"
+}, {
+  "code": "0183",
+  "municipality": "Sundbyberg",
+  "county": "Stockholm"
+}, {
+  "code": "0184",
+  "municipality": "Solna",
+  "county": "Stockholm"
+}, {
+  "code": "0186",
+  "municipality": "Lidingö",
+  "county": "Stockholm"
+}, {
+  "code": "0187",
+  "municipality": "Vaxholm",
+  "county": "Stockholm"
+}, {
+  "code": "0188",
+  "municipality": "Norrtälje",
+  "county": "Stockholm"
+}, {
+  "code": "0191",
+  "municipality": "Sigtuna",
+  "county": "Stockholm"
+}, {
+  "code": "0192",
+  "municipality": "Nynäshamn",
+  "county": "Stockholm"
+}, {
+  "code": "0305",
+  "municipality": "Håbo",
+  "county": "Uppsala"
+}, {
+  "code": "0319",
+  "municipality": "Älvkarleby",
+  "county": "Uppsala"
+}, {
+  "code": "0330",
+  "municipality": "Knivsta",
+  "county": "Uppsala"
+}, {
+  "code": "0331",
+  "municipality": "Heby",
+  "county": "Uppsala"
+}, {
+  "code": "0360",
+  "municipality": "Tierp",
+  "county": "Uppsala"
+}, {
+  "code": "0380",
+  "municipality": "Uppsala",
+  "county": "Uppsala"
+}, {
+  "code": "0381",
+  "municipality": "Enköping",
+  "county": "Uppsala"
+}, {
+  "code": "0382",
+  "municipality": "Östhammar",
+  "county": "Uppsala"
+}, {
+  "code": "0428",
+  "municipality": "Vingåker",
+  "county": "Södermanland"
+}, {
+  "code": "0461",
+  "municipality": "Gnesta",
+  "county": "Södermanland"
+}, {
+  "code": "0480",
+  "municipality": "Nyköping",
+  "county": "Södermanland"
+}, {
+  "code": "0481",
+  "municipality": "Oxelösund",
+  "county": "Södermanland"
+}, {
+  "code": "0482",
+  "municipality": "Flen",
+  "county": "Södermanland"
+}, {
+  "code": "0483",
+  "municipality": "Katrineholm",
+  "county": "Södermanland"
+}, {
+  "code": "0484",
+  "municipality": "Eskilstuna",
+  "county": "Södermanland"
+}, {
+  "code": "0486",
+  "municipality": "Strängnäs",
+  "county": "Södermanland"
+}, {
+  "code": "0488",
+  "municipality": "Trosa",
+  "county": "Södermanland"
+}, {
+  "code": "0509",
+  "municipality": "Ödeshög",
+  "county": "Östergötland"
+}, {
+  "code": "0512",
+  "municipality": "Ydre",
+  "county": "Östergötland"
+}, {
+  "code": "0513",
+  "municipality": "Kinda",
+  "county": "Östergötland"
+}, {
+  "code": "0560",
+  "municipality": "Boxholm",
+  "county": "Östergötland"
+}, {
+  "code": "0561",
+  "municipality": "Åtvidaberg",
+  "county": "Östergötland"
+}, {
+  "code": "0562",
+  "municipality": "Finspång",
+  "county": "Östergötland"
+}, {
+  "code": "0563",
+  "municipality": "Valdemarsvik",
+  "county": "Östergötland"
+}, {
+  "code": "0580",
+  "municipality": "Linköping",
+  "county": "Östergötland"
+}, {
+  "code": "0581",
+  "municipality": "Norrköping",
+  "county": "Östergötland"
+}, {
+  "code": "0582",
+  "municipality": "Söderköping",
+  "county": "Östergötland"
+}, {
+  "code": "0583",
+  "municipality": "Motala",
+  "county": "Östergötland"
+}, {
+  "code": "0584",
+  "municipality": "Vadstena",
+  "county": "Östergötland"
+}, {
+  "code": "0586",
+  "municipality": "Mjölby",
+  "county": "Östergötland"
+}, {
+  "code": "0604",
+  "municipality": "Aneby",
+  "county": "Jönköping"
+}, {
+  "code": "0617",
+  "municipality": "Gnosjö",
+  "county": "Jönköping"
+}, {
+  "code": "0642",
+  "municipality": "Mullsjö",
+  "county": "Jönköping"
+}, {
+  "code": "0643",
+  "municipality": "Habo",
+  "county": "Jönköping"
+}, {
+  "code": "0662",
+  "municipality": "Gislaved",
+  "county": "Jönköping"
+}, {
+  "code": "0665",
+  "municipality": "Vaggeryd",
+  "county": "Jönköping"
+}, {
+  "code": "0680",
+  "municipality": "Jönköping",
+  "county": "Jönköping"
+}, {
+  "code": "0682",
+  "municipality": "Nässjö",
+  "county": "Jönköping"
+}, {
+  "code": "0683",
+  "municipality": "Värnamo",
+  "county": "Jönköping"
+}, {
+  "code": "0684",
+  "municipality": "Sävsjö",
+  "county": "Jönköping"
+}, {
+  "code": "0685",
+  "municipality": "Vetlanda",
+  "county": "Jönköping"
+}, {
+  "code": "0686",
+  "municipality": "Eksjö",
+  "county": "Jönköping"
+}, {
+  "code": "0687",
+  "municipality": "Tranås",
+  "county": "Jönköping"
+}, {
+  "code": "0760",
+  "municipality": "Uppvidinge",
+  "county": "Kronoberg"
+}, {
+  "code": "0761",
+  "municipality": "Lessebo",
+  "county": "Kronoberg"
+}, {
+  "code": "0763",
+  "municipality": "Tingsryd",
+  "county": "Kronoberg"
+}, {
+  "code": "0764",
+  "municipality": "Alvesta",
+  "county": "Kronoberg"
+}, {
+  "code": "0765",
+  "municipality": "Älmhult",
+  "county": "Kronoberg"
+}, {
+  "code": "0767",
+  "municipality": "Markaryd",
+  "county": "Kronoberg"
+}, {
+  "code": "0780",
+  "municipality": "Växjö",
+  "county": "Kronoberg"
+}, {
+  "code": "0781",
+  "municipality": "Ljungby",
+  "county": "Kronoberg"
+}, {
+  "code": "0821",
+  "municipality": "Högsby",
+  "county": "Kalmar"
+}, {
+  "code": "0834",
+  "municipality": "Torsås",
+  "county": "Kalmar"
+}, {
+  "code": "0840",
+  "municipality": "Mörbylånga",
+  "county": "Kalmar"
+}, {
+  "code": "0860",
+  "municipality": "Hultsfred",
+  "county": "Kalmar"
+}, {
+  "code": "0861",
+  "municipality": "Mönsterås",
+  "county": "Kalmar"
+}, {
+  "code": "0862",
+  "municipality": "Emmaboda",
+  "county": "Kalmar"
+}, {
+  "code": "0880",
+  "municipality": "Kalmar",
+  "county": "Kalmar"
+}, {
+  "code": "0881",
+  "municipality": "Nybro",
+  "county": "Kalmar"
+}, {
+  "code": "0882",
+  "municipality": "Oskarshamn",
+  "county": "Kalmar"
+}, {
+  "code": "0883",
+  "municipality": "Västervik",
+  "county": "Kalmar"
+}, {
+  "code": "0884",
+  "municipality": "Vimmerby",
+  "county": "Kalmar"
+}, {
+  "code": "0885",
+  "municipality": "Borgholm",
+  "county": "Kalmar"
+}, {
+  "code": "0980",
+  "municipality": "Gotland",
+  "county": "Gotland"
+}, {
+  "code": "1060",
+  "municipality": "Olofström",
+  "county": "Blekinge"
+}, {
+  "code": "1080",
+  "municipality": "Karlskrona",
+  "county": "Blekinge"
+}, {
+  "code": "1081",
+  "municipality": "Ronneby",
+  "county": "Blekinge"
+}, {
+  "code": "1082",
+  "municipality": "Karlshamn",
+  "county": "Blekinge"
+}, {
+  "code": "1083",
+  "municipality": "Sölvesborg",
+  "county": "Blekinge"
+}, {
+  "code": "1214",
+  "municipality": "Svalöv",
+  "county": "Skåne"
+}, {
+  "code": "1230",
+  "municipality": "Staffanstorp",
+  "county": "Skåne"
+}, {
+  "code": "1231",
+  "municipality": "Burlöv",
+  "county": "Skåne"
+}, {
+  "code": "1233",
+  "municipality": "Vellinge",
+  "county": "Skåne"
+}, {
+  "code": "1256",
+  "municipality": "Östra Göinge",
+  "county": "Skåne"
+}, {
+  "code": "1257",
+  "municipality": "Örkelljunga",
+  "county": "Skåne"
+}, {
+  "code": "1260",
+  "municipality": "Bjuv",
+  "county": "Skåne"
+}, {
+  "code": "1261",
+  "municipality": "Kävlinge",
+  "county": "Skåne"
+}, {
+  "code": "1262",
+  "municipality": "Lomma",
+  "county": "Skåne"
+}, {
+  "code": "1263",
+  "municipality": "Svedala",
+  "county": "Skåne"
+}, {
+  "code": "1264",
+  "municipality": "Skurup",
+  "county": "Skåne"
+}, {
+  "code": "1265",
+  "municipality": "Sjöbo",
+  "county": "Skåne"
+}, {
+  "code": "1266",
+  "municipality": "Hörby",
+  "county": "Skåne"
+}, {
+  "code": "1267",
+  "municipality": "Höör",
+  "county": "Skåne"
+}, {
+  "code": "1270",
+  "municipality": "Tomelilla",
+  "county": "Skåne"
+}, {
+  "code": "1272",
+  "municipality": "Bromölla",
+  "county": "Skåne"
+}, {
+  "code": "1273",
+  "municipality": "Osby",
+  "county": "Skåne"
+}, {
+  "code": "1275",
+  "municipality": "Perstorp",
+  "county": "Skåne"
+}, {
+  "code": "1276",
+  "municipality": "Klippan",
+  "county": "Skåne"
+}, {
+  "code": "1277",
+  "municipality": "Åstorp",
+  "county": "Skåne"
+}, {
+  "code": "1278",
+  "municipality": "Båstad",
+  "county": "Skåne"
+}, {
+  "code": "1280",
+  "municipality": "Malmö",
+  "county": "Skåne"
+}, {
+  "code": "1281",
+  "municipality": "Lund",
+  "county": "Skåne"
+}, {
+  "code": "1282",
+  "municipality": "Landskrona",
+  "county": "Skåne"
+}, {
+  "code": "1283",
+  "municipality": "Helsingborg",
+  "county": "Skåne"
+}, {
+  "code": "1284",
+  "municipality": "Höganäs",
+  "county": "Skåne"
+}, {
+  "code": "1285",
+  "municipality": "Eslöv",
+  "county": "Skåne"
+}, {
+  "code": "1286",
+  "municipality": "Ystad",
+  "county": "Skåne"
+}, {
+  "code": "1287",
+  "municipality": "Trelleborg",
+  "county": "Skåne"
+}, {
+  "code": "1290",
+  "municipality": "Kristianstad",
+  "county": "Skåne"
+}, {
+  "code": "1291",
+  "municipality": "Simrishamn",
+  "county": "Skåne"
+}, {
+  "code": "1292",
+  "municipality": "Ängelholm",
+  "county": "Skåne"
+}, {
+  "code": "1293",
+  "municipality": "Hässleholm",
+  "county": "Skåne"
+}, {
+  "code": "1315",
+  "municipality": "Hylte",
+  "county": "Halland"
+}, {
+  "code": "1380",
+  "municipality": "Halmstad",
+  "county": "Halland"
+}, {
+  "code": "1381",
+  "municipality": "Laholm",
+  "county": "Halland"
+}, {
+  "code": "1382",
+  "municipality": "Falkenberg",
+  "county": "Halland"
+}, {
+  "code": "1383",
+  "municipality": "Varberg",
+  "county": "Halland"
+}, {
+  "code": "1384",
+  "municipality": "Kungsbacka",
+  "county": "Halland"
+}, {
+  "code": "1401",
+  "municipality": "Härryda",
+  "county": "Västra Götaland"
+}, {
+  "code": "1402",
+  "municipality": "Partille",
+  "county": "Västra Götaland"
+}, {
+  "code": "1407",
+  "municipality": "Öckerö",
+  "county": "Västra Götaland"
+}, {
+  "code": "1415",
+  "municipality": "Stenungsund",
+  "county": "Västra Götaland"
+}, {
+  "code": "1419",
+  "municipality": "Tjörn",
+  "county": "Västra Götaland"
+}, {
+  "code": "1421",
+  "municipality": "Orust",
+  "county": "Västra Götaland"
+}, {
+  "code": "1427",
+  "municipality": "Sotenäs",
+  "county": "Västra Götaland"
+}, {
+  "code": "1430",
+  "municipality": "Munkedal",
+  "county": "Västra Götaland"
+}, {
+  "code": "1435",
+  "municipality": "Tanum",
+  "county": "Västra Götaland"
+}, {
+  "code": "1438",
+  "municipality": "Dals-Ed",
+  "county": "Västra Götaland"
+}, {
+  "code": "1439",
+  "municipality": "Färgelanda",
+  "county": "Västra Götaland"
+}, {
+  "code": "1440",
+  "municipality": "Ale",
+  "county": "Västra Götaland"
+}, {
+  "code": "1441",
+  "municipality": "Lerum",
+  "county": "Västra Götaland"
+}, {
+  "code": "1442",
+  "municipality": "Vårgårda",
+  "county": "Västra Götaland"
+}, {
+  "code": "1443",
+  "municipality": "Bollebygd",
+  "county": "Västra Götaland"
+}, {
+  "code": "1444",
+  "municipality": "Grästorp",
+  "county": "Västra Götaland"
+}, {
+  "code": "1445",
+  "municipality": "Essunga",
+  "county": "Västra Götaland"
+}, {
+  "code": "1446",
+  "municipality": "Karlsborg",
+  "county": "Västra Götaland"
+}, {
+  "code": "1447",
+  "municipality": "Gullspång",
+  "county": "Västra Götaland"
+}, {
+  "code": "1452",
+  "municipality": "Tranemo",
+  "county": "Västra Götaland"
+}, {
+  "code": "1460",
+  "municipality": "Bengtsfors",
+  "county": "Västra Götaland"
+}, {
+  "code": "1461",
+  "municipality": "Mellerud",
+  "county": "Västra Götaland"
+}, {
+  "code": "1462",
+  "municipality": "Lilla Edet",
+  "county": "Västra Götaland"
+}, {
+  "code": "1463",
+  "municipality": "Mark",
+  "county": "Västra Götaland"
+}, {
+  "code": "1465",
+  "municipality": "Svenljunga",
+  "county": "Västra Götaland"
+}, {
+  "code": "1466",
+  "municipality": "Herrljunga",
+  "county": "Västra Götaland"
+}, {
+  "code": "1470",
+  "municipality": "Vara",
+  "county": "Västra Götaland"
+}, {
+  "code": "1471",
+  "municipality": "Götene",
+  "county": "Västra Götaland"
+}, {
+  "code": "1472",
+  "municipality": "Tibro",
+  "county": "Västra Götaland"
+}, {
+  "code": "1473",
+  "municipality": "Töreboda",
+  "county": "Västra Götaland"
+}, {
+  "code": "1480",
+  "municipality": "Göteborg",
+  "county": "Västra Götaland"
+}, {
+  "code": "1481",
+  "municipality": "Mölndal",
+  "county": "Västra Götaland"
+}, {
+  "code": "1482",
+  "municipality": "Kungälv",
+  "county": "Västra Götaland"
+}, {
+  "code": "1484",
+  "municipality": "Lysekil",
+  "county": "Västra Götaland"
+}, {
+  "code": "1485",
+  "municipality": "Uddevalla",
+  "county": "Västra Götaland"
+}, {
+  "code": "1486",
+  "municipality": "Strömstad",
+  "county": "Västra Götaland"
+}, {
+  "code": "1487",
+  "municipality": "Vänersborg",
+  "county": "Västra Götaland"
+}, {
+  "code": "1488",
+  "municipality": "Trollhättan",
+  "county": "Västra Götaland"
+}, {
+  "code": "1489",
+  "municipality": "Alingsås",
+  "county": "Västra Götaland"
+}, {
+  "code": "1490",
+  "municipality": "Borås",
+  "county": "Västra Götaland"
+}, {
+  "code": "1491",
+  "municipality": "Ulricehamn",
+  "county": "Västra Götaland"
+}, {
+  "code": "1492",
+  "municipality": "Åmål",
+  "county": "Västra Götaland"
+}, {
+  "code": "1493",
+  "municipality": "Mariestad",
+  "county": "Västra Götaland"
+}, {
+  "code": "1494",
+  "municipality": "Lidköping",
+  "county": "Västra Götaland"
+}, {
+  "code": "1495",
+  "municipality": "Skara",
+  "county": "Västra Götaland"
+}, {
+  "code": "1496",
+  "municipality": "Skövde",
+  "county": "Västra Götaland"
+}, {
+  "code": "1497",
+  "municipality": "Hjo",
+  "county": "Västra Götaland"
+}, {
+  "code": "1498",
+  "municipality": "Tidaholm",
+  "county": "Västra Götaland"
+}, {
+  "code": "1499",
+  "municipality": "Falköping",
+  "county": "Västra Götaland"
+}, {
+  "code": "1715",
+  "municipality": "Kil",
+  "county": "Värmland"
+}, {
+  "code": "1730",
+  "municipality": "Eda",
+  "county": "Värmland"
+}, {
+  "code": "1737",
+  "municipality": "Torsby",
+  "county": "Värmland"
+}, {
+  "code": "1760",
+  "municipality": "Storfors",
+  "county": "Värmland"
+}, {
+  "code": "1761",
+  "municipality": "Hammarö",
+  "county": "Värmland"
+}, {
+  "code": "1762",
+  "municipality": "Munkfors",
+  "county": "Värmland"
+}, {
+  "code": "1763",
+  "municipality": "Forshaga",
+  "county": "Värmland"
+}, {
+  "code": "1764",
+  "municipality": "Grums",
+  "county": "Värmland"
+}, {
+  "code": "1765",
+  "municipality": "Årjäng",
+  "county": "Värmland"
+}, {
+  "code": "1766",
+  "municipality": "Sunne",
+  "county": "Värmland"
+}, {
+  "code": "1780",
+  "municipality": "Karlstad",
+  "county": "Värmland"
+}, {
+  "code": "1781",
+  "municipality": "Kristinehamn",
+  "county": "Värmland"
+}, {
+  "code": "1782",
+  "municipality": "Filipstad",
+  "county": "Värmland"
+}, {
+  "code": "1783",
+  "municipality": "Hagfors",
+  "county": "Värmland"
+}, {
+  "code": "1784",
+  "municipality": "Arvika",
+  "county": "Värmland"
+}, {
+  "code": "1785",
+  "municipality": "Säffle",
+  "county": "Värmland"
+}, {
+  "code": "1814",
+  "municipality": "Lekeberg",
+  "county": "Örebro"
+}, {
+  "code": "1860",
+  "municipality": "Laxå",
+  "county": "Örebro"
+}, {
+  "code": "1861",
+  "municipality": "Hallsberg",
+  "county": "Örebro"
+}, {
+  "code": "1862",
+  "municipality": "Degerfors",
+  "county": "Örebro"
+}, {
+  "code": "1863",
+  "municipality": "Hällefors",
+  "county": "Örebro"
+}, {
+  "code": "1864",
+  "municipality": "Ljusnarsberg",
+  "county": "Örebro"
+}, {
+  "code": "1880",
+  "municipality": "Örebro",
+  "county": "Örebro"
+}, {
+  "code": "1881",
+  "municipality": "Kumla",
+  "county": "Örebro"
+}, {
+  "code": "1882",
+  "municipality": "Askersund",
+  "county": "Örebro"
+}, {
+  "code": "1883",
+  "municipality": "Karlskoga",
+  "county": "Örebro"
+}, {
+  "code": "1884",
+  "municipality": "Nora",
+  "county": "Örebro"
+}, {
+  "code": "1885",
+  "municipality": "Lindesberg",
+  "county": "Örebro"
+}, {
+  "code": "1904",
+  "municipality": "Skinnskatteberg",
+  "county": "Västmanland"
+}, {
+  "code": "1907",
+  "municipality": "Surahammar",
+  "county": "Västmanland"
+}, {
+  "code": "1960",
+  "municipality": "Kungsör",
+  "county": "Västmanland"
+}, {
+  "code": "1961",
+  "municipality": "Hallstahammar",
+  "county": "Västmanland"
+}, {
+  "code": "1962",
+  "municipality": "Norberg",
+  "county": "Västmanland"
+}, {
+  "code": "1980",
+  "municipality": "Västerås",
+  "county": "Västmanland"
+}, {
+  "code": "1981",
+  "municipality": "Sala",
+  "county": "Västmanland"
+}, {
+  "code": "1982",
+  "municipality": "Fagersta",
+  "county": "Västmanland"
+}, {
+  "code": "1983",
+  "municipality": "Köping",
+  "county": "Västmanland"
+}, {
+  "code": "1984",
+  "municipality": "Arboga",
+  "county": "Västmanland"
+}, {
+  "code": "2021",
+  "municipality": "Vansbro",
+  "county": "Dalarna"
+}, {
+  "code": "2023",
+  "municipality": "Malung-Sälen",
+  "county": "Dalarna"
+}, {
+  "code": "2026",
+  "municipality": "Gagnef",
+  "county": "Dalarna"
+}, {
+  "code": "2029",
+  "municipality": "Leksand",
+  "county": "Dalarna"
+}, {
+  "code": "2031",
+  "municipality": "Rättvik",
+  "county": "Dalarna"
+}, {
+  "code": "2034",
+  "municipality": "Orsa",
+  "county": "Dalarna"
+}, {
+  "code": "2039",
+  "municipality": "Älvdalen",
+  "county": "Dalarna"
+}, {
+  "code": "2061",
+  "municipality": "Smedjebacken",
+  "county": "Dalarna"
+}, {
+  "code": "2062",
+  "municipality": "Mora",
+  "county": "Dalarna"
+}, {
+  "code": "2080",
+  "municipality": "Falun",
+  "county": "Dalarna"
+}, {
+  "code": "2081",
+  "municipality": "Borlänge",
+  "county": "Dalarna"
+}, {
+  "code": "2082",
+  "municipality": "Säter",
+  "county": "Dalarna"
+}, {
+  "code": "2083",
+  "municipality": "Hedemora",
+  "county": "Dalarna"
+}, {
+  "code": "2084",
+  "municipality": "Avesta",
+  "county": "Dalarna"
+}, {
+  "code": "2085",
+  "municipality": "Ludvika",
+  "county": "Dalarna"
+}, {
+  "code": "2101",
+  "municipality": "Ockelbo",
+  "county": "Gävleborg"
+}, {
+  "code": "2104",
+  "municipality": "Hofors",
+  "county": "Gävleborg"
+}, {
+  "code": "2121",
+  "municipality": "Ovanåker",
+  "county": "Gävleborg"
+}, {
+  "code": "2132",
+  "municipality": "Nordanstig",
+  "county": "Gävleborg"
+}, {
+  "code": "2161",
+  "municipality": "Ljusdal",
+  "county": "Gävleborg"
+}, {
+  "code": "2180",
+  "municipality": "Gävle",
+  "county": "Gävleborg"
+}, {
+  "code": "2181",
+  "municipality": "Sandviken",
+  "county": "Gävleborg"
+}, {
+  "code": "2182",
+  "municipality": "Söderhamn",
+  "county": "Gävleborg"
+}, {
+  "code": "2183",
+  "municipality": "Bollnäs",
+  "county": "Gävleborg"
+}, {
+  "code": "2184",
+  "municipality": "Hudiksvall",
+  "county": "Gävleborg"
+}, {
+  "code": "2260",
+  "municipality": "Ånge",
+  "county": "Västernorrland"
+}, {
+  "code": "2262",
+  "municipality": "Timrå",
+  "county": "Västernorrland"
+}, {
+  "code": "2280",
+  "municipality": "Härnösand",
+  "county": "Västernorrland"
+}, {
+  "code": "2281",
+  "municipality": "Sundsvall",
+  "county": "Västernorrland"
+}, {
+  "code": "2282",
+  "municipality": "Kramfors",
+  "county": "Västernorrland"
+}, {
+  "code": "2283",
+  "municipality": "Sollefteå",
+  "county": "Västernorrland"
+}, {
+  "code": "2284",
+  "municipality": "Örnsköldsvik",
+  "county": "Västernorrland"
+}, {
+  "code": "2303",
+  "municipality": "Ragunda",
+  "county": "Jämtland"
+}, {
+  "code": "2305",
+  "municipality": "Bräcke",
+  "county": "Jämtland"
+}, {
+  "code": "2309",
+  "municipality": "Krokom",
+  "county": "Jämtland"
+}, {
+  "code": "2313",
+  "municipality": "Strömsund",
+  "county": "Jämtland"
+}, {
+  "code": "2321",
+  "municipality": "Åre",
+  "county": "Jämtland"
+}, {
+  "code": "2326",
+  "municipality": "Berg",
+  "county": "Jämtland"
+}, {
+  "code": "2361",
+  "municipality": "Härjedalen",
+  "county": "Jämtland"
+}, {
+  "code": "2380",
+  "municipality": "Östersund",
+  "county": "Jämtland"
+}, {
+  "code": "2401",
+  "municipality": "Nordmaling",
+  "county": "Västerbotten"
+}, {
+  "code": "2403",
+  "municipality": "Bjurholm",
+  "county": "Västerbotten"
+}, {
+  "code": "2404",
+  "municipality": "Vindeln",
+  "county": "Västerbotten"
+}, {
+  "code": "2409",
+  "municipality": "Robertsfors",
+  "county": "Västerbotten"
+}, {
+  "code": "2417",
+  "municipality": "Norsjö",
+  "county": "Västerbotten"
+}, {
+  "code": "2418",
+  "municipality": "Malå",
+  "county": "Västerbotten"
+}, {
+  "code": "2421",
+  "municipality": "Storuman",
+  "county": "Västerbotten"
+}, {
+  "code": "2422",
+  "municipality": "Sorsele",
+  "county": "Västerbotten"
+}, {
+  "code": "2425",
+  "municipality": "Dorotea",
+  "county": "Västerbotten"
+}, {
+  "code": "2460",
+  "municipality": "Vännäs",
+  "county": "Västerbotten"
+}, {
+  "code": "2462",
+  "municipality": "Vilhelmina",
+  "county": "Västerbotten"
+}, {
+  "code": "2463",
+  "municipality": "Åsele",
+  "county": "Västerbotten"
+}, {
+  "code": "2480",
+  "municipality": "Umeå",
+  "county": "Västerbotten"
+}, {
+  "code": "2481",
+  "municipality": "Lycksele",
+  "county": "Västerbotten"
+}, {
+  "code": "2482",
+  "municipality": "Skellefteå",
+  "county": "Västerbotten"
+}, {
+  "code": "2505",
+  "municipality": "Arvidsjaur",
+  "county": "Norrbotten"
+}, {
+  "code": "2506",
+  "municipality": "Arjeplog",
+  "county": "Norrbotten"
+}, {
+  "code": "2510",
+  "municipality": "Jokkmokk",
+  "county": "Norrbotten"
+}, {
+  "code": "2513",
+  "municipality": "Överkalix",
+  "county": "Norrbotten"
+}, {
+  "code": "2514",
+  "municipality": "Kalix",
+  "county": "Norrbotten"
+}, {
+  "code": "2518",
+  "municipality": "Övertorneå",
+  "county": "Norrbotten"
+}, {
+  "code": "2521",
+  "municipality": "Pajala",
+  "county": "Norrbotten"
+}, {
+  "code": "2523",
+  "municipality": "Gällivare",
+  "county": "Norrbotten"
+}, {
+  "code": "2560",
+  "municipality": "Älvsbyn",
+  "county": "Norrbotten"
+}, {
+  "code": "2580",
+  "municipality": "Luleå",
+  "county": "Norrbotten"
+}, {
+  "code": "2581",
+  "municipality": "Piteå",
+  "county": "Norrbotten"
+}, {
+  "code": "2582",
+  "municipality": "Boden",
+  "county": "Norrbotten"
+}, {
+  "code": "2583",
+  "municipality": "Haparanda",
+  "county": "Norrbotten"
+}, {
+  "code": "2584",
+  "municipality": "Kiruna",
+  "county": "Norrbotten"
+}]
