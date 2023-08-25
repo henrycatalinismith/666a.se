@@ -131,6 +131,8 @@ export async function lookupDocumentsByCaseId({
     .selectFrom('document')
     .selectAll()
     .where('case_id', '=', caseId)
+    .orderBy('filed')
+    .orderBy('code')
     .execute()
   return documents as any as Document[]
 }

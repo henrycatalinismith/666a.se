@@ -28,7 +28,7 @@ export default function Case(props: any) {
           </tr>
         </thead>
         <tbody>
-          {documents.map((document) => (
+          {documents.map((document: any) => (
             <tr key={document.id}>
               <td>{document.filed}</td>
               <td>{document.type}</td>
