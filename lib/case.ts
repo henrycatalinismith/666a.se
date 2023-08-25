@@ -1,5 +1,18 @@
 import { Case, db } from '../lib/database'
 
+export async function lookupCasesByCompanyId({
+  companyId,
+}: {
+  companyId: number
+}): Promise<Case[]> {
+  const cases = await db
+    .selectFrom('case')
+    .selectAll()
+    .where('company_id', '=', companyId)
+    .execute()
+  return cases as any as Case[]
+}
+
 export async function loopupCaseByCode(code: string): Promise<Case | null> {
   const c = await db
     .selectFrom('case')

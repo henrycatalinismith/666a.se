@@ -21,7 +21,7 @@ export async function importDocumentFromJson(document: {
   status: 'Avslutat' | 'Pågående'
 }) {
   console.log(`${document.id}: ${document.topic}`)
-  const company = await lookupCompanyByCode(document.org)
+  const company = await lookupCompanyByCode({ code: document.org })
   const municipality = await lookupMunicipality(document.municipality)
   const companyId = company.id as any as number
   const municipalityId = municipality.id as any as number
@@ -67,7 +67,7 @@ export async function importDocumentFromJson(document: {
 export async function importScrapedDocument(
   document: DocumentScrapeResult
 ): Promise<void> {
-  const company = await lookupCompanyByCode(document.company)
+  const company = await lookupCompanyByCode({ code: document.company })
   const municipality = await lookupMunicipality(document.municipality)
   const companyId = company.id as any as number
   const municipalityId = municipality.id as any as number

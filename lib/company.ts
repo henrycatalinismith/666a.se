@@ -1,3 +1,4 @@
+import _ from 'lodash'
 import slugify from 'slugify'
 
 import { Company, db } from '../lib/database'
@@ -7,7 +8,16 @@ export async function fetchAllCompanies(): Promise<Company[]> {
   return companies as any as Company[]
 }
 
-export async function lookupCompanyByCode(code: string): Promise<Company> {
+export async function fetchAllCompanyCodes(): Promise<string[]> {
+  const codes = await db.selectFrom('company').select('code').execute()
+  return _.map(codes, 'code')
+}
+
+export async function lookupCompanyByCode({
+  code,
+}: {
+  code: string
+}): Promise<Company> {
   const company = await db
     .selectFrom('company')
     .selectAll()
