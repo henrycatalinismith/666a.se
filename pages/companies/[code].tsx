@@ -55,7 +55,7 @@ export async function getStaticProps(context: any) {
   company.created = company.created.toISOString()
   company.updated = company.updated.toISOString()
 
-  cases = cases.map((c) => ({
+  cases = cases.map((c: any) => ({
     ...c,
     created: c.created.toISOString(),
     updated: c.updated.toISOString(),
