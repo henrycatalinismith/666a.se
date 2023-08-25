@@ -1,6 +1,18 @@
 import slugify from 'slugify'
 
-import { db } from '../lib/database'
+import { Company, db } from '../lib/database'
+
+export async function lookupCompanyByCode(code: string): Promise<Company> {
+  const company = await db
+    .selectFrom('company')
+    .selectAll()
+    .where('code', '=', code)
+    .executeTakeFirst()
+  if (!code) {
+    throw new Error(`No company found for ID "${code}"`)
+  }
+  return company as any as Company
+}
 
 export async function createCompany({
   name,
