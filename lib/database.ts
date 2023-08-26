@@ -55,12 +55,22 @@ export interface Case {
   updated: Date
 }
 
+export interface User {
+  id: Generated<number>
+  name: string
+  email: string
+  password: string
+  created: Date
+  updated: Date
+}
+
 export interface Database {
   case: Case
   company: Company
   county: County
   municipality: Municipality
   document: Document
+  user: User
 }
 
 export const db = new Kysely<Database>({
