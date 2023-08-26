@@ -1,6 +1,6 @@
 import bcrypt from 'bcrypt'
 
-import { db } from '../lib/database'
+import { User, db } from '../lib/database'
 
 export async function createUser({
   name,
@@ -35,21 +35,18 @@ export async function createUser({
     .execute()
 }
 
-export async function validLogin({
+export async function findUserByEmail({
   email,
-  password,
 }: {
   email: string
-  password: string
-}): Promise<boolean> {
+}): Promise<User | undefined> {
   const user = await db
     .selectFrom('user')
     .selectAll()
     .where('email', '=', email)
     .executeTakeFirst()
   if (!user) {
-    return false
+    return undefined
   }
-  const passwordMatches = await bcrypt.compare(password, user.password)
-  return passwordMatches
+  return user as any as User
 }
