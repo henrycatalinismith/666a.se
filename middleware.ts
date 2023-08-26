@@ -5,7 +5,7 @@ import { findSessionBySecret } from './lib/session'
 import type { NextRequest } from 'next/server'
 
 function requiresLogin(path: string): boolean {
-  if (path.match(/\/(companies|cases)/)) {
+  if (path.match(/\/(companies|cases|dashboard)/)) {
     return true
   }
 
@@ -17,10 +17,10 @@ export function middleware(request: NextRequest) {
   const session = secret ? findSessionBySecret({ secret }) : undefined
   requiresLogin(request.url)
   if (!session && requiresLogin(request.url)) {
-    return NextResponse.rewrite(new URL('/login', request.url))
+    return NextResponse.rewrite(new URL('/', request.url))
   }
 }
 
 export const config = {
-  matcher: ['/', '/companies/:code*', '/cases/:code*'],
+  matcher: ['/companies/:code*', '/cases/:code*', '/dashboard'],
 }
