@@ -1,4 +1,3 @@
-import _ from 'lodash'
 import Link from 'next/link'
 
 import { lookupCaseByCode } from '../../../lib/case'
