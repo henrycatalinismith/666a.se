@@ -1,71 +1,93 @@
 'use client'
 
+import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/navigation'
-import { FormEvent, useCallback, useState } from 'react'
+import { useForm } from 'react-hook-form'
+import * as z from 'zod'
+
+import { Button } from './ui/button'
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from './ui/form'
+import { Input } from './ui/input'
+
+const formSchema = z.object({
+  email: z.string().min(2, {
+    message: 'Email too short',
+  }),
+  password: z.string().min(2, {
+    message: 'Password too short',
+  }),
+})
 
 export default function LoginForm() {
-  const router = useRouter()
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const onSubmit = useCallback(
-    async (event: FormEvent) => {
-      event.preventDefault()
-      const params = {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
-      }
-      const response = await fetch('/login', params).then((response) =>
-        response.json()
-      )
-      if (response.status === 'success') {
-        router.push('/companies/556737-0431')
-      }
-      console.log(response)
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      email: '',
+      password: '',
     },
-    [email, password, router]
-  )
+  })
+  const router = useRouter()
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    const { email, password } = values
+    const params = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password }),
+    }
+    const response = await fetch('/login', params).then((response) =>
+      response.json()
+    )
+    if (response.status === 'success') {
+      router.push('/companies/556737-0431')
+    }
+    console.log(response)
+  }
+
+  const onError = async (e: any) => {
+    console.log(e)
+  }
 
   return (
-    <form className="space-y-4 md:space-y-6" onSubmit={onSubmit}>
-      <p>
-        <label
-          className="lock mb-2 text-sm font-medium text-gray-900 dark:text-white"
-          htmlFor="email"
-        >
-          Email
-        </label>
-        <input
-          className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          id="email"
-          type="text"
-          name="email"
-          onChange={(e) => setEmail(e?.target.value)}
-        />
-      </p>
-
-      <p>
-        <label
-          className="lock mb-2 text-sm font-medium text-gray-900 dark:text-white"
-          htmlFor="password"
-        >
-          Password
-        </label>
-        <input
-          className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          id="password"
-          type="password"
-          name="password"
-          onChange={(e) => setPassword(e?.target.value)}
-        />
-      </p>
-
-      <button
-        type="submit"
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+    <Form {...form}>
+      <form
+        onSubmit={form.handleSubmit(onSubmit, onError)}
+        className="space-y-8"
       >
-        Sign in
-      </button>
-    </form>
+        <FormField
+          control={form.control}
+          name="email"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Email</FormLabel>
+              <FormControl>
+                <Input placeholder="" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="password"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Password</FormLabel>
+              <FormControl>
+                <Input type="password" placeholder="" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <Button type="submit">Submit</Button>
+      </form>
+    </Form>
   )
 }
