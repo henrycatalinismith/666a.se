@@ -16,6 +16,9 @@ export default function LoginForm() {
       const response = await fetch('/api/login', params).then((response) =>
         response.json()
       )
+      if (response.status === 'success') {
+        navigation.navigate('/companies/556737-0431')
+      }
       console.log(response)
     },
     [email, password]

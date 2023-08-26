@@ -12,6 +12,7 @@ module.exports = {
   ],
   globals: {
     process: true,
+    navigation: true,
     module: true,
     Promise: true,
     Buffer: true,
@@ -63,5 +64,5 @@ module.exports = {
       pragma: 'React',
       version: 'detect',
     },
-  }
+  },
 }
