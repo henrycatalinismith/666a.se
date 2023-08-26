@@ -7,7 +7,7 @@ import { lookupDocumentsByCaseId } from '../../../lib/document'
 
 export default async function Case({ params }: any) {
   const c = await lookupCaseByCode({ code: params.code.join('/') })
-  const company = await lookupCompanyById({ id: c.company_id })
+  const company = await lookupCompanyById({ id: c!.company_id })
   const documents = await lookupDocumentsByCaseId({
     caseId: c!.id as any as number,
   })
