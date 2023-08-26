@@ -19,7 +19,7 @@ export async function POST(request: Request) {
   }
 
   const session = await createSession({ user_id: user.id as any as number })
-  const response = NextResponse.json({ status: 'lol' })
+  const response = NextResponse.json({ status: 'success' })
   response.cookies.set('session', session.secret)
   return response
 }

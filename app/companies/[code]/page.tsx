@@ -1,5 +1,13 @@
 import Link from 'next/link'
 
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '../../../components/ui/table'
 import { lookupCasesByCompanyId } from '../../../lib/case'
 import { lookupCompanyByCode } from '../../../lib/company'
 import { Company } from '../../../lib/database'
@@ -12,28 +20,34 @@ export default async function Company({ params }: any) {
 
   return (
     <>
-      <h1>{company.name}</h1>
-      <p>{company.code}</p>
+      <div className="space-y-3">
+        <h1 className="scroll-m-20 text-4xl font-bold tracking-tight">
+          {company.name}
+        </h1>
+        <p className="text-lg text-muted-foreground">{company.code}</p>
+      </div>
 
-      <h2>Case History</h2>
-      <table>
-        <thead>
-          <tr>
-            <th className="text-left">Case ID</th>
-            <th className="text-left">Topic</th>
-          </tr>
-        </thead>
-        <tbody>
+      <h2 className="pt-8 font-heading mt-8 scroll-m-20 text-xl font-semibold tracking-tight">
+        Case History
+      </h2>
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableHead>Case ID</TableHead>
+            <TableHead>Topic</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
           {cases.map((c: any) => (
-            <tr key={c.id}>
-              <td>
+            <TableRow key={c.id}>
+              <TableCell>
                 <Link href={`/cases/${c.code}`}>{c.code}</Link>
-              </td>
-              <td>{c.name}</td>
-            </tr>
+              </TableCell>
+              <TableCell>{c.name}</TableCell>
+            </TableRow>
           ))}
-        </tbody>
-      </table>
+        </TableBody>
+      </Table>
     </>
   )
 }
