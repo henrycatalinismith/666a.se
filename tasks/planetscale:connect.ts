@@ -1,1 +1,1 @@
-require('child_process').execSync('pscale connect ddosdotnews dev --port 3309')
+require('child_process').execSync('pscale connect 666a dev --port 3309')

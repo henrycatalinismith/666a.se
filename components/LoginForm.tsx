@@ -1,8 +1,10 @@
 'use client'
 
+import { useRouter } from 'next/navigation'
 import { FormEvent, useCallback, useState } from 'react'
 
 export default function LoginForm() {
+  const router = useRouter()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const onSubmit = useCallback(
@@ -17,11 +19,11 @@ export default function LoginForm() {
         response.json()
       )
       if (response.status === 'success') {
-        navigation.navigate('/companies/556737-0431')
+        router.push('/companies/556737-0431')
       }
       console.log(response)
     },
-    [email, password]
+    [email, password, router]
   )
 
   return (
