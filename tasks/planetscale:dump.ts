@@ -1,3 +1,3 @@
 require('child_process').execSync(
-  `pscale database dump ddosdotnews dev --output dumps/${new Date().toISOString()}`
+  `pscale database dump 666a dev --output dumps/${new Date().toISOString()}`
 )
