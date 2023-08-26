@@ -15,7 +15,7 @@ export default function LoginForm() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
       }
-      const response = await fetch('/api/login', params).then((response) =>
+      const response = await fetch('/login', params).then((response) =>
         response.json()
       )
       if (response.status === 'success') {
