@@ -7,10 +7,6 @@ import { Migrator, FileMigrationProvider } from 'kysely'
 import { run } from 'kysely-migration-cli'
 
 import { db } from '../lib/database'
-
-console.log(process.env.PLANETSCALE_DEV_HOST)
-console.log(process.env.PLANETSCALE_DEV_USERNAME)
-console.log(process.env.PLANETSCALE_DEV_PASSWORD)
 ;(async () => {
   const migrator = new Migrator({
     db,

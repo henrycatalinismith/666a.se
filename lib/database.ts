@@ -72,6 +72,15 @@ export interface Session {
   updated: Date
 }
 
+export interface Subscription {
+  id: Generated<number>
+  user_id: number
+  target_type: string
+  target_id: number
+  created: Date
+  updated: Date
+}
+
 export interface Database {
   case: Case
   company: Company
@@ -80,6 +89,7 @@ export interface Database {
   document: Document
   user: User
   session: Session
+  subscription: Subscription
 }
 
 export const db = new Kysely<Database>({
