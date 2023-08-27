@@ -1,5 +1,3 @@
-import _ from 'lodash'
-
 import { Subscription, User, db } from '../lib/database'
 
 export async function createSubscription({
