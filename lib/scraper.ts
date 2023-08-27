@@ -5,6 +5,7 @@ import {
   filterOutExistingDocumentCodes,
   importScrapedDocument,
 } from './document'
+import { findSubscribersByCompanyId } from './subscription'
 
 export interface DocumentScrapeResult {
   code: string
@@ -145,8 +146,14 @@ export async function scrapeCompany({
 
     for (const c of newCodes) {
       console.log(c)
-      const document = await scrapeDocument({ code: c, browser })
-      importScrapedDocument(document)
+      const scrapedDocument = await scrapeDocument({ code: c, browser })
+      const savedDocument = await importScrapedDocument(scrapedDocument)
+      const companySubscribers = await findSubscribersByCompanyId({
+        company_id: savedDocument.company_id,
+      })
+      for (const subscriber of companySubscribers) {
+        console.log(subscriber)
+      }
     }
 
     pageNumber += 1

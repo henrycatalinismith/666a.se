@@ -1,6 +1,6 @@
 import _ from 'lodash'
 
-import { db } from '../lib/database'
+import { Document, db } from '../lib/database'
 
 import { createCase, lookupCaseByCode } from './case'
 import { lookupCompanyByCode } from './company'
@@ -65,49 +65,71 @@ export async function importDocumentFromJson(document: {
 }
 
 export async function importScrapedDocument(
-  document: DocumentScrapeResult
-): Promise<void> {
-  const company = await lookupCompanyByCode({ code: document.company })
-  const municipality = await lookupMunicipality(document.municipality)
+  scrapedDocument: DocumentScrapeResult
+): Promise<Document> {
+  const company = await lookupCompanyByCode({ code: scrapedDocument.company })
+  const municipality = await lookupMunicipality(scrapedDocument.municipality)
   const companyId = company.id as any as number
   const municipalityId = municipality.id as any as number
-  const filed = new Date(Date.parse(document.filed))
+  const filed = new Date(Date.parse(scrapedDocument.filed))
 
-  const [caseCode] = document.code.match(/....\/....../)!
+  const [caseCode] = scrapedDocument.code.match(/....\/....../)!
   let c = await lookupCaseByCode({ code: caseCode })
   if (!c) {
     c = await createCase({
       code: caseCode,
-      name: document.topic,
+      name: scrapedDocument.topic,
       companyId: companyId,
     })
   }
   const caseId = c.id as any as number
 
-  db.insertInto('document')
+  const [result] = await db
+    .insertInto('document')
     .values({
       case_id: caseId,
       company_id: companyId,
       county_id: municipality.county_id,
       municipality_id: municipalityId,
-      code: document.code,
-      type: document.type,
-      cfar: document.cfar,
-      workplace: document.workplace,
+      code: scrapedDocument.code,
+      type: scrapedDocument.type,
+      cfar: scrapedDocument.cfar,
+      workplace: scrapedDocument.workplace,
       direction: {
         Utgående: 'outgoing',
         Inkommande: 'incoming',
         '': 'blank',
-      }[document.direction] as 'outgoing' | 'incoming' | 'blank',
+      }[scrapedDocument.direction] as 'outgoing' | 'incoming' | 'blank',
       status: {
         Avslutat: 'complete',
         Pågående: 'ongoing',
-      }[document.status] as 'ongoing' | 'complete',
+      }[scrapedDocument.status] as 'ongoing' | 'complete',
       filed,
       created: new Date(),
       updated: new Date(),
     })
     .execute()
+
+  const document = await findDocumentById({
+    id: result.insertId as any as number,
+  })
+  return document as any as Document
+}
+
+export async function findDocumentById({
+  id,
+}: {
+  id: number
+}): Promise<Document | undefined> {
+  const document = await db
+    .selectFrom('document')
+    .selectAll()
+    .where('id', '=', id)
+    .executeTakeFirst()
+  if (!document) {
+    return undefined
+  }
+  return document as any as Document
 }
 
 export async function filterOutExistingDocumentCodes(
@@ -119,6 +141,7 @@ export async function filterOutExistingDocumentCodes(
     .select('code')
     .where('code', 'in', codes)
     .execute()
+  console.log({ codes, matches })
   return _.difference(codes, _.map(matches, 'code'))
 }
 

@@ -5,7 +5,7 @@ export async function up(db: Kysely<any>): Promise<void> {
     .createTable('subscription')
     .addColumn('id', 'serial', (col) => col.primaryKey())
     .addColumn('user_id', 'bigint', (col) => col.notNull())
-    .addColumn('target_type', 'varchar(255)', (col) => col.notNull())
+    .addColumn('target_type', sql`enum('company')`, (col) => col.notNull())
     .addColumn('target_id', 'bigint', (col) => col.notNull())
     .addColumn('created', 'timestamp', (col) =>
       col.defaultTo(sql`now()`).notNull()
