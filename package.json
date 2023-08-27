@@ -19,6 +19,7 @@
     "scrape:company": "yarn ts-node -r dotenv/config tasks/scrape:company.ts",
     "scrape:document": "yarn ts-node -r dotenv/config tasks/scrape:document.ts",
     "scrape:search": "yarn ts-node -r dotenv/config tasks/scrape:search.ts",
+    "scrape:subscriptions": "yarn ts-node -r dotenv/config tasks/scrape:subscriptions.ts",
     "subscription:create": "yarn ts-node -r dotenv/config tasks/subscription:create.ts",
     "user:create": "yarn ts-node -r dotenv/config tasks/user:create.ts"
   },
