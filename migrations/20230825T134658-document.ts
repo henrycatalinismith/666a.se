@@ -2,6 +2,16 @@ import { Kysely, sql } from 'kysely'
 
 export async function up(db: Kysely<any>): Promise<void> {
   await db.schema
+    .createType('document_direction')
+    .asEnum(['blank', 'incoming', 'outgoing'])
+    .execute()
+
+  await db.schema
+    .createType('document_status')
+    .asEnum(['ongoing', 'complete'])
+    .execute()
+
+  await db.schema
     .createTable('document')
     .addColumn('id', 'serial', (col) => col.primaryKey())
     .addColumn('case_id', 'bigint', (col) => col.notNull())
@@ -12,12 +22,8 @@ export async function up(db: Kysely<any>): Promise<void> {
     .addColumn('type', 'varchar(255)', (col) => col.notNull())
     .addColumn('cfar', 'varchar(255)', (col) => col.notNull())
     .addColumn('workplace', 'varchar(255)', (col) => col.notNull())
-    .addColumn('direction', sql`enum('blank', 'incoming', 'outgoing')`, (col) =>
-      col.notNull()
-    )
-    .addColumn('status', sql`enum('ongoing', 'complete')`, (col) =>
-      col.notNull()
-    )
+    .addColumn('direction', sql`document_direction`, (col) => col.notNull())
+    .addColumn('status', sql`document_status`, (col) => col.notNull())
     .addColumn('filed', 'date', (col) => col.notNull())
     .addColumn('created', 'timestamp', (col) =>
       col.defaultTo(sql`now()`).notNull()
@@ -73,6 +79,8 @@ export async function up(db: Kysely<any>): Promise<void> {
 }
 
 export async function down(db: Kysely<any>): Promise<void> {
+  await db.schema.dropType('document_direction')
+  await db.schema.dropType('document_status')
   await db.schema.dropTable('document').execute()
   await db.schema.dropTable('case').execute()
 }

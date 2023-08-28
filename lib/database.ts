@@ -1,5 +1,5 @@
-import { Generated, Kysely } from 'kysely'
-import { PlanetScaleDialect } from 'kysely-planetscale'
+import { createKysely } from '@vercel/postgres-kysely'
+import { Generated } from 'kysely'
 
 export interface Company {
   id: Generated<number>
@@ -92,8 +92,11 @@ export interface Database {
   subscription: Subscription
 }
 
-export const db = new Kysely<Database>({
-  dialect: new PlanetScaleDialect({
-    url: process.env.DATABASE_URL,
-  }),
-})
+export const db = createKysely<Database>()
+
+// lol https://github.com/vercel/storage/issues/325
+Object.defineProperty(
+  db.getExecutor().adapter,
+  'supportsTransactionalDdl',
+  () => false
+)

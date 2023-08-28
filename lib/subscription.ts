@@ -18,9 +18,10 @@ export async function createSubscription({
       created: new Date(),
       updated: new Date(),
     })
+    .returning('id')
     .execute()
   const session = await findSubscriptionById({
-    id: result.insertId as any as number,
+    id: result.id as any as number,
   })
   return session as any as Subscription
 }

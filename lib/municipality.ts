@@ -31,7 +31,7 @@ export async function createMunicipality({
   const result = await db
     .selectFrom('county')
     .select('id')
-    .where('county.slug', '=', slugify(county))
+    .where('county.slug', '=', slugify(county, { lower: true }))
     .executeTakeFirst()
 
   if (!result) {
