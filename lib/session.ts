@@ -16,9 +16,11 @@ export async function createSession({
       created: new Date(),
       updated: new Date(),
     })
+    .onConflict((oc) => oc.column('user_id').doUpdateSet({ secret: secret }))
+    .returning('id')
     .execute()
   const session = await findSessionById({
-    id: result.insertId as any as number,
+    id: result.id as any as number,
   })
   return session as any as Session
 }
@@ -32,6 +34,22 @@ export async function findSessionById({
     .selectFrom('session')
     .selectAll()
     .where('id', '=', id)
+    .executeTakeFirst()
+  if (!session) {
+    return undefined
+  }
+  return session as any as Session
+}
+
+export async function findSessionByUserId({
+  user_id,
+}: {
+  user_id: number
+}): Promise<Session | undefined> {
+  const session = await db
+    .selectFrom('session')
+    .selectAll()
+    .where('user_id', '=', user_id)
     .executeTakeFirst()
   if (!session) {
     return undefined
