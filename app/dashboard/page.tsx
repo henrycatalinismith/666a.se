@@ -38,7 +38,7 @@ export default async function Dashboard() {
         <h2>Notifications</h2>
         <ol>
           {notifications.map((n) => (
-            <li key={`${n.id}`}>{documentsById[n.target_id].code}</li>
+            <li key={`${n.id}`}>{documentsById[n.target_id]!.code}</li>
           ))}
         </ol>
       </div>
