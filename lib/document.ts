@@ -108,10 +108,11 @@ export async function importScrapedDocument(
       created: new Date(),
       updated: new Date(),
     })
+    .returning('id')
     .execute()
 
   const document = await findDocumentById({
-    id: result.insertId as any as number,
+    id: result.id as any as number,
   })
   return document as any as Document
 }
