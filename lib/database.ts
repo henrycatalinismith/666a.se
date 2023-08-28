@@ -81,6 +81,17 @@ export interface Subscription {
   updated: Date
 }
 
+export interface Notification {
+  id: Generated<number>
+  user_id: number
+  target_type: string
+  target_id: number
+  type: string
+  created: Date
+  updated: Date
+  seen: Date | null
+}
+
 export interface Database {
   case: Case
   company: Company
@@ -90,6 +101,7 @@ export interface Database {
   user: User
   session: Session
   subscription: Subscription
+  notification: Notification
 }
 
 export const db = createKysely<Database>()
