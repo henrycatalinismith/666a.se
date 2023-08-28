@@ -45,3 +45,17 @@ export async function findNotificationById({
   }
   return notification as any as Notification
 }
+
+export async function findNewNotificationsByUserId({
+  user_id,
+}: {
+  user_id: number
+}): Promise<Notification[]> {
+  const notifications = await db
+    .selectFrom('notification')
+    .selectAll()
+    .where('user_id', '=', user_id)
+    .where('seen', 'is', null)
+    .execute()
+  return notifications as any as Notification[]
+}
