@@ -5,6 +5,7 @@ import {
   filterOutExistingDocumentCodes,
   importScrapedDocument,
 } from './document'
+import { createNotification } from './notification'
 import { findSubscribersByCompanyId } from './subscription'
 
 export interface DocumentScrapeResult {
@@ -151,8 +152,14 @@ export async function scrapeCompany({
       const companySubscribers = await findSubscribersByCompanyId({
         company_id: savedDocument.company_id,
       })
+
       for (const subscriber of companySubscribers) {
-        console.log(subscriber)
+        await createNotification({
+          user_id: subscriber.id as any as number,
+          target_type: 'document',
+          target_id: savedDocument.id as any as number,
+          type: 'created',
+        })
       }
     }
 

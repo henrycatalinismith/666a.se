@@ -23,9 +23,7 @@ export async function up(db: Kysely<any>): Promise<void> {
     .addColumn('updated', 'timestamp', (col) =>
       col.defaultTo(sql`now()`).notNull()
     )
-    .addColumn('seen', 'timestamp', (col) =>
-      col.defaultTo(sql`now()`).notNull()
-    )
+    .addColumn('seen', 'timestamp')
     .execute()
 
   await db.schema
@@ -42,6 +40,7 @@ export async function up(db: Kysely<any>): Promise<void> {
 }
 
 export async function down(db: Kysely<any>): Promise<void> {
-  await db.schema.dropType('notification_target_type')
   await db.schema.dropTable('notification').execute()
+  await db.schema.dropType('notification_target_type').execute()
+  await db.schema.dropType('notification_type').execute()
 }
