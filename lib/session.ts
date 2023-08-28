@@ -1,6 +1,6 @@
 import { v4 as uuid } from 'uuid'
 
-import { Session, db } from '../lib/database'
+import { User, Session, db } from '../lib/database'
 
 export async function createSession({
   user_id,
@@ -71,4 +71,20 @@ export async function findSessionBySecret({
     return undefined
   }
   return session as any as Session
+}
+
+export async function findUserBySessionSecret({
+  secret,
+}: {
+  secret: string
+}): Promise<User> {
+  console.log({ secret })
+  const result = await db
+    .selectFrom('session')
+    .leftJoin('user', 'user.id', 'session.user_id')
+    .selectAll('user')
+    .where('session.secret', '=', secret)
+    .executeTakeFirstOrThrow()
+
+  return result as any as User
 }

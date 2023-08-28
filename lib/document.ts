@@ -160,3 +160,18 @@ export async function lookupDocumentsByCaseId({
     .execute()
   return documents as any as Document[]
 }
+
+export async function findDocumentsByIdWithCaseAndCompany({
+  ids,
+}: {
+  ids: number[]
+}): Promise<any> {
+  const result = await db
+    .selectFrom('document')
+    .leftJoin('case', 'case.id', 'document.case_id')
+    .leftJoin('company', 'company.id', 'document.company_id')
+    .where('document.id', 'in', ids)
+    .selectAll()
+    .execute()
+  return result
+}
