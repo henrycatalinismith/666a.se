@@ -1,10 +1,12 @@
+import _ from 'lodash'
+
 import companies from '../data/company.json'
 import { createCompany } from '../lib/company'
 ;(async () => {
-  companies.forEach((company) => {
-    createCompany({
+  for (const company of _.sortBy(companies, 'name')) {
+    await createCompany({
       name: company.name,
       code: company.id,
     })
-  })
+  }
 })()
