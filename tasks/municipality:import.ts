@@ -1,13 +1,26 @@
+import { PrismaClient } from '@prisma/client'
 import _ from 'lodash'
+import slugify from 'slugify'
 
 import municipalities from '../data/municipality.json'
-import { createMunicipality } from '../lib/municipality'
+const prisma = new PrismaClient()
 ;(async () => {
   for (const municipality of _.sortBy(municipalities, 'municipality')) {
-    await createMunicipality({
-      name: municipality.municipality,
-      code: municipality.code,
-      county: municipality.county,
+    const county = await prisma.county.findFirstOrThrow({
+      where: {
+        slug: slugify(municipality.county, { lower: true }),
+      },
+    })
+    await prisma.municipality.create({
+      data: {
+        name: municipality.municipality,
+        code: municipality.code,
+        slug:
+          municipality.municipality === 'Håbo'
+            ? 'haabo'
+            : slugify(municipality.municipality, { lower: true }),
+        countyId: county.id,
+      },
     })
   }
 })()
