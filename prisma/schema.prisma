@@ -1,0 +1,19 @@
+datasource db {
+  provider = "postgresql"
+  url = env("POSTGRES_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Company {
+  id        Int      @id @default(autoincrement())
+  code      String   @unique
+  name      String
+  slug      String   @unique
+  created   DateTime @default(now())
+  updated   DateTime @default(now())
+
+  @@map("company")
+}
