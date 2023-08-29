@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import * as z from 'zod'
 
-import { Button } from './ui/button'
+import { Button } from './Button'
 import {
   Form,
   FormControl,
@@ -13,8 +13,8 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from './ui/form'
-import { Input } from './ui/input'
+} from './Form'
+import { Input } from './Input'
 
 const formSchema = z.object({
   email: z.string().min(2, {
