@@ -41,24 +41,3 @@ export async function lookupCompanyByCode({
   }
   return company as any as Company
 }
-
-export async function createCompany({
-  name,
-  code,
-}: {
-  name: string
-  code: string
-}) {
-  await db
-    .insertInto('company')
-    .values({
-      name,
-      slug: slugify(name, {
-        lower: true,
-      }),
-      code,
-      created: new Date(),
-      updated: new Date(),
-    })
-    .execute()
-}

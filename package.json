@@ -9,6 +9,7 @@
     "kysely:migrate": "yarn ts-node tasks/kysely:migrate.ts",
     "municipality:import": "yarn ts-node -r dotenv/config tasks/municipality:import.ts",
     "municipality:list": "yarn ts-node -r dotenv/config tasks/municipality:list.ts",
+    "prisma:migrate": "yarn ts-node tasks/prisma:migrate.ts",
     "next:dev": "next dev",
     "next:build": "next build",
     "next:start": "next start",
@@ -23,6 +24,7 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.0",
+    "@prisma/client": "^5.2.0",
     "@radix-ui/react-label": "^2.0.2",
     "@radix-ui/react-slot": "^1.0.2",
     "@vercel/postgres": "^0.4.1",
@@ -35,6 +37,7 @@
     "lucide-react": "^0.269.0",
     "next": "13.4.19",
     "postcss": "8.4.28",
+    "prisma": "^5.2.0",
     "puppeteer": "^21.1.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
