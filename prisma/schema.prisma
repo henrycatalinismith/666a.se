@@ -77,3 +77,24 @@ model Municipality {
   documents Document[]
   @@map("municipality")
 }
+
+model Session {
+  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String   @db.Uuid
+  secret    String
+  created   DateTime @default(now())
+  updated   DateTime @default(now())
+  @@map("session")
+}
+
+model User {
+  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name      String
+  email     String   @unique
+  password  String
+  created   DateTime @default(now())
+  updated   DateTime @default(now())
+  sessions  Session[]
+  @@map("user")
+}
