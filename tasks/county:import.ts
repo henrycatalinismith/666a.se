@@ -1,9 +1,7 @@
-import { PrismaClient } from '@prisma/client'
 import _ from 'lodash'
 
 import counties from '../data/county.json'
-const prisma = new PrismaClient()
-
+import prisma from '../lib/database'
 ;(async () => {
   for (const county of _.sortBy(counties, 'name')) {
     await prisma.county.create({
