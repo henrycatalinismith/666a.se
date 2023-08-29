@@ -8,9 +8,15 @@ import {
   TableHeader,
   TableRow,
 } from '../../../components/ui/table'
+import { requireUser } from '../../../lib/authentication'
 import prisma from '../../../lib/database'
 
 export default async function Company({ params }: any) {
+  const user = await requireUser()
+  if (!user) {
+    return <></>
+  }
+
   const company = await prisma.company.findFirstOrThrow({
     where: { code: params.code },
   })

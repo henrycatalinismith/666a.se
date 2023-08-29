@@ -1,16 +1,14 @@
 import clsx from 'clsx'
-import { cookies } from 'next/headers'
 
 import NavBar from '../../components/NavBar'
+import { requireUser } from '../../lib/authentication'
 import prisma from '../../lib/database'
 
 export default async function Dashboard() {
-  const cookieStore = cookies()
-  const secret = cookieStore.get('session')?.value || ''
-  const session = await prisma.session.findFirst({
-    where: { secret },
-    include: { user: true },
-  })
+  const user = await requireUser()
+  if (!user) {
+    return <></>
+  }
 
   // const notifications = await findNewNotificationsByUserId({
   //   user_id: session!.user.id as any as number,
@@ -30,9 +28,11 @@ export default async function Dashboard() {
   return (
     <>
       <NavBar />
-      <div className={clsx('container')}>
+      <div className="container">
         dashboard
-        <h2>Notifications for {session?.user.name}</h2>
+        <h2>Notifications for {user.name}</h2>
+        <ol></ol>
+        <h2>Subscriptions</h2>
         <ol></ol>
       </div>
     </>
