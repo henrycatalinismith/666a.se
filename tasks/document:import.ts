@@ -1,8 +1,7 @@
-import { PrismaClient } from '@prisma/client'
 import _ from 'lodash'
 
 import documents from '../data/document.json'
-const prisma = new PrismaClient()
+import prisma from '../lib/database'
 ;(async () => {
   for (const document of documents) {
     const company = await prisma.company.findFirstOrThrow({
