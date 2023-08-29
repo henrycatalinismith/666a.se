@@ -21,14 +21,16 @@ model Case {
 }
 
 model Company {
-  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  code      String   @unique
-  name      String
-  slug      String   @unique
-  created   DateTime @default(now())
-  updated   DateTime @default(now())
-  cases     Case[]
-  documents Document[]
+  id            String         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  code          String         @unique
+  name          String
+  slug          String         @unique
+  created       DateTime       @default(now())
+  updated       DateTime       @default(now())
+  cases         Case[]
+  documents     Document[]
+  subscriptions Subscription[] @relation("CompanySubscription")
+
   @@map("company")
 }
 
@@ -89,13 +91,32 @@ model Session {
   @@map("session")
 }
 
-model User {
+enum SubscribableType {
+  Company
+}
+
+model Subscription {
   id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  name      String
-  email     String   @unique
-  password  String
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String   @db.Uuid
+
+  company    Company?         @relation("CompanySubscription", fields: [targetId], references: [id], map: "company_subscribableId")
+  targetType SubscribableType
+  targetId   String @db.Uuid
+
   created   DateTime @default(now())
   updated   DateTime @default(now())
-  sessions  Session[]
+  @@map("subscription")
+}
+
+model User {
+  id            String         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name          String
+  email         String         @unique
+  password      String
+  created       DateTime       @default(now())
+  updated       DateTime       @default(now())
+  sessions      Session[]
+  subscriptions Subscription[]
   @@map("user")
 }
