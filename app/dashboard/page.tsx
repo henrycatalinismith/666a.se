@@ -1,3 +1,4 @@
+import { PrismaClient } from '@prisma/client'
 import clsx from 'clsx'
 import _ from 'lodash'
 import { cookies } from 'next/headers'
@@ -8,15 +9,18 @@ import {
   findDocumentsByIdWithCaseAndCompany,
 } from '../../lib/document'
 import { findNewNotificationsByUserId } from '../../lib/notification'
-import { findUserBySessionSecret } from '../../lib/session'
 
 export default async function Dashboard() {
+  const prisma = new PrismaClient()
   const cookieStore = cookies()
   const secret = cookieStore.get('session')?.value || ''
-  const user = await findUserBySessionSecret({ secret })
+  const session = await prisma.session.findFirst({
+    where: { secret },
+    include: { user: true },
+  })
 
   const notifications = await findNewNotificationsByUserId({
-    user_id: user.id as any as number,
+    user_id: session!.user.id as any as number,
   })
 
   const documents = await Promise.all(
