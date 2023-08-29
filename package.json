@@ -13,6 +13,7 @@
     "next:build": "next build",
     "next:start": "next start",
     "next:lint": "next lint",
+    "postinstall": "prisma generate",
     "scrape:all": "yarn ts-node -r dotenv/config tasks/scrape:all.ts",
     "scrape:company": "yarn ts-node -r dotenv/config tasks/scrape:company.ts",
     "scrape:document": "yarn ts-node -r dotenv/config tasks/scrape:document.ts",
