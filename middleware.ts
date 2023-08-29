@@ -1,6 +1,5 @@
+import { PrismaClient } from '@prisma/client'
 import { NextResponse } from 'next/server'
-
-import { findSessionBySecret } from './lib/session'
 
 import type { NextRequest } from 'next/server'
 
@@ -12,11 +11,22 @@ function requiresLogin(path: string): boolean {
   return false
 }
 
-export function middleware(request: NextRequest) {
+export async function middleware(request: NextRequest) {
+  if (!requiresLogin(request.url)) {
+    return
+  }
+
   const secret = request.cookies.get('session')?.value
-  const session = secret ? findSessionBySecret({ secret }) : undefined
-  requiresLogin(request.url)
-  if (!session && requiresLogin(request.url)) {
+  if (!secret) {
+    return NextResponse.rewrite(new URL('/', request.url))
+  }
+
+  const prisma = new PrismaClient()
+  const session = await prisma.session.findFirst({
+    where: { secret },
+  })
+
+  if (!session) {
     return NextResponse.rewrite(new URL('/', request.url))
   }
 }

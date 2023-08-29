@@ -1,14 +1,16 @@
+import { PrismaClient } from '@prisma/client'
 import bcrypt from 'bcrypt'
 import { NextResponse } from 'next/server'
-
-import { createSession } from '../../lib/session'
-import { findUserByEmail } from '../../lib/user'
+import { v4 as uuid } from 'uuid'
 
 export async function POST(request: Request) {
+  const prisma = new PrismaClient()
   const { email, password } = await request.json()
 
   const fail = () => NextResponse.json({ status: 'failure' })
-  const user = await findUserByEmail({ email })
+  const user = await prisma.user.findFirst({
+    where: { email },
+  })
   if (!user) {
     return fail()
   }
@@ -18,7 +20,12 @@ export async function POST(request: Request) {
     return fail()
   }
 
-  const session = await createSession({ user_id: user.id as any as number })
+  const session = await prisma.session.create({
+    data: {
+      userId: user.id,
+      secret: uuid(),
+    },
+  })
   const response = NextResponse.json({ status: 'success' })
   response.cookies.set('session', session.secret)
   return response
