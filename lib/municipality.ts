@@ -18,39 +18,3 @@ export async function lookupMunicipality(m: string): Promise<Municipality> {
   }
   return municipality as any as Municipality
 }
-
-export async function createMunicipality({
-  name,
-  code,
-  county,
-}: {
-  name: string
-  code: string
-  county: string
-}) {
-  const result = await db
-    .selectFrom('county')
-    .select('id')
-    .where('county.slug', '=', slugify(county, { lower: true }))
-    .executeTakeFirst()
-
-  if (!result) {
-    console.log(county)
-    return
-  }
-
-  const slug = name === 'Håbo' ? 'haabo' : slugify(name, { lower: true })
-
-  await db
-    .insertInto('municipality')
-    .values({
-      county_id: result.id,
-      name,
-      slug,
-      code,
-      created: new Date(),
-      updated: new Date(),
-    })
-    .execute()
-  console.log(`${code}: ${name}`)
-}
