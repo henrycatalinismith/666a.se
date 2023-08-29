@@ -8,7 +8,7 @@ generator client {
 }
 
 model Company {
-  id        Int      @id @default(autoincrement())
+  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   code      String   @unique
   name      String
   slug      String   @unique
@@ -18,11 +18,24 @@ model Company {
 }
 
 model County {
-  id        Int      @id @default(autoincrement())
+  id             String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  code           String   @unique
+  name           String
+  slug           String   @unique
+  created        DateTime @default(now())
+  updated        DateTime @default(now())
+  municipalities Municipality[]
+  @@map("county")
+}
+
+model Municipality {
+  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  county    County   @relation(fields: [countyId], references: [id])
+  countyId  String   @db.Uuid
   code      String   @unique
   name      String
   slug      String   @unique
   created   DateTime @default(now())
   updated   DateTime @default(now())
-  @@map("county")
+  @@map("municipality")
 }
