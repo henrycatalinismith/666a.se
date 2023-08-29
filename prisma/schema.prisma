@@ -7,6 +7,18 @@ generator client {
   provider = "prisma-client-js"
 }
 
+model Case {
+  id              String         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  company         Company        @relation(fields: [companyId], references: [id])
+  companyId       String         @db.Uuid
+  code            String         @unique
+  name            String
+  created         DateTime       @default(now())
+  updated         DateTime       @default(now())
+  documents       Document[]
+  @@map("case")
+}
+
 model Company {
   id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   code      String   @unique
@@ -14,6 +26,8 @@ model Company {
   slug      String   @unique
   created   DateTime @default(now())
   updated   DateTime @default(now())
+  cases     Case[]
+  documents Document[]
   @@map("company")
 }
 
@@ -24,8 +38,31 @@ model County {
   slug           String   @unique
   created        DateTime @default(now())
   updated        DateTime @default(now())
+  documents      Document[]
   municipalities Municipality[]
   @@map("county")
+}
+
+model Document {
+  id              String         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  case            Case           @relation(fields: [caseId], references: [id])
+  caseId          String         @db.Uuid
+  company         Company        @relation(fields: [companyId], references: [id])
+  companyId       String         @db.Uuid
+  county          County         @relation(fields: [countyId], references: [id])
+  countyId        String         @db.Uuid
+  municipality    Municipality   @relation(fields: [municipalityId], references: [id])
+  municipalityId  String         @db.Uuid
+  code            String         @unique
+  type            String
+  cfar            String
+  workplace       String
+  direction       String
+  status          String
+  filed           DateTime       @db.Date
+  created         DateTime       @default(now())
+  updated         DateTime       @default(now())
+  @@map("document")
 }
 
 model Municipality {
@@ -37,5 +74,6 @@ model Municipality {
   slug      String   @unique
   created   DateTime @default(now())
   updated   DateTime @default(now())
+  documents Document[]
   @@map("municipality")
 }
