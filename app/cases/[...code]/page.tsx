@@ -8,15 +8,21 @@ import {
   TableHeader,
   TableRow,
 } from '../../../components/ui/table'
-import { lookupCaseByCode } from '../../../lib/case'
-import { lookupCompanyById } from '../../../lib/company'
-import { lookupDocumentsByCaseId } from '../../../lib/document'
+import prisma from '../../../lib/database'
 
 export default async function Case({ params }: any) {
-  const c = await lookupCaseByCode({ code: params.code.join('/') })
-  const company = await lookupCompanyById({ id: c!.company_id })
-  const documents = await lookupDocumentsByCaseId({
-    caseId: c!.id as any as number,
+  const c = await prisma.case.findFirstOrThrow({
+    where: {
+      code: params.code.join('/'),
+    },
+  })
+  const company = await prisma.company.findFirstOrThrow({
+    where: { id: c.companyId },
+  })
+  const documents = await prisma.document.findMany({
+    where: {
+      caseId: c.id,
+    },
   })
 
   return (

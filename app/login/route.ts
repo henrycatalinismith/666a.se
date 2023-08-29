@@ -1,10 +1,10 @@
-import { PrismaClient } from '@prisma/client'
 import bcrypt from 'bcrypt'
 import { NextResponse } from 'next/server'
 import { v4 as uuid } from 'uuid'
 
+import prisma from '../../lib/database'
+
 export async function POST(request: Request) {
-  const prisma = new PrismaClient()
   const { email, password } = await request.json()
 
   const fail = () => NextResponse.json({ status: 'failure' })

@@ -1,9 +1,8 @@
-import { PrismaClient } from '@prisma/client'
 import _ from 'lodash'
 import slugify from 'slugify'
 
 import municipalities from '../data/municipality.json'
-const prisma = new PrismaClient()
+import prisma from '../lib/database'
 ;(async () => {
   for (const municipality of _.sortBy(municipalities, 'municipality')) {
     const county = await prisma.county.findFirstOrThrow({

@@ -1,3 +1,4 @@
+/*
 import * as _ from 'lodash'
 import { Browser } from 'puppeteer-core'
 
@@ -166,3 +167,5 @@ export async function scrapeCompany({
     pageNumber += 1
   } while (newCodes.length > 0)
 }
+
+*/
