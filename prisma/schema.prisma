@@ -20,6 +20,21 @@ model Case {
   @@map("case")
 }
 
+model Chunk {
+  id        String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  scan      Scan      @relation(fields: [scanId], references: [id])
+  scanId    String    @db.Uuid
+  startDate DateTime? @db.Date
+  stubCount Int?
+  hitCount  String?
+  created   DateTime  @default(now())
+  updated   DateTime  @default(now())
+  ingested  DateTime?
+  stubs     Stub[]
+  @@map("chunk")
+  @@index([scanId, created(sort: Asc), ingested(sort: Asc)])
+}
+
 model Company {
   id            String         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   code          String         @unique
@@ -43,6 +58,7 @@ model County {
   updated        DateTime @default(now())
   documents      Document[]
   municipalities Municipality[]
+  scans          Scan[]
   @@map("county")
 }
 
@@ -81,6 +97,19 @@ model Municipality {
   @@map("municipality")
 }
 
+model Scan {
+  id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  county     County   @relation(fields: [countyId], references: [id])
+  countyId   String   @db.Uuid
+  chunkCount Int
+  created    DateTime @default(now())
+  updated    DateTime @default(now())
+  completed  DateTime?
+  chunks     Chunk[]
+  @@map("scan")
+  @@index([countyId, created(sort: Asc), completed(sort: Asc)])
+}
+
 model Session {
   id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   user      User     @relation(fields: [userId], references: [id])
@@ -89,6 +118,22 @@ model Session {
   created   DateTime @default(now())
   updated   DateTime @default(now())
   @@map("session")
+}
+
+model Stub {
+  id            String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  chunk         Chunk    @relation(fields: [chunkId], references: [id])
+  chunkId       String   @db.Uuid
+  document_code String
+  document_type String
+  case_name     String
+  organization  String
+  filed         DateTime @db.Date
+  created       DateTime @default(now())
+  updated       DateTime @default(now())
+  ingested      DateTime?
+  @@map("stub")
+  @@index([created(sort: Asc), ingested(sort: Asc)])
 }
 
 enum SubscribableType {
