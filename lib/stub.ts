@@ -4,9 +4,11 @@ import prisma from './database'
 import { DiariumSearchResult } from './diarium'
 
 export async function createStubs(
-  chunk: Chunk,
+  chunkId: string,
   searchResult: DiariumSearchResult
 ): Promise<Stub[]> {
+  const chunk = await prisma.chunk.findFirstOrThrow({ where: { id: chunkId } })
+
   // When turning a search result into stubs, it's possible some of the result
   // rows may correspond to already-ingested documents. Creating a stub when a
   // document has already been ingested means wasting a request reingesting the
@@ -28,6 +30,8 @@ export async function createStubs(
   await prisma.stub.createMany({
     data: newDocuments.map((row, index) => ({
       chunkId: chunk.id,
+      scanId: chunk.scanId,
+      countyId: chunk.countyId,
       index,
       documentCode: row.documentCode,
       caseName: row.caseName,
@@ -39,6 +43,8 @@ export async function createStubs(
       ingested: null,
     })),
   })
+
+  // TODO: update chunk.stubCount
 
   return await prisma.stub.findMany({
     where: {

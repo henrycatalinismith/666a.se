@@ -1,10 +1,12 @@
 import { Chunk, County, Scan, Stub } from '@prisma/client'
 
-import { createChunk, updateChunk } from './chunk'
+import { createInitialChunk, createProjectedChunks, updateChunk } from './chunk'
 import prisma from './database'
 import { searchDiarium } from './diarium'
 import { createScan, findOngoingScan } from './scan'
 import { createStubs } from './stub'
+
+const stubsPerChunk = 10
 
 export async function scanCounty(county: County): Promise<Scan> {
   const ongoingScan = await findOngoingScan(county)
@@ -12,16 +14,19 @@ export async function scanCounty(county: County): Promise<Scan> {
     return ongoingScan
   }
 
-  // TODO: determine highest already-scanned date for the county : date H
-  // send county-wide search request in ascending date order beginning date H
-
   const scan = await createScan(county)
-  const pendingChunk = await createChunk(scan)
+  const pendingChunk = await createInitialChunk(scan.id)
   const ingestedChunk = await ingestChunk(pendingChunk)
   console.log(ingestedChunk.hitCount)
 
-  // TODO: bulk create other chunks for scan based on projection from
-  // ingestedChunk.hitCount
+  const limitedResult = ingestedChunk!.hitCount!.match(
+    /^Visar (\d+) av (\d+) träffar$/
+  )
+  if (limitedResult) {
+    const targetStubCount = parseInt(limitedResult[1], 10) - stubsPerChunk
+    const targetChunkCount = targetStubCount / stubsPerChunk
+    await createProjectedChunks(scan.id, targetChunkCount)
+  }
 
   return scan
 }
@@ -40,15 +45,16 @@ export async function ingestChunk(chunk: Chunk): Promise<Chunk> {
 
   const result = await searchDiarium({
     SelectedCounty: county.code,
-    sortDirection: 'Desc',
+    sortDirection: 'Asc',
     sortOrder: 'Dokumentdatum',
+    page: chunk.page,
   })
 
   console.log(
     `[ingestChunk]: ${chunk.id} ${result.rows.length} ${result.hitCount}`
   )
 
-  const stubs = await createStubs(chunk, result)
+  const stubs = await createStubs(chunk.id, result)
   const startDate = chunk.startDate ?? stubs[0].filed
   return await updateChunk(chunk.id, {
     hitCount: result.hitCount,

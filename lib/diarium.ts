@@ -9,6 +9,7 @@ export type DiariumSearchParameter =
   | 'OnlyActive'
   | 'SelectedCounty'
   | 'ShowToolbar'
+  | 'page'
 
 export type DiariumSearchQuery = Partial<Record<DiariumSearchParameter, any>>
 
@@ -30,11 +31,12 @@ export async function searchDiarium(
   const page = await browser.newPage()
   const url = new URL(
     '/om-oss/sok-i-arbetsmiljoverkets-diarium/',
-    'https://av.se/'
+    'https://www.av.se/'
   )
-  _.mapValues(query, (k, v) => {
+  _.mapValues(query, (v, k) => {
     url.searchParams.set(k, v)
   })
+  console.log(url.toString())
   await page.goto(url.toString())
 
   const result: DiariumSearchResult = {
