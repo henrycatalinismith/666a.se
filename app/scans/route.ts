@@ -9,7 +9,6 @@ export async function POST(request: Request) {
   if (!user) {
     return NextResponse.json({ status: 'failure' })
   }
-  console.log(user)
 
   const body = await request.json()
   const slug = body.county

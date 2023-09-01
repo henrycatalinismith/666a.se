@@ -21,16 +21,19 @@ model Case {
 }
 
 model Chunk {
-  id        String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  scan      Scan      @relation(fields: [scanId], references: [id])
-  scanId    String    @db.Uuid
-  startDate DateTime? @db.Date
-  stubCount Int?
-  hitCount  String?
-  created   DateTime  @default(now())
-  updated   DateTime  @default(now())
-  ingested  DateTime?
-  stubs     Stub[]
+  id         String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  county     County    @relation(fields: [countyId], references: [id])
+  countyId   String    @db.Uuid
+  scan       Scan      @relation(fields: [scanId], references: [id])
+  scanId     String    @db.Uuid
+  startDate  DateTime? @db.Date
+  page       Int
+  stubCount  Int?
+  hitCount   String?
+  created    DateTime  @default(now())
+  updated    DateTime  @default(now())
+  ingested   DateTime?
+  stubs      Stub[]
   @@map("chunk")
   @@index([scanId, created(sort: Asc), ingested(sort: Asc)])
 }
@@ -59,6 +62,8 @@ model County {
   documents      Document[]
   municipalities Municipality[]
   scans          Scan[]
+  chunks         Chunk[]
+  stubs          Stub[]
   @@map("county")
 }
 
@@ -98,14 +103,16 @@ model Municipality {
 }
 
 model Scan {
-  id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  county     County   @relation(fields: [countyId], references: [id])
-  countyId   String   @db.Uuid
+  id         String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  county     County    @relation(fields: [countyId], references: [id])
+  countyId   String    @db.Uuid
+  created    DateTime  @default(now())
+  updated    DateTime  @default(now())
+  startDate  DateTime? @db.Date
   chunkCount Int
-  created    DateTime @default(now())
-  updated    DateTime @default(now())
   completed  DateTime?
   chunks     Chunk[]
+  stubs      Stub[]
   @@map("scan")
   @@index([countyId, created(sort: Asc), completed(sort: Asc)])
 }
@@ -124,6 +131,10 @@ model Stub {
   id            String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   chunk         Chunk    @relation(fields: [chunkId], references: [id])
   chunkId       String   @db.Uuid
+  scan          Scan     @relation(fields: [scanId], references: [id])
+  scanId        String   @db.Uuid
+  county        County   @relation(fields: [countyId], references: [id])
+  countyId      String   @db.Uuid
   index         Int
   documentCode  String
   documentType  String
