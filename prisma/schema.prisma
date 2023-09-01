@@ -124,9 +124,10 @@ model Stub {
   id            String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   chunk         Chunk    @relation(fields: [chunkId], references: [id])
   chunkId       String   @db.Uuid
-  document_code String
-  document_type String
-  case_name     String
+  index         Int
+  documentCode  String
+  documentType  String
+  caseName      String
   organization  String
   filed         DateTime @db.Date
   created       DateTime @default(now())
