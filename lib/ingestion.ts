@@ -16,7 +16,7 @@ export async function scanCounty(county: County): Promise<Scan> {
 
   const scan = await createScan(county)
   const pendingChunk = await createInitialChunk(scan.id)
-  const ingestedChunk = await ingestChunk(pendingChunk)
+  const ingestedChunk = await ingestChunk(pendingChunk.id)
   console.log(ingestedChunk.hitCount)
 
   const limitedResult = ingestedChunk!.hitCount!.match(
@@ -31,20 +31,16 @@ export async function scanCounty(county: County): Promise<Scan> {
   return scan
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export async function ingestChunk(chunk: Chunk): Promise<Chunk> {
-  const scan = await prisma.scan.findFirstOrThrow({
-    where: { id: chunk.scanId },
+export async function ingestChunk(chunkId: string): Promise<Chunk> {
+  const chunk = await prisma.chunk.findFirstOrThrow({
+    where: { id: chunkId },
+    include: { county: true },
   })
 
-  const county = await prisma.county.findFirstOrThrow({
-    where: { id: scan.countyId },
-  })
-
-  console.log(`[ingestChunk]: ${chunk.id} ${county.name}`)
+  console.log(`[ingestChunk]: ${chunk.id} ${chunk.county.name}`)
 
   const result = await searchDiarium({
-    SelectedCounty: county.code,
+    SelectedCounty: chunk.county.code,
     sortDirection: 'Asc',
     sortOrder: 'Dokumentdatum',
     page: chunk.page,

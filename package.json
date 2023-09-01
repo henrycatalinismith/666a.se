@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "chunk:ingest": "yarn ts-node -r dotenv/config tasks/chunk:ingest.ts",
     "company:import": "yarn ts-node -r dotenv/config tasks/company:import.ts",
     "county:import": "yarn ts-node -r dotenv/config tasks/county:import.ts",
     "document:import": "yarn ts-node -r dotenv/config tasks/document:import.ts",
