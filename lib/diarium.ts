@@ -36,7 +36,6 @@ export async function searchDiarium(
   _.mapValues(query, (v, k) => {
     url.searchParams.set(k, v)
   })
-  console.log(url.toString())
   await page.goto(url.toString())
 
   const result: DiariumSearchResult = {
