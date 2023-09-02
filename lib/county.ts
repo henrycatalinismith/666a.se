@@ -8,11 +8,11 @@ export async function findNewestArtefactDate(
       countyId: countyId,
     },
     orderBy: {
-      filed: 'desc',
+      documentDate: 'desc',
     },
   })
   if (newestStub) {
-    return new Date(newestStub.filed)
+    return new Date(newestStub.documentDate)
   }
 
   const newestDocument = await prisma.document.findFirst({
@@ -20,10 +20,10 @@ export async function findNewestArtefactDate(
       countyId: countyId,
     },
     orderBy: {
-      filed: 'desc',
+      date: 'desc',
     },
   })
   if (newestDocument) {
-    return new Date(newestDocument.filed)
+    return new Date(newestDocument.date)
   }
 }

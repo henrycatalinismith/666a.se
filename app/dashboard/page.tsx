@@ -25,9 +25,9 @@ export default async function Dashboard() {
 
   const documents = await prisma.document.findMany({
     where: { companyId: { in: _.map(subscriptions, 'targetId') } },
-    orderBy: { filed: 'desc' },
+    orderBy: { date: 'desc' },
     take: 4,
-    include: { case: true, company: true },
+    include: { case: true, company: true, type: true },
   })
 
   // const notifications = await findNewNotificationsByUserId({
@@ -69,10 +69,8 @@ export default async function Dashboard() {
           <TableBody>
             {documents.map((doc) => (
               <TableRow key={doc.id}>
-                <TableCell>
-                  {doc.filed.toISOString().substring(0, 10)}
-                </TableCell>
-                <TableCell>{doc.type}</TableCell>
+                <TableCell>{doc.date.toISOString().substring(0, 10)}</TableCell>
+                <TableCell>{doc.type.name}</TableCell>
                 <TableCell>{doc.company.name}</TableCell>
               </TableRow>
             ))}

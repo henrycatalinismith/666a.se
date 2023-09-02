@@ -17,10 +17,10 @@ export type DiariumSearchResult = {
   hitCount: string
   rows: {
     caseName: string
+    companyName: string
     documentCode: string
+    documentDate: string
     documentType: string
-    filed: string
-    organization: string
   }[]
 }
 
@@ -52,8 +52,8 @@ export async function searchDiarium(
         documentCode: row.querySelector('td:nth-child(1)')!.innerHTML.trim(),
         caseName: row.querySelector('td:nth-child(2) a')!.innerHTML.trim(),
         documentType: row.querySelector('td:nth-child(3)')!.innerHTML.trim(),
-        filed: row.querySelector('td:nth-child(4)')!.innerHTML.trim(),
-        organization: row.querySelector('td:nth-child(5)')!.innerHTML.trim(),
+        documentDate: row.querySelector('td:nth-child(4)')!.innerHTML.trim(),
+        companyName: row.querySelector('td:nth-child(5)')!.innerHTML.trim(),
       }
     })
   })
@@ -106,7 +106,7 @@ export async function fetchDocument(code: string): Promise<DiariumDocument> {
       countyName: dd[8].innerHTML.match(/^(.+?) \((\d\d)\)/)![1],
       countyCode: dd[8].innerHTML.match(/^(.+?) \((\d\d)\)/)![2],
       municipalityName: dd[9].innerHTML.match(/^(.+?) \((\d{4})\)/)![1],
-      municipalityCode: dd[9].innerHTML.match(/^(.+?) \((\d{4})\)/)![1],
+      municipalityCode: dd[9].innerHTML.match(/^(.+?) \((\d{4})\)/)![2],
     }
   })
 
