@@ -60,3 +60,55 @@ export async function searchDiarium(
 
   return result
 }
+
+export type DiariumDocument = {
+  caseCode: string
+  caseStatus: string
+  caseTopic: string
+  documentCode: string
+  documentDate: string
+  documentType: string
+  documentDirection: string
+  companyName: string
+  companyCode: string
+  workplaceName: string
+  workplaceCode: string
+  countyName: string
+  countyCode: string
+  municipalityName: string
+  municipalityCode: string
+}
+
+export async function fetchDocument(code: string): Promise<DiariumDocument> {
+  const browser = await puppeteer.launch({ headless: 'new' })
+  const page = await browser.newPage()
+  const url = new URL(
+    '/om-oss/sok-i-arbetsmiljoverkets-diarium/',
+    'https://www.av.se/'
+  )
+  url.searchParams.set('id', code)
+  await page.goto(url.toString())
+
+  const d = await page.evaluate(() => {
+    const dd: HTMLElement[] = Array.from(document.querySelectorAll('dd'))
+    return {
+      caseCode: dd[0].innerHTML,
+      caseStatus: dd[11].innerHTML,
+      caseTopic: dd[2].innerHTML,
+      documentCode: dd[1].innerHTML,
+      documentDate: dd[10].innerHTML,
+      documentType: dd[3].innerHTML,
+      documentDirection: dd[4].innerHTML,
+      companyName: dd[5].innerHTML.match(/^(.+?) \((\d{6}-\d{4})\)/)![1],
+      companyCode: dd[5].innerHTML.match(/^(.+?) \((\d{6}-\d{4})\)/)![2],
+      workplaceName: dd[7].innerHTML,
+      workplaceCode: dd[6].innerHTML,
+      countyName: dd[8].innerHTML.match(/^(.+?) \((\d\d)\)/)![1],
+      countyCode: dd[8].innerHTML.match(/^(.+?) \((\d\d)\)/)![2],
+      municipalityName: dd[9].innerHTML.match(/^(.+?) \((\d{4})\)/)![1],
+      municipalityCode: dd[9].innerHTML.match(/^(.+?) \((\d{4})\)/)![1],
+    }
+  })
+
+  return d
+}
