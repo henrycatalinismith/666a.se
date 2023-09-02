@@ -2,7 +2,7 @@ import { Chunk, County, Scan, Stub } from '@prisma/client'
 
 import { createInitialChunk, createProjectedChunks, updateChunk } from './chunk'
 import prisma from './database'
-import { searchDiarium } from './diarium'
+import { fetchDocument, searchDiarium } from './diarium'
 import { createScan, findOngoingScan } from './scan'
 import { createStubs } from './stub'
 
@@ -61,7 +61,13 @@ export async function ingestChunk(chunkId: string): Promise<Chunk> {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export async function ingestStub(stub: Stub): Promise<void> {
+export async function ingestStub(stubId: string): Promise<void> {
+  const stub = await prisma.stub.findFirstOrThrow({
+    where: { id: stubId, ingested: null },
+  })
+
+  const diariumDocument = await fetchDocument(stub.documentCode)
+  console.log(diariumDocument)
   // send request
   // create document from response
   // mark stub as ingested
