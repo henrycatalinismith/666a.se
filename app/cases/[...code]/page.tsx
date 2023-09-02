@@ -59,7 +59,7 @@ export default async function Case({ params }: any) {
           <TableBody>
             {documents.map((document: any) => (
               <TableRow key={document.id}>
-                <TableCell>{document.filed.toISOString()}</TableCell>
+                <TableCell>{document.date.toISOString()}</TableCell>
                 <TableCell>{document.type}</TableCell>
                 <TableCell>{document.code}</TableCell>
               </TableRow>

@@ -3,33 +3,9 @@ import { Chunk, County, Scan, Stub } from '@prisma/client'
 import { createInitialChunk, createProjectedChunks, updateChunk } from './chunk'
 import prisma from './database'
 import { fetchDocument, searchDiarium } from './diarium'
+import { createDocument } from './document'
 import { createScan, findOngoingScan } from './scan'
 import { createStubs } from './stub'
-
-const stubsPerChunk = 10
-
-export async function scanCounty(county: County): Promise<Scan> {
-  const ongoingScan = await findOngoingScan(county)
-  if (ongoingScan) {
-    return ongoingScan
-  }
-
-  const scan = await createScan(county)
-  const pendingChunk = await createInitialChunk(scan.id)
-  const ingestedChunk = await ingestChunk(pendingChunk.id)
-  console.log(ingestedChunk.hitCount)
-
-  const limitedResult = ingestedChunk!.hitCount!.match(
-    /^Visar (\d+) av (\d+) träffar$/
-  )
-  if (limitedResult) {
-    const targetStubCount = parseInt(limitedResult[1], 10) - stubsPerChunk
-    const targetChunkCount = targetStubCount / stubsPerChunk
-    await createProjectedChunks(scan.id, targetChunkCount)
-  }
-
-  return scan
-}
 
 export async function ingestChunk(chunkId: string): Promise<Chunk> {
   const chunk = await prisma.chunk.findFirstOrThrow({
@@ -51,7 +27,7 @@ export async function ingestChunk(chunkId: string): Promise<Chunk> {
   )
 
   const stubs = await createStubs(chunk.id, result)
-  const startDate = chunk.startDate ?? stubs[0].filed
+  const startDate = chunk.startDate ?? stubs[0].documentDate
   return await updateChunk(chunk.id, {
     hitCount: result.hitCount,
     startDate,
@@ -67,7 +43,13 @@ export async function ingestStub(stubId: string): Promise<void> {
   })
 
   const diariumDocument = await fetchDocument(stub.documentCode)
-  console.log(diariumDocument)
+  await createDocument(diariumDocument)
+
+  await prisma.stub.update({
+    data: { ingested: new Date() },
+    where: { id: stub.id },
+  })
+
   // send request
   // create document from response
   // mark stub as ingested
