@@ -16,13 +16,12 @@
     "next:lint": "next lint",
     "postinstall": "prisma generate",
     "scan:create": "yarn ts-node -r dotenv/config tasks/scan:create.ts",
-    "scrape:all": "yarn ts-node -r dotenv/config tasks/scrape:all.ts",
-    "scrape:company": "yarn ts-node -r dotenv/config tasks/scrape:company.ts",
-    "scrape:document": "yarn ts-node -r dotenv/config tasks/scrape:document.ts",
-    "scrape:search": "yarn ts-node -r dotenv/config tasks/scrape:search.ts",
-    "scrape:subscriptions": "yarn ts-node -r dotenv/config tasks/scrape:subscriptions.ts",
+    "scan:county": "yarn ts-node -r dotenv/config tasks/scan:county.ts",
+    "status:import": "yarn ts-node -r dotenv/config tasks/status:import.ts",
     "stub:ingest": "yarn ts-node -r dotenv/config tasks/stub:ingest.ts",
     "subscription:create": "yarn ts-node -r dotenv/config tasks/subscription:create.ts",
+    "tick:create": "yarn ts-node -r dotenv/config tasks/tick:create.ts",
+    "type:import": "yarn ts-node -r dotenv/config tasks/type:import.ts",
     "user:create": "yarn ts-node -r dotenv/config tasks/user:create.ts"
   },
   "dependencies": {

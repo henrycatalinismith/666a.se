@@ -9,141 +9,191 @@ generator client {
 }
 
 model Case {
-  id              String         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  company         Company        @relation(fields: [companyId], references: [id])
-  companyId       String         @db.Uuid
-  code            String         @unique
-  name            String
-  created         DateTime       @default(now())
-  updated         DateTime       @default(now())
-  documents       Document[]
+  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  created DateTime @default(now())
+  updated DateTime @default(now())
+
+  companyId String @db.Uuid
+  statusId String @db.Uuid
+
+  code String @unique
+  name String
+
+  company Company @relation(fields: [companyId], references: [id])
+  documents Document[]
+  status Status @relation(fields: [statusId], references: [id])
+
   @@map("case")
 }
 
 model Chunk {
-  id         String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  county     County    @relation(fields: [countyId], references: [id])
-  countyId   String    @db.Uuid
-  scan       Scan      @relation(fields: [scanId], references: [id])
-  scanId     String    @db.Uuid
+  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  created DateTime  @default(now())
+  updated DateTime  @default(now())
+
+  countyId String @db.Uuid
+  scanId String @db.Uuid
+
   startDate  DateTime? @db.Date
-  page       Int
+  page Int
   stubCount  Int?
-  hitCount   String?
-  created    DateTime  @default(now())
-  updated    DateTime  @default(now())
-  ingested   DateTime?
-  stubs      Stub[]
+  hitCount String?
+  ingested DateTime?
+
+  county County @relation(fields: [countyId], references: [id])
+  scan Scan @relation(fields: [scanId], references: [id])
+  stubs Stub[]
+
   @@map("chunk")
   @@index([scanId, created(sort: Asc), ingested(sort: Asc)])
 }
 
 model Company {
-  id            String         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  code          String         @unique
-  name          String
-  slug          String         @unique
-  created       DateTime       @default(now())
-  updated       DateTime       @default(now())
-  cases         Case[]
-  documents     Document[]
+  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  created DateTime @default(now())
+  updated DateTime @default(now())
+
+  code String @unique
+  name String
+  slug String @unique
+  cases Case[]
+
+  documents Document[]
   subscriptions Subscription[] @relation("CompanySubscription")
 
   @@map("company")
 }
 
 model County {
-  id             String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  code           String   @unique
-  name           String
-  slug           String   @unique
-  created        DateTime @default(now())
-  updated        DateTime @default(now())
-  documents      Document[]
+  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  created DateTime @default(now())
+  updated DateTime @default(now())
+  ticked DateTime?
+
+  code String @unique
+  name String
+  slug String @unique
+
+  documents Document[]
   municipalities Municipality[]
-  scans          Scan[]
-  chunks         Chunk[]
-  stubs          Stub[]
+  scans Scan[]
+  chunks Chunk[]
+  stubs Stub[]
+
   @@map("county")
 }
 
 model Document {
-  id              String         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  case            Case           @relation(fields: [caseId], references: [id])
-  caseId          String         @db.Uuid
-  company         Company        @relation(fields: [companyId], references: [id])
-  companyId       String         @db.Uuid
-  county          County         @relation(fields: [countyId], references: [id])
-  countyId        String         @db.Uuid
-  municipality    Municipality   @relation(fields: [municipalityId], references: [id])
-  municipalityId  String         @db.Uuid
-  code            String         @unique
-  type            String
-  cfar            String
-  workplace       String
-  direction       String
-  status          String
-  filed           DateTime       @db.Date
-  created         DateTime       @default(now())
-  updated         DateTime       @default(now())
+  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  created DateTime @default(now())
+  updated DateTime @default(now())
+
+  caseId String @db.Uuid
+  companyId String @db.Uuid
+  countyId String @db.Uuid
+  municipalityId  String @db.Uuid
+  typeId String @db.Uuid
+  workplaceId String @db.Uuid
+
+  code String @unique
+  date DateTime @db.Date
+  direction String
+  typeText String
+
+  case Case @relation(fields: [caseId], references: [id])
+  company Company @relation(fields: [companyId], references: [id])
+  county County @relation(fields: [countyId], references: [id])
+  municipality Municipality @relation(fields: [municipalityId], references: [id])
+  type Type @relation(fields: [typeId], references: [id])
+  workplace Workplace @relation(fields: [workplaceId], references: [id])
+
   @@map("document")
 }
 
 model Municipality {
-  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  county    County   @relation(fields: [countyId], references: [id])
-  countyId  String   @db.Uuid
-  code      String   @unique
-  name      String
-  slug      String   @unique
-  created   DateTime @default(now())
-  updated   DateTime @default(now())
+  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  created DateTime @default(now())
+  updated DateTime @default(now())
+
+  countyId  String @db.Uuid
+
+  code String @unique
+  name String
+  slug String @unique
+
+  county County @relation(fields: [countyId], references: [id])
   documents Document[]
+
   @@map("municipality")
 }
 
 model Scan {
-  id         String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  county     County    @relation(fields: [countyId], references: [id])
-  countyId   String    @db.Uuid
-  created    DateTime  @default(now())
-  updated    DateTime  @default(now())
+  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  created DateTime  @default(now())
+  updated DateTime  @default(now())
+
+  countyId String @db.Uuid
+
   startDate  DateTime? @db.Date
   chunkCount Int
   completed  DateTime?
-  chunks     Chunk[]
-  stubs      Stub[]
+
+  chunks Chunk[]
+  county County @relation(fields: [countyId], references: [id])
+  stubs Stub[]
+
   @@map("scan")
   @@index([countyId, created(sort: Asc), completed(sort: Asc)])
 }
 
 model Session {
-  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  user      User     @relation(fields: [userId], references: [id])
-  userId    String   @db.Uuid
-  secret    String
-  created   DateTime @default(now())
-  updated   DateTime @default(now())
+  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  created DateTime @default(now())
+  updated DateTime @default(now())
+
+  userId String @db.Uuid
+
+  secret String
+
+  user User @relation(fields: [userId], references: [id])
+
   @@map("session")
 }
 
+model Status {
+  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  created DateTime @default(now())
+  updated DateTime @default(now())
+
+  name String
+  slug String @unique
+
+  cases Case[]
+
+  @@map("status")
+}
+
 model Stub {
-  id            String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  chunk         Chunk    @relation(fields: [chunkId], references: [id])
-  chunkId       String   @db.Uuid
-  scan          Scan     @relation(fields: [scanId], references: [id])
-  scanId        String   @db.Uuid
-  county        County   @relation(fields: [countyId], references: [id])
-  countyId      String   @db.Uuid
-  index         Int
+  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  created DateTime @default(now())
+  updated DateTime @default(now())
+  ingested DateTime?
+
+  chunkId String @db.Uuid
+  countyId String @db.Uuid
+  scanId String @db.Uuid
+
+  index Int
+  caseName String
+  companyName  String
   documentCode  String
   documentType  String
-  caseName      String
-  organization  String
-  filed         DateTime @db.Date
-  created       DateTime @default(now())
-  updated       DateTime @default(now())
-  ingested      DateTime?
+  documentDate DateTime @db.Date
+
+  chunk Chunk @relation(fields: [chunkId], references: [id])
+  county County @relation(fields: [countyId], references: [id])
+  scan Scan @relation(fields: [scanId], references: [id])
+
   @@map("stub")
   @@index([created(sort: Asc), ingested(sort: Asc)])
 }
@@ -153,27 +203,74 @@ enum SubscribableType {
 }
 
 model Subscription {
-  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  user      User     @relation(fields: [userId], references: [id])
-  userId    String   @db.Uuid
+  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  created DateTime @default(now())
+  updated DateTime @default(now())
 
-  company    Company?         @relation("CompanySubscription", fields: [targetId], references: [id], map: "company_subscribableId")
+  userId String @db.Uuid
   targetType SubscribableType
-  targetId   String @db.Uuid
+  targetId String @db.Uuid
 
-  created   DateTime @default(now())
-  updated   DateTime @default(now())
+  company Company? @relation("CompanySubscription", fields: [targetId], references: [id], map: "company_subscribableId")
+  user User @relation(fields: [userId], references: [id])
+
   @@map("subscription")
 }
 
+enum Tickable {
+  chunk
+  scan
+  stub
+}
+
+model Tick {
+  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  created DateTime @default(now())
+  updated DateTime @default(now())
+
+  targetType Tickable
+  targetId String @db.Uuid
+
+  @@map("tick")
+}
+
+model Type {
+  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  created DateTime @default(now())
+  updated DateTime @default(now())
+
+  name String
+  slug String @unique
+
+  documents Document[]
+
+  @@map("type")
+}
+
 model User {
-  id            String         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  name          String
-  email         String         @unique
-  password      String
-  created       DateTime       @default(now())
-  updated       DateTime       @default(now())
-  sessions      Session[]
+  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  created DateTime @default(now())
+  updated DateTime @default(now())
+
+  name String
+  email String @unique
+  password String
+
+  sessions Session[]
   subscriptions Subscription[]
+
   @@map("user")
+}
+
+model Workplace {
+  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  created DateTime @default(now())
+  updated DateTime @default(now())
+
+  name String
+  code String @unique
+
+  documents Document[]
+
+  @@map("workplace")
 }
