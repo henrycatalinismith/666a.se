@@ -22,9 +22,11 @@ export default async function Case({ params }: any) {
       code: params.code.join('/'),
     },
   })
-  const company = await prisma.company.findFirstOrThrow({
-    where: { id: c.companyId },
-  })
+  const company =
+    c.companyId &&
+    (await prisma.company.findFirstOrThrow({
+      where: { id: c.companyId },
+    }))
   const documents = await prisma.document.findMany({
     where: {
       caseId: c.id,
@@ -41,9 +43,11 @@ export default async function Case({ params }: any) {
           <p className="text-lg text-muted-foreground">{c!.name}</p>
         </div>
 
-        <p className="pt-8">
-          <Link href={`/companies/${company.code}`}>{company.name}</Link>
-        </p>
+        {company && (
+          <p className="pt-8">
+            <Link href={`/companies/${company.code}`}>{company.name}</Link>
+          </p>
+        )}
 
         <h2 className="pt-2 font-heading mt-8 scroll-m-20 text-xl font-semibold tracking-tight">
           Documents

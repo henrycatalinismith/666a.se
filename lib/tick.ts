@@ -1,4 +1,4 @@
-import { Tick } from '@prisma/client'
+import { ChunkStatus, StubStatus, Tick, TickType } from '@prisma/client'
 
 import prisma from './database'
 import { ingestChunk, ingestStub } from './ingestion'
@@ -8,12 +8,12 @@ export async function createTick(): Promise<Tick> {
   console.log('creating tick')
 
   const stub = await prisma.stub.findFirst({
-    where: { ingested: null },
+    where: { status: StubStatus.PENDING },
     orderBy: { created: 'asc' },
   })
 
   const chunk = await prisma.chunk.findFirst({
-    where: { ingested: null },
+    where: { status: { in: [ChunkStatus.PENDING, ChunkStatus.ONGOING] } },
     orderBy: { created: 'asc' },
   })
 
@@ -37,13 +37,15 @@ export async function createTick(): Promise<Tick> {
 }
 
 async function tickStub(stubId: string): Promise<Tick> {
+  const stub = await prisma.stub.findFirstOrThrow({ where: { id: stubId } })
   const now = new Date()
   const tick = await prisma.tick.create({
     data: {
       created: now,
       updated: now,
-      targetType: 'stub',
-      targetId: stubId,
+      scanId: stub.scanId,
+      stubId: stubId,
+      type: TickType.STUB,
     },
   })
 
@@ -53,13 +55,15 @@ async function tickStub(stubId: string): Promise<Tick> {
 }
 
 async function tickChunk(chunkId: string): Promise<Tick> {
+  const chunk = await prisma.chunk.findFirstOrThrow({ where: { id: chunkId } })
   const now = new Date()
   const tick = await prisma.tick.create({
     data: {
       created: now,
       updated: now,
-      targetType: 'chunk',
-      targetId: chunkId,
+      scanId: chunk.scanId,
+      chunkId: chunkId,
+      type: TickType.CHUNK,
     },
   })
   await ingestChunk(chunkId)
@@ -79,8 +83,8 @@ async function tickScan(countyId: string): Promise<Tick> {
     data: {
       created: now,
       updated: now,
-      targetType: 'scan',
-      targetId: scan.id,
+      scanId: scan.id,
+      type: TickType.SCAN,
     },
   })
 
