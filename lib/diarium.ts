@@ -69,10 +69,10 @@ export type DiariumDocument = {
   documentDate: string
   documentType: string
   documentDirection: string
-  companyName: string
-  companyCode: string
-  workplaceName: string
-  workplaceCode: string
+  companyName: string | null
+  companyCode: string | null
+  workplaceName: string | null
+  workplaceCode: string | null
   countyName: string
   countyCode: string
   municipalityName: string
@@ -91,6 +91,13 @@ export async function fetchDocument(code: string): Promise<DiariumDocument> {
 
   const d = await page.evaluate(() => {
     const dd: HTMLElement[] = Array.from(document.querySelectorAll('dd'))
+    const organisationMatches = dd[5].innerHTML.match(
+      /^(.+?) \((\d{6}-\d{4})\)/
+    )
+    const organisationSaknas = dd[5].innerHTML.trim() === 'Saknas'
+    const workplaceNameSaknas = dd[7].innerHTML.trim() === 'Saknas'
+    const workplaceCodeSaknas = dd[7].innerHTML.trim() === 'Saknas'
+
     return {
       caseCode: dd[0].innerHTML,
       caseStatus: dd[11].innerHTML,
@@ -99,10 +106,10 @@ export async function fetchDocument(code: string): Promise<DiariumDocument> {
       documentDate: dd[10].innerHTML,
       documentType: dd[3].innerHTML,
       documentDirection: dd[4].innerHTML,
-      companyName: dd[5].innerHTML.match(/^(.+?) \((\d{6}-\d{4})\)/)![1],
-      companyCode: dd[5].innerHTML.match(/^(.+?) \((\d{6}-\d{4})\)/)![2],
-      workplaceName: dd[7].innerHTML,
-      workplaceCode: dd[6].innerHTML,
+      companyName: organisationSaknas ? null : organisationMatches![1],
+      companyCode: organisationSaknas ? null : organisationMatches![2],
+      workplaceName: workplaceNameSaknas ? null : dd[7].innerHTML,
+      workplaceCode: workplaceCodeSaknas ? null : dd[6].innerHTML,
       countyName: dd[8].innerHTML.match(/^(.+?) \((\d\d)\)/)![1],
       countyCode: dd[8].innerHTML.match(/^(.+?) \((\d\d)\)/)![2],
       municipalityName: dd[9].innerHTML.match(/^(.+?) \((\d{4})\)/)![1],
