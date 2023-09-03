@@ -1,4 +1,4 @@
-import { County, Scan } from '@prisma/client'
+import { County, Scan, ScanStatus } from '@prisma/client'
 
 import { createInitialChunk, createProjectedChunks } from './chunk'
 import { findNewestArtefactDate } from './county'
@@ -12,9 +12,9 @@ export async function scanCounty(countyId: string): Promise<Scan> {
     where: { id: countyId },
   })
 
-  const ongoingScan = await findOngoingScan(county)
-  if (ongoingScan) {
-    return ongoingScan
+  const incompleteScan = await findIncompleteScan(county)
+  if (incompleteScan) {
+    return incompleteScan
   }
 
   const scan = await createScan(county)
@@ -34,11 +34,11 @@ export async function scanCounty(countyId: string): Promise<Scan> {
   return scan
 }
 
-export async function findOngoingScan(county: County): Promise<Scan | null> {
+export async function findIncompleteScan(county: County): Promise<Scan | null> {
   return await prisma.scan.findFirst({
     where: {
       countyId: county.id,
-      completed: null,
+      status: { in: [ScanStatus.PENDING, ScanStatus.ONGOING] },
     },
   })
 }
@@ -53,7 +53,7 @@ export async function createScan(county: County): Promise<Scan> {
       countyId: county.id,
       chunkCount: 0,
       startDate,
-      completed: null,
+      status: ScanStatus.PENDING,
       created: now,
       updated: now,
     },

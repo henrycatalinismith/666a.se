@@ -1,5 +1,3 @@
-import _ from 'lodash'
-
 import NavBar from '../../components/NavBar'
 import {
   Table,
@@ -18,13 +16,12 @@ export default async function Dashboard() {
     return <></>
   }
 
-  const subscriptions = await prisma.subscription.findMany({
-    where: { userId: user.id },
-    include: { company: true },
-  })
+  // const subscriptions = await prisma.subscription.findMany({
+  //   where: { userId: user.id },
+  //   include: { company: true },
+  // })
 
   const documents = await prisma.document.findMany({
-    where: { companyId: { in: _.map(subscriptions, 'targetId') } },
     orderBy: { date: 'desc' },
     take: 4,
     include: { case: true, company: true, type: true },
@@ -49,14 +46,6 @@ export default async function Dashboard() {
     <>
       <NavBar />
       <div className="container">
-        <h2>Subscriptions</h2>
-        <ol>
-          {subscriptions.map((sub) => (
-            <li key={sub.id}>{sub.company?.name}</li>
-          ))}
-        </ol>
-        <hr />
-
         <h2>Documents</h2>
         <Table>
           <TableHeader>
@@ -71,7 +60,7 @@ export default async function Dashboard() {
               <TableRow key={doc.id}>
                 <TableCell>{doc.date.toISOString().substring(0, 10)}</TableCell>
                 <TableCell>{doc.type.name}</TableCell>
-                <TableCell>{doc.company.name}</TableCell>
+                <TableCell>{doc.company?.name}</TableCell>
               </TableRow>
             ))}
           </TableBody>

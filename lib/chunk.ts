@@ -1,4 +1,4 @@
-import { Chunk, Scan } from '@prisma/client'
+import { Chunk, ChunkStatus, ScanStatus } from '@prisma/client'
 import _ from 'lodash'
 
 import prisma from './database'
@@ -10,6 +10,7 @@ export async function createInitialChunk(scanId: string): Promise<Chunk> {
 
   const chunk = await prisma.chunk.create({
     data: {
+      status: ChunkStatus.ONGOING,
       scanId: scanId,
       countyId: scan.countyId,
       startDate: scan.startDate,
@@ -36,6 +37,7 @@ export async function createProjectedChunks(
   const now = new Date()
   const result = await prisma.chunk.createMany({
     data: _.times(targetChunkCount, (index) => ({
+      status: ChunkStatus.PENDING,
       scanId: scan.id,
       countyId: scan.countyId,
       startDate: scan.startDate,
@@ -82,17 +84,22 @@ export async function updateChunk(
   // Each time a chunk is ingested there's a chance it's the last missing chunk
   // within its scan. After the final chunk for a scan is ingested, the scan is
   // marked as completed.
-  if (before.ingested === null && after.ingested !== null) {
+  if (
+    before.status === ChunkStatus.ONGOING &&
+    after.status === ChunkStatus.SUCCESS
+  ) {
     const uningestedSiblings = await prisma.chunk.count({
       where: {
         scanId: before.scanId,
-        ingested: { not: null },
+        status: {
+          in: [ChunkStatus.PENDING, ChunkStatus.ONGOING, ChunkStatus.FAILURE],
+        },
       },
     })
     if (uningestedSiblings === 0) {
       await prisma.scan.update({
         where: { id: before.scanId },
-        data: { completed: new Date(), updated: new Date() },
+        data: { status: ScanStatus.SUCCESS, updated: new Date() },
       })
     }
   }

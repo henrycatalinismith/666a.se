@@ -1,4 +1,4 @@
-import { Chunk, Stub } from '@prisma/client'
+import { Stub, StubStatus } from '@prisma/client'
 
 import prisma from './database'
 import { DiariumSearchResult } from './diarium'
@@ -33,6 +33,7 @@ export async function createStubs(
       scanId: chunk.scanId,
       countyId: chunk.countyId,
       index,
+      status: StubStatus.PENDING,
       caseName: row.caseName,
       documentCode: row.documentCode,
       documentDate: new Date(row.documentDate),
@@ -40,7 +41,6 @@ export async function createStubs(
       companyName: row.companyName,
       created: now,
       updated: now,
-      ingested: null,
     })),
   })
 

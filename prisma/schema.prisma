@@ -8,22 +8,31 @@ generator client {
   provider = "prisma-client-js"
 }
 
+enum CaseStatus {
+  ONGOING
+  CONCLUDED
+}
+
 model Case {
   id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   created DateTime @default(now())
   updated DateTime @default(now())
 
-  companyId String @db.Uuid
-  statusId String @db.Uuid
+  companyId String? @db.Uuid
 
   code String @unique
   name String
+  status CaseStatus @default(ONGOING)
 
-  company Company @relation(fields: [companyId], references: [id])
+  company Company? @relation(fields: [companyId], references: [id])
   documents Document[]
-  status Status @relation(fields: [statusId], references: [id])
+}
 
-  @@map("case")
+enum ChunkStatus {
+  PENDING
+  ONGOING
+  SUCCESS
+  FAILURE
 }
 
 model Chunk {
@@ -34,18 +43,18 @@ model Chunk {
   countyId String @db.Uuid
   scanId String @db.Uuid
 
+  status ChunkStatus @default(PENDING)
   startDate  DateTime? @db.Date
   page Int
   stubCount  Int?
   hitCount String?
-  ingested DateTime?
 
   county County @relation(fields: [countyId], references: [id])
   scan Scan @relation(fields: [scanId], references: [id])
   stubs Stub[]
+  ticks Tick[]
 
-  @@map("chunk")
-  @@index([scanId, created(sort: Asc), ingested(sort: Asc)])
+  @@index([scanId, created(sort: Asc), status])
 }
 
 model Company {
@@ -59,9 +68,6 @@ model Company {
   cases Case[]
 
   documents Document[]
-  subscriptions Subscription[] @relation("CompanySubscription")
-
-  @@map("company")
 }
 
 model County {
@@ -79,8 +85,6 @@ model County {
   scans Scan[]
   chunks Chunk[]
   stubs Stub[]
-
-  @@map("county")
 }
 
 model Document {
@@ -89,11 +93,11 @@ model Document {
   updated DateTime @default(now())
 
   caseId String @db.Uuid
-  companyId String @db.Uuid
+  companyId String? @db.Uuid
   countyId String @db.Uuid
   municipalityId  String @db.Uuid
   typeId String @db.Uuid
-  workplaceId String @db.Uuid
+  workplaceId String? @db.Uuid
 
   code String @unique
   date DateTime @db.Date
@@ -101,13 +105,13 @@ model Document {
   typeText String
 
   case Case @relation(fields: [caseId], references: [id])
-  company Company @relation(fields: [companyId], references: [id])
+  company Company? @relation(fields: [companyId], references: [id])
   county County @relation(fields: [countyId], references: [id])
   municipality Municipality @relation(fields: [municipalityId], references: [id])
   type Type @relation(fields: [typeId], references: [id])
-  workplace Workplace @relation(fields: [workplaceId], references: [id])
+  workplace Workplace? @relation(fields: [workplaceId], references: [id])
 
-  @@map("document")
+  stubs Stub[]
 }
 
 model Municipality {
@@ -123,8 +127,13 @@ model Municipality {
 
   county County @relation(fields: [countyId], references: [id])
   documents Document[]
+}
 
-  @@map("municipality")
+enum ScanStatus {
+  PENDING
+  ONGOING
+  SUCCESS
+  FAILURE
 }
 
 model Scan {
@@ -134,16 +143,16 @@ model Scan {
 
   countyId String @db.Uuid
 
+  status ScanStatus @default(PENDING)
   startDate  DateTime? @db.Date
   chunkCount Int
-  completed  DateTime?
 
   chunks Chunk[]
   county County @relation(fields: [countyId], references: [id])
   stubs Stub[]
+  ticks Tick[]
 
-  @@map("scan")
-  @@index([countyId, created(sort: Asc), completed(sort: Asc)])
+  @@index([countyId, created(sort: Asc), status])
 }
 
 model Session {
@@ -156,33 +165,25 @@ model Session {
   secret String
 
   user User @relation(fields: [userId], references: [id])
-
-  @@map("session")
 }
 
-model Status {
-  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  created DateTime @default(now())
-  updated DateTime @default(now())
-
-  name String
-  slug String @unique
-
-  cases Case[]
-
-  @@map("status")
+enum StubStatus {
+  PENDING
+  SUCCESS
+  FAILURE
 }
 
 model Stub {
   id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   created DateTime @default(now())
   updated DateTime @default(now())
-  ingested DateTime?
 
   chunkId String @db.Uuid
   countyId String @db.Uuid
   scanId String @db.Uuid
+  documentId String? @db.Uuid
 
+  status StubStatus @default(PENDING)
   index Int
   caseName String
   companyName  String
@@ -193,34 +194,16 @@ model Stub {
   chunk Chunk @relation(fields: [chunkId], references: [id])
   county County @relation(fields: [countyId], references: [id])
   scan Scan @relation(fields: [scanId], references: [id])
+  document Document? @relation(fields: [documentId], references: [id])
+  ticks Tick[]
 
-  @@map("stub")
-  @@index([created(sort: Asc), ingested(sort: Asc)])
+  @@index([created(sort: Asc), status])
 }
 
-enum SubscribableType {
-  Company
-}
-
-model Subscription {
-  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  created DateTime @default(now())
-  updated DateTime @default(now())
-
-  userId String @db.Uuid
-  targetType SubscribableType
-  targetId String @db.Uuid
-
-  company Company? @relation("CompanySubscription", fields: [targetId], references: [id], map: "company_subscribableId")
-  user User @relation(fields: [userId], references: [id])
-
-  @@map("subscription")
-}
-
-enum Tickable {
-  chunk
-  scan
-  stub
+enum TickType {
+  SCAN
+  CHUNK
+  STUB
 }
 
 model Tick {
@@ -228,10 +211,14 @@ model Tick {
   created DateTime @default(now())
   updated DateTime @default(now())
 
-  targetType Tickable
-  targetId String @db.Uuid
+  type TickType
+  scanId String @db.Uuid
+  chunkId String? @db.Uuid
+  stubId String? @db.Uuid
 
-  @@map("tick")
+  scan Scan @relation(fields: [scanId], references: [id])
+  chunk Chunk? @relation(fields: [chunkId], references: [id])
+  stub Stub? @relation(fields: [stubId], references: [id])
 }
 
 model Type {
@@ -243,8 +230,6 @@ model Type {
   slug String @unique
 
   documents Document[]
-
-  @@map("type")
 }
 
 model User {
@@ -257,9 +242,6 @@ model User {
   password String
 
   sessions Session[]
-  subscriptions Subscription[]
-
-  @@map("user")
 }
 
 model Workplace {
@@ -271,6 +253,4 @@ model Workplace {
   code String @unique
 
   documents Document[]
-
-  @@map("workplace")
 }

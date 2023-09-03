@@ -45,7 +45,7 @@ export default function LoginForm() {
       response.json()
     )
     if (response.status === 'success') {
-      router.push('/companies/556737-0431')
+      router.push('/ingestion')
     }
     console.log(response)
   }
