@@ -1,11 +1,12 @@
 import { CaseStatus, Document } from '@prisma/client'
 import slugify from 'slugify'
 
-import prisma from './database'
+import prisma, { Transaction } from './database'
 import { DiariumDocument } from './diarium'
 
 export async function createDocument(
-  diariumDocument: DiariumDocument
+  diariumDocument: DiariumDocument,
+  tx: Transaction
 ): Promise<Document> {
   let company = null
   let companyId = null
@@ -15,7 +16,7 @@ export async function createDocument(
     })
     if (!company) {
       const now = new Date()
-      company = await prisma.company.create({
+      company = await tx.company.create({
         data: {
           created: now,
           updated: now,
@@ -38,7 +39,7 @@ export async function createDocument(
       : CaseStatus.ONGOING
   if (!_case) {
     const now = new Date()
-    _case = await prisma.case.create({
+    _case = await tx.case.create({
       data: {
         created: now,
         updated: now,
@@ -58,7 +59,7 @@ export async function createDocument(
     })
     if (!workplace) {
       const now = new Date()
-      workplace = await prisma.workplace.create({
+      workplace = await tx.workplace.create({
         data: {
           created: now,
           updated: now,
@@ -83,7 +84,7 @@ export async function createDocument(
     },
   })
 
-  const d = await prisma.document.create({
+  const d = await tx.document.create({
     data: {
       caseId: caseId!,
       companyId,
