@@ -1,11 +1,12 @@
 import { Stub, StubStatus } from '@prisma/client'
 
-import prisma from './database'
+import prisma, { Transaction } from './database'
 import { DiariumSearchResult } from './diarium'
 
 export async function createStubs(
   chunkId: string,
-  searchResult: DiariumSearchResult
+  searchResult: DiariumSearchResult,
+  tx: Transaction
 ): Promise<Stub[]> {
   const chunk = await prisma.chunk.findFirstOrThrow({ where: { id: chunkId } })
 
@@ -27,7 +28,7 @@ export async function createStubs(
 
   const now = new Date()
 
-  await prisma.stub.createMany({
+  await tx.stub.createMany({
     data: newDocuments.map((row, index) => ({
       chunkId: chunk.id,
       scanId: chunk.scanId,

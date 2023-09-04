@@ -114,6 +114,25 @@ model Document {
   stubs Stub[]
 }
 
+enum ErrorStatus {
+  BLOCKING
+  RESOLVED
+}
+
+model Error {
+  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  created DateTime @default(now())
+  updated DateTime @default(now())
+
+  status ErrorStatus
+
+  code String?
+  message String
+  stack String?
+
+  ticks Tick[]
+}
+
 model Municipality {
   id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   created DateTime @default(now())
@@ -212,11 +231,13 @@ model Tick {
   updated DateTime @default(now())
 
   type TickType
-  scanId String @db.Uuid
+  errorId String? @db.Uuid
+  scanId String? @db.Uuid
   chunkId String? @db.Uuid
   stubId String? @db.Uuid
 
-  scan Scan @relation(fields: [scanId], references: [id])
+  error Error? @relation(fields: [errorId], references: [id])
+  scan Scan? @relation(fields: [scanId], references: [id])
   chunk Chunk? @relation(fields: [chunkId], references: [id])
   stub Stub? @relation(fields: [stubId], references: [id])
 }

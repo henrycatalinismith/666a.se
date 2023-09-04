@@ -1,12 +1,15 @@
 import { Chunk, ChunkStatus, ScanStatus, StubStatus } from '@prisma/client'
 
 import { updateChunk } from './chunk'
-import prisma from './database'
+import prisma, { Transaction } from './database'
 import { fetchDocument, searchDiarium } from './diarium'
 import { createDocument } from './document'
 import { createStubs } from './stub'
 
-export async function ingestChunk(chunkId: string): Promise<Chunk> {
+export async function ingestChunk(
+  chunkId: string,
+  tx: Transaction
+): Promise<Chunk> {
   const chunk = await prisma.chunk.findFirstOrThrow({
     where: { id: chunkId },
     include: { county: true },
@@ -25,31 +28,38 @@ export async function ingestChunk(chunkId: string): Promise<Chunk> {
     `[ingestChunk]: ${chunk.id} ${result.rows.length} ${result.hitCount}`
   )
 
-  const stubs = await createStubs(chunk.id, result)
+  const stubs = await createStubs(chunk.id, result, tx)
   const startDate = chunk.startDate ?? stubs[0].documentDate
 
-  await prisma.scan.update({
+  await tx.scan.update({
     where: { id: chunk.scanId },
     data: { status: ScanStatus.ONGOING },
   })
 
-  return await updateChunk(chunk.id, {
-    hitCount: result.hitCount,
-    startDate,
-    stubCount: stubs.length,
-    status: ChunkStatus.ONGOING,
-  })
+  return await updateChunk(
+    chunk.id,
+    {
+      hitCount: result.hitCount,
+      startDate,
+      stubCount: stubs.length,
+      status: ChunkStatus.ONGOING,
+    },
+    tx
+  )
 }
 
-export async function ingestStub(stubId: string): Promise<void> {
+export async function ingestStub(
+  stubId: string,
+  tx: Transaction
+): Promise<void> {
   const stub = await prisma.stub.findFirstOrThrow({
     where: { id: stubId, status: StubStatus.PENDING },
   })
 
   const diariumDocument = await fetchDocument(stub.documentCode)
-  const doc = await createDocument(diariumDocument)
+  const doc = await createDocument(diariumDocument, tx)
 
-  await prisma.stub.update({
+  await tx.stub.update({
     data: { status: StubStatus.SUCCESS, documentId: doc.id },
     where: { id: stub.id },
   })
@@ -64,7 +74,7 @@ export async function ingestStub(stubId: string): Promise<void> {
   })
   console.log(uningestedSiblings)
   if (uningestedSiblings === 0) {
-    await prisma.chunk.update({
+    await tx.chunk.update({
       where: { id: stub.chunkId },
       data: { status: ChunkStatus.SUCCESS, updated: new Date() },
     })
