@@ -1,68 +1,17 @@
 import { Chunk, ChunkStatus, ScanStatus } from '@prisma/client'
-import _ from 'lodash'
 
-import prisma from './database'
-
-export async function createInitialChunk(scanId: string): Promise<Chunk> {
-  const now = new Date()
-
-  const scan = await prisma.scan.findFirstOrThrow({ where: { id: scanId } })
-
-  const chunk = await prisma.chunk.create({
-    data: {
-      status: ChunkStatus.ONGOING,
-      scanId: scanId,
-      countyId: scan.countyId,
-      startDate: scan.startDate,
-      stubCount: null,
-      page: 1,
-      created: now,
-      updated: now,
-    },
-  })
-
-  await prisma.scan.update({
-    where: { id: scanId },
-    data: { chunkCount: { increment: 1 } },
-  })
-
-  return chunk
-}
-
-export async function createProjectedChunks(
-  scanId: string,
-  targetChunkCount: number
-): Promise<void> {
-  const scan = await prisma.scan.findFirstOrThrow({ where: { id: scanId } })
-  const now = new Date()
-  const result = await prisma.chunk.createMany({
-    data: _.times(targetChunkCount, (index) => ({
-      status: ChunkStatus.PENDING,
-      scanId: scan.id,
-      countyId: scan.countyId,
-      startDate: scan.startDate,
-      page: index + 2,
-      stubCount: null,
-      created: now,
-      updated: now,
-    })),
-  })
-
-  await prisma.scan.update({
-    where: { id: scanId },
-    data: { chunkCount: { increment: result.count } },
-  })
-}
+import prisma, { Transaction } from './database'
 
 export async function updateChunk(
   id: string,
-  data: Partial<Chunk>
+  data: Partial<Chunk>,
+  tx: Transaction
 ): Promise<Chunk> {
   const before = await prisma.chunk.findFirstOrThrow({
     where: { id },
   })
 
-  const after = await prisma.chunk.update({
+  const after = await tx.chunk.update({
     where: { id },
     data: {
       ...data,
@@ -75,7 +24,7 @@ export async function updateChunk(
     after.startDate !== null &&
     before.page === 1
   ) {
-    await prisma.scan.update({
+    await tx.scan.update({
       where: { id: before.scanId },
       data: { startDate: after.startDate, updated: new Date() },
     })
@@ -88,7 +37,7 @@ export async function updateChunk(
     before.status === ChunkStatus.ONGOING &&
     after.status === ChunkStatus.SUCCESS
   ) {
-    const uningestedSiblings = await prisma.chunk.count({
+    const uningestedSiblings = await tx.chunk.count({
       where: {
         scanId: before.scanId,
         status: {
@@ -97,7 +46,7 @@ export async function updateChunk(
       },
     })
     if (uningestedSiblings === 0) {
-      await prisma.scan.update({
+      await tx.scan.update({
         where: { id: before.scanId },
         data: { status: ScanStatus.SUCCESS, updated: new Date() },
       })
