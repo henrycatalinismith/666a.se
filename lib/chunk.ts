@@ -1,13 +1,13 @@
 import { Chunk, ChunkStatus, ScanStatus } from '@prisma/client'
 
-import prisma, { Transaction } from './database'
+import { Transaction } from './database'
 
 export async function updateChunk(
   id: string,
   data: Partial<Chunk>,
   tx: Transaction
 ): Promise<Chunk> {
-  const before = await prisma.chunk.findFirstOrThrow({
+  const before = await tx.chunk.findFirstOrThrow({
     where: { id },
   })
 
