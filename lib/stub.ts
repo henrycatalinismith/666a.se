@@ -1,6 +1,6 @@
 import { Stub, StubStatus } from '@prisma/client'
 
-import prisma, { Transaction } from './database'
+import { Transaction } from './database'
 import { DiariumSearchResult } from './diarium'
 
 export async function createStubs(

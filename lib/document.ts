@@ -1,7 +1,7 @@
 import { CaseStatus, Document } from '@prisma/client'
 import slugify from 'slugify'
 
-import prisma, { Transaction } from './database'
+import { Transaction } from './database'
 import { DiariumDocument } from './diarium'
 
 export async function createDocument(
