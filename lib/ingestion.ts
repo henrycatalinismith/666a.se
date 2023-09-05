@@ -1,7 +1,7 @@
 import { Chunk, ChunkStatus, ScanStatus, StubStatus } from '@prisma/client'
 
 import { updateChunk } from './chunk'
-import prisma, { Transaction } from './database'
+import { Transaction } from './database'
 import { fetchDocument, searchDiarium } from './diarium'
 import { createDocument } from './document'
 import { createStubs } from './stub'
