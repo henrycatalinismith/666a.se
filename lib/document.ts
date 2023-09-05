@@ -11,7 +11,7 @@ export async function createDocument(
   let company = null
   let companyId = null
   if (diariumDocument.companyCode && diariumDocument.companyName) {
-    company = await prisma.company.findFirst({
+    company = await tx.company.findFirst({
       where: { code: diariumDocument.companyCode },
     })
     if (!company) {
@@ -30,14 +30,16 @@ export async function createDocument(
   }
 
   let caseId = null
-  let _case = await prisma.case.findFirst({
+  let _case = await tx.case.findFirst({
     where: { code: diariumDocument.caseCode },
   })
   const status =
     diariumDocument.caseStatus === 'Avslutat'
       ? CaseStatus.CONCLUDED
       : CaseStatus.ONGOING
-  if (!_case) {
+  if (_case) {
+    caseId = _case.id
+  } else {
     const now = new Date()
     _case = await tx.case.create({
       data: {
@@ -51,10 +53,13 @@ export async function createDocument(
     })
     caseId = _case.id
   }
+  console.log('case')
+  console.log(_case)
+  console.log(caseId)
 
   let workplaceId = null
   if (diariumDocument.workplaceCode && diariumDocument.workplaceName) {
-    let workplace = await prisma.workplace.findFirst({
+    let workplace = await tx.workplace.findFirst({
       where: { code: diariumDocument.workplaceCode },
     })
     if (!workplace) {
@@ -71,14 +76,14 @@ export async function createDocument(
     }
   }
 
-  const county = await prisma.county.findFirstOrThrow({
+  const county = await tx.county.findFirstOrThrow({
     where: { code: diariumDocument.countyCode },
   })
-  const municipality = await prisma.municipality.findFirstOrThrow({
+  const municipality = await tx.municipality.findFirstOrThrow({
     where: { code: diariumDocument.municipalityCode },
   })
 
-  const type = await prisma.type.findFirstOrThrow({
+  const type = await tx.type.findFirstOrThrow({
     where: {
       name: diariumDocument.documentType,
     },

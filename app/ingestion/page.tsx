@@ -70,8 +70,8 @@ export default async function Ingestion() {
                 <TableCell>{tick.errorId ? 'ERROR' : 'OK'}</TableCell>
                 <TableCell>{tick.type}</TableCell>
                 <TableCell>
-                  {tick.type === TickType.SCAN && (
-                    <>{counties[tick.scan!.countyId].name}</>
+                  {tick.type === TickType.SCAN && tick.scan && (
+                    <>{counties[tick.scan?.countyId].name}</>
                   )}
                   {tick.type === TickType.CHUNK && <>{tick.chunk?.id}</>}
                   {tick.type === TickType.STUB && (
