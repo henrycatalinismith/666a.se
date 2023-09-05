@@ -8,13 +8,13 @@ export async function createStubs(
   searchResult: DiariumSearchResult,
   tx: Transaction
 ): Promise<Stub[]> {
-  const chunk = await prisma.chunk.findFirstOrThrow({ where: { id: chunkId } })
+  const chunk = await tx.chunk.findFirstOrThrow({ where: { id: chunkId } })
 
   // When turning a search result into stubs, it's possible some of the result
   // rows may correspond to already-ingested documents. Creating a stub when a
   // document has already been ingested means wasting a request reingesting the
   // same document twice. Filtering out existing documents here avoids this.
-  const documents = await prisma.document.findMany({
+  const documents = await tx.document.findMany({
     where: {
       code: {
         in: searchResult.rows.map((r) => r.documentCode),
@@ -47,7 +47,7 @@ export async function createStubs(
 
   // TODO: update chunk.stubCount
 
-  return await prisma.stub.findMany({
+  return await tx.stub.findMany({
     where: {
       chunkId: chunk.id,
       index: 0,

@@ -10,7 +10,7 @@ export async function ingestChunk(
   chunkId: string,
   tx: Transaction
 ): Promise<Chunk> {
-  const chunk = await prisma.chunk.findFirstOrThrow({
+  const chunk = await tx.chunk.findFirstOrThrow({
     where: { id: chunkId },
     include: { county: true },
   })
@@ -52,7 +52,7 @@ export async function ingestStub(
   stubId: string,
   tx: Transaction
 ): Promise<void> {
-  const stub = await prisma.stub.findFirstOrThrow({
+  const stub = await tx.stub.findFirstOrThrow({
     where: { id: stubId, status: StubStatus.PENDING },
   })
 
@@ -64,7 +64,7 @@ export async function ingestStub(
     where: { id: stub.id },
   })
 
-  const uningestedSiblings = await prisma.stub.count({
+  const uningestedSiblings = await tx.stub.count({
     where: {
       chunkId: stub.chunkId,
       status: {
@@ -72,7 +72,6 @@ export async function ingestStub(
       },
     },
   })
-  console.log(uningestedSiblings)
   if (uningestedSiblings === 0) {
     await tx.chunk.update({
       where: { id: stub.chunkId },
