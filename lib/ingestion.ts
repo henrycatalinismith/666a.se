@@ -15,7 +15,7 @@ export async function ingestChunk(
     include: { county: true },
   })
 
-  console.log(`[ingestChunk]: ${chunk.id} ${chunk.county.name}`)
+  console.log(`[ingestChunk]: ${chunkId} ${chunk.county.name}`)
 
   const result = await searchDiarium({
     SelectedCounty: chunk.county.code,

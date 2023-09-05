@@ -67,9 +67,14 @@ async function tickStub(stubId: string): Promise<Tick> {
   })
 
   try {
-    await prisma.$transaction(async (tx) => {
-      await ingestStub(stubId, tx)
-    })
+    await prisma.$transaction(
+      async (tx) => {
+        await ingestStub(stubId, tx)
+      },
+      {
+        timeout: 15000,
+      }
+    )
   } catch (e) {
     const error = await prisma.error.create({
       data: {
@@ -99,9 +104,14 @@ async function tickChunk(chunkId: string): Promise<Tick> {
   })
 
   try {
-    await prisma.$transaction(async (tx) => {
-      await ingestChunk(chunkId, tx)
-    })
+    await prisma.$transaction(
+      async (tx) => {
+        await ingestChunk(chunkId, tx)
+      },
+      {
+        timeout: 15000,
+      }
+    )
   } catch (e) {
     const error = await prisma.error.create({
       data: {
@@ -128,103 +138,108 @@ async function tickScan(countyId: string): Promise<Tick> {
   })
 
   try {
-    await prisma.$transaction(async (tx) => {
-      const incompleteScan = await prisma.scan.findFirst({
-        where: {
-          countyId: countyId,
-          status: { in: [ScanStatus.PENDING, ScanStatus.ONGOING] },
-        },
-      })
+    await prisma.$transaction(
+      async (tx) => {
+        const incompleteScan = await prisma.scan.findFirst({
+          where: {
+            countyId: countyId,
+            status: { in: [ScanStatus.PENDING, ScanStatus.ONGOING] },
+          },
+        })
 
-      if (incompleteScan) {
-        throw new Error('Cannot initiate new scan while one is ongoing')
-      }
+        if (incompleteScan) {
+          throw new Error('Cannot initiate new scan while one is ongoing')
+        }
 
-      const newestStub = await prisma.stub.findFirst({
-        where: {
-          countyId: countyId,
-        },
-        orderBy: {
-          documentDate: 'desc',
-        },
-      })
+        const newestStub = await prisma.stub.findFirst({
+          where: {
+            countyId: countyId,
+          },
+          orderBy: {
+            documentDate: 'desc',
+          },
+        })
 
-      const newestDocument = await prisma.document.findFirst({
-        where: {
-          countyId: countyId,
-        },
-        orderBy: {
-          date: 'desc',
-        },
-      })
+        const newestDocument = await prisma.document.findFirst({
+          where: {
+            countyId: countyId,
+          },
+          orderBy: {
+            date: 'desc',
+          },
+        })
 
-      const newestDate =
-        newestStub?.documentDate || newestDocument?.date || null
+        const newestDate =
+          newestStub?.documentDate || newestDocument?.date || null
 
-      const scan = await tx.scan.create({
-        data: {
-          countyId: countyId,
-          chunkCount: 0,
-          startDate: newestDate,
-          status: ScanStatus.PENDING,
-        },
-      })
+        const scan = await tx.scan.create({
+          data: {
+            countyId: countyId,
+            chunkCount: 0,
+            startDate: newestDate,
+            status: ScanStatus.PENDING,
+          },
+        })
 
-      await tx.tick.update({
-        data: { scanId: scan.id },
-        where: { id: tick.id },
-      })
+        await tx.tick.update({
+          data: { scanId: scan.id },
+          where: { id: tick.id },
+        })
 
-      await tx.county.update({
-        data: { ticked: new Date() },
-        where: { id: countyId },
-      })
+        await tx.county.update({
+          data: { ticked: new Date() },
+          where: { id: countyId },
+        })
 
-      const stubsPerChunk = 10
+        const stubsPerChunk = 10
 
-      const pendingChunk = await tx.chunk.create({
-        data: {
-          status: ChunkStatus.ONGOING,
-          scanId: scan.id,
-          countyId: scan.countyId,
-          startDate: scan.startDate,
-          stubCount: null,
-          page: 1,
-        },
-      })
-
-      await tx.scan.update({
-        where: { id: scan.id },
-        data: { chunkCount: { increment: 1 } },
-      })
-
-      const ingestedChunk = await ingestChunk(pendingChunk.id, tx)
-      console.log(ingestedChunk.hitCount)
-
-      const limitedResult = ingestedChunk!.hitCount!.match(
-        /^Visar (\d+) av (\d+) träffar$/
-      )
-      if (limitedResult) {
-        const targetStubCount = parseInt(limitedResult[1], 10) - stubsPerChunk
-        const targetChunkCount = targetStubCount / stubsPerChunk
-
-        const projectChunkResult = await tx.chunk.createMany({
-          data: _.times(targetChunkCount, (index) => ({
-            status: ChunkStatus.PENDING,
+        const pendingChunk = await tx.chunk.create({
+          data: {
+            status: ChunkStatus.ONGOING,
             scanId: scan.id,
             countyId: scan.countyId,
             startDate: scan.startDate,
-            page: index + 2,
             stubCount: null,
-          })),
+            page: 1,
+          },
         })
 
         await tx.scan.update({
           where: { id: scan.id },
-          data: { chunkCount: { increment: projectChunkResult.count } },
+          data: { chunkCount: { increment: 1 } },
         })
+
+        const ingestedChunk = await ingestChunk(pendingChunk.id, tx)
+        console.log(ingestedChunk.hitCount)
+
+        const limitedResult = ingestedChunk!.hitCount!.match(
+          /^Visar (\d+) av (\d+) träffar$/
+        )
+        if (limitedResult) {
+          const targetStubCount = parseInt(limitedResult[1], 10) - stubsPerChunk
+          const targetChunkCount = targetStubCount / stubsPerChunk
+
+          const projectChunkResult = await tx.chunk.createMany({
+            data: _.times(targetChunkCount, (index) => ({
+              status: ChunkStatus.PENDING,
+              scanId: scan.id,
+              countyId: scan.countyId,
+              startDate: scan.startDate,
+              page: index + 2,
+              stubCount: null,
+            })),
+          })
+
+          await tx.scan.update({
+            where: { id: scan.id },
+            data: { chunkCount: { increment: projectChunkResult.count } },
+          })
+        }
+      },
+      {
+        timeout: 15000,
       }
-    })
+    )
   } catch (e) {
     const error = await prisma.error.create({
       data: {
