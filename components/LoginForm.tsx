@@ -45,7 +45,7 @@ export default function LoginForm() {
       response.json()
     )
     if (response.status === 'success') {
-      router.push('/ingestion')
+      router.push('/reports/ticks')
     }
     console.log(response)
   }
