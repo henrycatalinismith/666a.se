@@ -34,6 +34,14 @@ export async function createDocument(
           console.log(
             `createCompany: duplicate slug error on ${diariumDocument.companyName}`
           )
+          console.log(diariumDocument)
+          console.log(
+            await tx.company.findFirst({
+              where: {
+                slug: slugify(diariumDocument.companyName, { lower: true }),
+              },
+            })
+          )
           company = await tx.company.create({
             data: {
               created: now,
