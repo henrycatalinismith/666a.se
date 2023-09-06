@@ -48,7 +48,7 @@ export async function createDocument(
         }
       }
     }
-    companyId = company.id
+    companyId = company?.id
   }
 
   let caseId = null
