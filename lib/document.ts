@@ -1,4 +1,4 @@
-import { CaseStatus, Document } from '@prisma/client'
+import { CaseStatus, Document, Prisma } from '@prisma/client'
 import slugify from 'slugify'
 
 import { Transaction } from './database'
@@ -16,15 +16,37 @@ export async function createDocument(
     })
     if (!company) {
       const now = new Date()
-      company = await tx.company.create({
-        data: {
-          created: now,
-          updated: now,
-          name: diariumDocument.companyName,
-          code: diariumDocument.companyCode,
-          slug: slugify(diariumDocument.companyName, { lower: true }),
-        },
-      })
+      try {
+        company = await tx.company.create({
+          data: {
+            created: now,
+            updated: now,
+            name: diariumDocument.companyName,
+            code: diariumDocument.companyCode,
+            slug: slugify(diariumDocument.companyName, { lower: true }),
+          },
+        })
+      } catch (e) {
+        if (
+          e instanceof Prisma.PrismaClientKnownRequestError &&
+          e.code === 'P2002'
+        ) {
+          console.log(
+            `createCompany: duplicate slug error on ${diariumDocument.companyName}`
+          )
+          company = await tx.company.create({
+            data: {
+              created: now,
+              updated: now,
+              name: diariumDocument.companyName,
+              code: diariumDocument.companyCode,
+              slug: `${slugify(diariumDocument.companyName, {
+                lower: true,
+              })}${Math.floor(Math.random() * 100)}`,
+            },
+          })
+        }
+      }
     }
     companyId = company.id
   }
