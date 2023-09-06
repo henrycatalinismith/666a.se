@@ -16,45 +16,27 @@ export async function createDocument(
     })
     if (!company) {
       const now = new Date()
-      try {
-        company = await tx.company.create({
-          data: {
-            created: now,
-            updated: now,
-            name: diariumDocument.companyName,
-            code: diariumDocument.companyCode,
-            slug: slugify(diariumDocument.companyName, { lower: true }),
-          },
-        })
-      } catch (e) {
-        if (
-          e instanceof Prisma.PrismaClientKnownRequestError &&
-          e.code === 'P2002'
-        ) {
-          console.log(
-            `createCompany: duplicate slug error on ${diariumDocument.companyName}`
-          )
-          console.log(diariumDocument)
-          console.log(
-            await tx.company.findFirst({
-              where: {
-                slug: slugify(diariumDocument.companyName, { lower: true }),
-              },
-            })
-          )
-          company = await tx.company.create({
-            data: {
-              created: now,
-              updated: now,
-              name: diariumDocument.companyName,
-              code: diariumDocument.companyCode,
-              slug: `${slugify(diariumDocument.companyName, {
-                lower: true,
-              })}${Math.floor(Math.random() * 100)}`,
-            },
-          })
-        }
-      }
+      const bareCompanyNameSlug = slugify(diariumDocument.companyName, {
+        lower: true,
+      })
+      const extendedCompanySlug =
+        bareCompanyNameSlug + diariumDocument.companyCode
+      const slugCollision = await tx.company.findFirst({
+        where: { slug: bareCompanyNameSlug },
+      })
+      const companySlug = slugCollision
+        ? extendedCompanySlug
+        : bareCompanyNameSlug
+
+      company = await tx.company.create({
+        data: {
+          created: now,
+          updated: now,
+          name: diariumDocument.companyName,
+          code: diariumDocument.companyCode,
+          slug: companySlug,
+        },
+      })
     }
     companyId = company?.id
   }
