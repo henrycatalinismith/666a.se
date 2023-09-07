@@ -1,6 +1,4 @@
 import { faCity, faEarthEurope } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import Link from 'next/link'
 
 import { IconHeading } from '../../../components/IconHeading'
 import { IconLink } from '../../../components/IconLink'
