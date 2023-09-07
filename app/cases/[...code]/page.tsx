@@ -18,19 +18,13 @@ export default async function Case({ params }: any) {
   }
 
   const c = await prisma.case.findFirstOrThrow({
-    where: {
-      code: params.code.join('/'),
-    },
+    where: { code: params.code.join('/') },
+    include: { company: true },
   })
-  const company =
-    c.companyId &&
-    (await prisma.company.findFirstOrThrow({
-      where: { id: c.companyId },
-    }))
+
   const documents = await prisma.document.findMany({
-    where: {
-      caseId: c.id,
-    },
+    where: { caseId: c.id },
+    include: { type: true },
   })
 
   return (
@@ -43,9 +37,9 @@ export default async function Case({ params }: any) {
           <p className="text-lg text-muted-foreground">{c!.name}</p>
         </div>
 
-        {company && (
+        {c.company && (
           <p className="pt-8">
-            <Link href={`/companies/${company.code}`}>{company.name}</Link>
+            <Link href={`/companies/${c.company.code}`}>{c.company.name}</Link>
           </p>
         )}
 
@@ -55,7 +49,7 @@ export default async function Case({ params }: any) {
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead className="text-left">Date</TableHead>
+              <TableHead className="text-left">ID</TableHead>
               <TableHead className="text-left">Type</TableHead>
               <TableHead className="text-left">Filing ID</TableHead>
             </TableRow>
@@ -63,9 +57,12 @@ export default async function Case({ params }: any) {
           <TableBody>
             {documents.map((document: any) => (
               <TableRow key={document.id}>
-                <TableCell>{document.date.toISOString()}</TableCell>
-                <TableCell>{document.type}</TableCell>
-                <TableCell>{document.code}</TableCell>
+                <TableCell>
+                  <Link href={`/documents/${document.code}`}>
+                    {document.code}
+                  </Link>
+                </TableCell>
+                <TableCell>{document.type.name}</TableCell>
               </TableRow>
             ))}
           </TableBody>
