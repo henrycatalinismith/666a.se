@@ -1,5 +1,9 @@
+import { faCity, faFileLines } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Link from 'next/link'
 
+import { IconHeading } from '../../../components/IconHeading'
+import { IconLink } from '../../../components/IconLink'
 import {
   Table,
   TableBody,
@@ -32,9 +36,7 @@ export default async function Municipality({ params }: any) {
     <>
       <div className="container pt-8">
         <div className="space-y-3">
-          <h1 className="scroll-m-20 text-4xl font-bold tracking-tight">
-            {municipality.name}
-          </h1>
+          <IconHeading icon={faCity}>{municipality.name}</IconHeading>
           <p className="text-lg text-muted-foreground">{municipality.code}</p>
         </div>
 
@@ -53,7 +55,9 @@ export default async function Municipality({ params }: any) {
             {documents.map((d: any) => (
               <TableRow key={d.id}>
                 <TableCell>
-                  <Link href={`/documents/${d.code}`}>{d.code}</Link>
+                  <IconLink href={`/documents/${d.code}`} icon={faFileLines}>
+                    {d.code}
+                  </IconLink>
                 </TableCell>
                 <TableCell>{d.type.name}</TableCell>
                 <TableCell>

@@ -1,5 +1,8 @@
+import { faBoxArchive, faPeopleGroup } from '@fortawesome/free-solid-svg-icons'
 import Link from 'next/link'
 
+import { IconHeading } from '../../../components/IconHeading'
+import { IconLink } from '../../../components/IconLink'
 import {
   Table,
   TableBody,
@@ -28,9 +31,7 @@ export default async function Company({ params }: any) {
     <>
       <div className="container pt-8">
         <div className="space-y-3">
-          <h1 className="scroll-m-20 text-4xl font-bold tracking-tight">
-            {company.name}
-          </h1>
+          <IconHeading icon={faPeopleGroup}>{company.name}</IconHeading>
           <p className="text-lg text-muted-foreground">{company.code}</p>
         </div>
 
@@ -48,7 +49,9 @@ export default async function Company({ params }: any) {
             {cases.map((c: any) => (
               <TableRow key={c.id}>
                 <TableCell>
-                  <Link href={`/cases/${c.code}`}>{c.code}</Link>
+                  <IconLink href={`/cases/${c.code}`} icon={faBoxArchive}>
+                    {c.code}
+                  </IconLink>
                 </TableCell>
                 <TableCell>{c.name}</TableCell>
               </TableRow>

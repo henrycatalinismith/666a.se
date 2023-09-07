@@ -1,5 +1,9 @@
+import { faCity, faEarthEurope } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Link from 'next/link'
 
+import { IconHeading } from '../../../components/IconHeading'
+import { IconLink } from '../../../components/IconLink'
 import {
   Table,
   TableBody,
@@ -26,9 +30,7 @@ export default async function County({ params }: any) {
     <>
       <div className="container pt-8">
         <div className="space-y-3">
-          <h1 className="scroll-m-20 text-4xl font-bold tracking-tight">
-            {county.name}
-          </h1>
+          <IconHeading icon={faEarthEurope}>{county.name}</IconHeading>
           <p className="text-lg text-muted-foreground">{county.code}</p>
         </div>
 
@@ -46,7 +48,9 @@ export default async function County({ params }: any) {
             {county.municipalities.map((m: any) => (
               <TableRow key={m.id}>
                 <TableCell>
-                  <Link href={`/municipalities/${m.slug}`}>{m.name}</Link>
+                  <IconLink href={`/municipalities/${m.slug}`} icon={faCity}>
+                    {m.name}
+                  </IconLink>
                 </TableCell>
                 <TableCell>{m.code}</TableCell>
               </TableRow>
