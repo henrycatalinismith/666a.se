@@ -1,4 +1,4 @@
-import { CaseStatus, Document, Prisma } from '@prisma/client'
+import { CaseStatus, Document } from '@prisma/client'
 import slugify from 'slugify'
 
 import { Transaction } from './database'

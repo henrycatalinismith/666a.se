@@ -5,7 +5,6 @@ import {
   faFileLines,
   faPeopleGroup,
 } from '@fortawesome/free-solid-svg-icons'
-import Link from 'next/link'
 
 import { IconHeading } from '../../../components/IconHeading'
 import { IconLink } from '../../../components/IconLink'
