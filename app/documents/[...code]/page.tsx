@@ -1,5 +1,7 @@
-import Link from 'next/link'
+import { faFileLines, faPeopleGroup } from '@fortawesome/free-solid-svg-icons'
 
+import { IconHeading } from '../../../components/IconHeading'
+import { IconLink } from '../../../components/IconLink'
 import { requireUser } from '../../../lib/authentication'
 import prisma from '../../../lib/database'
 
@@ -18,17 +20,18 @@ export default async function Document({ params }: any) {
     <>
       <div className="container pt-8">
         <div className="space-y-3">
-          <h1 className="scroll-m-20 text-4xl font-bold tracking-tight">
-            {document.code}
-          </h1>
+          <IconHeading icon={faFileLines}>{document.code}</IconHeading>
           <p className="text-lg text-muted-foreground">{document.type.name}</p>
         </div>
 
         {document.company && (
           <p className="pt-8">
-            <Link href={`/companies/${document.company.code}`}>
+            <IconLink
+              icon={faPeopleGroup}
+              href={`/companies/${document.company.code}`}
+            >
               {document.company.name}
-            </Link>
+            </IconLink>
           </p>
         )}
       </div>
