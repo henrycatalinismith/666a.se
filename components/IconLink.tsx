@@ -5,7 +5,7 @@ import { FC } from 'react'
 export type IconLinkProps = {
   icon: any
   href: string
-  children: string
+  children: any
 }
 
 export const IconLink: FC<IconLinkProps> = ({ icon, href, children }) => {

@@ -1,3 +1,6 @@
+import { faBoxArchive } from '@fortawesome/free-solid-svg-icons'
+
+import { IconLink } from '../components/IconLink'
 import {
   Table,
   TableBody,
@@ -29,8 +32,14 @@ export default async function Ingestion() {
         <TableBody>
           {documents.map((d) => (
             <TableRow key={d.id}>
-              <TableCell>{d.date.toISOString().substring(0, 10)}</TableCell>
-              <TableCell>{d.case?.name}</TableCell>
+              <TableCell className="whitespace-nowrap">
+                {d.date.toISOString().substring(0, 10)}
+              </TableCell>
+              <TableCell>
+                <IconLink href={`/cases/${d.case?.code}`} icon={faBoxArchive}>
+                  {d.case?.name}
+                </IconLink>
+              </TableCell>
               <TableCell>{d.type.name}</TableCell>
               <TableCell>{d.company?.name}</TableCell>
             </TableRow>

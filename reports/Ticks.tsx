@@ -1,7 +1,9 @@
+import { faFileLines } from '@fortawesome/free-solid-svg-icons'
 import { ErrorStatus, TickType } from '@prisma/client'
 import _ from 'lodash'
 
 import { Error } from '../components/Error'
+import { IconLink } from '../components/IconLink'
 import {
   Table,
   TableBody,
@@ -64,7 +66,13 @@ export default async function Ingestion() {
                 {tick.type === TickType.CHUNK && <>{tick.chunk?.id}</>}
                 {tick.type === TickType.STUB && (
                   <>
-                    {tick.stub?.documentCode} {tick.stub?.caseName}
+                    <IconLink
+                      icon={faFileLines}
+                      href={`/documents/${tick.stub?.documentCode}`}
+                    >
+                      {tick.stub?.documentCode as string}{' '}
+                      {tick.stub?.caseName as string}
+                    </IconLink>
                   </>
                 )}
               </TableCell>
