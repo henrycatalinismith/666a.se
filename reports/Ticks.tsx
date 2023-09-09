@@ -1,7 +1,7 @@
 import { faFileLines } from '@fortawesome/free-solid-svg-icons'
 import { ErrorStatus, TickType } from '@prisma/client'
 import { Error } from 'components/Error'
-import { IconLink } from 'components/IconLink'
+import { IconLink } from 'ui/IconLink'
 import {
   Table,
   TableBody,
@@ -9,7 +9,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from 'components/Table'
+} from 'ui/Table'
 import prisma from 'lib/database'
 import _ from 'lodash'
 

@@ -1,4 +1,6 @@
-import NavBar from 'components/NavBar'
+import { requireUser } from 'lib/authentication'
+import prisma from 'lib/database'
+import NavBar from 'ui/NavBar'
 import {
   Table,
   TableBody,
@@ -6,9 +8,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from 'components/Table'
-import { requireUser } from 'lib/authentication'
-import prisma from 'lib/database'
+} from 'ui/Table'
 
 export default async function Dashboard() {
   const user = await requireUser()

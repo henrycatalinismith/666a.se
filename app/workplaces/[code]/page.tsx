@@ -1,6 +1,9 @@
 import { faBuilding, faFileLines } from '@fortawesome/free-solid-svg-icons'
-import { IconHeading } from 'components/IconHeading'
-import { IconLink } from 'components/IconLink'
+import { requireUser } from 'lib/authentication'
+import prisma from 'lib/database'
+import Link from 'next/link'
+import { IconHeading } from 'ui/IconHeading'
+import { IconLink } from 'ui/IconLink'
 import {
   Table,
   TableBody,
@@ -8,10 +11,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from 'components/Table'
-import { requireUser } from 'lib/authentication'
-import prisma from 'lib/database'
-import Link from 'next/link'
+} from 'ui/Table'
 
 export default async function Workplace({ params }: any) {
   const user = await requireUser()
@@ -28,8 +28,11 @@ export default async function Workplace({ params }: any) {
     <>
       <div className="container pt-8">
         <div className="space-y-3">
-          <IconHeading icon={faBuilding}>{workplace.name}</IconHeading>
-          <p className="text-lg text-muted-foreground">{workplace.code}</p>
+          <IconHeading
+            icon={faBuilding}
+            title={workplace.name}
+            subtitle={workplace.code}
+          />
         </div>
 
         <h2 className="pt-8 font-heading mt-8 scroll-m-20 text-xl font-semibold tracking-tight">

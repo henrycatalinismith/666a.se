@@ -1,8 +1,8 @@
 import { faFileLines, faPeopleGroup } from '@fortawesome/free-solid-svg-icons'
-import { IconHeading } from 'components/IconHeading'
-import { IconLink } from 'components/IconLink'
 import { requireUser } from 'lib/authentication'
 import prisma from 'lib/database'
+import { IconHeading } from 'ui/IconHeading'
+import { IconLink } from 'ui/IconLink'
 
 export default async function Document({ params }: any) {
   const user = await requireUser()
@@ -19,8 +19,11 @@ export default async function Document({ params }: any) {
     <>
       <div className="container pt-8">
         <div className="space-y-3">
-          <IconHeading icon={faFileLines}>{document.code}</IconHeading>
-          <p className="text-lg text-muted-foreground">{document.type.name}</p>
+          <IconHeading
+            icon={faFileLines}
+            title={document.code}
+            subtitle={document.type.name}
+          />
         </div>
 
         {document.company && (
