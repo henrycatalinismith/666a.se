@@ -1,4 +1,5 @@
-import { faBuilding, faFileLines } from '@fortawesome/free-solid-svg-icons'
+import { DocumentIconDefinition } from 'icons/DocumentIcon'
+import { WorkplaceIconDefinition } from 'icons/WorkplaceIcon'
 import { requireUser } from 'lib/authentication'
 import prisma from 'lib/database'
 import Link from 'next/link'
@@ -28,7 +29,7 @@ export default async function Workplace({ params }: any) {
     <>
       <div className="container pt-8">
         <IconHeading
-          icon={faBuilding}
+          icon={WorkplaceIconDefinition}
           title={workplace.name}
           subtitle={workplace.code}
         />
@@ -48,7 +49,10 @@ export default async function Workplace({ params }: any) {
             {workplace.documents.map((d: any) => (
               <TableRow key={d.id}>
                 <TableCell>
-                  <IconLink href={`/documents/${d.code}`} icon={faFileLines}>
+                  <IconLink
+                    href={`/documents/${d.code}`}
+                    icon={DocumentIconDefinition}
+                  >
                     {d.code}
                   </IconLink>
                 </TableCell>

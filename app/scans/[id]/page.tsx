@@ -1,4 +1,5 @@
-import { faCubes, faSatelliteDish } from '@fortawesome/free-solid-svg-icons'
+import { ChunkIconDefinition } from 'icons/ChunkIcon'
+import { ScanIconDefinition } from 'icons/ScanIcon'
 import { requireUser } from 'lib/authentication'
 import prisma from 'lib/database'
 import { IconHeading } from 'ui/IconHeading'
@@ -30,7 +31,7 @@ export default async function Document({ params }: any) {
     <>
       <div className="container pt-8 flex flex-col gap-8">
         <IconHeading
-          icon={faSatelliteDish}
+          icon={ScanIconDefinition}
           title={`${scan.county.name} ${scan.startDate
             ?.toISOString()
             .substring(0, 10)}`}
@@ -54,7 +55,10 @@ export default async function Document({ params }: any) {
             {scan.chunks.map((chunk) => (
               <TableRow key={chunk.id}>
                 <TableCell>
-                  <IconLink icon={faCubes} href={`/chunks/${chunk.id}`}>
+                  <IconLink
+                    icon={ChunkIconDefinition}
+                    href={`/chunks/${chunk.id}`}
+                  >
                     {`${chunk.county.name} ${chunk.startDate
                       ?.toISOString()
                       .substring(0, 10)}`}

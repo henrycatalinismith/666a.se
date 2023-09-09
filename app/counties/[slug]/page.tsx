@@ -1,4 +1,5 @@
-import { faCity, faEarthEurope } from '@fortawesome/free-solid-svg-icons'
+import { CountyIconDefinition } from 'icons/CountyIcon'
+import { MunicipalityIconDefinition } from 'icons/MunicipalityIcon'
 import { requireUser } from 'lib/authentication'
 import prisma from 'lib/database'
 import { IconHeading } from 'ui/IconHeading'
@@ -26,7 +27,11 @@ export default async function County({ params }: any) {
   return (
     <>
       <div className="container mx-auto w-sbm pt-8">
-        <IconHeading icon={faEarthEurope} title={county.name} subtitle="" />
+        <IconHeading
+          icon={CountyIconDefinition}
+          title={county.name}
+          subtitle=""
+        />
 
         <h2 className="pt-8 font-heading mt-8 scroll-m-20 text-xl font-semibold tracking-tight">
           Municipalities
@@ -43,7 +48,10 @@ export default async function County({ params }: any) {
             {county.municipalities.map((m: any) => (
               <TableRow key={m.id}>
                 <TableCell>
-                  <IconLink href={`/municipalities/${m.slug}`} icon={faCity}>
+                  <IconLink
+                    href={`/municipalities/${m.slug}`}
+                    icon={MunicipalityIconDefinition}
+                  >
                     {m.name}
                   </IconLink>
                 </TableCell>

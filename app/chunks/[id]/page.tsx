@@ -1,4 +1,9 @@
-import { faCube, faCubes, faFileLines } from '@fortawesome/free-solid-svg-icons'
+import { Relations } from 'components/Relations'
+import { ChunkIconDefinition } from 'icons/ChunkIcon'
+import { CountyIconDefinition } from 'icons/CountyIcon'
+import { DocumentIconDefinition } from 'icons/DocumentIcon'
+import { ScanIconDefinition } from 'icons/ScanIcon'
+import { StubIconDefinition } from 'icons/StubIcon'
 import { requireUser } from 'lib/authentication'
 import prisma from 'lib/database'
 import { IconHeading } from 'ui/IconHeading'
@@ -20,18 +25,42 @@ export default async function Document({ params }: any) {
 
   const chunk = await prisma.chunk.findFirstOrThrow({
     where: { id: params.id },
-    include: { county: true, stubs: { include: { document: true } } },
+    include: {
+      county: true,
+      scan: { include: { county: true } },
+      stubs: { include: { document: true } },
+    },
   })
 
   return (
     <>
       <div className="container pt-8 flex flex-col gap-8">
         <IconHeading
-          icon={faCubes}
+          icon={ChunkIconDefinition}
           title={`${chunk.county.name} ${chunk.startDate
             ?.toISOString()
             .substring(0, 10)}`}
           subtitle={chunk.id}
+        />
+
+        <Relations
+          rows={[
+            {
+              icon: ScanIconDefinition,
+              href: `/scans/${chunk.scan.id}`,
+              text: `${chunk.scan.county.name} ${chunk.scan.startDate
+                ?.toISOString()
+                .substring(0, 10)}`,
+              show: true,
+            },
+
+            {
+              icon: CountyIconDefinition,
+              href: `/counties/${chunk.county.slug}`,
+              text: chunk.county.name,
+              show: true,
+            },
+          ]}
         />
 
         <h2 className="font-heading scroll-m-20 text-xl font-semibold tracking-tight">
@@ -48,14 +77,17 @@ export default async function Document({ params }: any) {
             {chunk.stubs.map((stub) => (
               <TableRow key={stub.id}>
                 <TableCell>
-                  <IconLink icon={faCube} href={`/stubs/${stub.id}`}>
+                  <IconLink
+                    icon={StubIconDefinition}
+                    href={`/stubs/${stub.id}`}
+                  >
                     {stub.id}
                   </IconLink>
                 </TableCell>
                 <TableCell>
                   {stub.document && (
                     <IconLink
-                      icon={faFileLines}
+                      icon={DocumentIconDefinition}
                       href={`/documents/${stub.document.code}`}
                     >
                       {stub.document.code}

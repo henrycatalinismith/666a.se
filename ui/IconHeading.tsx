@@ -15,12 +15,16 @@ export const IconHeading: FC<IconHeadingProps> = ({
   return (
     <>
       <div className="flex scroll-m-20 font-bold tracking-tight flex-row items-center gap-2">
-        <div className="border-black border-4 rounded-full w-16 h-16 flex items-center justify-center">
+        <div className="border-black border-4 rounded-full w-16 h-16 min-w-[4rem] flex items-center justify-center">
           <FontAwesomeIcon icon={icon} className="h-8" />
         </div>
-        <div className="flex flex-col">
-          <h1 className="text-4xl">{title}</h1>
-          <p className="text-lg text-muted-foreground">{subtitle}</p>
+        <div className="flex flex-col min-w-0">
+          <h1 className="text-1xl whitespace-nowrap overflow-hidden text-ellipsis">
+            {title}
+          </h1>
+          <p className="text-1xl text-muted-foreground whitespace-nowrap overflow-hidden text-ellipsis">
+            {subtitle}
+          </p>
         </div>
       </div>
     </>
