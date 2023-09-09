@@ -1,4 +1,4 @@
-// import prisma from '../lib/database'
+// import prisma from 'lib/database'
 // ;(async () => {
 //   const [, , email, slug] = process.argv
 

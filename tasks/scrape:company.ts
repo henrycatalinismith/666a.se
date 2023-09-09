@@ -1,6 +1,6 @@
 // import * as puppeteer from 'puppeteer'
 
-// import { scrapeCompany } from '../lib/scraper'
+// import { scrapeCompany } from 'lib/scraper'
 // ;(async () => {
 //   const browser: any = await puppeteer.launch({ headless: 'new' })
 //   const code = process.argv[2]

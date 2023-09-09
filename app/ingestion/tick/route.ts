@@ -1,7 +1,7 @@
+import { requireUser } from 'lib/authentication'
 import { NextResponse } from 'next/server'
 
-import { requireUser } from '../../../lib/authentication'
-// import prisma from '../../../lib/database'
+// import prisma from 'lib/database'
 
 export async function POST() {
   const user = await requireUser()

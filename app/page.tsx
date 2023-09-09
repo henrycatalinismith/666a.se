@@ -1,4 +1,4 @@
-import LoginForm from '../components/LoginForm'
+import LoginForm from 'components/LoginForm'
 
 export const preferredRegion = 'home'
 export const dynamic = 'force-dynamic'

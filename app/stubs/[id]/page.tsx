@@ -1,8 +1,7 @@
 import { faCube } from '@fortawesome/free-solid-svg-icons'
-
-import { IconHeading } from '../../../components/IconHeading'
-import { requireUser } from '../../../lib/authentication'
-import prisma from '../../../lib/database'
+import { IconHeading } from 'components/IconHeading'
+import { requireUser } from 'lib/authentication'
+import prisma from 'lib/database'
 
 export default async function Document({ params }: any) {
   const user = await requireUser()

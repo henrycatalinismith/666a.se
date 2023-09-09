@@ -1,8 +1,7 @@
 import { ErrorStatus } from '@prisma/client'
+import { requireUser } from 'lib/authentication'
+import prisma from 'lib/database'
 import { NextResponse } from 'next/server'
-
-import { requireUser } from '../../../../lib/authentication'
-import prisma from '../../../../lib/database'
 
 export async function POST(request: any) {
   const user = await requireUser()

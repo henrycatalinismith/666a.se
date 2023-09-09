@@ -1,9 +1,7 @@
 import { faFileLines } from '@fortawesome/free-solid-svg-icons'
 import { ErrorStatus, TickType } from '@prisma/client'
-import _ from 'lodash'
-
-import { Error } from '../components/Error'
-import { IconLink } from '../components/IconLink'
+import { Error } from 'components/Error'
+import { IconLink } from 'components/IconLink'
 import {
   Table,
   TableBody,
@@ -11,8 +9,9 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '../components/Table'
-import prisma from '../lib/database'
+} from 'components/Table'
+import prisma from 'lib/database'
+import _ from 'lodash'
 
 export default async function Ingestion() {
   const blockingError = await prisma.error.findFirst({

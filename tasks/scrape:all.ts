@@ -1,7 +1,7 @@
 // import * as puppeteer from 'puppeteer'
 
-// import { fetchAllCompanies } from '../lib/company'
-// import { scrapeCompany } from '../lib/scraper'
+// import { fetchAllCompanies } from 'lib/company'
+// import { scrapeCompany } from 'lib/scraper'
 // ;(async () => {
 //   const browser: any = await puppeteer.launch({ headless: 'new' })
 
