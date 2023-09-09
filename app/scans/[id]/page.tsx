@@ -29,18 +29,13 @@ export default async function Document({ params }: any) {
   return (
     <>
       <div className="container pt-8 flex flex-col gap-8">
-        <div className="space-y-3">
-          <IconHeading
-            icon={faSatelliteDish}
-            title={`${scan.county.name} ${scan.startDate
-              ?.toISOString()
-              .substring(0, 10)}`}
-            subtitle={scan.id}
-          />
-          <p className="text-lg text-muted-foreground">
-            {scan.created.toISOString().substring(0, 19).replace('T', ' ')}
-          </p>
-        </div>
+        <IconHeading
+          icon={faSatelliteDish}
+          title={`${scan.county.name} ${scan.startDate
+            ?.toISOString()
+            .substring(0, 10)}`}
+          subtitle={scan.id}
+        />
 
         <h2 className="font-heading scroll-m-20 text-xl font-semibold tracking-tight">
           Chunks

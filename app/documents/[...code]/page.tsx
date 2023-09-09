@@ -18,13 +18,11 @@ export default async function Document({ params }: any) {
   return (
     <>
       <div className="container pt-8">
-        <div className="space-y-3">
-          <IconHeading
-            icon={faFileLines}
-            title={document.code}
-            subtitle={document.type.name}
-          />
-        </div>
+        <IconHeading
+          icon={faFileLines}
+          title={document.code}
+          subtitle={document.type.name}
+        />
 
         {document.company && (
           <p className="pt-8">

@@ -28,13 +28,11 @@ export default async function Company({ params }: any) {
   return (
     <>
       <div className="container pt-8">
-        <div className="space-y-3">
-          <IconHeading
-            icon={faPeopleGroup}
-            title={company.name}
-            subtitle={company.code}
-          />
-        </div>
+        <IconHeading
+          icon={faPeopleGroup}
+          title={company.name}
+          subtitle={company.code}
+        />
 
         <h2 className="pt-8 font-heading mt-8 scroll-m-20 text-xl font-semibold tracking-tight">
           Case History
