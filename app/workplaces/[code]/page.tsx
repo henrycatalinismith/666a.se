@@ -27,13 +27,11 @@ export default async function Workplace({ params }: any) {
   return (
     <>
       <div className="container pt-8">
-        <div className="space-y-3">
-          <IconHeading
-            icon={faBuilding}
-            title={workplace.name}
-            subtitle={workplace.code}
-          />
-        </div>
+        <IconHeading
+          icon={faBuilding}
+          title={workplace.name}
+          subtitle={workplace.code}
+        />
 
         <h2 className="pt-8 font-heading mt-8 scroll-m-20 text-xl font-semibold tracking-tight">
           Documents
