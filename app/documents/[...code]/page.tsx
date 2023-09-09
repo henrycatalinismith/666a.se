@@ -1,8 +1,15 @@
-import { faFileLines, faPeopleGroup } from '@fortawesome/free-solid-svg-icons'
+import { Relations } from 'components/Relations'
+import { CaseIconDefinition } from 'icons/CaseIcon'
+import { ChunkIconDefinition } from 'icons/ChunkIcon'
+import { CompanyIconDefinition } from 'icons/CompanyIcon'
+import { CountyIconDefinition } from 'icons/CountyIcon'
+import { DocumentIconDefinition } from 'icons/DocumentIcon'
+import { MunicipalityIconDefinition } from 'icons/MunicipalityIcon'
+import { StubIconDefinition } from 'icons/StubIcon'
+import { WorkplaceIconDefinition } from 'icons/WorkplaceIcon'
 import { requireUser } from 'lib/authentication'
 import prisma from 'lib/database'
 import { IconHeading } from 'ui/IconHeading'
-import { IconLink } from 'ui/IconLink'
 
 export default async function Document({ params }: any) {
   const user = await requireUser()
@@ -12,39 +19,88 @@ export default async function Document({ params }: any) {
 
   const document = await prisma.document.findFirstOrThrow({
     where: { code: params.code.join('/') },
-    include: { company: true, type: true, workplace: true },
+    include: {
+      case: true,
+      company: true,
+      county: true,
+      municipality: true,
+      type: true,
+      workplace: true,
+      stubs: {
+        include: {
+          chunk: {
+            include: { county: true },
+          },
+        },
+      },
+    },
   })
 
   return (
     <>
-      <div className="container pt-8">
+      <div className="flex flex-col container pt-8 gap-2">
         <IconHeading
-          icon={faFileLines}
+          icon={DocumentIconDefinition}
           title={document.code}
           subtitle={document.type.name}
         />
 
-        {document.company && (
-          <p className="pt-8">
-            <IconLink
-              icon={faPeopleGroup}
-              href={`/companies/${document.company.code}`}
-            >
-              {document.company.name}
-            </IconLink>
-          </p>
-        )}
+        <Relations
+          rows={[
+            {
+              icon: CaseIconDefinition,
+              href: `/cases/${document.case.code}`,
+              text: document.case.name,
+              show: true,
+            },
 
-        {document.workplace && (
-          <p className="pt-8">
-            <IconLink
-              icon={faPeopleGroup}
-              href={`/workplaces/${document.workplace.code}`}
-            >
-              {document.workplace.name}
-            </IconLink>
-          </p>
-        )}
+            {
+              icon: WorkplaceIconDefinition,
+              href: `/workplaces/${document.workplace?.code}`,
+              text: document.workplace?.name,
+              show: !!document.workplace,
+            },
+
+            {
+              icon: CompanyIconDefinition,
+              href: `/companies/${document.company?.code}`,
+              text: document.company?.name,
+              show: !!document.company,
+            },
+
+            {
+              icon: MunicipalityIconDefinition,
+              href: `/municipalities/${document.municipality.slug}`,
+              text: document.municipality.name,
+              show: true,
+            },
+
+            {
+              icon: CountyIconDefinition,
+              href: `/counties/${document.county.slug}`,
+              text: document.county.name,
+              show: true,
+            },
+
+            {
+              icon: StubIconDefinition,
+              href: `/stubs/${document.stubs[0].id}`,
+              text: document.stubs[0].documentCode,
+              show: !!document.stubs[0],
+            },
+
+            {
+              icon: ChunkIconDefinition,
+              href: `/chunks/${document.stubs[0].chunk.id}`,
+              text: `${
+                document.stubs[0].chunk.county.name
+              } ${document.stubs[0].chunk.startDate
+                ?.toISOString()
+                .substring(0, 10)}`,
+              show: true,
+            },
+          ]}
+        />
       </div>
     </>
   )
