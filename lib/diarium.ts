@@ -104,7 +104,7 @@ export async function fetchDocument(code: string): Promise<DiariumDocument> {
       caseTopic: dd[2].innerHTML,
       documentCode: dd[1].innerHTML,
       documentDate: dd[10].innerHTML,
-      documentType: dd[3].innerHTML,
+      documentType: dd[3].innerHTML.trim(),
       documentDirection: dd[4].innerHTML,
       companyName: organisationSaknas ? null : organisationMatches![1],
       companyCode: organisationSaknas ? null : organisationMatches![2],
