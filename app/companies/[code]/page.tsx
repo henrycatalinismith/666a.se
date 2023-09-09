@@ -1,6 +1,8 @@
 import { faBoxArchive, faPeopleGroup } from '@fortawesome/free-solid-svg-icons'
-import { IconHeading } from 'components/IconHeading'
-import { IconLink } from 'components/IconLink'
+import { requireUser } from 'lib/authentication'
+import prisma from 'lib/database'
+import { IconHeading } from 'ui/IconHeading'
+import { IconLink } from 'ui/IconLink'
 import {
   Table,
   TableBody,
@@ -8,9 +10,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from 'components/Table'
-import { requireUser } from 'lib/authentication'
-import prisma from 'lib/database'
+} from 'ui/Table'
 
 export default async function Company({ params }: any) {
   const user = await requireUser()
@@ -29,8 +29,11 @@ export default async function Company({ params }: any) {
     <>
       <div className="container pt-8">
         <div className="space-y-3">
-          <IconHeading icon={faPeopleGroup}>{company.name}</IconHeading>
-          <p className="text-lg text-muted-foreground">{company.code}</p>
+          <IconHeading
+            icon={faPeopleGroup}
+            title={company.name}
+            subtitle={company.code}
+          />
         </div>
 
         <h2 className="pt-8 font-heading mt-8 scroll-m-20 text-xl font-semibold tracking-tight">

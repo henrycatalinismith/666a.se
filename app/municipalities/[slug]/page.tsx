@@ -1,6 +1,9 @@
 import { faCity, faFileLines } from '@fortawesome/free-solid-svg-icons'
-import { IconHeading } from 'components/IconHeading'
-import { IconLink } from 'components/IconLink'
+import { requireUser } from 'lib/authentication'
+import prisma from 'lib/database'
+import Link from 'next/link'
+import { IconHeading } from 'ui/IconHeading'
+import { IconLink } from 'ui/IconLink'
 import {
   Table,
   TableBody,
@@ -8,10 +11,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from 'components/Table'
-import { requireUser } from 'lib/authentication'
-import prisma from 'lib/database'
-import Link from 'next/link'
+} from 'ui/Table'
 
 export default async function Municipality({ params }: any) {
   const user = await requireUser()
@@ -34,7 +34,7 @@ export default async function Municipality({ params }: any) {
     <>
       <div className="container pt-8">
         <div className="space-y-3">
-          <IconHeading icon={faCity}>{municipality.name}</IconHeading>
+          <IconHeading icon={faCity} title={municipality.name} subtitle="" />
           <p className="text-lg text-muted-foreground">{municipality.code}</p>
         </div>
 

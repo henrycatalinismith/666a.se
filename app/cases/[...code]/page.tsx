@@ -5,8 +5,10 @@ import {
   faFileLines,
   faPeopleGroup,
 } from '@fortawesome/free-solid-svg-icons'
-import { IconHeading } from 'components/IconHeading'
-import { IconLink } from 'components/IconLink'
+import { requireUser } from 'lib/authentication'
+import prisma from 'lib/database'
+import { IconHeading } from 'ui/IconHeading'
+import { IconLink } from 'ui/IconLink'
 import {
   Table,
   TableBody,
@@ -14,9 +16,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from 'components/Table'
-import { requireUser } from 'lib/authentication'
-import prisma from 'lib/database'
+} from 'ui/Table'
 
 export default async function Case({ params }: any) {
   const user = await requireUser()
@@ -38,8 +38,7 @@ export default async function Case({ params }: any) {
     <>
       <div className="container pt-8 flex flex-col gap-8">
         <div className="space-y-3">
-          <IconHeading icon={faBoxArchive}>{c.code}</IconHeading>
-          <p className="text-lg text-muted-foreground">{c!.name}</p>
+          <IconHeading icon={faBoxArchive} subtitle={c.name} title={c.code} />
         </div>
 
         <div>

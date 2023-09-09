@@ -5,7 +5,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from 'components/Table'
+} from 'ui/Table'
 import prisma from 'lib/database'
 import _ from 'lodash'
 
