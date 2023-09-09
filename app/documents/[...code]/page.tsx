@@ -13,7 +13,7 @@ export default async function Document({ params }: any) {
 
   const document = await prisma.document.findFirstOrThrow({
     where: { code: params.code.join('/') },
-    include: { company: true, type: true },
+    include: { company: true, type: true, workplace: true },
   })
 
   return (
@@ -31,6 +31,17 @@ export default async function Document({ params }: any) {
               href={`/companies/${document.company.code}`}
             >
               {document.company.name}
+            </IconLink>
+          </p>
+        )}
+
+        {document.workplace && (
+          <p className="pt-8">
+            <IconLink
+              icon={faPeopleGroup}
+              href={`/workplaces/${document.workplace.code}`}
+            >
+              {document.workplace.name}
             </IconLink>
           </p>
         )}
