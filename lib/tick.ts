@@ -234,6 +234,10 @@ async function tickScan(countyId: string): Promise<Tick> {
             where: { id: scan.id },
             data: { chunkCount: { increment: projectChunkResult.count } },
           })
+        } else {
+          throw new Error(
+            `Unsupported hit count pattern ${ingestedChunk.hitCount}`
+          )
         }
       },
       {
