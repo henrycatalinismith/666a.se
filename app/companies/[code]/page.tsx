@@ -1,4 +1,5 @@
-import { faBoxArchive, faPeopleGroup } from '@fortawesome/free-solid-svg-icons'
+import { CaseIconDefinition } from 'icons/CaseIcon'
+import { CompanyIconDefinition } from 'icons/CompanyIcon'
 import { requireUser } from 'lib/authentication'
 import prisma from 'lib/database'
 import { IconHeading } from 'ui/IconHeading'
@@ -29,7 +30,7 @@ export default async function Company({ params }: any) {
     <>
       <div className="container pt-8">
         <IconHeading
-          icon={faPeopleGroup}
+          icon={CompanyIconDefinition}
           title={company.name}
           subtitle={company.code}
         />
@@ -48,7 +49,7 @@ export default async function Company({ params }: any) {
             {cases.map((c: any) => (
               <TableRow key={c.id}>
                 <TableCell>
-                  <IconLink href={`/cases/${c.code}`} icon={faBoxArchive}>
+                  <IconLink href={`/cases/${c.code}`} icon={CaseIconDefinition}>
                     {c.code}
                   </IconLink>
                 </TableCell>

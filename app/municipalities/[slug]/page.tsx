@@ -1,4 +1,5 @@
-import { faCity, faFileLines } from '@fortawesome/free-solid-svg-icons'
+import { DocumentIconDefinition } from 'icons/DocumentIcon'
+import { MunicipalityIconDefinition } from 'icons/MunicipalityIcon'
 import { requireUser } from 'lib/authentication'
 import prisma from 'lib/database'
 import Link from 'next/link'
@@ -33,7 +34,11 @@ export default async function Municipality({ params }: any) {
   return (
     <>
       <div className="container pt-8">
-        <IconHeading icon={faCity} title={municipality.name} subtitle="" />
+        <IconHeading
+          icon={MunicipalityIconDefinition}
+          title={municipality.name}
+          subtitle=""
+        />
 
         <h2 className="pt-8 font-heading mt-8 scroll-m-20 text-xl font-semibold tracking-tight">
           Documents
@@ -50,7 +55,10 @@ export default async function Municipality({ params }: any) {
             {documents.map((d: any) => (
               <TableRow key={d.id}>
                 <TableCell>
-                  <IconLink href={`/documents/${d.code}`} icon={faFileLines}>
+                  <IconLink
+                    href={`/documents/${d.code}`}
+                    icon={DocumentIconDefinition}
+                  >
                     {d.code}
                   </IconLink>
                 </TableCell>

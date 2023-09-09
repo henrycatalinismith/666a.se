@@ -1,10 +1,9 @@
-import {
-  faBoxArchive,
-  faCity,
-  faEarthEurope,
-  faFileLines,
-  faPeopleGroup,
-} from '@fortawesome/free-solid-svg-icons'
+import { Relations } from 'components/Relations'
+import { CaseIconDefinition } from 'icons/CaseIcon'
+import { CompanyIconDefinition } from 'icons/CompanyIcon'
+import { CountyIconDefinition } from 'icons/CountyIcon'
+import { DocumentIconDefinition } from 'icons/DocumentIcon'
+import { MunicipalityIconDefinition } from 'icons/MunicipalityIcon'
 import { requireUser } from 'lib/authentication'
 import prisma from 'lib/database'
 import { IconHeading } from 'ui/IconHeading'
@@ -36,45 +35,39 @@ export default async function Case({ params }: any) {
 
   return (
     <>
-      <div className="container pt-8 flex flex-col gap-8">
-        <IconHeading icon={faBoxArchive} subtitle={c.name} title={c.code} />
+      <div className="container pt-8 flex flex-col gap-2">
+        <IconHeading
+          icon={CaseIconDefinition}
+          subtitle={c.name}
+          title={c.code}
+        />
 
-        <div>
-          {c.company && (
-            <p className="">
-              <IconLink
-                icon={faPeopleGroup}
-                href={`/companies/${c.company.code}`}
-              >
-                {c.company.name}
-              </IconLink>
-            </p>
-          )}
+        <Relations
+          rows={[
+            {
+              icon: CompanyIconDefinition,
+              href: `/companies/${c.company?.code}`,
+              text: c.company?.name,
+              show: !!c.company,
+            },
 
-          {documents[0].county && (
-            <p className="">
-              <IconLink
-                icon={faEarthEurope}
-                href={`/counties/${documents[0].county.slug}`}
-              >
-                {documents[0].county.name}
-              </IconLink>
-            </p>
-          )}
+            {
+              icon: MunicipalityIconDefinition,
+              href: `/municipalities/${documents[0].municipality.slug}`,
+              text: documents[0].municipality.name,
+              show: true,
+            },
 
-          {documents[0].municipality && (
-            <p className="">
-              <IconLink
-                icon={faCity}
-                href={`/municipalities/${documents[0].municipality.slug}`}
-              >
-                {documents[0].municipality.name}
-              </IconLink>
-            </p>
-          )}
-        </div>
+            {
+              icon: CountyIconDefinition,
+              href: `/counties/${documents[0].county.slug}`,
+              text: documents[0].county.name,
+              show: true,
+            },
+          ]}
+        />
 
-        <h2 className="font-heading scroll-m-20 text-xl font-semibold tracking-tight">
+        <h2 className="font-heading scroll-m-20 text-xl font-semibold tracking-tight mt-8">
           Documents
         </h2>
         <Table>
@@ -90,7 +83,7 @@ export default async function Case({ params }: any) {
               <TableRow key={document.id}>
                 <TableCell>
                   <IconLink
-                    icon={faFileLines}
+                    icon={DocumentIconDefinition}
                     href={`/documents/${document.code}`}
                   >
                     {document.code}
