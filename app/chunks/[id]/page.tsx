@@ -1,21 +1,13 @@
 import { Relations } from 'components/Relations'
 import { ChunkIconDefinition } from 'icons/ChunkIcon'
 import { CountyIconDefinition } from 'icons/CountyIcon'
-import { DocumentIconDefinition } from 'icons/DocumentIcon'
 import { ScanIconDefinition } from 'icons/ScanIcon'
 import { StubIconDefinition } from 'icons/StubIcon'
 import { requireUser } from 'lib/authentication'
 import prisma from 'lib/database'
+import { EntityList } from 'ui/EntityList'
 import { IconHeading } from 'ui/IconHeading'
-import { IconLink } from 'ui/IconLink'
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from 'ui/Table'
+import { LittleHeading } from 'ui/LittleHeading'
 
 export default async function Document({ params }: any) {
   const user = await requireUser()
@@ -63,41 +55,16 @@ export default async function Document({ params }: any) {
           ]}
         />
 
-        <h2 className="font-heading scroll-m-20 text-xl font-semibold tracking-tight">
-          Stubs
-        </h2>
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead className="text-left">Code</TableHead>
-              <TableHead className="text-left">Document</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {chunk.stubs.map((stub) => (
-              <TableRow key={stub.id}>
-                <TableCell>
-                  <IconLink
-                    icon={StubIconDefinition}
-                    href={`/stubs/${stub.id}`}
-                  >
-                    {stub.id}
-                  </IconLink>
-                </TableCell>
-                <TableCell>
-                  {stub.document && (
-                    <IconLink
-                      icon={DocumentIconDefinition}
-                      href={`/documents/${stub.document.code}`}
-                    >
-                      {stub.document.code}
-                    </IconLink>
-                  )}
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+        <LittleHeading>Stubs</LittleHeading>
+
+        <EntityList
+          items={chunk.stubs.map((stub) => ({
+            icon: StubIconDefinition,
+            href: `/stubs/${stub.id}`,
+            text: stub.documentType,
+            subtitle: stub.documentCode,
+          }))}
+        />
       </div>
     </>
   )

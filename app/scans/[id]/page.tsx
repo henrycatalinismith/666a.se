@@ -1,9 +1,14 @@
+import { Relations } from 'components/Relations'
 import { ChunkIconDefinition } from 'icons/ChunkIcon'
+import { CountyIconDefinition } from 'icons/CountyIcon'
 import { ScanIconDefinition } from 'icons/ScanIcon'
 import { requireUser } from 'lib/authentication'
 import prisma from 'lib/database'
+import _ from 'lodash'
+import { Card } from 'ui/Card'
 import { IconHeading } from 'ui/IconHeading'
 import { IconLink } from 'ui/IconLink'
+import { Progress } from 'ui/Progress'
 import {
   Table,
   TableBody,
@@ -27,9 +32,15 @@ export default async function Document({ params }: any) {
     },
   })
 
+  const totalChunks = scan.chunks.length
+  const completeChunks = _.filter(scan.chunks, { status: 'SUCCESS' }).length
+  console.log(totalChunks)
+  console.log(completeChunks)
+  const progress = (completeChunks / totalChunks) * 100
+
   return (
     <>
-      <div className="container pt-8 flex flex-col gap-8">
+      <div className="container pt-8 flex flex-col gap-2">
         <IconHeading
           icon={ScanIconDefinition}
           title={`${scan.county.name} ${scan.startDate
@@ -37,6 +48,23 @@ export default async function Document({ params }: any) {
             .substring(0, 10)}`}
           subtitle={scan.id}
         />
+
+        <Relations
+          rows={[
+            {
+              icon: CountyIconDefinition,
+              href: `/counties/${scan.county.slug}`,
+              text: scan.county.name,
+              show: true,
+            },
+          ]}
+        />
+
+        {scan.status === 'ONGOING' && (
+          <Card className="p-8 mt-8 mb-8">
+            <Progress value={progress} />
+          </Card>
+        )}
 
         <h2 className="font-heading scroll-m-20 text-xl font-semibold tracking-tight">
           Chunks
