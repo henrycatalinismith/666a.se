@@ -26,10 +26,7 @@ export default async function County({ params }: any) {
   return (
     <>
       <div className="container mx-auto w-sbm pt-8">
-        <div className="space-y-3">
-          <IconHeading icon={faEarthEurope} title={county.name} subtitle="" />
-          <p className="text-lg text-muted-foreground">{county.code}</p>
-        </div>
+        <IconHeading icon={faEarthEurope} title={county.name} subtitle="" />
 
         <h2 className="pt-8 font-heading mt-8 scroll-m-20 text-xl font-semibold tracking-tight">
           Municipalities

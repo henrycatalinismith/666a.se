@@ -37,9 +37,7 @@ export default async function Case({ params }: any) {
   return (
     <>
       <div className="container pt-8 flex flex-col gap-8">
-        <div className="space-y-3">
-          <IconHeading icon={faBoxArchive} subtitle={c.name} title={c.code} />
-        </div>
+        <IconHeading icon={faBoxArchive} subtitle={c.name} title={c.code} />
 
         <div>
           {c.company && (

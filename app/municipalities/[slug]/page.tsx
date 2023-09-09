@@ -33,10 +33,7 @@ export default async function Municipality({ params }: any) {
   return (
     <>
       <div className="container pt-8">
-        <div className="space-y-3">
-          <IconHeading icon={faCity} title={municipality.name} subtitle="" />
-          <p className="text-lg text-muted-foreground">{municipality.code}</p>
-        </div>
+        <IconHeading icon={faCity} title={municipality.name} subtitle="" />
 
         <h2 className="pt-8 font-heading mt-8 scroll-m-20 text-xl font-semibold tracking-tight">
           Documents
