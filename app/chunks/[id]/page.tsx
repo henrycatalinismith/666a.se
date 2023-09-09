@@ -1,7 +1,6 @@
 import { faCube, faCubes, faFileLines } from '@fortawesome/free-solid-svg-icons'
-
-import { IconHeading } from '../../../components/IconHeading'
-import { IconLink } from '../../../components/IconLink'
+import { IconHeading } from 'components/IconHeading'
+import { IconLink } from 'components/IconLink'
 import {
   Table,
   TableBody,
@@ -9,9 +8,9 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '../../../components/Table'
-import { requireUser } from '../../../lib/authentication'
-import prisma from '../../../lib/database'
+} from 'components/Table'
+import { requireUser } from 'lib/authentication'
+import prisma from 'lib/database'
 
 export default async function Document({ params }: any) {
   const user = await requireUser()

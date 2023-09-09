@@ -1,4 +1,4 @@
-import { createTick } from '../lib/ingestion'
+import { createTick } from 'lib/ingestion'
 ;(async () => {
   console.log('tick')
   const tick = await createTick()
