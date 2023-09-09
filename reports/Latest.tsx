@@ -1,6 +1,5 @@
 import { faBoxArchive } from '@fortawesome/free-solid-svg-icons'
-
-import { IconLink } from '../components/IconLink'
+import { IconLink } from 'components/IconLink'
 import {
   Table,
   TableBody,
@@ -8,8 +7,8 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '../components/Table'
-import prisma from '../lib/database'
+} from 'components/Table'
+import prisma from 'lib/database'
 
 export default async function Ingestion() {
   const documents = await prisma.document.findMany({

@@ -1,5 +1,3 @@
-import _ from 'lodash'
-
 import {
   Table,
   TableBody,
@@ -7,8 +5,9 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '../components/Table'
-import prisma from '../lib/database'
+} from 'components/Table'
+import prisma from 'lib/database'
+import _ from 'lodash'
 
 export default async function Ingestion() {
   const totals: Record<string, number> = {}

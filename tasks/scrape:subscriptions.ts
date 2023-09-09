@@ -1,8 +1,8 @@
 // import _ from 'lodash'
 // import * as puppeteer from 'puppeteer'
 
-// import { scrapeCompany } from '../lib/scraper'
-// import { fetchSubscribedCompanyCodes } from '../lib/subscription'
+// import { scrapeCompany } from 'lib/scraper'
+// import { fetchSubscribedCompanyCodes } from 'lib/subscription'
 // ;(async () => {
 //   const browser: any = await puppeteer.launch({ headless: 'new' })
 
