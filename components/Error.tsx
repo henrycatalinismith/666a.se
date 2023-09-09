@@ -1,8 +1,8 @@
 'use client'
 import { Error } from '@prisma/client'
 
-import { Button } from './Button'
-import { Card } from './Card'
+import { Button } from '../ui/Button'
+import { Card } from '../ui/Card'
 
 export function Error({ error }: { error: Error }) {
   const onResolve = () => {

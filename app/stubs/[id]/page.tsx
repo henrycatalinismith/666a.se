@@ -1,7 +1,7 @@
 import { faCube } from '@fortawesome/free-solid-svg-icons'
-import { IconHeading } from 'components/IconHeading'
 import { requireUser } from 'lib/authentication'
 import prisma from 'lib/database'
+import { IconHeading } from 'ui/IconHeading'
 
 export default async function Document({ params }: any) {
   const user = await requireUser()
@@ -17,12 +17,14 @@ export default async function Document({ params }: any) {
   return (
     <>
       <div className="container pt-8 flex flex-col gap-8">
-        <div className="space-y-3">
-          <IconHeading icon={faCube}>{stub.id}</IconHeading>
-          <p className="text-lg text-muted-foreground">
-            {stub.created.toISOString().substring(0, 19).replace('T', ' ')}
-          </p>
-        </div>
+        <IconHeading
+          icon={faCube}
+          title={stub.documentCode}
+          subtitle={stub.created
+            .toISOString()
+            .substring(0, 19)
+            .replace('T', ' ')}
+        />
       </div>
     </>
   )

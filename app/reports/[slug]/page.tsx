@@ -1,9 +1,9 @@
-import NavBar from 'components/NavBar'
 import { ReportNav } from 'components/ReportNav'
 import { requireUser } from 'lib/authentication'
 import Latest from 'reports/Latest'
 import Ticks from 'reports/Ticks'
 import Totals from 'reports/Totals'
+import NavBar from 'ui/NavBar'
 
 export default async function Company({ params }: any) {
   const user = await requireUser()

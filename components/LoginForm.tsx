@@ -3,9 +3,7 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
-import * as z from 'zod'
-
-import { Button } from './Button'
+import { Button } from 'ui/Button'
 import {
   Form,
   FormControl,
@@ -13,8 +11,9 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from './Form'
-import { Input } from './Input'
+} from 'ui/Form'
+import { Input } from 'ui/Input'
+import * as z from 'zod'
 
 const formSchema = z.object({
   email: z.string().min(2, {

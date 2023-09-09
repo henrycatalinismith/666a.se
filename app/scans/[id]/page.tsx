@@ -1,6 +1,8 @@
 import { faCubes, faSatelliteDish } from '@fortawesome/free-solid-svg-icons'
-import { IconHeading } from 'components/IconHeading'
-import { IconLink } from 'components/IconLink'
+import { requireUser } from 'lib/authentication'
+import prisma from 'lib/database'
+import { IconHeading } from 'ui/IconHeading'
+import { IconLink } from 'ui/IconLink'
 import {
   Table,
   TableBody,
@@ -8,9 +10,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from 'components/Table'
-import { requireUser } from 'lib/authentication'
-import prisma from 'lib/database'
+} from 'ui/Table'
 
 export default async function Document({ params }: any) {
   const user = await requireUser()
@@ -20,14 +20,23 @@ export default async function Document({ params }: any) {
 
   const scan = await prisma.scan.findFirstOrThrow({
     where: { id: params.id },
-    include: { chunks: true },
+    include: {
+      county: true,
+      chunks: { include: { county: true }, orderBy: { page: 'asc' } },
+    },
   })
 
   return (
     <>
       <div className="container pt-8 flex flex-col gap-8">
         <div className="space-y-3">
-          <IconHeading icon={faSatelliteDish}>{scan.id}</IconHeading>
+          <IconHeading
+            icon={faSatelliteDish}
+            title={`${scan.county.name} ${scan.startDate
+              ?.toISOString()
+              .substring(0, 10)}`}
+            subtitle={scan.id}
+          />
           <p className="text-lg text-muted-foreground">
             {scan.created.toISOString().substring(0, 19).replace('T', ' ')}
           </p>
@@ -51,7 +60,9 @@ export default async function Document({ params }: any) {
               <TableRow key={chunk.id}>
                 <TableCell>
                   <IconLink icon={faCubes} href={`/chunks/${chunk.id}`}>
-                    {chunk.id}
+                    {`${chunk.county.name} ${chunk.startDate
+                      ?.toISOString()
+                      .substring(0, 10)}`}
                   </IconLink>
                 </TableCell>
                 <TableCell>{chunk.status}</TableCell>

@@ -1,6 +1,8 @@
 import { faCube, faCubes, faFileLines } from '@fortawesome/free-solid-svg-icons'
-import { IconHeading } from 'components/IconHeading'
-import { IconLink } from 'components/IconLink'
+import { requireUser } from 'lib/authentication'
+import prisma from 'lib/database'
+import { IconHeading } from 'ui/IconHeading'
+import { IconLink } from 'ui/IconLink'
 import {
   Table,
   TableBody,
@@ -8,9 +10,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from 'components/Table'
-import { requireUser } from 'lib/authentication'
-import prisma from 'lib/database'
+} from 'ui/Table'
 
 export default async function Document({ params }: any) {
   const user = await requireUser()
@@ -20,18 +20,19 @@ export default async function Document({ params }: any) {
 
   const chunk = await prisma.chunk.findFirstOrThrow({
     where: { id: params.id },
-    include: { stubs: { include: { document: true } } },
+    include: { county: true, stubs: { include: { document: true } } },
   })
 
   return (
     <>
       <div className="container pt-8 flex flex-col gap-8">
-        <div className="space-y-3">
-          <IconHeading icon={faCubes}>{chunk.id}</IconHeading>
-          <p className="text-lg text-muted-foreground">
-            {chunk.created.toISOString().substring(0, 19).replace('T', ' ')}
-          </p>
-        </div>
+        <IconHeading
+          icon={faCubes}
+          title={`${chunk.county.name} ${chunk.startDate
+            ?.toISOString()
+            .substring(0, 10)}`}
+          subtitle={chunk.id}
+        />
 
         <h2 className="font-heading scroll-m-20 text-xl font-semibold tracking-tight">
           Stubs
