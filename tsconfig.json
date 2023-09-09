@@ -29,6 +29,7 @@
   },
   "ts-node": {
     "compilerOptions": {
+      "baseUrl": ".",
       "module": "commonjs"
     }
   },
