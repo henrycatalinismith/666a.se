@@ -1,6 +1,4 @@
-import { createTick } from '../lib/tick'
-
-// import prisma from '../lib/database'
+import { createTick } from '../lib/ingestion'
 ;(async () => {
   console.log('tick')
   const tick = await createTick()
