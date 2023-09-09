@@ -6,16 +6,9 @@ import { DocumentIconDefinition } from 'icons/DocumentIcon'
 import { MunicipalityIconDefinition } from 'icons/MunicipalityIcon'
 import { requireUser } from 'lib/authentication'
 import prisma from 'lib/database'
+import { EntityList } from 'ui/EntityList'
 import { IconHeading } from 'ui/IconHeading'
-import { IconLink } from 'ui/IconLink'
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from 'ui/Table'
+import { LittleHeading } from 'ui/LittleHeading'
 
 export default async function Case({ params }: any) {
   const user = await requireUser()
@@ -67,33 +60,16 @@ export default async function Case({ params }: any) {
           ]}
         />
 
-        <h2 className="font-heading scroll-m-20 text-xl font-semibold tracking-tight mt-8">
-          Documents
-        </h2>
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead className="text-left">ID</TableHead>
-              <TableHead className="text-left">Type</TableHead>
-              <TableHead className="text-left">Filing ID</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {documents.map((document: any) => (
-              <TableRow key={document.id}>
-                <TableCell>
-                  <IconLink
-                    icon={DocumentIconDefinition}
-                    href={`/documents/${document.code}`}
-                  >
-                    {document.code}
-                  </IconLink>
-                </TableCell>
-                <TableCell>{document.type.name}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+        <LittleHeading>Documents</LittleHeading>
+
+        <EntityList
+          items={documents.map((document) => ({
+            icon: DocumentIconDefinition,
+            href: `/documents/${document.code}`,
+            text: document.type.name,
+            subtitle: document.date.toISOString().substring(0, 10),
+          }))}
+        />
       </div>
     </>
   )

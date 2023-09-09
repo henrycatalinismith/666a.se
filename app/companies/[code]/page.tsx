@@ -2,16 +2,9 @@ import { CaseIconDefinition } from 'icons/CaseIcon'
 import { CompanyIconDefinition } from 'icons/CompanyIcon'
 import { requireUser } from 'lib/authentication'
 import prisma from 'lib/database'
+import { EntityList } from 'ui/EntityList'
 import { IconHeading } from 'ui/IconHeading'
-import { IconLink } from 'ui/IconLink'
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from 'ui/Table'
+import { LittleHeading } from 'ui/LittleHeading'
 
 export default async function Company({ params }: any) {
   const user = await requireUser()
@@ -24,40 +17,28 @@ export default async function Company({ params }: any) {
   })
   const cases = await prisma.case.findMany({
     where: { companyId: company.id },
+    include: { documents: { orderBy: { date: 'asc' } } },
   })
 
   return (
     <>
-      <div className="container pt-8">
+      <div className="container flex flex-col pt-8 gap-2">
         <IconHeading
           icon={CompanyIconDefinition}
           title={company.name}
           subtitle={company.code}
         />
 
-        <h2 className="pt-8 font-heading mt-8 scroll-m-20 text-xl font-semibold tracking-tight">
-          Case History
-        </h2>
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead>Case ID</TableHead>
-              <TableHead>Topic</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {cases.map((c: any) => (
-              <TableRow key={c.id}>
-                <TableCell>
-                  <IconLink href={`/cases/${c.code}`} icon={CaseIconDefinition}>
-                    {c.code}
-                  </IconLink>
-                </TableCell>
-                <TableCell>{c.name}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+        <LittleHeading>Cases</LittleHeading>
+
+        <EntityList
+          items={cases.map((c) => ({
+            icon: CaseIconDefinition,
+            href: `/cases/${c.code}`,
+            text: c.name,
+            subtitle: c.documents[0].date.toISOString().substring(0, 10),
+          }))}
+        />
       </div>
     </>
   )
