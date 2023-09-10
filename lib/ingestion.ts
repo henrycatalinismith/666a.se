@@ -269,30 +269,36 @@ async function tickScan(countyId: string): Promise<Tick> {
         const limitedResult = ingestedChunk!.hitCount!.match(
           /^Visar (\d+) av (\d+) träffar$/
         )
+        const fullResult = ingestedChunk!.hitCount!.match(/^(\d+) träffar$/)
+        let targetStubCount = 0
+
         if (limitedResult) {
-          const targetStubCount = parseInt(limitedResult[1], 10) - stubsPerChunk
-          const targetChunkCount = targetStubCount / stubsPerChunk
-
-          const projectChunkResult = await tx.chunk.createMany({
-            data: _.times(targetChunkCount, (index) => ({
-              status: ChunkStatus.PENDING,
-              scanId: scan.id,
-              countyId: scan.countyId,
-              startDate: scan.startDate,
-              page: index + 2,
-              stubCount: null,
-            })),
-          })
-
-          await tx.scan.update({
-            where: { id: scan.id },
-            data: { chunkCount: { increment: projectChunkResult.count } },
-          })
+          targetStubCount = parseInt(limitedResult[1], 10) - stubsPerChunk
+        } else if (fullResult) {
+          targetStubCount = parseInt(fullResult[1], 10) - stubsPerChunk
         } else {
           throw new Error(
             `Unsupported hit count pattern ${ingestedChunk.hitCount}`
           )
         }
+
+        const targetChunkCount = targetStubCount / stubsPerChunk
+
+        const projectChunkResult = await tx.chunk.createMany({
+          data: _.times(targetChunkCount, (index) => ({
+            status: ChunkStatus.PENDING,
+            scanId: scan.id,
+            countyId: scan.countyId,
+            startDate: scan.startDate,
+            page: index + 2,
+            stubCount: null,
+          })),
+        })
+
+        await tx.scan.update({
+          where: { id: scan.id },
+          data: { chunkCount: { increment: projectChunkResult.count } },
+        })
       },
       {
         timeout: 15000,
