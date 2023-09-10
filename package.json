@@ -22,6 +22,7 @@
     "stub:ingest": "yarn ts-node -r dotenv/config tasks/stub:ingest.ts",
     "subscription:create": "yarn ts-node -r dotenv/config tasks/subscription:create.ts",
     "tick:create": "yarn ts-node -r dotenv/config tasks/tick:create.ts",
+    "tick:loop": "yarn ts-node -r dotenv/config tasks/tick:loop.ts",
     "type:import": "yarn ts-node -r dotenv/config tasks/type:import.ts",
     "user:create": "yarn ts-node -r dotenv/config tasks/user:create.ts"
   },
