@@ -8,7 +8,7 @@ function sleep(ms: number) {
   for (let i = 0; i < 10000; i += 1) {
     const tick = await createTick()
     console.log(tick)
-    await sleep(5000)
+    await sleep(2000)
   }
 
   process.exit(0)
