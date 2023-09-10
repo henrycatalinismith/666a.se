@@ -1,5 +1,5 @@
-import { CountyIconDefinition } from 'icons/CountyIcon'
-import { MunicipalityIconDefinition } from 'icons/MunicipalityIcon'
+import { CountyIconDefinition } from 'entities/County'
+import { MunicipalityIconDefinition } from 'entities/Municipality'
 import { requireUser } from 'lib/authentication'
 import prisma from 'lib/database'
 import { IconHeading } from 'ui/IconHeading'

@@ -1,5 +1,5 @@
-import { DocumentIconDefinition } from 'icons/DocumentIcon'
-import { WorkplaceIconDefinition } from 'icons/WorkplaceIcon'
+import { DocumentIconDefinition } from 'entities/Document'
+import { WorkplaceIconDefinition } from 'entities/Workplace'
 import { requireUser } from 'lib/authentication'
 import prisma from 'lib/database'
 import Link from 'next/link'

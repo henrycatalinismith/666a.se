@@ -1,5 +1,10 @@
+import { ErrorStatus, ScanStatus } from '@prisma/client'
+import { Progress } from '@radix-ui/react-progress'
+import { DashboardError } from 'components/DashboardError'
+import { DashboardScan } from 'components/DashboardScan'
 import { requireUser } from 'lib/authentication'
 import prisma from 'lib/database'
+import { Card } from 'ui/Card'
 import NavBar from 'ui/NavBar'
 import {
   Table,
@@ -16,7 +21,16 @@ export default async function Dashboard() {
     return <></>
   }
 
+  const scan = await prisma.scan.findFirst({
+    where: { status: ScanStatus.ONGOING },
+    include: {
+      county: true,
+      chunks: { include: { county: true }, orderBy: { page: 'asc' } },
+    },
+  })
+
   // const subscriptions = await prisma.subscription.findMany({
+
   //   where: { userId: user.id },
   //   include: { company: true },
   // })
@@ -25,6 +39,10 @@ export default async function Dashboard() {
     orderBy: { date: 'desc' },
     take: 4,
     include: { case: true, company: true, type: true },
+  })
+
+  const blockingError = await prisma.error.findFirst({
+    where: { status: ErrorStatus.BLOCKING },
   })
 
   // const notifications = await findNewNotificationsByUserId({
@@ -45,7 +63,17 @@ export default async function Dashboard() {
   return (
     <>
       <NavBar />
+
       <div className="container">
+        {scan && (
+          <DashboardScan
+            chunks={scan.chunks}
+            county={scan.county}
+            scan={scan}
+          />
+        )}
+        {blockingError && <DashboardError error={blockingError} />}
+
         <h2>Documents</h2>
         <Table>
           <TableHeader>
