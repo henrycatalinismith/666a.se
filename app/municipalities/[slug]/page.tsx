@@ -1,5 +1,5 @@
-import { DocumentIconDefinition } from 'icons/DocumentIcon'
-import { MunicipalityIconDefinition } from 'icons/MunicipalityIcon'
+import { DocumentIconDefinition } from 'entities/Document'
+import { MunicipalityIconDefinition } from 'entities/Municipality'
 import { requireUser } from 'lib/authentication'
 import prisma from 'lib/database'
 import Link from 'next/link'
