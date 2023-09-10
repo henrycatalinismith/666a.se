@@ -20,7 +20,7 @@ export const EntityList: FC<EntityListProps> = ({ items }) => {
           <div className="flex min-w-[4rem] w-16 justify-center items-center">
             <FontAwesomeIcon icon={item.icon} className="h-8" />
           </div>
-          <div className="flex flex-col">
+          <div className="flex flex-col min-w-0">
             <Link
               href={item.href}
               className="text-blue-700 whitespace-nowrap overflow-hidden text-ellipsis max-w-full min-w-0"

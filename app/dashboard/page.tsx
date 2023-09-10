@@ -1,19 +1,12 @@
 import { ErrorStatus, ScanStatus } from '@prisma/client'
-import { Progress } from '@radix-ui/react-progress'
 import { DashboardError } from 'components/DashboardError'
 import { DashboardScan } from 'components/DashboardScan'
+import { DocumentIconDefinition } from 'entities/Document'
 import { requireUser } from 'lib/authentication'
 import prisma from 'lib/database'
-import { Card } from 'ui/Card'
+import { EntityList } from 'ui/EntityList'
+import { LittleHeading } from 'ui/LittleHeading'
 import NavBar from 'ui/NavBar'
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from 'ui/Table'
 
 export default async function Dashboard() {
   const user = await requireUser()
@@ -36,7 +29,7 @@ export default async function Dashboard() {
   // })
 
   const documents = await prisma.document.findMany({
-    orderBy: { date: 'desc' },
+    orderBy: { created: 'desc' },
     take: 4,
     include: { case: true, company: true, type: true },
   })
@@ -64,7 +57,7 @@ export default async function Dashboard() {
     <>
       <NavBar />
 
-      <div className="container">
+      <div className="container flex flex-col gap-8">
         {scan && (
           <DashboardScan
             chunks={scan.chunks}
@@ -74,25 +67,15 @@ export default async function Dashboard() {
         )}
         {blockingError && <DashboardError error={blockingError} />}
 
-        <h2>Documents</h2>
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead className="text-left">Date</TableHead>
-              <TableHead className="text-left">Type</TableHead>
-              <TableHead className="text-left">Company</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {documents.map((doc) => (
-              <TableRow key={doc.id}>
-                <TableCell>{doc.date.toISOString().substring(0, 10)}</TableCell>
-                <TableCell>{doc.type.name}</TableCell>
-                <TableCell>{doc.company?.name}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+        <LittleHeading>Latest Documents</LittleHeading>
+        <EntityList
+          items={documents.map((document) => ({
+            icon: DocumentIconDefinition,
+            href: `/documents/${document.code}`,
+            text: document.type.name,
+            subtitle: document.date.toISOString().substring(0, 10),
+          }))}
+        />
       </div>
     </>
   )

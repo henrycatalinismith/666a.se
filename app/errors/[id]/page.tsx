@@ -23,11 +23,13 @@ export default async function Error({ params }: any) {
           title={`${error.message.split('\n')[0]}`}
           subtitle={error.id}
         />
+      </div>
 
-        <pre className="overflow-hidden">
-          <code>{error.stack}</code>
-        </pre>
+      <pre className="container overflow-hidden bg-gray-200 w-full flex p-8 my-8 text-ellipsis">
+        <code className="overflow-hidden">{error.stack}</code>
+      </pre>
 
+      <div className="container flex flex-col gap-2">
         <ResolveErrorButton error={error} />
       </div>
     </>
