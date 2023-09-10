@@ -20,6 +20,7 @@ export default async function Dashboard() {
       county: true,
       chunks: { include: { county: true }, orderBy: { page: 'asc' } },
     },
+    orderBy: { created: 'asc' },
   })
 
   // const subscriptions = await prisma.subscription.findMany({
