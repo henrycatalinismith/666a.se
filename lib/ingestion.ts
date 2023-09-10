@@ -17,6 +17,13 @@ import slugify from 'slugify'
 import { Transaction } from './database'
 import prisma from './database'
 
+async function launchBrowser(): Promise<any> {
+  if (!(global as any).browser) {
+    ;(global as any).browser = await puppeteer.launch({ headless: 'new' })
+  }
+  return (global as any).browser
+}
+
 type DiariumDocument = {
   caseCode: string
   caseStatus: string
@@ -602,7 +609,7 @@ async function updateChunk(
 async function searchDiarium(
   query: DiariumSearchQuery
 ): Promise<DiariumSearchResult> {
-  const browser = await puppeteer.launch({ headless: 'new' })
+  const browser = await launchBrowser()
   const page = await browser.newPage()
   const url = new URL(
     '/om-oss/sok-i-arbetsmiljoverkets-diarium/',
@@ -637,7 +644,7 @@ async function searchDiarium(
 }
 
 async function fetchDocument(code: string): Promise<DiariumDocument> {
-  const browser = await puppeteer.launch({ headless: 'new' })
+  const browser = await launchBrowser()
   const page = await browser.newPage()
   const url = new URL(
     '/om-oss/sok-i-arbetsmiljoverkets-diarium/',
