@@ -1,6 +1,6 @@
 import { Relations } from 'components/Relations'
-import { CountyIconDefinition } from 'icons/CountyIcon'
-import { ScanIconDefinition } from 'icons/ScanIcon'
+import { CountyIconDefinition } from 'entities/County'
+import { ScanIconDefinition } from 'entities/Scan'
 import { requireUser } from 'lib/authentication'
 import prisma from 'lib/database'
 import _ from 'lodash'

@@ -1,5 +1,5 @@
-import { CaseIconDefinition } from 'icons/CaseIcon'
-import { CompanyIconDefinition } from 'icons/CompanyIcon'
+import { CaseIconDefinition } from 'entities/Case'
+import { CompanyIconDefinition } from 'entities/Company'
 import { requireUser } from 'lib/authentication'
 import prisma from 'lib/database'
 import { EntityList } from 'ui/EntityList'
