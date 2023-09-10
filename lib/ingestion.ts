@@ -17,7 +17,7 @@ import slugify from 'slugify'
 import { Transaction } from './database'
 import prisma from './database'
 
-async function launchBrowser(): Promise<any> {
+async function launchBrowser(): Promise<puppeteer.Browser> {
   if (!(global as any).browser) {
     ;(global as any).browser = await puppeteer.launch({ headless: 'new' })
   }
