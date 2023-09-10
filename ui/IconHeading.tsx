@@ -19,10 +19,10 @@ export const IconHeading: FC<IconHeadingProps> = ({
           <FontAwesomeIcon icon={icon} className="h-8" />
         </div>
         <div className="flex flex-col min-w-0">
-          <h1 className="text-1xl whitespace-nowrap overflow-hidden text-ellipsis">
+          <h1 className="text-1xl whitespace-nowrap overflow-hidden text-ellipsis m:overflow-visible">
             {title}
           </h1>
-          <p className="text-1xl text-muted-foreground whitespace-nowrap overflow-hidden text-ellipsis">
+          <p className="text-1xl text-muted-foreground whitespace-nowrap overflow-hidden text-ellipsis m:overflow-visible">
             {subtitle}
           </p>
         </div>
