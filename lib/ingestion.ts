@@ -205,6 +205,11 @@ async function tickScan(countyId: string): Promise<Tick> {
           throw new Error('Cannot initiate new scan while one is ongoing')
         }
 
+        await prisma.scan.updateMany({
+          data: { status: ScanStatus.SUCCESS },
+          where: { status: ScanStatus.ONGOING },
+        })
+
         const newestStub = await prisma.stub.findFirst({
           where: {
             countyId: countyId,
