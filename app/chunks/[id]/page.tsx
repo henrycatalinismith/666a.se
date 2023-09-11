@@ -1,3 +1,4 @@
+import { faCalendar } from '@fortawesome/free-solid-svg-icons'
 import { Relations } from 'components/Relations'
 import { ChunkIconDefinition } from 'entities/Chunk'
 import { CountyIconDefinition } from 'entities/County'
@@ -29,27 +30,35 @@ export default async function Document({ params }: any) {
       <div className="container pt-8 flex flex-col gap-8">
         <IconHeading
           icon={ChunkIconDefinition}
-          title={`${chunk.county.name} ${chunk.startDate
-            ?.toISOString()
-            .substring(0, 10)}`}
+          title="Chunk"
           subtitle={chunk.id}
         />
 
         <Relations
           rows={[
             {
+              type: 'text',
+              icon: faCalendar,
+              text: 'Start date',
+              subtitle: chunk.startDate
+                ?.toISOString()
+                .substring(0, 10) as string,
+              show: true,
+            },
+
+            {
               icon: ScanIconDefinition,
               href: `/scans/${chunk.scan.id}`,
-              text: `${chunk.scan.county.name} ${chunk.scan.startDate
-                ?.toISOString()
-                .substring(0, 10)}`,
+              text: 'Scan',
+              subtitle: chunk.scan.id,
               show: true,
             },
 
             {
               icon: CountyIconDefinition,
               href: `/counties/${chunk.county.slug}`,
-              text: chunk.county.name,
+              text: 'County',
+              subtitle: chunk.county.name,
               show: true,
             },
           ]}
@@ -63,6 +72,7 @@ export default async function Document({ params }: any) {
             href: `/stubs/${stub.id}`,
             text: stub.documentType,
             subtitle: stub.documentCode,
+            show: true,
           }))}
         />
       </div>

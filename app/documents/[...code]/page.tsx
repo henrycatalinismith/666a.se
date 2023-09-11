@@ -1,3 +1,4 @@
+import { faCalendar, faFlag } from '@fortawesome/free-solid-svg-icons'
 import { Relations } from 'components/Relations'
 import { CaseIconDefinition } from 'entities/Case'
 import { ChunkIconDefinition } from 'entities/Chunk'
@@ -5,6 +6,7 @@ import { CompanyIconDefinition } from 'entities/Company'
 import { CountyIconDefinition } from 'entities/County'
 import { DocumentIconDefinition } from 'entities/Document'
 import { MunicipalityIconDefinition } from 'entities/Municipality'
+import { ScanIconDefinition } from 'entities/Scan'
 import { StubIconDefinition } from 'entities/Stub'
 import { WorkplaceIconDefinition } from 'entities/Workplace'
 import { requireUser } from 'lib/authentication'
@@ -28,9 +30,8 @@ export default async function Document({ params }: any) {
       workplace: true,
       stubs: {
         include: {
-          chunk: {
-            include: { county: true },
-          },
+          chunk: true,
+          scan: true,
         },
       },
     },
@@ -41,62 +42,89 @@ export default async function Document({ params }: any) {
       <div className="flex flex-col container pt-8 gap-2">
         <IconHeading
           icon={DocumentIconDefinition}
-          title={document.code}
-          subtitle={document.type.name}
+          title="Document"
+          subtitle={document.code}
         />
 
         <Relations
           rows={[
             {
+              type: 'text',
+              icon: faFlag,
+              text: 'Type',
+              subtitle: document.type.name,
+              show: true,
+            },
+
+            {
+              type: 'text',
+              icon: faCalendar,
+              text: 'Date',
+              subtitle: document.date.toISOString().substring(0, 10),
+              show: true,
+            },
+
+            {
               icon: CaseIconDefinition,
               href: `/cases/${document.case.code}`,
-              text: document.case.name,
+              text: 'Case',
+              subtitle: document.case.name,
               show: true,
             },
 
             {
               icon: WorkplaceIconDefinition,
               href: `/workplaces/${document.workplace?.code}`,
-              text: document.workplace?.name,
+              text: 'Workplace',
+              subtitle: document.workplace?.name as string,
               show: !!document.workplace,
             },
 
             {
               icon: CompanyIconDefinition,
               href: `/companies/${document.company?.code}`,
-              text: document.company?.name,
+              text: 'Company',
+              subtitle: document.company?.name as string,
               show: !!document.company,
             },
 
             {
               icon: MunicipalityIconDefinition,
               href: `/municipalities/${document.municipality.slug}`,
-              text: document.municipality.name,
+              text: 'Municipality',
+              subtitle: document.municipality.name,
               show: true,
             },
 
             {
               icon: CountyIconDefinition,
               href: `/counties/${document.county.slug}`,
-              text: document.county.name,
+              text: 'County',
+              subtitle: document.county.name,
               show: true,
             },
 
             {
               icon: StubIconDefinition,
               href: `/stubs/${document.stubs[0].id}`,
-              text: document.stubs[0].documentCode,
+              text: 'Stub',
+              subtitle: document.stubs[0].id,
               show: !!document.stubs[0],
             },
 
             {
               icon: ChunkIconDefinition,
               href: `/chunks/${document.stubs[0].chunk.id}`,
-              text: `${
-                document.stubs[0].chunk.county.name
-              } ${document.stubs[0].chunk.startDate
-                ?.toISOString()
-                .substring(0, 10)}`,
+              text: 'Chunk',
+              subtitle: document.stubs[0].chunk.id,
+              show: true,
+            },
+
+            {
+              icon: ScanIconDefinition,
+              href: `/scans/${document.stubs[0].scan.id}`,
+              text: 'Scan',
+              subtitle: document.stubs[0].scan.id,
               show: true,
             },
           ]}

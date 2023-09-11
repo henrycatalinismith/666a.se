@@ -2,16 +2,9 @@ import { CountyIconDefinition } from 'entities/County'
 import { MunicipalityIconDefinition } from 'entities/Municipality'
 import { requireUser } from 'lib/authentication'
 import prisma from 'lib/database'
+import { EntityList } from 'ui/EntityList'
 import { IconHeading } from 'ui/IconHeading'
-import { IconLink } from 'ui/IconLink'
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from 'ui/Table'
+import { LittleHeading } from 'ui/LittleHeading'
 
 export default async function County({ params }: any) {
   const user = await requireUser()
@@ -26,40 +19,24 @@ export default async function County({ params }: any) {
 
   return (
     <>
-      <div className="container mx-auto w-sbm pt-8">
+      <div className="container mx-auto w-sbm pt-8 flex flex-col gap-8">
         <IconHeading
           icon={CountyIconDefinition}
-          title={county.name}
-          subtitle=""
+          title={'County'}
+          subtitle={county.name}
         />
 
-        <h2 className="pt-8 font-heading mt-8 scroll-m-20 text-xl font-semibold tracking-tight">
-          Municipalities
-        </h2>
+        <LittleHeading>Municipalities</LittleHeading>
 
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead>Name</TableHead>
-              <TableHead>?</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {county.municipalities.map((m: any) => (
-              <TableRow key={m.id}>
-                <TableCell>
-                  <IconLink
-                    href={`/municipalities/${m.slug}`}
-                    icon={MunicipalityIconDefinition}
-                  >
-                    {m.name}
-                  </IconLink>
-                </TableCell>
-                <TableCell>{m.code}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+        <EntityList
+          items={county.municipalities.map((municipality) => ({
+            icon: MunicipalityIconDefinition,
+            href: `/municipalities/${municipality.slug}`,
+            text: municipality.name,
+            subtitle: municipality.code,
+            show: true,
+          }))}
+        />
       </div>
     </>
   )

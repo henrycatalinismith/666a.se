@@ -1,3 +1,5 @@
+import { faTag } from '@fortawesome/free-solid-svg-icons'
+import { Relations } from 'components/Relations'
 import { CaseIconDefinition } from 'entities/Case'
 import { CompanyIconDefinition } from 'entities/Company'
 import { requireUser } from 'lib/authentication'
@@ -25,8 +27,20 @@ export default async function Company({ params }: any) {
       <div className="container flex flex-col pt-8 gap-2">
         <IconHeading
           icon={CompanyIconDefinition}
-          title={company.name}
+          title="Company"
           subtitle={company.code}
+        />
+
+        <Relations
+          rows={[
+            {
+              type: 'text',
+              icon: faTag,
+              text: 'Name',
+              subtitle: company.name,
+              show: true,
+            },
+          ]}
         />
 
         <LittleHeading>Cases</LittleHeading>
@@ -37,6 +51,7 @@ export default async function Company({ params }: any) {
             href: `/cases/${c.code}`,
             text: c.name,
             subtitle: c.documents[0].date.toISOString().substring(0, 10),
+            show: true,
           }))}
         />
       </div>
