@@ -1,7 +1,5 @@
 import { ReportNav } from 'components/ReportNav'
 import { requireUser } from 'lib/authentication'
-import Latest from 'reports/Latest'
-import Ticks from 'reports/Ticks'
 import Totals from 'reports/Totals'
 import NavBar from 'ui/NavBar'
 
@@ -20,27 +18,13 @@ export default async function Company({ params }: any) {
         <ReportNav
           items={[
             {
-              name: 'Latest',
-              path: '/reports/latest',
-              active: slug === 'latest',
-            },
-            {
-              name: 'Ticks',
-              path: '/reports/ticks',
-              active: slug === 'ticks',
-            },
-            {
               name: 'Totals',
               path: '/reports/totals',
               active: slug === 'totals',
             },
           ]}
         />
-        <div>
-          {slug === 'latest' && <Latest />}
-          {slug === 'ticks' && <Ticks />}
-          {slug === 'totals' && <Totals />}
-        </div>
+        <div>{slug === 'totals' && <Totals />}</div>
       </div>
     </>
   )
