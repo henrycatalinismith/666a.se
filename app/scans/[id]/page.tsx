@@ -1,3 +1,4 @@
+import { faCalendar, faClock } from '@fortawesome/free-solid-svg-icons'
 import { Relations } from 'components/Relations'
 import { CountyIconDefinition } from 'entities/County'
 import { ScanIconDefinition } from 'entities/Scan'
@@ -26,23 +27,42 @@ export default async function Document({ params }: any) {
   const completeChunks = _.filter(scan.chunks, { status: 'SUCCESS' }).length
   const progress = (completeChunks / totalChunks) * 100
 
+  const tickCount = await prisma.tick.count({ where: { scanId: scan.id } })
+
   return (
     <>
       <div className="container pt-8 flex flex-col gap-2">
         <IconHeading
           icon={ScanIconDefinition}
-          title={`${scan.county.name} ${scan.startDate
-            ?.toISOString()
-            .substring(0, 10)}`}
+          title={`Scan`}
           subtitle={scan.id}
         />
 
         <Relations
           rows={[
             {
+              type: 'text',
+              icon: faCalendar,
+              text: 'Start date',
+              subtitle: scan.startDate
+                ?.toISOString()
+                .substring(0, 10) as string,
+              show: true,
+            },
+
+            {
+              type: 'text',
+              icon: faClock,
+              text: 'Ticks',
+              subtitle: `${tickCount}`,
+              show: true,
+            },
+
+            {
               icon: CountyIconDefinition,
               href: `/counties/${scan.county.slug}`,
-              text: scan.county.name,
+              text: 'County',
+              subtitle: scan.county.name,
               show: true,
             },
           ]}

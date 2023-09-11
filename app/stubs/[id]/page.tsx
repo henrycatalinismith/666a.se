@@ -1,5 +1,8 @@
+import { faCalendar, faFlag, faTag } from '@fortawesome/free-solid-svg-icons'
 import { Relations } from 'components/Relations'
 import { ChunkIconDefinition } from 'entities/Chunk'
+import { CountyIconDefinition } from 'entities/County'
+import { DocumentIconDefinition } from 'entities/Document'
 import { ScanIconDefinition } from 'entities/Scan'
 import { StubIconDefinition } from 'entities/Stub'
 import { requireUser } from 'lib/authentication'
@@ -15,7 +18,7 @@ export default async function Document({ params }: any) {
   const stub = await prisma.stub.findFirstOrThrow({
     where: { id: params.id },
     include: {
-      document: true,
+      document: { include: { type: true } },
       chunk: { include: { county: true } },
       scan: { include: { county: true } },
     },
@@ -26,30 +29,67 @@ export default async function Document({ params }: any) {
       <div className="container pt-8 flex flex-col gap-8">
         <IconHeading
           icon={StubIconDefinition}
-          title={stub.documentCode}
-          subtitle={stub.created
-            .toISOString()
-            .substring(0, 19)
-            .replace('T', ' ')}
+          title={'Stub'}
+          subtitle={stub.id}
         />
 
         <Relations
           rows={[
             {
+              type: 'text',
+              icon: faCalendar,
+              text: 'Document date',
+              subtitle: stub.documentDate
+                ?.toISOString()
+                .substring(0, 10) as string,
+              show: true,
+            },
+
+            {
+              type: 'text',
+              icon: faFlag,
+              text: 'Document type',
+              subtitle: stub.documentType,
+              show: true,
+            },
+
+            {
+              type: 'text',
+              icon: faTag,
+              text: 'Case name',
+              subtitle: stub.caseName,
+              show: true,
+            },
+
+            {
+              icon: DocumentIconDefinition,
+              href: `/documents/${stub.document?.code}`,
+              text: 'Document',
+              subtitle: stub.document?.type.name as string,
+              show: !!stub.document,
+            },
+
+            {
               icon: ChunkIconDefinition,
               href: `/chunks/${stub.chunk.id}`,
-              text: `${stub.chunk.county.name} ${stub.chunk.startDate
-                ?.toISOString()
-                .substring(0, 10)}`,
+              text: 'Chunk',
+              subtitle: stub.chunk.id,
               show: true,
             },
 
             {
               icon: ScanIconDefinition,
               href: `/scans/${stub.scan.id}`,
-              text: `${stub.scan.county.name} ${stub.scan.startDate
-                ?.toISOString()
-                .substring(0, 10)}`,
+              text: 'Scan',
+              subtitle: stub.scan.id,
+              show: true,
+            },
+
+            {
+              icon: CountyIconDefinition,
+              href: `/counties/${stub.scan.county.slug}`,
+              text: 'County',
+              subtitle: stub.scan.county.name,
               show: true,
             },
           ]}

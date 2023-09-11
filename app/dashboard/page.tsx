@@ -75,6 +75,7 @@ export default async function Dashboard() {
             href: `/documents/${document.code}`,
             text: document.type.name,
             subtitle: document.date.toISOString().substring(0, 10),
+            show: true,
           }))}
         />
       </div>
