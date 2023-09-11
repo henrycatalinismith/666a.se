@@ -1,11 +1,14 @@
-import { faCalendar, faClock } from '@fortawesome/free-solid-svg-icons'
+import { faBug, faCalendar, faClock } from '@fortawesome/free-solid-svg-icons'
 import { Relations } from 'components/Relations'
+import { ChunkIconDefinition } from 'entities/Chunk'
 import { CountyIconDefinition } from 'entities/County'
 import { ScanIconDefinition } from 'entities/Scan'
+import { StubIconDefinition } from 'entities/Stub'
 import { requireUser } from 'lib/authentication'
 import prisma from 'lib/database'
 import _ from 'lodash'
 import { Card } from 'ui/Card'
+import { EntityList } from 'ui/EntityList'
 import { IconHeading } from 'ui/IconHeading'
 import { Progress } from 'ui/Progress'
 
@@ -28,6 +31,16 @@ export default async function Document({ params }: any) {
   const progress = (completeChunks / totalChunks) * 100
 
   const tickCount = await prisma.tick.count({ where: { scanId: scan.id } })
+  const errorCount = await prisma.tick.count({
+    where: { scanId: scan.id, errorId: { not: null } },
+  })
+
+  const latestTicks = await prisma.tick.findMany({
+    where: { scanId: scan.id },
+    include: { chunk: true, stub: true },
+    orderBy: { created: 'desc' },
+    take: 32,
+  })
 
   return (
     <>
@@ -59,6 +72,14 @@ export default async function Document({ params }: any) {
             },
 
             {
+              type: 'text',
+              icon: faBug,
+              text: 'Errors',
+              subtitle: `${errorCount}`,
+              show: true,
+            },
+
+            {
               icon: CountyIconDefinition,
               href: `/counties/${scan.county.slug}`,
               text: 'County',
@@ -73,6 +94,29 @@ export default async function Document({ params }: any) {
             <Progress value={progress} />
           </Card>
         )}
+
+        <EntityList
+          items={latestTicks
+            .filter((tick) => !!tick.chunk || !!tick.stub)
+            .map((tick) => {
+              if (tick.stub) {
+                return {
+                  icon: StubIconDefinition,
+                  href: `/stubs/${tick.stub.id}`,
+                  text: tick.stub.documentType,
+                  subtitle: tick.stub.documentCode,
+                  show: true,
+                }
+              }
+              return {
+                icon: ChunkIconDefinition,
+                href: `/chunks/${tick.chunk!.id}`,
+                text: `${tick.chunk!.page}`,
+                subtitle: tick.chunk!.id,
+                show: true,
+              }
+            })}
+        />
       </div>
     </>
   )
