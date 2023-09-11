@@ -1,18 +1,12 @@
+import { faTag } from '@fortawesome/free-solid-svg-icons'
+import { Relations } from 'components/Relations'
 import { DocumentIconDefinition } from 'entities/Document'
 import { WorkplaceIconDefinition } from 'entities/Workplace'
 import { requireUser } from 'lib/authentication'
 import prisma from 'lib/database'
-import Link from 'next/link'
+import { EntityList } from 'ui/EntityList'
 import { IconHeading } from 'ui/IconHeading'
-import { IconLink } from 'ui/IconLink'
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from 'ui/Table'
+import { LittleHeading } from 'ui/LittleHeading'
 
 export default async function Workplace({ params }: any) {
   const user = await requireUser()
@@ -27,43 +21,36 @@ export default async function Workplace({ params }: any) {
 
   return (
     <>
-      <div className="container pt-8">
+      <div className="container pt-8 flex flex-col gap-8">
         <IconHeading
           icon={WorkplaceIconDefinition}
-          title={workplace.name}
+          title={'Workplace'}
           subtitle={workplace.code}
         />
 
-        <h2 className="pt-8 font-heading mt-8 scroll-m-20 text-xl font-semibold tracking-tight">
-          Documents
-        </h2>
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead>Name</TableHead>
-              <TableHead>Type</TableHead>
-              <TableHead>Case</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {workplace.documents.map((d: any) => (
-              <TableRow key={d.id}>
-                <TableCell>
-                  <IconLink
-                    href={`/documents/${d.code}`}
-                    icon={DocumentIconDefinition}
-                  >
-                    {d.code}
-                  </IconLink>
-                </TableCell>
-                <TableCell>{d.type?.name}</TableCell>
-                <TableCell>
-                  <Link href={`/cases/${d.case?.code}`}>{d.case.name}</Link>
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+        <Relations
+          rows={[
+            {
+              type: 'text',
+              icon: faTag,
+              text: 'Name',
+              subtitle: workplace.name,
+              show: true,
+            },
+          ]}
+        />
+
+        <LittleHeading>Documents</LittleHeading>
+
+        <EntityList
+          items={workplace.documents.map((document) => ({
+            icon: DocumentIconDefinition,
+            href: `/documents/${document.code}`,
+            text: document.type.name,
+            subtitle: document.date.toISOString().substring(0, 10),
+            show: true,
+          }))}
+        />
       </div>
     </>
   )

@@ -1,3 +1,4 @@
+import { faTag } from '@fortawesome/free-solid-svg-icons'
 import { Relations } from 'components/Relations'
 import { CaseIconDefinition } from 'entities/Case'
 import { CompanyIconDefinition } from 'entities/Company'
@@ -18,43 +19,48 @@ export default async function Case({ params }: any) {
 
   const c = await prisma.case.findFirstOrThrow({
     where: { code: params.code.join('/') },
-    include: { company: true },
-  })
-
-  const documents = await prisma.document.findMany({
-    where: { caseId: c.id },
-    include: { county: true, municipality: true, type: true },
+    include: {
+      company: true,
+      documents: { include: { county: true, municipality: true, type: true } },
+    },
   })
 
   return (
     <>
       <div className="container pt-8 flex flex-col gap-2">
-        <IconHeading
-          icon={CaseIconDefinition}
-          subtitle={c.name}
-          title={c.code}
-        />
+        <IconHeading icon={CaseIconDefinition} title="Case" subtitle={c.code} />
 
         <Relations
           rows={[
             {
+              type: 'text',
+              icon: faTag,
+              text: 'Name',
+              subtitle: c.name,
+              show: true,
+            },
+
+            {
               icon: CompanyIconDefinition,
               href: `/companies/${c.company?.code}`,
-              text: c.company?.name,
+              text: 'Company',
+              subtitle: c.company?.name as string,
               show: !!c.company,
             },
 
             {
               icon: MunicipalityIconDefinition,
-              href: `/municipalities/${documents[0].municipality.slug}`,
-              text: documents[0].municipality.name,
+              href: `/municipalities/${c.documents[0].municipality.slug}`,
+              text: 'Municipality',
+              subtitle: c.documents[0].municipality.name,
               show: true,
             },
 
             {
               icon: CountyIconDefinition,
-              href: `/counties/${documents[0].county.slug}`,
-              text: documents[0].county.name,
+              href: `/counties/${c.documents[0].county.slug}`,
+              text: 'County',
+              subtitle: c.documents[0].county.name,
               show: true,
             },
           ]}
@@ -63,11 +69,12 @@ export default async function Case({ params }: any) {
         <LittleHeading>Documents</LittleHeading>
 
         <EntityList
-          items={documents.map((document) => ({
+          items={c.documents.map((document) => ({
             icon: DocumentIconDefinition,
             href: `/documents/${document.code}`,
             text: document.type.name,
             subtitle: document.date.toISOString().substring(0, 10),
+            show: true,
           }))}
         />
       </div>
