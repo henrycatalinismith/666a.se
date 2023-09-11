@@ -39,7 +39,7 @@ export default async function Document({ params }: any) {
 
   return (
     <>
-      <div className="flex flex-col container pt-8 gap-2">
+      <div className="flex flex-col container pt-8 gap-8">
         <IconHeading
           icon={DocumentIconDefinition}
           title="Document"
