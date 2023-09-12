@@ -148,6 +148,27 @@ model Municipality {
   documents Document[]
 }
 
+enum RoleName {
+  DEVELOPER
+}
+
+enum RoleStatus {
+  ACTIVE
+  REVOKED
+}
+
+model Role {
+  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  created DateTime  @default(now())
+  updated DateTime  @default(now())
+
+  userId String @db.Uuid
+  name RoleName
+  status RoleStatus
+
+  user User @relation(fields: [userId], references: [id])
+}
+
 enum ScanStatus {
   PENDING
   ONGOING
@@ -263,6 +284,7 @@ model User {
   password String
 
   sessions Session[]
+  roles Role[]
 }
 
 model Workplace {
