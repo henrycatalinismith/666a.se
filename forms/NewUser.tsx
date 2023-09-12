@@ -24,7 +24,7 @@ const formSchema = z.object({
   }),
 })
 
-export default function LoginForm() {
+export function NewUser() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -32,7 +32,6 @@ export default function LoginForm() {
       password: '',
     },
   })
-  const router = useRouter()
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     const { email, password } = values
     const params = {
@@ -40,12 +39,10 @@ export default function LoginForm() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, password }),
     }
-    const response = await fetch('/login', params).then((response) =>
+    const response = await fetch('/users', params).then((response) =>
       response.json()
     )
-    if (response.status === 'success') {
-      router.push(response.destination)
-    }
+    console.log(response)
   }
 
   const onError = async (e: any) => {
