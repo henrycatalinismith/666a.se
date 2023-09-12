@@ -8,7 +8,7 @@ import { EntityList } from 'ui/EntityList'
 import { LittleHeading } from 'ui/LittleHeading'
 import NavBar from 'ui/NavBar'
 
-export default async function Dashboard() {
+export default async function Admin() {
   const user = await requireUser([RoleName.DEVELOPER])
   if (!user) {
     return <></>
