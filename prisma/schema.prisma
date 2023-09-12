@@ -26,8 +26,6 @@ model Case {
 
   company Company? @relation(fields: [companyId], references: [id])
   documents Document[]
-
-  @@map("case")
 }
 
 enum ChunkStatus {
@@ -57,7 +55,6 @@ model Chunk {
   ticks Tick[]
 
   @@index([scanId, created(sort: Asc), status])
-  @@map("chunk")
 }
 
 model Company {
@@ -71,8 +68,6 @@ model Company {
   cases Case[]
 
   documents Document[]
-
-  @@map("company")
 }
 
 model County {
@@ -90,8 +85,6 @@ model County {
   scans Scan[]
   chunks Chunk[]
   stubs Stub[]
-
-  @@map("county")
 }
 
 model Document {
@@ -119,8 +112,6 @@ model Document {
   workplace Workplace? @relation(fields: [workplaceId], references: [id])
 
   stubs Stub[]
-
-  @@map("document")
 }
 
 enum ErrorStatus {
@@ -140,8 +131,6 @@ model Error {
   stack String?
 
   ticks Tick[]
-
-  @@map("error")
 }
 
 model Municipality {
@@ -157,8 +146,6 @@ model Municipality {
 
   county County @relation(fields: [countyId], references: [id])
   documents Document[]
-
-  @@map("municipality")
 }
 
 enum ScanStatus {
@@ -185,7 +172,6 @@ model Scan {
   ticks Tick[]
 
   @@index([countyId, created(sort: Asc), status])
-  @@map("scan")
 }
 
 model Session {
@@ -198,8 +184,6 @@ model Session {
   secret String
 
   user User @relation(fields: [userId], references: [id])
-
-  @@map("session")
 }
 
 enum StubStatus {
@@ -233,7 +217,6 @@ model Stub {
   ticks Tick[]
 
   @@index([created(sort: Asc), status])
-  @@map("stub")
 }
 
 enum TickType {
@@ -257,8 +240,6 @@ model Tick {
   scan Scan? @relation(fields: [scanId], references: [id])
   chunk Chunk? @relation(fields: [chunkId], references: [id])
   stub Stub? @relation(fields: [stubId], references: [id])
-
-  @@map("tick")
 }
 
 model Type {
@@ -270,8 +251,6 @@ model Type {
   slug String @unique
 
   documents Document[]
-
-  @@map("type")
 }
 
 model User {
@@ -284,8 +263,6 @@ model User {
   password String
 
   sessions Session[]
-
-  @@map("user")
 }
 
 model Workplace {
@@ -297,6 +274,4 @@ model Workplace {
   code String @unique
 
   documents Document[]
-
-  @@map("workplace")
 }
