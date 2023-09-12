@@ -1,3 +1,4 @@
+import { RoleName } from '@prisma/client'
 import { CountyIconDefinition } from 'entities/County'
 import { MunicipalityIconDefinition } from 'entities/Municipality'
 import { requireUser } from 'lib/authentication'
@@ -7,7 +8,7 @@ import { IconHeading } from 'ui/IconHeading'
 import { LittleHeading } from 'ui/LittleHeading'
 
 export default async function County({ params }: any) {
-  const user = await requireUser()
+  const user = await requireUser([RoleName.DEVELOPER])
   if (!user) {
     return <></>
   }

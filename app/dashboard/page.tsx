@@ -1,4 +1,4 @@
-import { ErrorStatus, ScanStatus } from '@prisma/client'
+import { ErrorStatus, RoleName, ScanStatus } from '@prisma/client'
 import { DashboardError } from 'components/DashboardError'
 import { DashboardScan } from 'components/DashboardScan'
 import { DocumentIconDefinition } from 'entities/Document'
@@ -9,7 +9,7 @@ import { LittleHeading } from 'ui/LittleHeading'
 import NavBar from 'ui/NavBar'
 
 export default async function Dashboard() {
-  const user = await requireUser()
+  const user = await requireUser([RoleName.DEVELOPER])
   if (!user) {
     return <></>
   }

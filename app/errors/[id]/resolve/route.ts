@@ -1,10 +1,10 @@
-import { ErrorStatus } from '@prisma/client'
+import { ErrorStatus, RoleName } from '@prisma/client'
 import { requireUser } from 'lib/authentication'
 import prisma from 'lib/database'
 import { NextResponse } from 'next/server'
 
 export async function POST(request: any) {
-  const user = await requireUser()
+  const user = await requireUser([RoleName.DEVELOPER])
   if (!user) {
     return NextResponse.json({ status: 'failure' })
   }

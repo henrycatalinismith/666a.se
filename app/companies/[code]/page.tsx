@@ -1,4 +1,5 @@
 import { faTag } from '@fortawesome/free-solid-svg-icons'
+import { RoleName } from '@prisma/client'
 import { Relations } from 'components/Relations'
 import { CaseIconDefinition } from 'entities/Case'
 import { CompanyIconDefinition } from 'entities/Company'
@@ -9,7 +10,7 @@ import { IconHeading } from 'ui/IconHeading'
 import { LittleHeading } from 'ui/LittleHeading'
 
 export default async function Company({ params }: any) {
-  const user = await requireUser()
+  const user = await requireUser([RoleName.DEVELOPER])
   if (!user) {
     return <></>
   }

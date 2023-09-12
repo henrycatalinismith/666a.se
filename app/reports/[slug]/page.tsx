@@ -1,10 +1,11 @@
+import { RoleName } from '@prisma/client'
 import { ReportNav } from 'components/ReportNav'
 import { requireUser } from 'lib/authentication'
 import Totals from 'reports/Totals'
 import NavBar from 'ui/NavBar'
 
 export default async function Company({ params }: any) {
-  const user = await requireUser()
+  const user = await requireUser([RoleName.DEVELOPER])
   if (!user) {
     return <></>
   }

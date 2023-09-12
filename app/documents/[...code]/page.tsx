@@ -1,4 +1,5 @@
 import { faCalendar, faFlag } from '@fortawesome/free-solid-svg-icons'
+import { RoleName } from '@prisma/client'
 import { Relations } from 'components/Relations'
 import { CaseIconDefinition } from 'entities/Case'
 import { ChunkIconDefinition } from 'entities/Chunk'
@@ -14,7 +15,7 @@ import prisma from 'lib/database'
 import { IconHeading } from 'ui/IconHeading'
 
 export default async function Document({ params }: any) {
-  const user = await requireUser()
+  const user = await requireUser([RoleName.DEVELOPER])
   if (!user) {
     return <></>
   }

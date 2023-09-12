@@ -1,3 +1,4 @@
+import { RoleName } from '@prisma/client'
 import { ResolveErrorButton } from 'components/ResolveErrorButton'
 import { ErrorIconDefinition } from 'entities/Error'
 import { requireUser } from 'lib/authentication'
@@ -5,7 +6,7 @@ import prisma from 'lib/database'
 import { IconHeading } from 'ui/IconHeading'
 
 export default async function Error({ params }: any) {
-  const user = await requireUser()
+  const user = await requireUser([RoleName.DEVELOPER])
   if (!user) {
     return <></>
   }
