@@ -44,9 +44,8 @@ export default function LoginForm() {
       response.json()
     )
     if (response.status === 'success') {
-      router.push('/reports/ticks')
+      router.push(response.destination)
     }
-    console.log(response)
   }
 
   const onError = async (e: any) => {
