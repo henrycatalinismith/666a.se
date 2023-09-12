@@ -17,7 +17,6 @@ export async function requireUser(requiredRoles?: RoleName[]) {
 
   if (!session) {
     redirect('/')
-    return
   }
 
   if (!requiredRoles) {
@@ -28,7 +27,6 @@ export async function requireUser(requiredRoles?: RoleName[]) {
   const missingRoles = _.difference(requiredRoles, activeRoles)
   if (missingRoles.length === requiredRoles.length) {
     redirect('/')
-    return
   }
 
   return session.user
