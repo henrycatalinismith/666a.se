@@ -40,7 +40,6 @@ model Chunk {
   created DateTime  @default(now())
   updated DateTime  @default(now())
 
-  countyId String? @db.Uuid
   scanId String @db.Uuid
 
   status ChunkStatus @default(PENDING)
@@ -49,7 +48,6 @@ model Chunk {
   stubCount  Int?
   hitCount String?
 
-  county County? @relation(fields: [countyId], references: [id])
   scan Scan @relation(fields: [scanId], references: [id])
   stubs Stub[]
   ticks Tick[]
@@ -74,7 +72,6 @@ model County {
   id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   created DateTime @default(now())
   updated DateTime @default(now())
-  ticked DateTime?
 
   code String @unique
   name String
@@ -82,8 +79,6 @@ model County {
 
   documents Document[]
   municipalities Municipality[]
-  scans Scan[]
-  chunks Chunk[]
 }
 
 model Document {
@@ -93,8 +88,8 @@ model Document {
 
   caseId String @db.Uuid
   companyId String? @db.Uuid
-  countyId String @db.Uuid
-  municipalityId  String @db.Uuid
+  countyId String? @db.Uuid
+  municipalityId String? @db.Uuid
   typeId String @db.Uuid
   workplaceId String? @db.Uuid
 
@@ -105,8 +100,8 @@ model Document {
 
   case Case @relation(fields: [caseId], references: [id])
   company Company? @relation(fields: [companyId], references: [id])
-  county County @relation(fields: [countyId], references: [id])
-  municipality Municipality @relation(fields: [municipalityId], references: [id])
+  county County? @relation(fields: [countyId], references: [id])
+  municipality Municipality? @relation(fields: [municipalityId], references: [id])
   type Type @relation(fields: [typeId], references: [id])
   workplace Workplace? @relation(fields: [workplaceId], references: [id])
 
@@ -180,7 +175,6 @@ model Scan {
   created DateTime  @default(now())
   updated DateTime  @default(now())
 
-  countyId String? @db.Uuid
   date DateTime? @db.Date
 
   status ScanStatus @default(PENDING)
@@ -188,11 +182,8 @@ model Scan {
   chunkCount Int
 
   chunks Chunk[]
-  county County? @relation(fields: [countyId], references: [id])
   stubs Stub[]
   ticks Tick[]
-
-  @@index([countyId, created(sort: Asc), status])
 }
 
 model Session {
