@@ -2,7 +2,6 @@ import { faBug, faCalendar, faClock } from '@fortawesome/free-solid-svg-icons'
 import { RoleName } from '@prisma/client'
 import { Relations } from 'components/Relations'
 import { ChunkIconDefinition } from 'entities/Chunk'
-import { CountyIconDefinition } from 'entities/County'
 import { ScanIconDefinition } from 'entities/Scan'
 import { StubIconDefinition } from 'entities/Stub'
 import { requireUser } from 'lib/authentication'
@@ -22,8 +21,7 @@ export default async function Document({ params }: any) {
   const scan = await prisma.scan.findFirstOrThrow({
     where: { id: params.id },
     include: {
-      county: true,
-      chunks: { include: { county: true }, orderBy: { page: 'asc' } },
+      chunks: { orderBy: { page: 'asc' } },
     },
   })
 
@@ -57,10 +55,8 @@ export default async function Document({ params }: any) {
             {
               type: 'text',
               icon: faCalendar,
-              text: 'Start date',
-              subtitle: scan.startDate
-                ?.toISOString()
-                .substring(0, 10) as string,
+              text: 'Date',
+              subtitle: scan.date?.toISOString().substring(0, 10) as string,
               show: true,
             },
 
@@ -78,14 +74,6 @@ export default async function Document({ params }: any) {
               text: 'Errors',
               subtitle: `${errorCount}`,
               show: true,
-            },
-
-            {
-              icon: CountyIconDefinition,
-              href: `/counties/${scan.county?.slug}`,
-              text: 'County',
-              subtitle: scan.county?.name as string,
-              show: !!scan.county,
             },
           ]}
         />

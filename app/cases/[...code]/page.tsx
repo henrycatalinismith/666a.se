@@ -51,18 +51,18 @@ export default async function Case({ params }: any) {
 
             {
               icon: MunicipalityIconDefinition,
-              href: `/municipalities/${c.documents[0].municipality.slug}`,
+              href: `/municipalities/${c.documents[0].municipality?.slug}`,
               text: 'Municipality',
-              subtitle: c.documents[0].municipality.name,
-              show: true,
+              subtitle: c.documents[0].municipality?.name as string,
+              show: !!c.documents[0].municipality,
             },
 
             {
               icon: CountyIconDefinition,
-              href: `/counties/${c.documents[0].county.slug}`,
+              href: `/counties/${c.documents[0].county?.slug}`,
               text: 'County',
-              subtitle: c.documents[0].county.name,
-              show: true,
+              subtitle: c.documents[0].county?.name as string,
+              show: !!c.documents[0].county,
             },
           ]}
         />

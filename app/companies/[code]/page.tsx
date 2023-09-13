@@ -1,5 +1,4 @@
 import { faTag } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { RoleName } from '@prisma/client'
 import {
   IconDefinitionList,
@@ -14,7 +13,6 @@ import { CaseIconDefinition } from 'entities/Case'
 import { CompanyIconDefinition } from 'entities/Company'
 import { requireUser } from 'lib/authentication'
 import prisma from 'lib/database'
-import { useState } from 'react'
 import { EntityList } from 'ui/EntityList'
 import { IconHeading } from 'ui/IconHeading'
 import { LittleHeading } from 'ui/LittleHeading'

@@ -18,6 +18,7 @@ export default async function Admin() {
     where: { status: ScanStatus.ONGOING },
     include: {
       chunks: { orderBy: { page: 'asc' } },
+      stubs: true,
     },
     orderBy: { created: 'desc' },
   })
@@ -52,7 +53,9 @@ export default async function Admin() {
       <NavBar />
 
       <div className="container flex flex-col gap-8">
-        {scan && <DashboardScan chunks={scan.chunks} scan={scan} />}
+        {scan && (
+          <DashboardScan chunks={scan.chunks} scan={scan} stubs={scan.stubs} />
+        )}
         {blockingError && <DashboardError error={blockingError} />}
 
         <LittleHeading>Latest Documents</LittleHeading>

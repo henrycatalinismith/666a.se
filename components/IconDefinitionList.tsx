@@ -4,7 +4,6 @@ import { IconDefinition } from '@fortawesome/fontawesome-svg-core'
 import { faFloppyDisk } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
-  ChangeEvent,
   FC,
   createContext,
   useCallback,

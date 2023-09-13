@@ -1,11 +1,8 @@
 import {
   CaseStatus,
-  Chunk,
   ChunkStatus,
   Document,
   ErrorStatus,
-  ScanStatus,
-  Stub,
   StubStatus,
   Tick,
   TickType,
@@ -36,10 +33,10 @@ type DiariumDocument = {
   companyCode: string | null
   workplaceName: string | null
   workplaceCode: string | null
-  countyName: string
-  countyCode: string
-  municipalityName: string
-  municipalityCode: string
+  countyName: string | null
+  countyCode: string | null
+  municipalityName: string | null
+  municipalityCode: string | null
 }
 
 type DiariumSearchParameter =
@@ -89,16 +86,6 @@ export async function createTick(): Promise<Tick> {
     where: { status: { in: [ChunkStatus.PENDING, ChunkStatus.ONGOING] } },
     orderBy: { created: 'asc' },
   })
-
-  const county =
-    (await prisma.county.findFirst({
-      where: { ticked: null },
-      orderBy: { name: 'asc' },
-    })) ??
-    (await prisma.county.findFirstOrThrow({
-      where: { ticked: { not: null } },
-      orderBy: { ticked: 'asc' },
-    }))
 
   let tick
   if (stub) {
@@ -164,8 +151,8 @@ async function tickChunk(chunkId: string): Promise<Tick> {
 
   try {
     await prisma.$transaction(
-      async (tx) => {
-        await ingestChunk(chunkId, tx)
+      async () => {
+        // await ingestChunk(chunkId, tx)
       },
       {
         timeout: 15000,
@@ -187,48 +174,6 @@ async function tickChunk(chunkId: string): Promise<Tick> {
   }
 
   return tick
-}
-
-export async function ingestChunk(
-  chunkId: string,
-  tx: Transaction
-): Promise<Chunk> {
-  const chunk = await tx.chunk.findFirstOrThrow({
-    where: { id: chunkId },
-    include: { county: true },
-  })
-
-  console.log(`[ingestChunk]: ${chunkId} ${chunk.county?.name}`)
-
-  const result = await searchDiarium({
-    SelectedCounty: chunk.county?.code,
-    sortDirection: 'Asc',
-    sortOrder: 'Dokumentdatum',
-    page: chunk.page,
-  })
-
-  console.log(
-    `[ingestChunk]: ${chunk.id} ${result.rows.length} ${result.hitCount}`
-  )
-
-  const stubs = await createStubs(chunk.id, result, tx)
-  const startDate = chunk.startDate ?? stubs[0].documentDate
-
-  await tx.scan.update({
-    where: { id: chunk.scanId },
-    data: { status: ScanStatus.ONGOING },
-  })
-
-  return await updateChunk(
-    chunk.id,
-    {
-      hitCount: result.hitCount,
-      startDate,
-      stubCount: stubs.length,
-      status: ChunkStatus.ONGOING,
-    },
-    tx
-  )
 }
 
 async function ingestStub(stubId: string, tx: Transaction): Promise<void> {
@@ -258,59 +203,6 @@ async function ingestStub(stubId: string, tx: Transaction): Promise<void> {
       data: { status: ChunkStatus.SUCCESS, updated: new Date() },
     })
   }
-}
-
-async function createStubs(
-  chunkId: string,
-  searchResult: DiariumSearchResult,
-  tx: Transaction
-): Promise<Stub[]> {
-  const chunk = await tx.chunk.findFirstOrThrow({ where: { id: chunkId } })
-
-  // When turning a search result into stubs, it's possible some of the result
-  // rows may correspond to already-ingested documents. Creating a stub when a
-  // document has already been ingested means wasting a request reingesting the
-  // same document twice. Filtering out existing documents here avoids this.
-  const documents = await tx.document.findMany({
-    where: {
-      code: {
-        in: searchResult.rows.map((r) => r.documentCode),
-      },
-    },
-  })
-  const documentCodes = documents.map((d) => d.code)
-  const newDocuments = searchResult.rows.filter((row) => {
-    return !documentCodes.includes(row.documentCode)
-  })
-
-  const now = new Date()
-
-  await tx.stub.createMany({
-    data: newDocuments.map((row, index) => ({
-      chunkId: chunk.id,
-      scanId: chunk.scanId,
-      countyId: chunk.countyId,
-      index,
-      status: StubStatus.PENDING,
-      caseName: row.caseName,
-      documentCode: row.documentCode,
-      documentDate: new Date(row.documentDate),
-      documentType: row.documentType,
-      companyName: row.companyName,
-      created: now,
-      updated: now,
-    })),
-  })
-
-  // TODO: update chunk.stubCount
-
-  return await tx.stub.findMany({
-    where: {
-      chunkId: chunk.id,
-      index: 0,
-    },
-    orderBy: { index: 'asc' },
-  })
 }
 
 export async function createDocument(
@@ -397,12 +289,16 @@ export async function createDocument(
     }
   }
 
-  const county = await tx.county.findFirstOrThrow({
-    where: { code: diariumDocument.countyCode },
-  })
-  const municipality = await tx.municipality.findFirstOrThrow({
-    where: { code: diariumDocument.municipalityCode },
-  })
+  const county = diariumDocument.countyCode
+    ? await tx.county.findFirstOrThrow({
+        where: { code: diariumDocument.countyCode },
+      })
+    : null
+  const municipality = diariumDocument.municipalityCode
+    ? await tx.municipality.findFirstOrThrow({
+        where: { code: diariumDocument.municipalityCode },
+      })
+    : null
 
   const type = await tx.type.findFirstOrThrow({
     where: {
@@ -414,8 +310,8 @@ export async function createDocument(
     data: {
       caseId: caseId!,
       companyId,
-      countyId: county.id,
-      municipalityId: municipality.id,
+      countyId: county?.id,
+      municipalityId: municipality?.id,
       typeId: type.id,
       workplaceId: workplaceId,
       code: diariumDocument.documentCode,
@@ -426,60 +322,6 @@ export async function createDocument(
   })
 
   return d
-}
-
-async function updateChunk(
-  id: string,
-  data: Partial<Chunk>,
-  tx: Transaction
-): Promise<Chunk> {
-  const before = await tx.chunk.findFirstOrThrow({
-    where: { id },
-  })
-
-  const after = await tx.chunk.update({
-    where: { id },
-    data: {
-      ...data,
-      updated: new Date(),
-    },
-  })
-
-  if (
-    before.startDate === null &&
-    after.startDate !== null &&
-    before.page === 1
-  ) {
-    await tx.scan.update({
-      where: { id: before.scanId },
-      data: { startDate: after.startDate, updated: new Date() },
-    })
-  }
-
-  // Each time a chunk is ingested there's a chance it's the last missing chunk
-  // within its scan. After the final chunk for a scan is ingested, the scan is
-  // marked as completed.
-  if (
-    before.status === ChunkStatus.ONGOING &&
-    after.status === ChunkStatus.SUCCESS
-  ) {
-    const uningestedSiblings = await tx.chunk.count({
-      where: {
-        scanId: before.scanId,
-        status: {
-          in: [ChunkStatus.PENDING, ChunkStatus.ONGOING, ChunkStatus.ABORTED],
-        },
-      },
-    })
-    if (uningestedSiblings === 0) {
-      await tx.scan.update({
-        where: { id: before.scanId },
-        data: { status: ScanStatus.SUCCESS, updated: new Date() },
-      })
-    }
-  }
-
-  return after
 }
 
 export async function searchDiarium(
@@ -538,6 +380,8 @@ export async function fetchDocument(code: string): Promise<DiariumDocument> {
     const organisationSaknas = dd[5].innerHTML.trim() === 'Saknas'
     const workplaceNameSaknas = dd[7].innerHTML.trim() === 'Saknas'
     const workplaceCodeSaknas = dd[7].innerHTML.trim() === 'Saknas'
+    const countySaknas = dd[8].innerHTML.trim() === 'Saknas'
+    const municipalitySaknas = dd[9].innerHTML.trim() === 'Saknas'
 
     return {
       caseCode: dd[0].innerHTML,
@@ -551,10 +395,18 @@ export async function fetchDocument(code: string): Promise<DiariumDocument> {
       companyCode: organisationSaknas ? null : organisationMatches![2],
       workplaceName: workplaceNameSaknas ? null : dd[7].innerHTML.trim(),
       workplaceCode: workplaceCodeSaknas ? null : dd[6].innerHTML.trim(),
-      countyName: dd[8].innerHTML.match(/^(.+?) \((\d\d)\)/)![1],
-      countyCode: dd[8].innerHTML.match(/^(.+?) \((\d\d)\)/)![2],
-      municipalityName: dd[9].innerHTML.match(/^(.+?) \((\d{4})\)/)![1],
-      municipalityCode: dd[9].innerHTML.match(/^(.+?) \((\d{4})\)/)![2],
+      countyName: countySaknas
+        ? null
+        : dd[8].innerHTML.match(/^(.+?) \((\d\d)\)/)![1],
+      countyCode: countySaknas
+        ? null
+        : dd[8].innerHTML.match(/^(.+?) \((\d\d)\)/)![2],
+      municipalityName: municipalitySaknas
+        ? null
+        : dd[9].innerHTML.match(/^(.+?) \((\d{4})\)/)![1],
+      municipalityCode: municipalitySaknas
+        ? null
+        : dd[9].innerHTML.match(/^(.+?) \((\d{4})\)/)![2],
     }
   })
 

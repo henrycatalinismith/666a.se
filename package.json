@@ -17,7 +17,6 @@
     "next:lint": "next lint",
     "postinstall": "prisma generate",
     "scan:create": "yarn ts-node -r dotenv/config tasks/scan:create.ts",
-    "scan:county": "yarn ts-node -r dotenv/config tasks/scan:county.ts",
     "status:import": "yarn ts-node -r dotenv/config tasks/status:import.ts",
     "stub:ingest": "yarn ts-node -r dotenv/config tasks/stub:ingest.ts",
     "subscription:create": "yarn ts-node -r dotenv/config tasks/subscription:create.ts",

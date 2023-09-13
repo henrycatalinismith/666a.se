@@ -2,7 +2,6 @@ import { faCalendar } from '@fortawesome/free-solid-svg-icons'
 import { RoleName } from '@prisma/client'
 import { Relations } from 'components/Relations'
 import { ChunkIconDefinition } from 'entities/Chunk'
-import { CountyIconDefinition } from 'entities/County'
 import { ScanIconDefinition } from 'entities/Scan'
 import { StubIconDefinition } from 'entities/Stub'
 import { requireUser } from 'lib/authentication'
@@ -20,8 +19,7 @@ export default async function Document({ params }: any) {
   const chunk = await prisma.chunk.findFirstOrThrow({
     where: { id: params.id },
     include: {
-      county: true,
-      scan: { include: { county: true } },
+      scan: true,
       stubs: { include: { document: true } },
     },
   })
@@ -53,14 +51,6 @@ export default async function Document({ params }: any) {
               text: 'Scan',
               subtitle: chunk.scan.id,
               show: true,
-            },
-
-            {
-              icon: CountyIconDefinition,
-              href: `/counties/${chunk.county?.slug}`,
-              text: 'County',
-              subtitle: chunk.county?.name as string,
-              show: !!chunk.county,
             },
           ]}
         />
