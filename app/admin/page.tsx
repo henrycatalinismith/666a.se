@@ -17,17 +17,10 @@ export default async function Admin() {
   const scan = await prisma.scan.findFirst({
     where: { status: ScanStatus.ONGOING },
     include: {
-      county: true,
-      chunks: { include: { county: true }, orderBy: { page: 'asc' } },
+      chunks: { orderBy: { page: 'asc' } },
     },
     orderBy: { created: 'desc' },
   })
-
-  // const subscriptions = await prisma.subscription.findMany({
-
-  //   where: { userId: user.id },
-  //   include: { company: true },
-  // })
 
   const documents = await prisma.document.findMany({
     orderBy: { created: 'desc' },
@@ -59,13 +52,7 @@ export default async function Admin() {
       <NavBar />
 
       <div className="container flex flex-col gap-8">
-        {scan && (
-          <DashboardScan
-            chunks={scan.chunks}
-            county={scan.county}
-            scan={scan}
-          />
-        )}
+        {scan && <DashboardScan chunks={scan.chunks} scan={scan} />}
         {blockingError && <DashboardError error={blockingError} />}
 
         <LittleHeading>Latest Documents</LittleHeading>

@@ -50,6 +50,8 @@ type DiariumSearchParameter =
   | 'OnlyActive'
   | 'SelectedCounty'
   | 'ShowToolbar'
+  | 'FromDate'
+  | 'ToDate'
   | 'page'
 
 type DiariumSearchQuery = Partial<Record<DiariumSearchParameter, any>>
@@ -98,11 +100,14 @@ export async function createTick(): Promise<Tick> {
       orderBy: { ticked: 'asc' },
     }))
 
-  const tick = stub
-    ? await tickStub(stub.id)
-    : chunk
-    ? await tickChunk(chunk.id)
-    : await tickScan(county.id)
+  let tick
+  if (stub) {
+    tick = await tickStub(stub.id)
+  } else if (chunk) {
+    tick = await tickChunk(chunk.id)
+  } else {
+    throw new Error('idk')
+  }
 
   return tick
 }
@@ -184,159 +189,19 @@ async function tickChunk(chunkId: string): Promise<Tick> {
   return tick
 }
 
-async function tickScan(countyId: string): Promise<Tick> {
-  const tick = await prisma.tick.create({
-    data: {
-      type: TickType.SCAN,
-    },
-  })
-
-  try {
-    await prisma.$transaction(
-      async (tx) => {
-        const incompleteScan = await prisma.scan.findFirst({
-          where: {
-            countyId: countyId,
-            status: { in: [ScanStatus.PENDING, ScanStatus.ONGOING] },
-          },
-        })
-
-        if (incompleteScan) {
-          throw new Error('Cannot initiate new scan while one is ongoing')
-        }
-
-        await prisma.scan.updateMany({
-          data: { status: ScanStatus.SUCCESS },
-          where: { status: ScanStatus.ONGOING },
-        })
-
-        const newestStub = await prisma.stub.findFirst({
-          where: {
-            countyId: countyId,
-          },
-          orderBy: {
-            documentDate: 'desc',
-          },
-        })
-
-        const newestDocument = await prisma.document.findFirst({
-          where: {
-            countyId: countyId,
-          },
-          orderBy: {
-            date: 'desc',
-          },
-        })
-
-        const newestDate =
-          newestStub?.documentDate || newestDocument?.date || null
-
-        const scan = await tx.scan.create({
-          data: {
-            countyId: countyId,
-            chunkCount: 0,
-            startDate: newestDate,
-            status: ScanStatus.PENDING,
-          },
-        })
-
-        await tx.tick.update({
-          data: { scanId: scan.id },
-          where: { id: tick.id },
-        })
-
-        await tx.county.update({
-          data: { ticked: new Date() },
-          where: { id: countyId },
-        })
-
-        const stubsPerChunk = 10
-
-        const pendingChunk = await tx.chunk.create({
-          data: {
-            status: ChunkStatus.ONGOING,
-            scanId: scan.id,
-            countyId: scan.countyId,
-            startDate: scan.startDate,
-            stubCount: null,
-            page: 1,
-          },
-        })
-
-        await tx.scan.update({
-          where: { id: scan.id },
-          data: { chunkCount: { increment: 1 } },
-        })
-
-        const ingestedChunk = await ingestChunk(pendingChunk.id, tx)
-        console.log(ingestedChunk.hitCount)
-
-        const limitedResult = ingestedChunk!.hitCount!.match(
-          /^Visar (\d+) av (\d+) träffar$/
-        )
-        const fullResult = ingestedChunk!.hitCount!.match(/^(\d+) träffar$/)
-        let targetStubCount = 0
-
-        if (limitedResult) {
-          targetStubCount = parseInt(limitedResult[1], 10) - stubsPerChunk
-        } else if (fullResult) {
-          targetStubCount = parseInt(fullResult[1], 10) - stubsPerChunk
-        } else {
-          throw new Error(
-            `Unsupported hit count pattern ${ingestedChunk.hitCount}`
-          )
-        }
-
-        const targetChunkCount = targetStubCount / stubsPerChunk
-
-        const projectChunkResult = await tx.chunk.createMany({
-          data: _.times(targetChunkCount, (index) => ({
-            status: ChunkStatus.PENDING,
-            scanId: scan.id,
-            countyId: scan.countyId,
-            startDate: scan.startDate,
-            page: index + 2,
-            stubCount: null,
-          })),
-        })
-
-        await tx.scan.update({
-          where: { id: scan.id },
-          data: { chunkCount: { increment: projectChunkResult.count } },
-        })
-      },
-      {
-        timeout: 15000,
-      }
-    )
-  } catch (e) {
-    const error = await prisma.error.create({
-      data: {
-        status: ErrorStatus.BLOCKING,
-        code: (e as any).code,
-        message: (e as any).message,
-        stack: (e as any).stack,
-      },
-    })
-    await prisma.tick.update({
-      where: { id: tick.id },
-      data: { errorId: error.id },
-    })
-  }
-
-  return tick
-}
-
-async function ingestChunk(chunkId: string, tx: Transaction): Promise<Chunk> {
+export async function ingestChunk(
+  chunkId: string,
+  tx: Transaction
+): Promise<Chunk> {
   const chunk = await tx.chunk.findFirstOrThrow({
     where: { id: chunkId },
     include: { county: true },
   })
 
-  console.log(`[ingestChunk]: ${chunkId} ${chunk.county.name}`)
+  console.log(`[ingestChunk]: ${chunkId} ${chunk.county?.name}`)
 
   const result = await searchDiarium({
-    SelectedCounty: chunk.county.code,
+    SelectedCounty: chunk.county?.code,
     sortDirection: 'Asc',
     sortOrder: 'Dokumentdatum',
     page: chunk.page,
@@ -383,7 +248,7 @@ async function ingestStub(stubId: string, tx: Transaction): Promise<void> {
     where: {
       chunkId: stub.chunkId,
       status: {
-        in: [StubStatus.PENDING, StubStatus.FAILURE],
+        in: [StubStatus.PENDING, StubStatus.ABORTED],
       },
     },
   })
@@ -448,7 +313,7 @@ async function createStubs(
   })
 }
 
-async function createDocument(
+export async function createDocument(
   diariumDocument: DiariumDocument,
   tx: Transaction
 ): Promise<Document> {
@@ -602,7 +467,7 @@ async function updateChunk(
       where: {
         scanId: before.scanId,
         status: {
-          in: [ChunkStatus.PENDING, ChunkStatus.ONGOING, ChunkStatus.FAILURE],
+          in: [ChunkStatus.PENDING, ChunkStatus.ONGOING, ChunkStatus.ABORTED],
         },
       },
     })
@@ -617,7 +482,7 @@ async function updateChunk(
   return after
 }
 
-async function searchDiarium(
+export async function searchDiarium(
   query: DiariumSearchQuery
 ): Promise<DiariumSearchResult> {
   const browser = await launchBrowser()
@@ -629,6 +494,7 @@ async function searchDiarium(
   _.mapValues(query, (v, k) => {
     url.searchParams.set(k, v)
   })
+  console.log(url.toString())
   await page.goto(url.toString())
 
   const result: DiariumSearchResult = {
@@ -654,7 +520,7 @@ async function searchDiarium(
   return result
 }
 
-async function fetchDocument(code: string): Promise<DiariumDocument> {
+export async function fetchDocument(code: string): Promise<DiariumDocument> {
   const browser = await launchBrowser()
   const page = await browser.newPage()
   const url = new URL(

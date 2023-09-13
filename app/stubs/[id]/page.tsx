@@ -88,10 +88,10 @@ export default async function Document({ params }: any) {
 
             {
               icon: CountyIconDefinition,
-              href: `/counties/${stub.scan.county.slug}`,
+              href: `/counties/${stub.scan.county?.slug}`,
               text: 'County',
-              subtitle: stub.scan.county.name,
-              show: true,
+              subtitle: stub.scan.county?.name as string,
+              show: !!stub.scan.county,
             },
           ]}
         />
