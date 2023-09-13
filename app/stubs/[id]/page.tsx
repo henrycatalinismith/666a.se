@@ -2,7 +2,6 @@ import { faCalendar, faFlag, faTag } from '@fortawesome/free-solid-svg-icons'
 import { RoleName } from '@prisma/client'
 import { Relations } from 'components/Relations'
 import { ChunkIconDefinition } from 'entities/Chunk'
-import { CountyIconDefinition } from 'entities/County'
 import { DocumentIconDefinition } from 'entities/Document'
 import { ScanIconDefinition } from 'entities/Scan'
 import { StubIconDefinition } from 'entities/Stub'
@@ -20,8 +19,8 @@ export default async function Document({ params }: any) {
     where: { id: params.id },
     include: {
       document: { include: { type: true } },
-      chunk: { include: { county: true } },
-      scan: { include: { county: true } },
+      chunk: true,
+      scan: true,
     },
   })
 
@@ -84,14 +83,6 @@ export default async function Document({ params }: any) {
               text: 'Scan',
               subtitle: stub.scan.id,
               show: true,
-            },
-
-            {
-              icon: CountyIconDefinition,
-              href: `/counties/${stub.scan.county?.slug}`,
-              text: 'County',
-              subtitle: stub.scan.county?.name as string,
-              show: !!stub.scan.county,
             },
           ]}
         />

@@ -91,18 +91,18 @@ export default async function Document({ params }: any) {
 
             {
               icon: MunicipalityIconDefinition,
-              href: `/municipalities/${document.municipality.slug}`,
+              href: `/municipalities/${document.municipality?.slug}`,
               text: 'Municipality',
-              subtitle: document.municipality.name,
-              show: true,
+              subtitle: document.municipality?.name as string,
+              show: !!document.municipality,
             },
 
             {
               icon: CountyIconDefinition,
-              href: `/counties/${document.county.slug}`,
+              href: `/counties/${document.county?.slug}`,
               text: 'County',
-              subtitle: document.county.name,
-              show: true,
+              subtitle: document.county?.name as string,
+              show: !!document.county,
             },
 
             {
