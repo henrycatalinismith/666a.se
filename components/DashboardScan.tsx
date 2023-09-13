@@ -1,6 +1,6 @@
 'use client'
 
-import { Chunk, County, Scan } from '@prisma/client'
+import { Chunk, Scan } from '@prisma/client'
 import { ScanIcon } from 'entities/Scan'
 import _ from 'lodash'
 import Link from 'next/link'
@@ -10,15 +10,10 @@ import { Progress } from 'ui/Progress'
 
 export type DashboardScanProps = {
   chunks: Chunk[]
-  county: County
   scan: Scan
 }
 
-export const DashboardScan: FC<DashboardScanProps> = ({
-  chunks,
-  county,
-  scan,
-}) => {
+export const DashboardScan: FC<DashboardScanProps> = ({ chunks, scan }) => {
   const progress =
     (_.filter(chunks, { status: 'SUCCESS' }).length / chunks.length) * 100
 
@@ -33,9 +28,7 @@ export const DashboardScan: FC<DashboardScanProps> = ({
         </Link>
         <div className="flex flex-col min-w-0 flex-1">
           <p className="text-1xl whitespace-nowrap overflow-hidden text-ellipsis">
-            {`${county!.name} ${scan.startDate
-              ?.toISOString()
-              .substring(0, 10)}`}
+            {`${scan.startDate?.toISOString().substring(0, 10)}`}
           </p>
           <Progress value={progress} className="w-full" />
         </div>

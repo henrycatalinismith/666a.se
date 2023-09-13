@@ -32,7 +32,7 @@ enum ChunkStatus {
   PENDING
   ONGOING
   SUCCESS
-  FAILURE
+  ABORTED
 }
 
 model Chunk {
@@ -40,7 +40,7 @@ model Chunk {
   created DateTime  @default(now())
   updated DateTime  @default(now())
 
-  countyId String @db.Uuid
+  countyId String? @db.Uuid
   scanId String @db.Uuid
 
   status ChunkStatus @default(PENDING)
@@ -49,7 +49,7 @@ model Chunk {
   stubCount  Int?
   hitCount String?
 
-  county County @relation(fields: [countyId], references: [id])
+  county County? @relation(fields: [countyId], references: [id])
   scan Scan @relation(fields: [scanId], references: [id])
   stubs Stub[]
   ticks Tick[]
@@ -84,7 +84,6 @@ model County {
   municipalities Municipality[]
   scans Scan[]
   chunks Chunk[]
-  stubs Stub[]
 }
 
 model Document {
@@ -173,7 +172,7 @@ enum ScanStatus {
   PENDING
   ONGOING
   SUCCESS
-  FAILURE
+  ABORTED
 }
 
 model Scan {
@@ -181,14 +180,15 @@ model Scan {
   created DateTime  @default(now())
   updated DateTime  @default(now())
 
-  countyId String @db.Uuid
+  countyId String? @db.Uuid
+  date DateTime? @db.Date
 
   status ScanStatus @default(PENDING)
   startDate  DateTime? @db.Date
   chunkCount Int
 
   chunks Chunk[]
-  county County @relation(fields: [countyId], references: [id])
+  county County? @relation(fields: [countyId], references: [id])
   stubs Stub[]
   ticks Tick[]
 
@@ -210,7 +210,7 @@ model Session {
 enum StubStatus {
   PENDING
   SUCCESS
-  FAILURE
+  ABORTED
 }
 
 model Stub {
@@ -219,7 +219,6 @@ model Stub {
   updated DateTime @default(now())
 
   chunkId String @db.Uuid
-  countyId String @db.Uuid
   scanId String @db.Uuid
   documentId String? @db.Uuid
 
@@ -232,7 +231,6 @@ model Stub {
   documentDate DateTime @db.Date
 
   chunk Chunk @relation(fields: [chunkId], references: [id])
-  county County @relation(fields: [countyId], references: [id])
   scan Scan @relation(fields: [scanId], references: [id])
   document Document? @relation(fields: [documentId], references: [id])
   ticks Tick[]

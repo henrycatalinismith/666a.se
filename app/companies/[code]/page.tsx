@@ -1,10 +1,20 @@
 import { faTag } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { RoleName } from '@prisma/client'
+import {
+  IconDefinitionList,
+  IconDefinitionListDefinition,
+  IconDefinitionListIcon,
+  IconDefinitionListItem,
+  IconDefinitionListRow,
+  IconDefinitionListTerm,
+} from 'components/IconDefinitionList'
 import { Relations } from 'components/Relations'
 import { CaseIconDefinition } from 'entities/Case'
 import { CompanyIconDefinition } from 'entities/Company'
 import { requireUser } from 'lib/authentication'
 import prisma from 'lib/database'
+import { useState } from 'react'
 import { EntityList } from 'ui/EntityList'
 import { IconHeading } from 'ui/IconHeading'
 import { LittleHeading } from 'ui/LittleHeading'
@@ -31,6 +41,18 @@ export default async function Company({ params }: any) {
           title="Company"
           subtitle={company.code}
         />
+
+        <IconDefinitionList>
+          <IconDefinitionListRow editable>
+            <IconDefinitionListIcon icon={faTag} />
+            <IconDefinitionListItem>
+              <IconDefinitionListTerm>Name</IconDefinitionListTerm>
+              <IconDefinitionListDefinition>
+                {company.name}
+              </IconDefinitionListDefinition>
+            </IconDefinitionListItem>
+          </IconDefinitionListRow>
+        </IconDefinitionList>
 
         <Relations
           rows={[
