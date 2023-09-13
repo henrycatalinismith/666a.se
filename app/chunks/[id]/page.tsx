@@ -57,10 +57,10 @@ export default async function Document({ params }: any) {
 
             {
               icon: CountyIconDefinition,
-              href: `/counties/${chunk.county.slug}`,
+              href: `/counties/${chunk.county?.slug}`,
               text: 'County',
-              subtitle: chunk.county.name,
-              show: true,
+              subtitle: chunk.county?.name as string,
+              show: !!chunk.county,
             },
           ]}
         />
