@@ -13,9 +13,19 @@ import {
   useState,
 } from 'react'
 
-const EditableContext = createContext(false)
-const EditingContext = createContext(false)
-const SetEditingContext = createContext<(e: boolean) => void>(() => {})
+type RowState = {
+  ui: RowUiState
+  value: string
+}
+type RowUiState = 'uneditable' | 'editable' | 'editing'
+type RowActionType = 'edit' | 'change' | 'save'
+type RowAction = { type: RowActionType } | { type: 'change'; payload: string }
+type RowDispatch = (action: RowAction) => void
+
+const RowContext = createContext<[RowState, RowDispatch]>([
+  { ui: 'uneditable', value: '' },
+  () => {},
+])
 
 export const IconDefinitionList: FC<{ children: any }> = ({ children }) => {
   return (
@@ -28,18 +38,40 @@ export const IconDefinitionList: FC<{ children: any }> = ({ children }) => {
 export const IconDefinitionListRow: FC<{
   children: any
   editable?: boolean
-}> = ({ children, editable }) => {
-  const [editing, setEditing] = useState(false)
+  onSave: (v: any) => void
+}> = ({ children, editable, onSave }) => {
+  const [rowState, setRowState] = useState<RowState>({
+    ui: editable ? 'editable' : 'uneditable',
+    value: '',
+  })
+
+  const dispatch = useCallback(
+    (action: RowAction) => {
+      if (rowState.ui === 'uneditable') {
+        return
+      }
+      if (action.type === 'edit') {
+        setRowState({ ...rowState, ui: 'editing' })
+        return
+      }
+      if (action.type === 'change') {
+        setRowState({ ...rowState, value: (action as any).payload })
+        return
+      }
+      if (action.type === 'save') {
+        onSave(rowState.value)
+        setRowState({ ...rowState, ui: 'editable' })
+        return
+      }
+    },
+    [onSave, rowState]
+  )
   return (
     <>
       <div className="flex flex-row gap-2">
-        <EditableContext.Provider value={editable ?? false}>
-          <EditingContext.Provider value={editing}>
-            <SetEditingContext.Provider value={(e: boolean) => setEditing(e)}>
-              {children}
-            </SetEditingContext.Provider>
-          </EditingContext.Provider>
-        </EditableContext.Provider>
+        <RowContext.Provider value={[rowState, dispatch]}>
+          {children}
+        </RowContext.Provider>
       </div>
     </>
   )
@@ -48,15 +80,19 @@ export const IconDefinitionListRow: FC<{
 export const IconDefinitionListIcon: FC<{ icon: IconDefinition }> = ({
   icon,
 }) => {
-  const editable = useContext(EditableContext)
-  const editing = useContext(EditingContext)
-  const setEditing = useContext(SetEditingContext)
-  const onClick = () => setEditing(!editing)
-  const displayIcon = editing ? faFloppyDisk : icon
+  const [state, dispatch] = useContext(RowContext)
+  const displayIcon = state.ui === 'editing' ? faFloppyDisk : icon
+  const onClick = useCallback(() => {
+    if (state.ui === 'editable') {
+      dispatch({ type: 'edit' })
+    } else if (state.ui === 'editing') {
+      dispatch({ type: 'save' })
+    }
+  }, [dispatch, state])
   return (
     <>
       <div className="flex min-w-[4rem] w-16 justify-center items-center">
-        {editable ? (
+        {['editable', 'editing'].includes(state.ui) ? (
           <button onClick={onClick}>
             <FontAwesomeIcon icon={displayIcon} className="h-8" />
           </button>
@@ -89,27 +125,32 @@ export const IconDefinitionListTerm: FC<{ children: any }> = ({ children }) => {
 export const IconDefinitionListDefinition: FC<{ children: any }> = ({
   children,
 }) => {
-  const editing = useContext(EditingContext)
+  const [state, dispatch] = useContext(RowContext)
   const input = useRef<HTMLInputElement>(null)
   const [value, setValue] = useState(children)
 
   useEffect(() => {
-    if (editing && input.current) {
+    if (state.ui === 'editing' && input.current) {
       input.current.focus()
     }
-  }, [editing])
+  }, [state])
 
-  const onChange = useCallback((event: React.FormEvent<HTMLInputElement>) => {
-    setValue(event.currentTarget.value)
-  }, [])
+  const onChange = useCallback(
+    (event: React.FormEvent<HTMLInputElement>) => {
+      dispatch({ type: 'change', payload: event.currentTarget.value })
+      setValue(event.currentTarget.value)
+    },
+    [dispatch]
+  )
+  console.log(state)
 
   return (
     <>
-      {editing ? (
+      {state.ui === 'editing' ? (
         <input type="text" value={value} ref={input} onChange={onChange} />
       ) : (
         <span className="font-bold whitespace-nowrap overflow-hidden text-ellipsis">
-          {children}
+          {state.value ? state.value : children}
         </span>
       )}
     </>
