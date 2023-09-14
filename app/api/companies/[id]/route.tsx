@@ -1,4 +1,4 @@
-import { ErrorStatus, RoleName } from '@prisma/client'
+import { RoleName } from '@prisma/client'
 import { requireUser } from 'lib/authentication'
 import prisma from 'lib/database'
 import { NextResponse } from 'next/server'
