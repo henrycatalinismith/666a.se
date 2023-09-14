@@ -1,12 +1,12 @@
-import { ErrorStatus, RoleName, ScanStatus } from '@prisma/client'
-import { DashboardError } from 'components/DashboardError'
-import { DashboardScan } from 'components/DashboardScan'
-import { DocumentIconDefinition } from 'entities/Document'
+import { RoleName } from '@prisma/client'
+import { CountyIconDefinition } from 'entities/County'
+import { DayIconDefinition } from 'entities/Day'
+import { MunicipalityIconDefinition } from 'entities/Municipality'
+import { TypeIconDefinition } from 'entities/Type'
+import { UserIconDefinition } from 'entities/User'
 import { requireUser } from 'lib/authentication'
 import prisma from 'lib/database'
 import { EntityList } from 'ui/EntityList'
-import { LittleHeading } from 'ui/LittleHeading'
-import NavBar from 'ui/NavBar'
 
 export default async function Admin() {
   const user = await requireUser([RoleName.DEVELOPER])
@@ -14,59 +14,57 @@ export default async function Admin() {
     return <></>
   }
 
-  const scan = await prisma.scan.findFirst({
-    where: { status: ScanStatus.ONGOING },
-    include: {
-      chunks: { orderBy: { page: 'asc' } },
-      stubs: true,
-    },
-    orderBy: { created: 'desc' },
-  })
-
-  const documents = await prisma.document.findMany({
-    orderBy: { created: 'desc' },
-    take: 4,
-    include: { case: true, company: true, type: true },
-  })
-
-  const blockingError = await prisma.error.findFirst({
-    where: { status: ErrorStatus.BLOCKING },
-  })
-
-  // const notifications = await findNewNotificationsByUserId({
-  //   user_id: session!.user.id as any as number,
-  // })
-
-  // const documents = await Promise.all(
-  // notifications.map((n) => findDocumentById({ id: n.target_id }))
-  // )
-  // const documentsById = _.keyBy(documents, 'id')
-
-  // this is shit. kysely is terrible for joins
-  // const newd = await findDocumentsByIdWithCaseAndCompany({
-  // ids: _.map(notifications, 'target_id'),
-  // })
-  // console.log(newd)
+  const counties = await prisma.county.count()
+  const days = await prisma.day.count()
+  const municipalities = await prisma.municipality.count()
+  const types = await prisma.type.count()
+  const users = await prisma.user.count()
 
   return (
     <>
-      <NavBar />
-
-      <div className="container flex flex-col gap-8">
-        {scan && (
-          <DashboardScan chunks={scan.chunks} scan={scan} stubs={scan.stubs} />
-        )}
-        {blockingError && <DashboardError error={blockingError} />}
-
-        <LittleHeading>Latest Documents</LittleHeading>
+      <div className="container flex flex-col gap-8 pt-8">
         <EntityList
-          items={documents.map((document) => ({
-            icon: DocumentIconDefinition,
-            href: `/documents/${document.code}`,
-            text: document.type.name,
-            subtitle: document.date.toISOString().substring(0, 10),
-            show: true,
-          }))}
+          items={[
+            {
+              icon: CountyIconDefinition,
+              text: 'Counties',
+              subtitle: `${counties}`,
+              href: '/admin/counties',
+              show: true,
+            },
+
+            {
+              icon: DayIconDefinition,
+              text: 'Days',
+              subtitle: `${days}`,
+              href: '/admin/days',
+              show: true,
+            },
+
+            {
+              icon: MunicipalityIconDefinition,
+              text: 'Municipalities',
+              subtitle: `${municipalities}`,
+              href: '/admin/municipalities',
+              show: true,
+            },
+
+            {
+              icon: TypeIconDefinition,
+              text: 'Types',
+              subtitle: `${types}`,
+              href: '/admin/types',
+              show: true,
+            },
+
+            {
+              icon: UserIconDefinition,
+              text: 'Users',
+              subtitle: `${users}`,
+              href: '/admin/users',
+              show: true,
+            },
+          ]}
         />
       </div>
     </>
