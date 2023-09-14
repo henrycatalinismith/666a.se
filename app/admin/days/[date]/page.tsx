@@ -25,6 +25,10 @@ export default async function Day({ params }: any) {
     where: { date: day.date },
   })
 
+  const stubCount = await prisma.stub.count({
+    where: { chunkId: { in: _.map(day.chunks, 'id') } },
+  })
+
   return (
     <>
       <div className="container flex flex-col pt-8 gap-2">
@@ -41,6 +45,14 @@ export default async function Day({ params }: any) {
               icon: faHashtag,
               text: 'Documents',
               subtitle: `${documentCount}`,
+              show: true,
+            },
+
+            {
+              type: 'text',
+              icon: faHashtag,
+              text: 'Stubs',
+              subtitle: `${stubCount}`,
               show: true,
             },
 

@@ -30,7 +30,7 @@ import { searchDiarium } from '../lib/diarium'
       const stubsPerChunk = 10
       let targetStubCount = 0
       if (fullResult) {
-        targetStubCount = parseInt(fullResult[1], 10) - stubsPerChunk
+        targetStubCount = parseInt(fullResult[1], 10)
       }
       const targetChunkCount = targetStubCount / stubsPerChunk
 

@@ -73,6 +73,14 @@ export default async function Document({ params }: any) {
 
             {
               type: 'text',
+              icon: faHashtag,
+              text: 'Hit Count',
+              subtitle: `${chunk.hitCount}`,
+              show: true,
+            },
+
+            {
+              type: 'text',
               icon: faGears,
               text: 'Status',
               subtitle: `${chunk.status}`,
