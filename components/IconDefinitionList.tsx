@@ -142,7 +142,6 @@ export const IconDefinitionListDefinition: FC<{ children: any }> = ({
     },
     [dispatch]
   )
-  console.log(state)
 
   return (
     <>
