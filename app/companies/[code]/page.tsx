@@ -1,5 +1,6 @@
 import { faTag } from '@fortawesome/free-solid-svg-icons'
 import { RoleName } from '@prisma/client'
+import { CompanyName } from 'components/CompanyName'
 import {
   IconDefinitionList,
   IconDefinitionListDefinition,
@@ -41,28 +42,8 @@ export default async function Company({ params }: any) {
         />
 
         <IconDefinitionList>
-          <IconDefinitionListRow editable>
-            <IconDefinitionListIcon icon={faTag} />
-            <IconDefinitionListItem>
-              <IconDefinitionListTerm>Name</IconDefinitionListTerm>
-              <IconDefinitionListDefinition>
-                {company.name}
-              </IconDefinitionListDefinition>
-            </IconDefinitionListItem>
-          </IconDefinitionListRow>
+          <CompanyName company={company} />
         </IconDefinitionList>
-
-        <Relations
-          rows={[
-            {
-              type: 'text',
-              icon: faTag,
-              text: 'Name',
-              subtitle: company.name,
-              show: true,
-            },
-          ]}
-        />
 
         <LittleHeading>Cases</LittleHeading>
 
