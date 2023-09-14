@@ -1,7 +1,7 @@
 import { ChunkStatus, StubStatus } from '@prisma/client'
 
 import prisma from '../lib/database'
-import { searchDiarium } from '../lib/ingestion'
+import { searchDiarium } from '../lib/diarium'
 
 function delay(ms: number): Promise<void> {
   return new Promise((resolve) => setTimeout(() => resolve(), ms))
@@ -9,20 +9,24 @@ function delay(ms: number): Promise<void> {
 
 ;(async () => {
   const chunks = await prisma.chunk.findMany({
-    where: { status: { in: [ChunkStatus.PENDING, ChunkStatus.ONGOING] } },
+    where: { status: { in: [ChunkStatus.PENDING] } },
+    include: { day: true },
     orderBy: { created: 'asc' },
-    include: { scan: true },
   })
 
   for (const chunk of chunks) {
-    console.log(`${chunk.id} ${chunk.startDate} ${chunk.page}`)
+    console.log(
+      `${chunk.id} ${chunk.day.date.toISOString().substring(0, 10)} ${
+        chunk.page
+      }`
+    )
 
     await prisma.$transaction(
       async (tx) => {
         const now = new Date()
         const result = await searchDiarium({
-          FromDate: chunk.scan.date!.toISOString().substring(0, 10),
-          ToDate: chunk.scan.date!.toISOString().substring(0, 10),
+          FromDate: chunk.day.date!.toISOString().substring(0, 10),
+          ToDate: chunk.day.date!.toISOString().substring(0, 10),
           page: chunk.page,
         })
 
@@ -41,7 +45,6 @@ function delay(ms: number): Promise<void> {
         const newStubs = await tx.stub.createMany({
           data: newDocuments.map((row, index) => ({
             chunkId: chunk.id,
-            scanId: chunk.scanId,
             index,
             status: StubStatus.PENDING,
             caseName: row.caseName,
@@ -54,20 +57,27 @@ function delay(ms: number): Promise<void> {
           })),
         })
 
-        await tx.chunk.update({
+        const after = await tx.chunk.update({
           where: { id: chunk.id },
           data: {
             hitCount: result.hitCount,
+            newCount: newDocuments.length,
             stubCount: newStubs.count,
-            status: StubStatus.SUCCESS,
+            status:
+              result.rows.length > 0 && newDocuments.length > 0
+                ? ChunkStatus.ONGOING
+                : ChunkStatus.SUCCESS,
           },
         })
+
+        console.log(after)
       },
       {
         timeout: 15000,
       }
     )
 
+    process.exit(0)
     await delay(1000)
   }
 

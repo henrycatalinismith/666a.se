@@ -40,19 +40,16 @@ model Chunk {
   created DateTime  @default(now())
   updated DateTime  @default(now())
 
-  scanId String @db.Uuid
+  dayId String @db.Uuid
 
-  status ChunkStatus @default(PENDING)
-  startDate  DateTime? @db.Date
   page Int
-  stubCount  Int?
+  status ChunkStatus @default(PENDING)
+  stubCount Int?
+  newCount Int?
   hitCount String?
 
-  scan Scan @relation(fields: [scanId], references: [id])
+  day Day @relation(fields: [dayId], references: [id])
   stubs Stub[]
-  ticks Tick[]
-
-  @@index([scanId, created(sort: Asc), status])
 }
 
 model Company {
@@ -79,6 +76,16 @@ model County {
 
   documents Document[]
   municipalities Municipality[]
+}
+
+model Day {
+  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  created DateTime @default(now())
+  updated DateTime @default(now())
+
+  date DateTime @db.Date @unique
+
+  chunks Chunk[]
 }
 
 model Document {
@@ -123,8 +130,6 @@ model Error {
   code String?
   message String
   stack String?
-
-  ticks Tick[]
 }
 
 model Municipality {
@@ -163,29 +168,6 @@ model Role {
   user User @relation(fields: [userId], references: [id])
 }
 
-enum ScanStatus {
-  PENDING
-  ONGOING
-  SUCCESS
-  ABORTED
-}
-
-model Scan {
-  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  created DateTime  @default(now())
-  updated DateTime  @default(now())
-
-  date DateTime? @db.Date
-
-  status ScanStatus @default(PENDING)
-  startDate  DateTime? @db.Date
-  chunkCount Int
-
-  chunks Chunk[]
-  stubs Stub[]
-  ticks Tick[]
-}
-
 model Session {
   id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   created DateTime @default(now())
@@ -210,7 +192,6 @@ model Stub {
   updated DateTime @default(now())
 
   chunkId String @db.Uuid
-  scanId String @db.Uuid
   documentId String? @db.Uuid
 
   status StubStatus @default(PENDING)
@@ -222,34 +203,9 @@ model Stub {
   documentDate DateTime @db.Date
 
   chunk Chunk @relation(fields: [chunkId], references: [id])
-  scan Scan @relation(fields: [scanId], references: [id])
   document Document? @relation(fields: [documentId], references: [id])
-  ticks Tick[]
 
   @@index([created(sort: Asc), status])
-}
-
-enum TickType {
-  SCAN
-  CHUNK
-  STUB
-}
-
-model Tick {
-  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  created DateTime @default(now())
-  updated DateTime @default(now())
-
-  type TickType
-  errorId String? @db.Uuid
-  scanId String? @db.Uuid
-  chunkId String? @db.Uuid
-  stubId String? @db.Uuid
-
-  error Error? @relation(fields: [errorId], references: [id])
-  scan Scan? @relation(fields: [scanId], references: [id])
-  chunk Chunk? @relation(fields: [chunkId], references: [id])
-  stub Stub? @relation(fields: [stubId], references: [id])
 }
 
 model Type {
