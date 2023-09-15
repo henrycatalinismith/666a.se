@@ -1,6 +1,7 @@
-import types from 'data/type.json'
-import prisma from 'lib/database'
 import slugify from 'slugify'
+
+import types from '../data/type.json'
+import prisma from '../lib/database'
 ;(async () => {
   for (const t of types) {
     await prisma.type.create({

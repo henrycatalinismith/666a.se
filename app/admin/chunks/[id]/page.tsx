@@ -1,5 +1,4 @@
 import {
-  faCalendar,
   faGears,
   faHashtag,
   faPercent,
@@ -7,6 +6,8 @@ import {
 import { RoleName, StubStatus } from '@prisma/client'
 import { Relations } from 'components/Relations'
 import { ChunkIconDefinition } from 'entities/Chunk'
+import { DayIconDefinition } from 'entities/Day'
+import { ScanIconDefinition } from 'entities/Scan'
 import { StubIconDefinition } from 'entities/Stub'
 import { requireUser } from 'lib/authentication'
 import prisma from 'lib/database'
@@ -24,7 +25,9 @@ export default async function Document({ params }: any) {
   const chunk = await prisma.chunk.findFirstOrThrow({
     where: { id: params.id },
     include: {
-      day: true,
+      scan: {
+        include: { day: true },
+      },
       stubs: {
         include: { document: true },
         orderBy: { index: 'asc' },
@@ -45,9 +48,17 @@ export default async function Document({ params }: any) {
           rows={[
             {
               type: 'text',
-              icon: faCalendar,
+              icon: ScanIconDefinition,
+              text: 'Scan',
+              subtitle: chunk.scan.id,
+              show: true,
+            },
+
+            {
+              type: 'text',
+              icon: DayIconDefinition,
               text: 'Day',
-              subtitle: chunk.day.date.toISOString().substring(0, 10),
+              subtitle: chunk.scan.day.date.toISOString().substring(0, 10),
               show: true,
             },
 

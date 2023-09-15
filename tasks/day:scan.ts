@@ -1,4 +1,4 @@
-import { ChunkStatus, StubStatus } from '@prisma/client'
+import { ChunkStatus, ScanStatus, StubStatus } from '@prisma/client'
 import _ from 'lodash'
 
 import prisma from '../lib/database'
@@ -10,21 +10,31 @@ import { searchDiarium } from '../lib/diarium'
 
       const day = await tx.day.findFirstOrThrow({
         where: { date },
-        include: { chunks: true },
+        include: {
+          scans: {
+            where: { status: ScanStatus.ONGOING },
+          },
+        },
       })
 
       console.log(day)
+
+      if (day.scans.length > 0) {
+        console.log('day busy')
+        process.exit(0)
+      }
+
+      const scan = await tx.scan.create({
+        data: {
+          dayId: day.id,
+          status: ScanStatus.ONGOING,
+        },
+      })
 
       const result = await searchDiarium({
         FromDate: date.toISOString().substring(0, 10),
         ToDate: date.toISOString().substring(0, 10),
       })
-
-      if (day.chunks.length > 0) {
-        console.log(day.chunks.length)
-        console.log(result.hitCount)
-        process.exit(0)
-      }
 
       const fullResult = result.hitCount.match(/^(\d+) träffar$/)
       const stubsPerChunk = 10
@@ -47,14 +57,13 @@ import { searchDiarium } from '../lib/diarium'
       })
 
       const now = new Date()
-
       const firstChunk = await tx.chunk.create({
         data: {
           status:
             result.rows.length > 0 && newDocuments.length > 0
               ? ChunkStatus.ONGOING
               : ChunkStatus.SUCCESS,
-          dayId: day.id,
+          scanId: scan.id,
           page: 1,
           stubCount: result.rows.length,
           newCount: newDocuments.length,
@@ -85,7 +94,7 @@ import { searchDiarium } from '../lib/diarium'
       const pendingChunks = await tx.chunk.createMany({
         data: _.times(targetChunkCount, (index) => ({
           status: ChunkStatus.PENDING,
-          dayId: day.id,
+          scanId: scan.id,
           page: index + 2,
           stubCount: null,
         })),

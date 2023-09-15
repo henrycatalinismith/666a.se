@@ -10,13 +10,13 @@ function delay(ms: number): Promise<void> {
 ;(async () => {
   const chunks = await prisma.chunk.findMany({
     where: { status: { in: [ChunkStatus.PENDING] } },
-    include: { day: true },
+    include: { scan: { include: { day: true } } },
     orderBy: { created: 'asc' },
   })
 
   for (const chunk of chunks) {
     console.log(
-      `${chunk.id} ${chunk.day.date.toISOString().substring(0, 10)} ${
+      `${chunk.id} ${chunk.scan.day.date.toISOString().substring(0, 10)} ${
         chunk.page
       }`
     )
@@ -25,8 +25,8 @@ function delay(ms: number): Promise<void> {
       async (tx) => {
         const now = new Date()
         const result = await searchDiarium({
-          FromDate: chunk.day.date!.toISOString().substring(0, 10),
-          ToDate: chunk.day.date!.toISOString().substring(0, 10),
+          FromDate: chunk.scan.day.date!.toISOString().substring(0, 10),
+          ToDate: chunk.scan.day.date!.toISOString().substring(0, 10),
           page: chunk.page,
         })
 

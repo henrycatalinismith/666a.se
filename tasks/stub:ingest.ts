@@ -1,4 +1,10 @@
-import { CaseStatus, ChunkStatus, Document, StubStatus } from '@prisma/client'
+import {
+  CaseStatus,
+  ChunkStatus,
+  Document,
+  Stub,
+  StubStatus,
+} from '@prisma/client'
 import slugify from 'slugify'
 
 import prisma, { Transaction } from '../lib/database'
@@ -41,7 +47,7 @@ function delay(ms: number): Promise<void> {
         }
 
         const diariumDocument = await fetchDocument(stub.documentCode)
-        const doc = await createDocument(diariumDocument, tx)
+        const doc = await createDocument(diariumDocument, stub, tx)
         console.log(doc.id)
 
         await tx.stub.updateMany({
@@ -84,6 +90,7 @@ async function maybeChunkSuccess(
 
 export async function createDocument(
   diariumDocument: DiariumDocument,
+  stub: Stub,
   tx: Transaction
 ): Promise<Document> {
   let company = null
@@ -192,7 +199,7 @@ export async function createDocument(
       typeId: type.id,
       workplaceId: workplaceId,
       code: diariumDocument.documentCode,
-      date: new Date(diariumDocument.documentDate),
+      date: stub.documentDate,
       direction: diariumDocument.documentDirection,
       typeText: diariumDocument.documentType,
     },

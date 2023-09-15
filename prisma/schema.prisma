@@ -40,7 +40,7 @@ model Chunk {
   created DateTime  @default(now())
   updated DateTime  @default(now())
 
-  dayId String @db.Uuid
+  scanId String @db.Uuid
 
   page Int
   status ChunkStatus @default(PENDING)
@@ -48,7 +48,7 @@ model Chunk {
   newCount Int?
   hitCount String?
 
-  day Day @relation(fields: [dayId], references: [id])
+  scan Scan @relation(fields: [scanId], references: [id])
   stubs Stub[]
 }
 
@@ -85,7 +85,7 @@ model Day {
 
   date DateTime @db.Date @unique
 
-  chunks Chunk[]
+  scans Scan[]
 }
 
 model Document {
@@ -166,6 +166,25 @@ model Role {
   status RoleStatus
 
   user User @relation(fields: [userId], references: [id])
+}
+
+enum ScanStatus {
+  PENDING
+  ONGOING
+  SUCCESS
+  ABORTED
+}
+
+model Scan {
+  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  created DateTime @default(now())
+  updated DateTime @default(now())
+
+  dayId String @db.Uuid
+  status ScanStatus
+
+  day Day @relation(fields: [dayId], references: [id])
+  chunks Chunk[]
 }
 
 model Session {
