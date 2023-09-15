@@ -1,5 +1,6 @@
 import bcrypt from 'bcrypt'
-import prisma from 'lib/database'
+
+import prisma from '../lib/database'
 ;(async () => {
   await prisma.user.create({
     data: {

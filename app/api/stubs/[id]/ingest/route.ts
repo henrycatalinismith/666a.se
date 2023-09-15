@@ -1,91 +1,66 @@
 import {
   CaseStatus,
-  ChunkStatus,
   Document,
+  RoleName,
   Stub,
   StubStatus,
 } from '@prisma/client'
+import { inngest } from 'inngest/client'
+import { requireUser } from 'lib/authentication'
+import prisma, { Transaction } from 'lib/database'
+import { DiariumDocument, fetchDocument } from 'lib/diarium'
+import { NextResponse } from 'next/server'
 import slugify from 'slugify'
 
-import prisma, { Transaction } from '../lib/database'
-import { DiariumDocument, fetchDocument } from '../lib/diarium'
+export async function POST(request: any) {
+  const user = await requireUser([RoleName.DEVELOPER])
+  if (!user) {
+    return NextResponse.json({ status: 'failure' })
+  }
 
-function delay(ms: number): Promise<void> {
-  return new Promise((resolve) => setTimeout(() => resolve(), ms))
-}
-
-;(async () => {
-  const chunk = await prisma.chunk.findFirstOrThrow({
-    where: { status: { in: [ChunkStatus.ONGOING] } },
-    include: {
-      stubs: {
-        where: { status: { in: [StubStatus.PENDING] } },
-        orderBy: { index: 'asc' },
-      },
-    },
-    orderBy: { page: 'asc' },
+  const id = request.url!.match(/stubs\/(.+)\//)![1]
+  const stub = await prisma.stub.findFirstOrThrow({
+    where: { id },
+    include: { chunk: { include: { scan: { include: { day: true } } } } },
   })
-  const stubs = chunk.stubs
 
-  for (const stub of stubs) {
-    console.log(`${stub.id} ${stub.documentCode}`)
-    console.log(chunk.id)
+  await prisma.$transaction(
+    async (tx) => {
+      const diariumDocument = await fetchDocument(stub.documentCode)
+      const doc = await createDocument(diariumDocument, stub, tx)
+      console.log(doc.id)
 
-    await prisma.$transaction(
-      async (tx) => {
-        const d = await tx.document.findFirst({
-          where: { code: stub.documentCode },
+      await tx.stub.updateMany({
+        data: { status: StubStatus.SUCCESS, documentId: doc.id },
+        where: { documentCode: stub.documentCode },
+      })
+
+      const pendingSiblings = await tx.stub.count({
+        where: {
+          chunkId: stub.chunk.id,
+          status: { in: [StubStatus.PENDING] },
+        },
+      })
+      console.log({ pendingSiblings })
+      if (pendingSiblings === 0) {
+        await inngest.send({
+          name: '666a/chunk.completed',
+          data: {
+            id: stub.chunkId,
+          },
         })
-        if (d) {
-          console.log('oops')
-          await tx.stub.updateMany({
-            data: { status: StubStatus.SUCCESS, documentId: d.id },
-            where: { documentCode: stub.documentCode },
-          })
-          await maybeChunkSuccess(tx, stub.chunkId)
-          return
-        }
-
-        const diariumDocument = await fetchDocument(stub.documentCode)
-        const doc = await createDocument(diariumDocument, stub, tx)
-        console.log(doc.id)
-
-        await tx.stub.updateMany({
-          data: { status: StubStatus.SUCCESS, documentId: doc.id },
-          where: { documentCode: stub.documentCode },
-        })
-
-        await maybeChunkSuccess(tx, stub.chunkId)
-      },
-      {
-        timeout: 15000,
       }
-    )
-
-    process.exit(0)
-    await delay(3000)
-  }
-
-  process.exit(0)
-})()
-
-async function maybeChunkSuccess(
-  tx: Transaction,
-  chunkId: string
-): Promise<void> {
-  const pendingSiblings = await tx.stub.count({
-    where: {
-      chunkId,
-      status: { in: [StubStatus.PENDING] },
     },
-  })
-  console.log({ pendingSiblings })
-  if (pendingSiblings === 0) {
-    await tx.chunk.update({
-      where: { id: chunkId },
-      data: { status: ChunkStatus.SUCCESS },
-    })
-  }
+    {
+      timeout: 15000,
+    }
+  )
+
+  return NextResponse.json([
+    {
+      status: 'success',
+    },
+  ])
 }
 
 export async function createDocument(
