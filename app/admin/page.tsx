@@ -1,13 +1,7 @@
 import { RoleName } from '@prisma/client'
-import { CaseIconDefinition } from 'entities/Case'
-import { CompanyIconDefinition } from 'entities/Company'
-import { CountyIconDefinition } from 'entities/County'
-import { DayIconDefinition } from 'entities/Day'
-import { ErrorIconDefinition } from 'entities/Error'
-import { MunicipalityIconDefinition } from 'entities/Municipality'
-import { TypeIconDefinition } from 'entities/Type'
+import { NotificationIconDefinition } from 'entities/Notification'
+import { SubscriptionIconDefinition } from 'entities/Subscription'
 import { UserIconDefinition } from 'entities/User'
-import { WorkplaceIconDefinition } from 'entities/Workplace'
 import { requireUser } from 'lib/authentication'
 import prisma from 'lib/database'
 import { EntityList } from 'ui/EntityList'
@@ -18,15 +12,9 @@ export default async function Admin() {
     return <></>
   }
 
-  const cases = await prisma.company.count()
-  const companies = await prisma.company.count()
-  const counties = await prisma.county.count()
-  const days = await prisma.day.count()
-  const errors = await prisma.error.count()
-  const municipalities = await prisma.municipality.count()
-  const types = await prisma.type.count()
+  const notifications = await prisma.notification.count()
+  const subscriptions = await prisma.subscription.count()
   const users = await prisma.user.count()
-  const workplaces = await prisma.workplace.count()
 
   return (
     <>
@@ -34,58 +22,18 @@ export default async function Admin() {
         <EntityList
           items={[
             {
-              icon: CaseIconDefinition,
-              text: 'Cases',
-              subtitle: `${cases}`,
-              href: '/admin/cases',
+              icon: NotificationIconDefinition,
+              text: 'Notifications',
+              subtitle: `${notifications}`,
+              href: '/admin/notifications',
               show: true,
             },
 
             {
-              icon: CompanyIconDefinition,
-              text: 'Companies',
-              subtitle: `${companies}`,
-              href: '/admin/companies',
-              show: true,
-            },
-
-            {
-              icon: CountyIconDefinition,
-              text: 'Counties',
-              subtitle: `${counties}`,
-              href: '/admin/counties',
-              show: true,
-            },
-
-            {
-              icon: DayIconDefinition,
-              text: 'Days',
-              subtitle: `${days}`,
-              href: '/admin/days',
-              show: true,
-            },
-
-            {
-              icon: ErrorIconDefinition,
-              text: 'Errors',
-              subtitle: `${errors}`,
-              href: '/admin/errors',
-              show: true,
-            },
-
-            {
-              icon: MunicipalityIconDefinition,
-              text: 'Municipalities',
-              subtitle: `${municipalities}`,
-              href: '/admin/municipalities',
-              show: true,
-            },
-
-            {
-              icon: TypeIconDefinition,
-              text: 'Types',
-              subtitle: `${types}`,
-              href: '/admin/types',
+              icon: SubscriptionIconDefinition,
+              text: 'Subscriptions',
+              subtitle: `${subscriptions}`,
+              href: '/admin/subscriptions',
               show: true,
             },
 
@@ -94,14 +42,6 @@ export default async function Admin() {
               text: 'Users',
               subtitle: `${users}`,
               href: '/admin/users',
-              show: true,
-            },
-
-            {
-              icon: WorkplaceIconDefinition,
-              text: 'Workplaces',
-              subtitle: `${workplaces}`,
-              href: '/admin/workplaces',
               show: true,
             },
           ]}

@@ -8,143 +8,25 @@ generator client {
   provider = "prisma-client-js"
 }
 
-enum CaseStatus {
-  ONGOING
-  CONCLUDED
-}
-
-model Case {
-  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  created DateTime @default(now())
-  updated DateTime @default(now())
-
-  companyId String? @db.Uuid
-
-  code String @unique
-  name String
-  status CaseStatus @default(ONGOING)
-
-  company Company? @relation(fields: [companyId], references: [id])
-  documents Document[]
-}
-
-enum ChunkStatus {
+enum NotificationEmailStatus {
   PENDING
-  ONGOING
   SUCCESS
   ABORTED
 }
 
-model Chunk {
-  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  created DateTime  @default(now())
-  updated DateTime  @default(now())
+// POST /api/notifications
+// POST /api/notifications/{id}/email
 
-  scanId String @db.Uuid
-
-  page Int
-  status ChunkStatus @default(PENDING)
-  stubCount Int?
-  newCount Int?
-  hitCount String?
-
-  scan Scan @relation(fields: [scanId], references: [id])
-  stubs Stub[]
-}
-
-model Company {
+model Notification {
   id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   created DateTime @default(now())
   updated DateTime @default(now())
-
-  code String @unique
-  name String
-  slug String @unique
-  cases Case[]
-
-  documents Document[]
-}
-
-model County {
-  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  created DateTime @default(now())
-  updated DateTime @default(now())
-
-  code String @unique
-  name String
-  slug String @unique
-
-  documents Document[]
-  municipalities Municipality[]
-}
-
-model Day {
-  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  created DateTime @default(now())
-  updated DateTime @default(now())
-
-  date DateTime @db.Date @unique
-
-  scans Scan[]
-}
-
-model Document {
-  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  created DateTime @default(now())
-  updated DateTime @default(now())
-
-  caseId String @db.Uuid
-  companyId String? @db.Uuid
-  countyId String? @db.Uuid
-  municipalityId String? @db.Uuid
-  typeId String @db.Uuid
-  workplaceId String? @db.Uuid
-
-  code String @unique
-  date DateTime @db.Date
-  direction String
-  typeText String
-
-  case Case @relation(fields: [caseId], references: [id])
-  company Company? @relation(fields: [companyId], references: [id])
-  county County? @relation(fields: [countyId], references: [id])
-  municipality Municipality? @relation(fields: [municipalityId], references: [id])
-  type Type @relation(fields: [typeId], references: [id])
-  workplace Workplace? @relation(fields: [workplaceId], references: [id])
-
-  stubs Stub[]
-}
-
-enum ErrorStatus {
-  BLOCKING
-  RESOLVED
-}
-
-model Error {
-  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  created DateTime @default(now())
-  updated DateTime @default(now())
-
-  status ErrorStatus
-
-  code String?
-  message String
-  stack String?
-}
-
-model Municipality {
-  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  created DateTime @default(now())
-  updated DateTime @default(now())
-
-  countyId  String @db.Uuid
-
-  code String @unique
-  name String
-  slug String @unique
-
-  county County @relation(fields: [countyId], references: [id])
-  documents Document[]
+  subscriptionId String @db.Uuid
+  userId String @db.Uuid
+  companyCode String
+  emailStatus NotificationEmailStatus
+  subscription Subscription @relation(fields: [subscriptionId], references: [id])
+  user User @relation(fields: [userId], references: [id])
 }
 
 enum RoleName {
@@ -160,104 +42,40 @@ model Role {
   id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   created DateTime  @default(now())
   updated DateTime  @default(now())
-
   userId String @db.Uuid
   name RoleName
   status RoleStatus
-
   user User @relation(fields: [userId], references: [id])
-}
-
-enum ScanStatus {
-  PENDING
-  ONGOING
-  SUCCESS
-  ABORTED
-}
-
-model Scan {
-  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  created DateTime @default(now())
-  updated DateTime @default(now())
-
-  dayId String @db.Uuid
-  status ScanStatus
-
-  day Day @relation(fields: [dayId], references: [id])
-  chunks Chunk[]
 }
 
 model Session {
   id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   created DateTime @default(now())
   updated DateTime @default(now())
-
   userId String @db.Uuid
-
   secret String
-
   user User @relation(fields: [userId], references: [id])
 }
 
-enum StubStatus {
-  PENDING
-  SUCCESS
-  ABORTED
-}
-
-model Stub {
+model Subscription {
   id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   created DateTime @default(now())
   updated DateTime @default(now())
-
-  chunkId String @db.Uuid
-  documentId String? @db.Uuid
-
-  status StubStatus @default(PENDING)
-  index Int
-  caseName String
-  companyName  String
-  documentCode  String
-  documentType  String
-  documentDate DateTime @db.Date
-
-  chunk Chunk @relation(fields: [chunkId], references: [id])
-  document Document? @relation(fields: [documentId], references: [id])
-
-  @@index([created(sort: Asc), status])
-}
-
-model Type {
-  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  created DateTime @default(now())
-  updated DateTime @default(now())
-
-  name String
-  slug String @unique
-
-  documents Document[]
+  userId String @db.Uuid
+  companyCode String
+  notifications Notification[]
+  user User @relation(fields: [userId], references: [id])
 }
 
 model User {
   id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   created DateTime @default(now())
   updated DateTime @default(now())
-
   name String
   email String @unique
   password String
-
-  sessions Session[]
+  notifications Notification[]
   roles Role[]
-}
-
-model Workplace {
-  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  created DateTime @default(now())
-  updated DateTime @default(now())
-
-  name String
-  code String @unique
-
-  documents Document[]
+  sessions Session[]
+  subscriptions Subscription[]
 }

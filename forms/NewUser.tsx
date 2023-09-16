@@ -16,6 +16,9 @@ import { Input } from 'ui/Input'
 import * as z from 'zod'
 
 const formSchema = z.object({
+  name: z.string().min(1, {
+    message: 'Name too short',
+  }),
   email: z.string().min(2, {
     message: 'Email too short',
   }),
@@ -32,17 +35,21 @@ export function NewUser() {
       password: '',
     },
   })
+  const router = useRouter()
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    const { email, password } = values
+    const { name, email, password } = values
     const params = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify({ name, email, password }),
     }
-    const response = await fetch('/users', params).then((response) =>
+    const response = await fetch('/api/users', params).then((response) =>
       response.json()
     )
     console.log(response)
+    if (response[0].id) {
+      router.push(`/admin/users/${response[0].id}`)
+    }
   }
 
   const onError = async (e: any) => {
@@ -53,8 +60,22 @@ export function NewUser() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit, onError)}
-        className="space-y-8"
+        className="space-y-8 gap-8 flex flex-col"
       >
+        <FormField
+          control={form.control}
+          name="name"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Name</FormLabel>
+              <FormControl>
+                <Input placeholder="" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
         <FormField
           control={form.control}
           name="email"
@@ -68,6 +89,7 @@ export function NewUser() {
             </FormItem>
           )}
         />
+
         <FormField
           control={form.control}
           name="password"
@@ -75,7 +97,7 @@ export function NewUser() {
             <FormItem>
               <FormLabel>Password</FormLabel>
               <FormControl>
-                <Input type="password" placeholder="" {...field} />
+                <Input type="text" placeholder="" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
