@@ -16,39 +16,36 @@ import { Input } from 'ui/Input'
 import * as z from 'zod'
 
 const formSchema = z.object({
-  name: z.string().min(1, {
-    message: 'Name too short',
+  userId: z.string().min(1, {
+    message: 'User ID too short',
   }),
-  email: z.string().min(2, {
-    message: 'Email too short',
-  }),
-  password: z.string().min(2, {
-    message: 'Password too short',
+  companyCode: z.string().min(2, {
+    message: 'Company code too short',
   }),
 })
 
-export function NewUser() {
+export function NewSubscription() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      email: '',
-      password: '',
+      userId: '',
+      companyCode: '',
     },
   })
   const router = useRouter()
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    const { name, email, password } = values
+    const { userId, companyCode } = values
     const params = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, email, password }),
+      body: JSON.stringify({ userId, companyCode }),
     }
-    const response = await fetch('/api/users', params).then((response) =>
-      response.json()
+    const response = await fetch('/api/subscriptions', params).then(
+      (response) => response.json()
     )
     console.log(response)
     if (response[0].id) {
-      router.push(`/admin/users/${response[0].id}`)
+      router.push(`/admin/subscriptions/${response[0].id}`)
     }
   }
 
@@ -64,10 +61,10 @@ export function NewUser() {
       >
         <FormField
           control={form.control}
-          name="name"
+          name="userId"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Name</FormLabel>
+              <FormLabel>User ID</FormLabel>
               <FormControl>
                 <Input placeholder="" {...field} />
               </FormControl>
@@ -78,26 +75,12 @@ export function NewUser() {
 
         <FormField
           control={form.control}
-          name="email"
+          name="companyCode"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Email</FormLabel>
+              <FormLabel>Company Code</FormLabel>
               <FormControl>
                 <Input placeholder="" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <FormField
-          control={form.control}
-          name="password"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Password</FormLabel>
-              <FormControl>
-                <Input type="text" placeholder="" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>

@@ -38,7 +38,6 @@ export const ingestChunk = inngest.createFunction(
   { name: 'Ingest chunk' },
   { event: '666a/chunk.started' },
   async ({ event, step }) => {
-    await step.sleep(`${event.data.page * 10}s`)
     await step.run('Ingest chunk', async () =>
       fetch(`http://192.168.86.195:3000/api/chunks/${event.data.id}/ingest`, {
         method: 'POST',

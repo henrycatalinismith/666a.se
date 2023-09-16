@@ -2,6 +2,7 @@ import { RoleName } from '@prisma/client'
 import { UserIconDefinition } from 'entities/User'
 import { requireUser } from 'lib/authentication'
 import prisma from 'lib/database'
+import { Button } from 'ui/Button'
 import { EntityList } from 'ui/EntityList'
 import { IconHeading } from 'ui/IconHeading'
 
@@ -24,6 +25,7 @@ export default async function Users() {
           icon={UserIconDefinition}
           title="Users"
           subtitle={`${users.length}`}
+          newUrl="/admin/users/new"
         />
 
         <EntityList
