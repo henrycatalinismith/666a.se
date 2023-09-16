@@ -1,4 +1,5 @@
 import { RoleName } from '@prisma/client'
+import { DeleteButton } from 'components/DeleteButton'
 import { UserIconDefinition } from 'entities/User'
 import { requireUser } from 'lib/authentication'
 import prisma from 'lib/database'
@@ -21,6 +22,9 @@ export default async function User({ params }: any) {
           icon={UserIconDefinition}
           title="User"
           subtitle={`${user.id}`}
+          actions={[
+            <DeleteButton key="delete" url={`/api/users/${user.id}`} />,
+          ]}
         />
       </div>
     </>
