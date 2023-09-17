@@ -1,4 +1,5 @@
 import { RoleName } from '@prisma/client'
+
 import { UserIconDefinition } from 'entities/User'
 import { requireUser } from 'lib/authentication'
 import prisma from 'lib/database'

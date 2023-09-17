@@ -1,8 +1,9 @@
 import { RoleName } from '@prisma/client'
 import bcrypt from 'bcrypt'
+import { NextResponse } from 'next/server'
+
 import { requireUser } from 'lib/authentication'
 import prisma from 'lib/database'
-import { NextResponse } from 'next/server'
 
 export async function POST(request: any) {
   const user = await requireUser([RoleName.DEVELOPER])
