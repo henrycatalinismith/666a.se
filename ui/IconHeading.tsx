@@ -33,7 +33,7 @@ export const IconHeading: FC<IconHeadingProps> = ({
             {subtitle}
           </span>
         </h1>
-        <div>
+        <div className="flex flex-row gap-1">
           {newUrl && (
             <Link
               href={newUrl}

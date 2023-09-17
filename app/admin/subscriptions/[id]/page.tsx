@@ -1,4 +1,5 @@
 import { RoleName } from '@prisma/client'
+import { CheckButton } from 'components/CheckButton'
 import { CompanyCode } from 'components/CompanyCode'
 import { DeleteButton } from 'components/DeleteButton'
 import { IconDefinitionList } from 'components/IconDefinitionList'
@@ -29,6 +30,7 @@ export default async function Subscription({ params }: any) {
               key="delete"
               url={`/api/subscriptions/${subscription.id}`}
             />,
+            <CheckButton key="check" id={subscription.id} />,
           ]}
         />
 

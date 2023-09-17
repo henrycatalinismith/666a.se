@@ -2,6 +2,7 @@
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/navigation'
+import { useTranslations } from 'next-intl'
 import { useForm } from 'react-hook-form'
 import { Button } from 'ui/Button'
 import {
@@ -25,6 +26,8 @@ const formSchema = z.object({
 })
 
 export function Login() {
+  const t = useTranslations('Login')
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -58,6 +61,7 @@ export function Login() {
         onSubmit={form.handleSubmit(onSubmit, onError)}
         className="space-y-8"
       >
+        <h2>{t('title')}</h2>
         <FormField
           control={form.control}
           name="email"
