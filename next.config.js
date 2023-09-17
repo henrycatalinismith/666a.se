@@ -4,11 +4,6 @@ const withNextIntl = require('next-intl/plugin')(
 )
 
 /** @type {import('next').NextConfig} */
-const nextConfig = withNextIntl({
-  i18n: {
-    defaultLocale: 'sv',
-    locales: ['en', 'sv'],
-  },
-})
+const nextConfig = withNextIntl({})
 
 module.exports = nextConfig
