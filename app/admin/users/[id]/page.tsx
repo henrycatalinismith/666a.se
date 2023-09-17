@@ -1,4 +1,5 @@
 import { RoleName } from '@prisma/client'
+
 import { DeleteButton } from 'components/DeleteButton'
 import { UserIconDefinition } from 'entities/User'
 import { requireUser } from 'lib/authentication'

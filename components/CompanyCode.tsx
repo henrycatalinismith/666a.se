@@ -1,6 +1,8 @@
 'use client'
 
 import { faTag } from '@fortawesome/free-solid-svg-icons'
+import { FC, useCallback } from 'react'
+
 import {
   IconDefinitionListDefinition,
   IconDefinitionListIcon,
@@ -8,7 +10,6 @@ import {
   IconDefinitionListRow,
   IconDefinitionListTerm,
 } from 'components/IconDefinitionList'
-import { FC, useCallback } from 'react'
 
 export type CompanyCodeProps = {
   subscriptionId: string

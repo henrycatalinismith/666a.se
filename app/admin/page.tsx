@@ -1,4 +1,5 @@
 import { RoleName } from '@prisma/client'
+
 import { NotificationIconDefinition } from 'entities/Notification'
 import { SubscriptionIconDefinition } from 'entities/Subscription'
 import { UserIconDefinition } from 'entities/User'
