@@ -3,7 +3,10 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
+import { useMemo } from 'react'
 import { useForm } from 'react-hook-form'
+import * as z from 'zod'
+
 import { Button } from 'ui/Button'
 import {
   Form,
@@ -14,19 +17,22 @@ import {
   FormMessage,
 } from 'ui/Form'
 import { Input } from 'ui/Input'
-import * as z from 'zod'
-
-const formSchema = z.object({
-  email: z.string().min(2, {
-    message: 'Email too short',
-  }),
-  password: z.string().min(2, {
-    message: 'Password too short',
-  }),
-})
 
 export function Login() {
   const t = useTranslations('Login')
+
+  const formSchema = useMemo(
+    () =>
+      z.object({
+        email: z.string().min(2, {
+          message: t('emailTooShort'),
+        }),
+        password: z.string().min(2, {
+          message: t('passwordTooShort'),
+        }),
+      }),
+    [t]
+  )
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -35,6 +41,7 @@ export function Login() {
       password: '',
     },
   })
+
   const router = useRouter()
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     const { email, password } = values
@@ -43,7 +50,7 @@ export function Login() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, password }),
     }
-    const response = await fetch('/login', params).then((response) =>
+    const response = await fetch('/api/login', params).then((response) =>
       response.json()
     )
     if (response.status === 'success') {
@@ -59,7 +66,7 @@ export function Login() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit, onError)}
-        className="space-y-8"
+        className="flex flex-col gap-8"
       >
         <h2>{t('title')}</h2>
         <FormField
@@ -67,7 +74,7 @@ export function Login() {
           name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Email</FormLabel>
+              <FormLabel>{t('email')}</FormLabel>
               <FormControl>
                 <Input placeholder="" {...field} />
               </FormControl>
@@ -80,7 +87,7 @@ export function Login() {
           name="password"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Password</FormLabel>
+              <FormLabel>{t('password')}</FormLabel>
               <FormControl>
                 <Input type="password" placeholder="" {...field} />
               </FormControl>
@@ -88,7 +95,7 @@ export function Login() {
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+        <Button type="submit">{t('submit')}</Button>
       </form>
     </Form>
   )
