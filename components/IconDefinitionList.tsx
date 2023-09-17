@@ -58,7 +58,7 @@ export const IconDefinitionListRow: FC<{
         setRowState({ ...rowState, value: (action as any).payload })
         return
       }
-      if (action.type === 'save') {
+      if (action.type === 'save' && onSave) {
         onSave(rowState.value)
         setRowState({ ...rowState, ui: 'editable' })
         return
