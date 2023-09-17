@@ -1,36 +1,40 @@
 'use client'
-import { clsx } from 'clsx'
+import { faBars } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Link from 'next/link'
+import { FC } from 'react'
 
-export default function NavBar() {
-  const links = [
-    {
-      href: '/dashboard',
-      text: 'Home',
-    },
-    {
-      href: '/subscriptions',
-      text: 'Subscriptions',
-    },
-  ]
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from './DropdownMenu'
+
+export type NavBarProps = {
+  links: {
+    href: string
+    text: string
+  }[]
+}
+
+export const NavBar: FC<NavBarProps> = ({ links }) => {
   return (
     <header className="sticky inset-x-0 top-0 z-50 border-b border-gray-200 bg-white">
-      <div className="container flex flex-1 items-center gap-4">
-        <div className={clsx('flex h-14', 'items-center')}>666a</div>
-
-        <nav aria-label="Global" className="hidden sm:block lg:flex-1">
-          <ul className="gap-4 flex">
-            {links.map((l) => (
-              <li key={l.href} className="">
-                <Link href={l.href}>
-                  <div className="block text-s font-medium text-gray-900 hover:opacity-75">
-                    {l.text}
-                  </div>
-                </Link>
-              </li>
+      <div className="container flex flex-1 items-center justify-between">
+        <div className="font-bold flex h-14 items-center">666a</div>
+        <DropdownMenu>
+          <DropdownMenuTrigger>
+            <FontAwesomeIcon icon={faBars} />
+          </DropdownMenuTrigger>
+          <DropdownMenuContent>
+            {links.map((link) => (
+              <DropdownMenuItem key={link.href}>
+                <Link href={link.href}>{link.text}</Link>
+              </DropdownMenuItem>
             ))}
-          </ul>
-        </nav>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
     </header>
   )
