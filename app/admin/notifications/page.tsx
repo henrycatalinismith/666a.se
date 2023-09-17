@@ -1,4 +1,5 @@
 import { RoleName } from '@prisma/client'
+
 import { NotificationIconDefinition } from 'entities/Notification'
 import { requireUser } from 'lib/authentication'
 import prisma from 'lib/database'

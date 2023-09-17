@@ -1,4 +1,5 @@
 import { RoleName } from '@prisma/client'
+
 import { CheckButton } from 'components/CheckButton'
 import { CompanyCode } from 'components/CompanyCode'
 import { DeleteButton } from 'components/DeleteButton'
