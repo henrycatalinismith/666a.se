@@ -1,6 +1,5 @@
 import { RoleName } from '@prisma/client'
 import { SubscriptionIconDefinition } from 'entities/Subscription'
-import { UserIconDefinition } from 'entities/User'
 import { requireUser } from 'lib/authentication'
 import prisma from 'lib/database'
 import { EntityList } from 'ui/EntityList'
