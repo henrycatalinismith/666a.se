@@ -38,7 +38,7 @@ export const IconDefinitionList: FC<{ children: any }> = ({ children }) => {
 export const IconDefinitionListRow: FC<{
   children: any
   editable?: boolean
-  onSave: (v: any) => void
+  onSave?: (v: any) => void
 }> = ({ children, editable, onSave }) => {
   const [rowState, setRowState] = useState<RowState>({
     ui: editable ? 'editable' : 'uneditable',

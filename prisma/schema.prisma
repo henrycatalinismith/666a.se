@@ -23,8 +23,12 @@ model Notification {
   updated DateTime @default(now())
   subscriptionId String @db.Uuid
   userId String @db.Uuid
-  companyCode String
   emailStatus NotificationEmailStatus
+  caseName String
+  companyCode String
+  documentCode String
+  documentDate String
+  documentType String
   subscription Subscription @relation(fields: [subscriptionId], references: [id])
   user User @relation(fields: [userId], references: [id])
 }
