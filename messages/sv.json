@@ -1,5 +1,24 @@
 {
+  "NavBar": {
+    "dashboard": "Startsida",
+    "settings": "Inställningar",
+    "login": "Logga in",
+    "logout": "Logga ut",
+    "register": "Kom igång"
+  },
   "Login": {
-    "title": "Logga in"
+    "title": "Logga in",
+    "email": "E-post",
+    "emailTooShort": "För kort e-postadress",
+    "password": "Lösenord",
+    "passwordTooShort": "För kort lösenord",
+    "submit": "Logga in"
+  },
+  "Hero": {
+    "automated": "automatiska",
+    "workEnvironmentAuthority": "arbetsmiljöverket",
+    "emailAlerts": "e-postaviseringar",
+    "stopWorrying": "Ta reda på nya dokument så snart de publiceras. Ingen mer ångest över att glömma att kolla.",
+    "cta": "Nu kör vi"
   }
 }

@@ -1,5 +1,24 @@
 {
+  "NavBar": {
+    "dashboard": "Dashboard",
+    "settings": "Settings",
+    "login": "Login",
+    "logout": "Logout",
+    "register": "Sign up"
+  },
   "Login": {
-    "title": "Sign in"
+    "title": "Sign in",
+    "email": "Email",
+    "emailTooShort": "Email too short",
+    "password": "Password",
+    "passwordTooShort": "Password too short",
+    "submit": "Login"
+  },
+  "Hero": {
+    "automated": "automated",
+    "workEnvironmentAuthority": "work environment authority",
+    "emailAlerts": "email alerts",
+    "stopWorrying": "Stop worrying how long since you last remembered to check. Start hearing about new documents as soon as they're filed.",
+    "cta": "Let's go"
   }
 }
