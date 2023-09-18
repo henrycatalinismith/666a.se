@@ -30,11 +30,25 @@
     "passwordTooShort": "Password too short",
     "submit": "Register"
   },
+  "Onboarding": {
+    "title": "Let's get you set up",
+    "orgNumber": "First, you need to go and find out the ID number of the company you want email alerts about. These are generally quite easy to find on Google. Just search for the word 'organisationsnummer' alongside the name of the company and it'll usually be among the top results.",
+    "inputLabel": "Company ID",
+    "invalidCode": "A company ID is always six digits and four digits with a hyphen in between, like 000000-0000.",
+    "submit": "Subscribe"
+  },
   "Hero": {
     "automated": "automated",
     "workEnvironmentAuthority": "work environment authority",
     "emailAlerts": "email alerts",
     "stopWorrying": "Stop worrying how long since you last remembered to check. Start hearing about new documents as soon as they're filed.",
     "cta": "Let's go"
+  },
+  "Dashboard": {
+    "title": "Welcome Back",
+    "subscription": "You're subscribed to email alerts for company ID {companyCode}. Email henry@catalinismith.com if you need to change to another company ID"
+  },
+  "Settings": {
+    "title": "Settings"
   }
 }

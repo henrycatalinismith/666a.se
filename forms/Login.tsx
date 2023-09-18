@@ -50,7 +50,7 @@ export function Login() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, password }),
     }
-    const response = await fetch('/api/login', params).then((response) =>
+    const response = await fetch('/api/me/login', params).then((response) =>
       response.json()
     )
     if (response.status === 'success') {

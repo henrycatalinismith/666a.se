@@ -13,7 +13,7 @@ export const LogoutButton: FC = () => {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
     }
-    await fetch('/api/logout', params)
+    await fetch('/api/me/logout', params)
     router.push('/en/login')
   }
   return (

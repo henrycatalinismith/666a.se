@@ -1,3 +1,4 @@
+import { SessionStatus } from '@prisma/client'
 import bcrypt from 'bcrypt'
 import { NextResponse } from 'next/server'
 import { v4 as uuid } from 'uuid'
@@ -27,13 +28,14 @@ export async function POST(request: Request) {
     data: {
       userId: user.id,
       secret: uuid(),
+      status: SessionStatus.ACTIVE,
     },
   })
 
   const response = NextResponse.json({
     status: 'success',
     id: user.id,
-    destination: '/dashboard',
+    destination: '/onboarding',
   })
 
   response.cookies.set('session', session.secret)

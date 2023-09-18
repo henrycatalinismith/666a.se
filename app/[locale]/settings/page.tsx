@@ -1,6 +1,7 @@
-// import { useTranslations } from 'next-intl'
+import { Settings } from 'components/Settings'
+import { requireUser } from 'lib/authentication'
 
-export default function Settings() {
-  // const t = useTranslations('Hero')
-  return <div>settings</div>
+export default async function SettingsPage() {
+  const user = await requireUser()
+  return <Settings user={user} />
 }
