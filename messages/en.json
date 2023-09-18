@@ -14,6 +14,22 @@
     "passwordTooShort": "Password too short",
     "submit": "Login"
   },
+  "Logout": {
+    "title": "Logout",
+    "steps": "You can logout using the button below. Doing so will end your current session.",
+    "impact": "You'll need to login again next time you want to access your account. But in the meantime your account will be protected from access by anyone else with access to this device.",
+    "button": "Logout"
+  },
+  "Register": {
+    "title": "Sign up",
+    "name": "Name",
+    "nameTooShort": "You must enter a name",
+    "email": "Email",
+    "emailTooShort": "Email too short",
+    "password": "Password",
+    "passwordTooShort": "Password too short",
+    "submit": "Register"
+  },
   "Hero": {
     "automated": "automated",
     "workEnvironmentAuthority": "work environment authority",
