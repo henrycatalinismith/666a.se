@@ -14,6 +14,22 @@
     "passwordTooShort": "För kort lösenord",
     "submit": "Logga in"
   },
+  "Logout": {
+    "title": "Logga ut",
+    "steps": "Du kan logga ut genom att använda knappen nedan. Genom att göra det avslutas din nuvarande session.",
+    "impact": "Du kommer behöva logga in igen nästa gång du vill komma åt ditt konto. Men under tiden kommer ditt konto vara skyddat från åtkomst av någon annan med tillgång till den här enheten.",
+    "button": "Logga ut"
+  },
+  "Register": {
+    "title": "Kom igång",
+    "name": "Namn",
+    "nameTooShort": "Du måste ange ett namn",
+    "email": "E-post",
+    "emailTooShort": "För kort e-postadress",
+    "password": "Lösenord",
+    "passwordTooShort": "För kort lösenord",
+    "submit": "Registrera"
+  },
   "Hero": {
     "automated": "automatiska",
     "workEnvironmentAuthority": "arbetsmiljöverket",

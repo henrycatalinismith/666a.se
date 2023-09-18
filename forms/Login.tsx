@@ -66,9 +66,9 @@ export function Login() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit, onError)}
-        className="flex flex-col gap-8"
+        className="flex flex-col gap-8 max-w-sm my-8"
       >
-        <h2>{t('title')}</h2>
+        <h1 className="text-2xl font-bold">{t('title')}</h1>
         <FormField
           control={form.control}
           name="email"

@@ -1,4 +1,4 @@
-import { RoleName, RoleStatus } from '@prisma/client'
+import { RoleName, RoleStatus, SessionStatus } from '@prisma/client'
 import _ from 'lodash'
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
@@ -9,7 +9,10 @@ export async function sessionUser() {
   const cookieStore = cookies()
   const secret = cookieStore.get('session')?.value || ''
   const session = await prisma.session.findFirst({
-    where: { secret },
+    where: {
+      secret,
+      status: SessionStatus.ACTIVE,
+    },
     include: {
       user: { include: { roles: { where: { status: RoleStatus.ACTIVE } } } },
     },
@@ -18,7 +21,7 @@ export async function sessionUser() {
     return null
   }
 
-  return session.user
+  return session
 }
 
 export async function requireUser(requiredRoles?: RoleName[]) {

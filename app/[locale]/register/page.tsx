@@ -1,6 +1,9 @@
-// import { useTranslations } from 'next-intl'
+import { Register } from 'forms/Register'
 
-export default function Register() {
-  // const t = useTranslations('Hero')
-  return <div>register</div>
+export default function RegisterPage() {
+  return (
+    <div className="container">
+      <Register />
+    </div>
+  )
 }

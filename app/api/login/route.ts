@@ -1,4 +1,4 @@
-import { RoleName, RoleStatus } from '@prisma/client'
+import { RoleName, RoleStatus, SessionStatus } from '@prisma/client'
 import bcrypt from 'bcrypt'
 import _ from 'lodash'
 import { NextResponse } from 'next/server'
@@ -27,8 +27,10 @@ export async function POST(request: Request) {
     data: {
       userId: user.id,
       secret: uuid(),
+      status: SessionStatus.ACTIVE,
     },
   })
+
   const activeRoles = _.map(user.roles, 'name')
   const destination = activeRoles.includes(RoleName.DEVELOPER)
     ? '/admin'

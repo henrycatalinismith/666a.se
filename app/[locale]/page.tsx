@@ -1,7 +1,6 @@
-// import { Login } from 'forms/Login'
-
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
+
 export const preferredRegion = 'home'
 export const dynamic = 'force-dynamic'
 export const runtime = 'nodejs'
@@ -9,7 +8,7 @@ export const runtime = 'nodejs'
 export default function Home() {
   const t = useTranslations('Hero')
   return (
-    <section className="relative max-w-screen-xl mx-auto py-4 px-4 md:px-8">
+    <section className="container relative mx-auto py-4 ">
       <div className="absolute top-0 left-0 w-full h-full bg-white opacity-40"></div>
       <div className="relative z-10 gap-5 items-center lg:flex">
         <div className="flex-1 max-w-lg py-5 sm:mx-auto sm:text-center lg:max-w-max lg:text-left">

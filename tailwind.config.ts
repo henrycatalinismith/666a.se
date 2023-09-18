@@ -5,6 +5,7 @@ module.exports = {
     './app/**/*.{ts,tsx}',
     './components/**/*.{ts,tsx}',
     './entities/**/*.{ts,tsx}',
+    './forms/**/*.{ts,tsx}',
     './pages/**/*.{ts,tsx}',
     './reports/**/*.{ts,tsx}',
     './src/**/*.{ts,tsx}',
