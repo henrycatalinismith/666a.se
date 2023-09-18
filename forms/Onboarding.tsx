@@ -18,17 +18,14 @@ import {
 } from 'ui/Form'
 import { Input } from 'ui/Input'
 
-export function Login() {
-  const t = useTranslations('Login')
+export function Onboarding() {
+  const t = useTranslations('Onboarding')
 
   const formSchema = useMemo(
     () =>
       z.object({
-        email: z.string().min(2, {
-          message: t('emailTooShort'),
-        }),
-        password: z.string().min(2, {
-          message: t('passwordTooShort'),
+        companyCode: z.string().regex(/^\d{6}-\d{4}/, {
+          message: t('invalidCode'),
         }),
       }),
     [t]
@@ -37,24 +34,23 @@ export function Login() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      email: '',
-      password: '',
+      companyCode: '',
     },
   })
 
   const router = useRouter()
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    const { email, password } = values
+    const { companyCode } = values
     const params = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify({ companyCode }),
     }
-    const response = await fetch('/api/me/login', params).then((response) =>
+    const response = await fetch('/api/me/subscribe', params).then((response) =>
       response.json()
     )
     if (response.status === 'success') {
-      router.push(response.destination)
+      router.push('/dashboard')
     }
   }
 
@@ -68,28 +64,14 @@ export function Login() {
         onSubmit={form.handleSubmit(onSubmit, onError)}
         className="flex flex-col gap-8 max-w-sm my-8"
       >
-        <h1 className="text-2xl font-bold">{t('title')}</h1>
         <FormField
           control={form.control}
-          name="email"
+          name="companyCode"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>{t('email')}</FormLabel>
+              <FormLabel>{t('inputLabel')}</FormLabel>
               <FormControl>
                 <Input placeholder="" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="password"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>{t('password')}</FormLabel>
-              <FormControl>
-                <Input type="password" placeholder="" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
