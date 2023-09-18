@@ -1,7 +1,7 @@
 {
   "explorer.fileNesting.enabled": true,
   "explorer.fileNesting.patterns":{
-    "package.json": ".eslint*, .github*, .gitignore, .env*, .next*, next-env*, next.config.js, components.json, postcss.config.js, tailwind.*, tsconfig.*, yarn* ",
+    "package.json": ".eslint*, .github*, .gitignore, .env*, .next*, next-env*, next.config.js, components.json, postcss.config.js, tailwind.*, tsconfig.*, yarn*, i18n.ts, vercel.json ",
   },
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true

@@ -9,7 +9,8 @@
     "next:start": "next start",
     "next:lint": "next lint",
     "postinstall": "prisma generate",
-    "user:create": "yarn ts-node -r dotenv/config tasks/user:create.ts"
+    "user:create": "yarn ts-node -r dotenv/config tasks/user:create.ts",
+    "vercel:build": "yarn ts-node -r dotenv/config tasks/vercel:build.ts"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.4.2",
