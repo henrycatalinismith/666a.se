@@ -52,12 +52,18 @@ model Role {
   user User @relation(fields: [userId], references: [id])
 }
 
+enum SessionStatus {
+  ACTIVE
+  REVOKED
+}
+
 model Session {
   id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   created DateTime @default(now())
   updated DateTime @default(now())
   userId String @db.Uuid
   secret String
+  status SessionStatus
   user User @relation(fields: [userId], references: [id])
 }
 
