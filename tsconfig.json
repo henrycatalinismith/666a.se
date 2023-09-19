@@ -1,6 +1,14 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
+    "paths": {
+      "components/*": ["components/*"],
+      "entities/*": ["entities/*"],
+      "forms/*": ["forms/*"],
+      "inngest/*": ["inngest/*"],
+      "lib/*": ["lib/*"],
+      "ui/*": ["ui/*"],
+    },
     "target": "es2015",
     "lib": [
       "dom",

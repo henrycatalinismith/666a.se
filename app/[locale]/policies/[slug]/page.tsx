@@ -1,6 +1,6 @@
 import path from 'path'
 
-import glob from 'glob'
+import { sync } from 'glob'
 import _ from 'lodash'
 import { useLocale } from 'next-intl'
 import rehypeClassNames from 'rehype-class-names'
@@ -37,7 +37,12 @@ export default async function PolicyPage({ params }: any) {
 }
 
 export async function generateStaticParams(): Promise<any> {
-  const files = glob.sync(`policies/*.md`)
-  const slugs = _.uniq(_.map(files, (f) => f.split('.')[0]))
+  const files = sync(`policies/*.md`)
+  const slugs = _.chain(files)
+    .map((f) => f.split('.')[0])
+    .map((f) => f.split('/')[1])
+    .uniq()
+    .value()
+  console.log(slugs)
   return slugs.map((slug) => ({ slug }))
 }
