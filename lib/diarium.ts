@@ -44,7 +44,7 @@ type DiariumSearchResult = {
   }[]
 }
 
-async function launchBrowser(): Promise<puppeteer.Browser> {
+async function launchBrowser(): Promise<any> {
   if (!(global as any).browser) {
     ;(global as any).browser = await puppeteer.launch({ headless: 'new' })
   }
@@ -71,7 +71,10 @@ export async function searchDiarium(
     rows: [],
   }
 
-  result.hitCount = await page.$eval('.hit-count', (e) => (e as any).innerText)
+  result.hitCount = await page.$eval(
+    '.hit-count',
+    (e: any) => (e as any).innerText
+  )
   result.rows = await page.evaluate(() => {
     return Array.from(
       document.querySelectorAll('#handling-results tbody tr')
