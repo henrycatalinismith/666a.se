@@ -33,10 +33,6 @@ export default async function LocaleLayout({
           text: messages.NavBar.dashboard,
         },
         {
-          href: `/${locale}/settings`,
-          text: messages.NavBar.settings,
-        },
-        {
           href: `/${locale}/logout`,
           text: messages.NavBar.logout,
         },
