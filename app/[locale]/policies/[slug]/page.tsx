@@ -1,3 +1,4 @@
+/*
 import path from 'path'
 
 import { sync } from 'glob'
@@ -38,11 +39,9 @@ export default async function PolicyPage({ params }: any) {
 
 export async function generateStaticParams(): Promise<any> {
   const files = sync(`policies/*.md`)
-  const slugs = _.chain(files)
-    .map((f) => f.split('.')[0])
-    .map((f) => f.split('/')[1])
-    .uniq()
-    .value()
+  const slugs = _.chain(files).map(f => f.split('.')[0]).map(f => f.split('/')[1]).uniq().value()
   console.log(slugs)
   return slugs.map((slug) => ({ slug }))
 }
+
+*/
