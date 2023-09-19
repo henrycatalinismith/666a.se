@@ -1,3 +1,6 @@
+export default async function PolicyPage() {
+  return <div>p</div>
+}
 /*
 import path from 'path'
 
