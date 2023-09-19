@@ -1,9 +1,11 @@
-const withNextIntl = require('next-intl/plugin')(
+import withNextIntl from 'next-intl/plugin'
+
+const withIntl = withNextIntl(
   // This is the default (also the `src` folder is supported out of the box)
   './i18n.ts'
 )
 
 /** @type {import('next').NextConfig} */
-const nextConfig = withNextIntl({})
+const nextConfig = withIntl({})
 
-module.exports = nextConfig
+export default nextConfig
