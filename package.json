@@ -2,6 +2,7 @@
   "name": "666a",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "prisma:migrate": "yarn ts-node tasks/prisma:migrate.ts",
     "next:dev": "next dev",
