@@ -6,7 +6,7 @@ import { v4 as uuid } from 'uuid'
 import prisma from 'lib/database'
 
 export async function POST(request: Request) {
-  const { name, email, password } = await request.json()
+  const { name, companyCode, email, password } = await request.json()
 
   let user
 
@@ -24,6 +24,13 @@ export async function POST(request: Request) {
     })
   }
 
+  await prisma.subscription.create({
+    data: {
+      userId: user.id,
+      companyCode,
+    },
+  })
+
   const session = await prisma.session.create({
     data: {
       userId: user.id,
@@ -35,7 +42,7 @@ export async function POST(request: Request) {
   const response = NextResponse.json({
     status: 'success',
     id: user.id,
-    destination: '/onboarding',
+    destination: '/dashboard',
   })
 
   response.cookies.set('session', session.secret)
