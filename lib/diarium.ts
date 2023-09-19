@@ -1,5 +1,5 @@
 import _ from 'lodash'
-import * as puppeteer from 'puppeteer'
+import puppeteer from 'puppeteer'
 
 export type DiariumDocument = {
   caseCode: string
