@@ -2,7 +2,6 @@ import path from 'path'
 
 import { sync } from 'glob'
 import _ from 'lodash'
-import { useLocale } from 'next-intl'
 import rehypeClassNames from 'rehype-class-names'
 import rehypeStringify from 'rehype-stringify'
 import remarkParse from 'remark-parse'
@@ -11,7 +10,7 @@ import { read } from 'to-vfile'
 import { unified } from 'unified'
 
 export default async function PolicyPage({ params }: any) {
-  const locale = useLocale()
+  const locale = params.locale
   const filename = path.join('policies', `${params.slug}.${locale}.md`)
 
   const file = await unified()
