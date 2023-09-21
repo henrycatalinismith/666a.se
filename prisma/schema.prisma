@@ -1,0 +1,91 @@
+datasource db {
+  provider = "postgresql"
+  url = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum NotificationEmailStatus {
+  PENDING
+  SUCCESS
+  ABORTED
+}
+
+// POST /api/notifications
+// POST /api/notifications/{id}/email
+
+model Notification {
+  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  created DateTime @default(now())
+  updated DateTime @default(now())
+  subscriptionId String @db.Uuid
+  userId String @db.Uuid
+  emailStatus NotificationEmailStatus
+  caseName String
+  companyCode String
+  documentCode String
+  documentDate String
+  documentType String
+  subscription Subscription @relation(fields: [subscriptionId], references: [id])
+  user User @relation(fields: [userId], references: [id])
+}
+
+enum RoleName {
+  DEVELOPER
+}
+
+enum RoleStatus {
+  ACTIVE
+  REVOKED
+}
+
+model Role {
+  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  created DateTime  @default(now())
+  updated DateTime  @default(now())
+  userId String @db.Uuid
+  name RoleName
+  status RoleStatus
+  user User @relation(fields: [userId], references: [id])
+}
+
+enum SessionStatus {
+  ACTIVE
+  REVOKED
+}
+
+model Session {
+  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  created DateTime @default(now())
+  updated DateTime @default(now())
+  userId String @db.Uuid
+  secret String
+  status SessionStatus
+  user User @relation(fields: [userId], references: [id])
+}
+
+model Subscription {
+  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  created DateTime @default(now())
+  updated DateTime @default(now())
+  userId String @db.Uuid
+  companyCode String
+  notifications Notification[]
+  user User @relation(fields: [userId], references: [id])
+}
+
+model User {
+  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  created DateTime @default(now())
+  updated DateTime @default(now())
+  name String
+  email String @unique
+  password String
+  notifications Notification[]
+  roles Role[]
+  sessions Session[]
+  subscriptions Subscription[]
+}

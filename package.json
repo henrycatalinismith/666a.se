@@ -10,10 +10,12 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@prisma/client": "^5.3.1",
     "@types/lodash": "^4.14.198",
     "@types/node": "20.6.3",
     "@types/react": "18.2.22",
     "@types/react-dom": "18.2.7",
+    "@vercel/postgres": "^0.4.2",
     "autoprefixer": "10.4.15",
     "eslint": "8.49.0",
     "eslint-config-next": "13.5.1",
@@ -22,6 +24,7 @@
     "next": "13.5.1",
     "next-intl": "3.0.0-beta.17",
     "postcss": "8.4.30",
+    "prisma": "^5.3.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "rehype-class-names": "^1.0.14",
