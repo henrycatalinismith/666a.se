@@ -1,5 +1,5 @@
 import { SessionStatus } from '@prisma/client'
-import bcrypt from 'bcrypt'
+import bcryptjs from 'bcryptjs'
 import { NextResponse } from 'next/server'
 import { v4 as uuid } from 'uuid'
 
@@ -15,7 +15,7 @@ export async function POST(request: Request) {
       data: {
         name,
         email,
-        password: await bcrypt.hash(password, 10),
+        password: await bcryptjs.hashSync(password, 10),
       },
     })
   } catch (e) {
