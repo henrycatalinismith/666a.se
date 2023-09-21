@@ -2,6 +2,7 @@ import { RoleName } from '@prisma/client'
 
 import { NotificationIconDefinition } from 'entities/Notification'
 import { SubscriptionIconDefinition } from 'entities/Subscription'
+import { RefreshIconDefinition } from 'entities/Refresh'
 import { UserIconDefinition } from 'entities/User'
 import { requireUser } from 'lib/authentication'
 import prisma from 'lib/database'
@@ -14,6 +15,7 @@ export default async function Admin() {
   }
 
   const notifications = await prisma.notification.count()
+  const refreshes = await prisma.refresh.count()
   const subscriptions = await prisma.subscription.count()
   const users = await prisma.user.count()
 
@@ -27,6 +29,14 @@ export default async function Admin() {
               text: 'Notifications',
               subtitle: `${notifications}`,
               href: '/admin/notifications',
+              show: true,
+            },
+
+            {
+              icon: RefreshIconDefinition,
+              text: 'Refreshes',
+              subtitle: `${refreshes}`,
+              href: '/admin/refreshes',
               show: true,
             },
 
@@ -45,6 +55,7 @@ export default async function Admin() {
               href: '/admin/users',
               show: true,
             },
+
           ]}
         />
       </div>
