@@ -19,6 +19,12 @@ export async function POST(request: any) {
     },
   })
 
+  const refresh =await prisma.refresh.create({
+    data: {
+      subscriptionId: subscription.id
+    }
+  })
+
   const today = new Date()
 
   const result = await searchDiarium({
@@ -33,6 +39,7 @@ export async function POST(request: any) {
     await prisma.notification.create({
       data: {
         subscriptionId: subscription.id,
+        refreshId: refresh.id,
         userId: subscription.user.id,
         companyCode: subscription.companyCode,
         emailStatus: NotificationEmailStatus.PENDING,
