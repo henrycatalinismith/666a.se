@@ -51,4 +51,8 @@ https://666a.se/unsubscribe/e2a10b0f-bcbe-4977-9d38-5ea1d6b26c15
   } catch (error) {
     console.error(error)
   }
+
+  return NextResponse.json({
+    success: true
+  })
 }
