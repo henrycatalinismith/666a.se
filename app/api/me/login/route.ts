@@ -1,5 +1,5 @@
 import { RoleName, RoleStatus, SessionStatus } from '@prisma/client'
-import bcrypt from 'bcrypt'
+import bcryptjs from 'bcryptjs'
 import _ from 'lodash'
 import { NextResponse } from 'next/server'
 import { v4 as uuid } from 'uuid'
@@ -18,7 +18,7 @@ export async function POST(request: Request) {
     return fail()
   }
 
-  const valid = await bcrypt.compare(password, user.password)
+  const valid = await bcryptjs.compareSync(password, user.password)
   if (!valid) {
     return fail()
   }

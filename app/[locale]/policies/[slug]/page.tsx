@@ -1,6 +1,6 @@
+import fs from 'fs'
 import path from 'path'
 
-import { sync } from 'glob'
 import _ from 'lodash'
 import rehypeClassNames from 'rehype-class-names'
 import rehypeStringify from 'rehype-stringify'
@@ -36,9 +36,8 @@ export default async function PolicyPage({ params }: any) {
 }
 
 export async function generateStaticParams(): Promise<any> {
-  const files = sync(`policies/*.md`)
+  const files = fs.readdirSync('policies')
   const params = _.chain(files)
-    .map(f => f.split('/')[1])
     .map(f => f.split('.'))
     .map(([slug, locale]) => ({ slug, locale }))
     .value()
