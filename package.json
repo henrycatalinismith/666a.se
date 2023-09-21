@@ -58,5 +58,8 @@
     "unified": "^11.0.3",
     "uuid": "^9.0.1"
   },
-  "devDependencies": {}
+  "devDependencies": {},
+  "resolutions": {
+    "gauge": "5.0.0"
+  }
 }
