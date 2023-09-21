@@ -43,4 +43,8 @@ export async function POST(request: any) {
       },
     })
   }
+
+  return NextResponse.json({
+    success: true
+  })
 }
