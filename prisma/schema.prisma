@@ -22,6 +22,7 @@ model Notification {
   created DateTime @default(now())
   updated DateTime @default(now())
   subscriptionId String @db.Uuid
+  refreshId String @db.Uuid
   userId String @db.Uuid
   emailStatus NotificationEmailStatus
   caseName String
@@ -29,8 +30,18 @@ model Notification {
   documentCode String
   documentDate String
   documentType String
+  refresh Refresh @relation(fields: [refreshId], references: [id])
   subscription Subscription @relation(fields: [subscriptionId], references: [id])
   user User @relation(fields: [userId], references: [id])
+}
+
+model Refresh {
+  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  created DateTime @default(now())
+  updated DateTime @default(now())
+  subscriptionId String @db.Uuid
+  notifications Notification[]
+  subscription Subscription @relation(fields: [subscriptionId], references: [id])
 }
 
 enum RoleName {
@@ -74,6 +85,7 @@ model Subscription {
   userId String @db.Uuid
   companyCode String
   notifications Notification[]
+  refreshes Refresh[]
   user User @relation(fields: [userId], references: [id])
 }
 
