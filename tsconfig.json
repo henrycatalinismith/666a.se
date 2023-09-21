@@ -19,7 +19,9 @@
       }
     ],
     "paths": {
+      "components/*": ["./forms/*"],
       "forms/*": ["./forms/*"],
+      "inngest/*": ["./forms/*"],
       "lib/*": ["./lib/*"],
       "ui/*": ["./ui/*"]
     }
