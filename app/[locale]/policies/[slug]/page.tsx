@@ -37,7 +37,10 @@ export default async function PolicyPage({ params }: any) {
 
 export async function generateStaticParams(): Promise<any> {
   const files = sync(`policies/*.md`)
-  const slugs = _.chain(files).map(f => f.split('.')[0]).map(f => f.split('/')[1]).uniq().value()
-  console.log(slugs)
-  return slugs.map((slug) => ({ slug }))
+  const params = _.chain(files)
+    .map(f => f.split('/')[1])
+    .map(f => f.split('.'))
+    .map(([slug, locale]) => ({ slug, locale }))
+    .value()
+  return params
 }
