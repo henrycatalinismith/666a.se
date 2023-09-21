@@ -20,6 +20,7 @@
     ],
     "paths": {
       "components/*": ["./components/*"],
+      "entities/*": ["./entities/*"],
       "forms/*": ["./forms/*"],
       "lib/*": ["./lib/*"],
       "ui/*": ["./ui/*"]
