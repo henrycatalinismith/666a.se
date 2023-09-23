@@ -13,9 +13,8 @@ export default async function Refreshes() {
   }
 
   const refreshes = await prisma.refresh.findMany({
-    orderBy: {
-      created: 'desc',
-    },
+    include: { search: true, subscription: true },
+    orderBy: { created: 'desc' },
   })
 
   return (
@@ -31,8 +30,8 @@ export default async function Refreshes() {
           items={refreshes.map((refresh) => ({
             icon: RefreshIconDefinition,
             href: `/admin/refreshes/${refresh.id}`,
-            subtitle: refresh.subscriptionId,
             text: refresh.id,
+            subtitle: `${refresh.subscription.companyCode} ${refresh.search.status}`,
             show: true,
           }))}
         />
