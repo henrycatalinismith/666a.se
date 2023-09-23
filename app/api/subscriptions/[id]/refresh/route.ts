@@ -93,23 +93,19 @@ export async function POST(request: any) {
     })),
   })
 
-  console.log(result.hitCount)
-  console.log(result.rows.length)
-  for (const row of result.rows) {
-    await prisma.notification.create({
-      data: {
-        subscriptionId: subscription.id,
-        refreshId: refresh.id,
-        userId: subscription.user.id,
-        companyCode: subscription.companyCode,
-        emailStatus: NotificationEmailStatus.Pending,
-        caseName: row.caseName,
-        documentCode: row.documentCode,
-        documentDate: row.documentDate,
-        documentType: row.documentType,
-      },
-    })
-  }
+  const searchResults = await prisma.searchResult.findMany({
+    where: { searchId: search.id },
+  })
+
+  await prisma.notification.createMany({
+    data: searchResults.map(searchResult => ({
+      subscriptionId: subscription.id,
+      refreshId: refresh.id,
+      userId: subscription.user.id,
+      searchResultId: searchResult.id,
+      emailStatus: NotificationEmailStatus.Pending,
+    }))
+  })
 
   return NextResponse.json({
     success: true,
