@@ -1,4 +1,4 @@
-import { RoleName } from '@prisma/client'
+import { RoleName, SearchStatus } from '@prisma/client'
 import Link from 'next/link'
 
 import {
@@ -17,6 +17,8 @@ import prisma from 'lib/database'
 import { EntityList } from 'ui/EntityList'
 import { IconHeading } from 'ui/IconHeading'
 import { LittleHeading } from 'ui/LittleHeading'
+import { Relations } from 'components/Relations'
+import { SearchIconDefinition } from 'entities/Search'
 
 export default async function Refresh({ params }: any) {
   const currentUser = await requireUser([RoleName.Developer])
@@ -26,7 +28,7 @@ export default async function Refresh({ params }: any) {
 
   const refresh = await prisma.refresh.findFirstOrThrow({
     where: { id: params.id },
-    include: { notifications: true, subscription: true },
+    include: { notifications: true, search: true, subscription: true },
   })
 
   return (
@@ -38,19 +40,26 @@ export default async function Refresh({ params }: any) {
           subtitle={`${refresh.id}`}
         />
 
-        <IconDefinitionList>
-          <IconDefinitionListRow>
-            <IconDefinitionListIcon icon={SubscriptionIconDefinition} />
-            <IconDefinitionListItem>
-              <IconDefinitionListTerm>Subscription</IconDefinitionListTerm>
-              <IconDefinitionListDefinition>
-                <Link href={`/admin/subscriptions/${refresh.subscription.id}`}>
-                  {refresh.subscription.id}
-                </Link>
-              </IconDefinitionListDefinition>
-            </IconDefinitionListItem>
-          </IconDefinitionListRow>
-        </IconDefinitionList>
+        <Relations
+          rows={[
+            {
+              icon: SubscriptionIconDefinition,
+              type: 'link',
+              text: 'Subscription',
+              subtitle: refresh.subscription.companyCode,
+              href: `/admin/subscriptions/${refresh.subscription.id}`,
+              show: true,
+            },
+            {
+              icon: SearchIconDefinition,
+              type: 'link',
+              text: 'Search',
+              subtitle: refresh.search.status === SearchStatus.Success ? refresh.search.hitCount! : refresh.search.status,
+              href: `/admin/searches/${refresh.search.id}`,
+              show: true,
+            },
+        ]}
+        />
 
         <LittleHeading>Notifications</LittleHeading>
 
