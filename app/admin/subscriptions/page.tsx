@@ -7,7 +7,7 @@ import { EntityList } from 'ui/EntityList'
 import { IconHeading } from 'ui/IconHeading'
 
 export default async function Subscriptions() {
-  const user = await requireUser([RoleName.DEVELOPER])
+  const user = await requireUser([RoleName.Developer])
   if (!user) {
     return <></>
   }

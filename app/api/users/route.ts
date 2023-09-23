@@ -35,7 +35,7 @@ export async function POST(request: Request) {
     data: {
       userId: user.id,
       secret: uuid(),
-      status: SessionStatus.ACTIVE,
+      status: SessionStatus.Active,
     },
   })
 
