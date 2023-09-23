@@ -1,9 +1,9 @@
 import { RoleName } from '@prisma/client'
 
-import { RefreshButton } from 'components/RefreshButton'
 import { CompanyCode } from 'components/CompanyCode'
 import { DeleteButton } from 'components/DeleteButton'
 import { IconDefinitionList } from 'components/IconDefinitionList'
+import { RefreshButton } from 'components/RefreshButton'
 import { SubscriptionIconDefinition } from 'entities/Subscription'
 import { requireUser } from 'lib/authentication'
 import prisma from 'lib/database'

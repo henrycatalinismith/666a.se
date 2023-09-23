@@ -38,7 +38,7 @@ export default async function PolicyPage({ params }: any) {
 export async function generateStaticParams(): Promise<any> {
   const files = fs.readdirSync('policies')
   const params = _.chain(files)
-    .map(f => f.split('.'))
+    .map((f) => f.split('.'))
     .map(([slug, locale]) => ({ slug, locale }))
     .value()
   return params

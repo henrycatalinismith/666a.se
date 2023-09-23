@@ -1,12 +1,19 @@
 import { RoleName } from '@prisma/client'
+import Link from 'next/link'
 
-import { IconDefinitionList, IconDefinitionListDefinition, IconDefinitionListIcon, IconDefinitionListItem, IconDefinitionListRow, IconDefinitionListTerm } from 'components/IconDefinitionList'
+import {
+  IconDefinitionList,
+  IconDefinitionListDefinition,
+  IconDefinitionListIcon,
+  IconDefinitionListItem,
+  IconDefinitionListRow,
+  IconDefinitionListTerm,
+} from 'components/IconDefinitionList'
 import { NotificationIconDefinition } from 'entities/Notification'
 import { RefreshIconDefinition } from 'entities/Refresh'
 import { SubscriptionIconDefinition } from 'entities/Subscription'
 import { requireUser } from 'lib/authentication'
 import prisma from 'lib/database'
-import Link from 'next/link'
 import { EntityList } from 'ui/EntityList'
 import { IconHeading } from 'ui/IconHeading'
 import { LittleHeading } from 'ui/LittleHeading'

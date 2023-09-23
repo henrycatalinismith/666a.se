@@ -1,8 +1,9 @@
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { NextIntlClientProvider } from 'next-intl'
-import { NavBar } from 'ui/NavBar'
+
 import { sessionUser } from 'lib/authentication'
+import { NavBar } from 'ui/NavBar'
 
 export function generateStaticParams() {
   return [{ locale: 'en' }, { locale: 'de' }]
@@ -27,26 +28,26 @@ export default async function LocaleLayout({
   }
 
   const links = user
-  ? [
-      {
-        href: `/${locale}/dashboard`,
-        text: messages.NavBar.dashboard,
-      },
-      {
-        href: `/${locale}/logout`,
-        text: messages.NavBar.logout,
-      },
-    ]
-  : [
-      {
-        href: `/${locale}/login`,
-        text: messages.NavBar.login,
-      },
-      {
-        href: `/${locale}/register`,
-        text: messages.NavBar.register,
-      },
-    ]
+    ? [
+        {
+          href: `/${locale}/dashboard`,
+          text: messages.NavBar.dashboard,
+        },
+        {
+          href: `/${locale}/logout`,
+          text: messages.NavBar.logout,
+        },
+      ]
+    : [
+        {
+          href: `/${locale}/login`,
+          text: messages.NavBar.login,
+        },
+        {
+          href: `/${locale}/register`,
+          text: messages.NavBar.register,
+        },
+      ]
 
   return (
     <html lang={locale}>
