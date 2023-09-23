@@ -12,7 +12,7 @@ export async function POST(request: Request) {
   const fail = () => NextResponse.json({ status: 'failure' })
   const user = await prisma.user.findFirst({
     where: { email },
-    include: { roles: { where: { status: RoleStatus.ACTIVE } } },
+    include: { roles: { where: { status: RoleStatus.Active } } },
   })
   if (!user) {
     return fail()
@@ -27,12 +27,12 @@ export async function POST(request: Request) {
     data: {
       userId: user.id,
       secret: uuid(),
-      status: SessionStatus.ACTIVE,
+      status: SessionStatus.Active,
     },
   })
 
   const activeRoles = _.map(user.roles, 'name')
-  const destination = activeRoles.includes(RoleName.DEVELOPER)
+  const destination = activeRoles.includes(RoleName.Developer)
     ? '/admin'
     : '/dashboard'
   const response = NextResponse.json({ status: 'success', destination })

@@ -5,7 +5,7 @@ import { requireUser } from 'lib/authentication'
 import prisma from 'lib/database'
 
 export async function DELETE(request: any) {
-  const user = await requireUser([RoleName.DEVELOPER])
+  const user = await requireUser([RoleName.Developer])
   if (!user) {
     return NextResponse.json({ status: 'failure' })
   }

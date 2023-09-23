@@ -1,20 +1,20 @@
 import { RoleName } from '@prisma/client'
 
-import { UserIconDefinition } from 'entities/User'
+import { SearchIconDefinition } from 'entities/Search'
 import { requireUser } from 'lib/authentication'
 import prisma from 'lib/database'
 import { EntityList } from 'ui/EntityList'
 import { IconHeading } from 'ui/IconHeading'
 
-export default async function Users() {
+export default async function Searches() {
   const user = await requireUser([RoleName.Developer])
   if (!user) {
     return <></>
   }
 
-  const users = await prisma.user.findMany({
+  const searches = await prisma.search.findMany({
     orderBy: {
-      created: 'asc',
+      created: 'desc',
     },
   })
 
@@ -22,18 +22,17 @@ export default async function Users() {
     <>
       <div className="container flex flex-col pt-8 gap-8">
         <IconHeading
-          icon={UserIconDefinition}
-          title="Users"
-          subtitle={`${users.length}`}
-          newUrl="/admin/users/new"
+          icon={SearchIconDefinition}
+          title="Searches"
+          subtitle={`${searches.length}`}
         />
 
         <EntityList
-          items={users.map((user) => ({
-            icon: UserIconDefinition,
-            href: `/admin/users/${user.id}`,
-            subtitle: user.email,
-            text: user.id,
+          items={searches.map((search) => ({
+            icon: SearchIconDefinition,
+            href: `/admin/searches/${search.id}`,
+            subtitle: search.status,
+            text: search.id,
             show: true,
           }))}
         />

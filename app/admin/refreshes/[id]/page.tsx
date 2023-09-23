@@ -19,7 +19,7 @@ import { IconHeading } from 'ui/IconHeading'
 import { LittleHeading } from 'ui/LittleHeading'
 
 export default async function Refresh({ params }: any) {
-  const currentUser = await requireUser([RoleName.DEVELOPER])
+  const currentUser = await requireUser([RoleName.Developer])
   if (!currentUser) {
     return <></>
   }

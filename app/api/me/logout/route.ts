@@ -11,7 +11,7 @@ export async function POST() {
   }
 
   await prisma.session.update({
-    data: { status: SessionStatus.REVOKED },
+    data: { status: SessionStatus.Revoked },
     where: { id: session.id },
   })
 

@@ -11,10 +11,10 @@ export async function sessionUser() {
   const session = await prisma.session.findFirst({
     where: {
       secret,
-      status: SessionStatus.ACTIVE,
+      status: SessionStatus.Active,
     },
     include: {
-      user: { include: { roles: { where: { status: RoleStatus.ACTIVE } } } },
+      user: { include: { roles: { where: { status: RoleStatus.Active } } } },
     },
   })
   if (!session) {
@@ -30,7 +30,7 @@ export async function requireUser(requiredRoles?: RoleName[]) {
   const session = await prisma.session.findFirst({
     where: { secret },
     include: {
-      user: { include: { roles: { where: { status: RoleStatus.ACTIVE } } } },
+      user: { include: { roles: { where: { status: RoleStatus.Active } } } },
     },
   })
 
