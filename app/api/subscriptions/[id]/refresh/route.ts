@@ -19,7 +19,8 @@ export async function POST(request: any) {
     },
   })
 
-  const refresh =await prisma.refresh.create({
+
+  const refresh = await prisma.refresh.create({
     data: {
       subscriptionId: subscription.id
     }
