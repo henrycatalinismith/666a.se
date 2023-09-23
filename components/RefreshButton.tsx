@@ -13,9 +13,10 @@ export const RefreshButton: FC<RefreshButtonProps> = ({ id }) => {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
     }
-    const response = await fetch(`/api/subscriptions/${id}/refresh`, params).then(
-      (response) => response.json()
-    )
+    const response = await fetch(
+      `/api/subscriptions/${id}/refresh`,
+      params
+    ).then((response) => response.json())
     console.log(response)
   }
   return (

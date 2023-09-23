@@ -1,8 +1,8 @@
 import { RoleName } from '@prisma/client'
 
 import { NotificationIconDefinition } from 'entities/Notification'
-import { SubscriptionIconDefinition } from 'entities/Subscription'
 import { RefreshIconDefinition } from 'entities/Refresh'
+import { SubscriptionIconDefinition } from 'entities/Subscription'
 import { UserIconDefinition } from 'entities/User'
 import { requireUser } from 'lib/authentication'
 import prisma from 'lib/database'
@@ -55,7 +55,6 @@ export default async function Admin() {
               href: '/admin/users',
               show: true,
             },
-
           ]}
         />
       </div>

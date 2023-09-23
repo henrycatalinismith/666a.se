@@ -7,8 +7,6 @@ import { FC } from 'react'
 
 export const RefreshIconDefinition = faRotate
 
-export const RefreshIcon: FC<Omit<FontAwesomeIconProps, 'icon'>> = (
-  props
-) => {
+export const RefreshIcon: FC<Omit<FontAwesomeIconProps, 'icon'>> = (props) => {
   return <FontAwesomeIcon {...props} icon={RefreshIconDefinition} />
 }
