@@ -8,10 +8,69 @@ generator client {
   provider = "prisma-client-js"
 }
 
+enum SearchStatus {
+  Pending
+  Active
+  Success
+  Error
+}
+
+model Search {
+  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  created DateTime @default(now())
+  updated DateTime @default(now())
+  status SearchStatus
+  hitCount String?
+  refreshes Refresh[]
+  parameters SearchParameter[]
+  results SearchResult[]
+  @@map("searches")
+}
+
+enum SearchParameterName {
+  FromDate
+  OnlyActive
+  OrganisationNumber
+  SelectedCounty
+  ShowToolbar
+  ToDate
+  id
+  page
+  sortDirection
+  sortOrder
+}
+
+model SearchParameter {
+  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  created DateTime @default(now())
+  updated DateTime @default(now())
+  searchId String @db.Uuid
+  name SearchParameterName
+  value String
+  search Search @relation(fields: [searchId], references: [id])
+  @@map("search_parameters")
+}
+
+model SearchResult {
+  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  created DateTime @default(now())
+  updated DateTime @default(now())
+  searchId String @db.Uuid
+  caseName String
+  companyName String
+  companyCode String
+  documentCode String
+  documentDate String
+  documentType String
+  notifications Notification[]
+  search Search @relation(fields: [searchId], references: [id])
+  @@map("search_results")
+}
+
 enum NotificationEmailStatus {
-  PENDING
-  SUCCESS
-  ABORTED
+  Pending
+  Success
+  Aborted
 }
 
 // POST /api/notifications
@@ -24,15 +83,13 @@ model Notification {
   subscriptionId String @db.Uuid
   refreshId String @db.Uuid
   userId String @db.Uuid
+  searchResultId String @db.Uuid
   emailStatus NotificationEmailStatus
-  caseName String
-  companyCode String
-  documentCode String
-  documentDate String
-  documentType String
   refresh Refresh @relation(fields: [refreshId], references: [id])
+  searchResult SearchResult @relation(fields: [searchResultId], references: [id])
   subscription Subscription @relation(fields: [subscriptionId], references: [id])
   user User @relation(fields: [userId], references: [id])
+  @@map("notifications")
 }
 
 model Refresh {
@@ -40,17 +97,20 @@ model Refresh {
   created DateTime @default(now())
   updated DateTime @default(now())
   subscriptionId String @db.Uuid
+  searchId String @db.Uuid
   notifications Notification[]
+  search Search @relation(fields: [searchId], references: [id])
   subscription Subscription @relation(fields: [subscriptionId], references: [id])
+  @@map("refreshes")
 }
 
 enum RoleName {
-  DEVELOPER
+  Developer
 }
 
 enum RoleStatus {
-  ACTIVE
-  REVOKED
+  Active
+  Revoked
 }
 
 model Role {
@@ -61,11 +121,12 @@ model Role {
   name RoleName
   status RoleStatus
   user User @relation(fields: [userId], references: [id])
+  @@map("roles")
 }
 
 enum SessionStatus {
-  ACTIVE
-  REVOKED
+  Active
+  Revoked
 }
 
 model Session {
@@ -76,6 +137,7 @@ model Session {
   secret String
   status SessionStatus
   user User @relation(fields: [userId], references: [id])
+  @@map("sessions")
 }
 
 model Subscription {
@@ -87,6 +149,7 @@ model Subscription {
   notifications Notification[]
   refreshes Refresh[]
   user User @relation(fields: [userId], references: [id])
+  @@map("subscriptions")
 }
 
 model User {
@@ -100,4 +163,5 @@ model User {
   roles Role[]
   sessions Session[]
   subscriptions Subscription[]
+  @@map("users")
 }

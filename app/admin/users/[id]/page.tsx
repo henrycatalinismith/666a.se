@@ -7,7 +7,7 @@ import prisma from 'lib/database'
 import { IconHeading } from 'ui/IconHeading'
 
 export default async function User({ params }: any) {
-  const currentUser = await requireUser([RoleName.DEVELOPER])
+  const currentUser = await requireUser([RoleName.Developer])
   if (!currentUser) {
     return <></>
   }

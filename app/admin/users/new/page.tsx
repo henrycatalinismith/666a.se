@@ -4,7 +4,7 @@ import { NewUser } from 'forms/NewUser'
 import { requireUser } from 'lib/authentication'
 
 export default async function NewUserPage() {
-  const user = await requireUser([RoleName.DEVELOPER])
+  const user = await requireUser([RoleName.Developer])
   if (!user) {
     return <></>
   }

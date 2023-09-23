@@ -4,7 +4,7 @@ import { NewSubscription } from 'forms/NewSubscription'
 import { requireUser } from 'lib/authentication'
 
 export default async function NewSubscriptionPage() {
-  const user = await requireUser([RoleName.DEVELOPER])
+  const user = await requireUser([RoleName.Developer])
   if (!user) {
     return <></>
   }
