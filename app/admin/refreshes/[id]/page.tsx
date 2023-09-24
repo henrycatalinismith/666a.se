@@ -1,24 +1,15 @@
 import { RoleName, SearchStatus } from '@prisma/client'
-import Link from 'next/link'
 
-import {
-  IconDefinitionList,
-  IconDefinitionListDefinition,
-  IconDefinitionListIcon,
-  IconDefinitionListItem,
-  IconDefinitionListRow,
-  IconDefinitionListTerm,
-} from 'components/IconDefinitionList'
+import { Relations } from 'components/Relations'
 import { NotificationIconDefinition } from 'entities/Notification'
 import { RefreshIconDefinition } from 'entities/Refresh'
+import { SearchIconDefinition } from 'entities/Search'
 import { SubscriptionIconDefinition } from 'entities/Subscription'
 import { requireUser } from 'lib/authentication'
 import prisma from 'lib/database'
 import { EntityList } from 'ui/EntityList'
 import { IconHeading } from 'ui/IconHeading'
 import { LittleHeading } from 'ui/LittleHeading'
-import { Relations } from 'components/Relations'
-import { SearchIconDefinition } from 'entities/Search'
 
 export default async function Refresh({ params }: any) {
   const currentUser = await requireUser([RoleName.Developer])
@@ -54,11 +45,14 @@ export default async function Refresh({ params }: any) {
               icon: SearchIconDefinition,
               type: 'link',
               text: 'Search',
-              subtitle: refresh.search.status === SearchStatus.Success ? refresh.search.hitCount! : refresh.search.status,
+              subtitle:
+                refresh.search.status === SearchStatus.Success
+                  ? refresh.search.hitCount!
+                  : refresh.search.status,
               href: `/admin/searches/${refresh.search.id}`,
               show: true,
             },
-        ]}
+          ]}
         />
 
         <LittleHeading>Notifications</LittleHeading>
