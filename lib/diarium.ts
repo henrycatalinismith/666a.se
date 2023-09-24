@@ -1,6 +1,5 @@
 import _ from 'lodash'
-// import puppeteer from 'puppeteer'
-import chromium from 'chrome-aws-lambda'
+import puppeteer from 'puppeteer'
 
 export type DiariumDocument = {
   caseCode: string
@@ -47,7 +46,7 @@ type DiariumSearchResult = {
 
 async function launchBrowser(): Promise<any> {
   if (!(global as any).browser) {
-    ;(global as any).browser = await chromium.puppeteer.launch({ headless: 'new' })
+    ;(global as any).browser = await puppeteer.launch({ headless: 'new' })
   }
   return (global as any).browser
 }
