@@ -8,65 +8,6 @@ generator client {
   provider = "prisma-client-js"
 }
 
-enum SearchStatus {
-  Pending
-  Active
-  Success
-  Error
-}
-
-model Search {
-  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  created DateTime @default(now())
-  updated DateTime @default(now())
-  status SearchStatus
-  hitCount String?
-  refreshes Refresh[]
-  parameters SearchParameter[]
-  results SearchResult[]
-  @@map("searches")
-}
-
-enum SearchParameterName {
-  FromDate
-  OnlyActive
-  OrganisationNumber
-  SelectedCounty
-  ShowToolbar
-  ToDate
-  id
-  page
-  sortDirection
-  sortOrder
-}
-
-model SearchParameter {
-  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  created DateTime @default(now())
-  updated DateTime @default(now())
-  searchId String @db.Uuid
-  name SearchParameterName
-  value String
-  search Search @relation(fields: [searchId], references: [id])
-  @@map("search_parameters")
-}
-
-model SearchResult {
-  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  created DateTime @default(now())
-  updated DateTime @default(now())
-  searchId String @db.Uuid
-  caseName String
-  companyName String
-  companyCode String
-  documentCode String
-  documentDate String
-  documentType String
-  notifications Notification[]
-  search Search @relation(fields: [searchId], references: [id])
-  @@map("search_results")
-}
-
 enum NotificationEmailStatus {
   Pending
   Success
@@ -139,6 +80,66 @@ model Session {
   user User @relation(fields: [userId], references: [id])
   @@map("sessions")
 }
+
+enum SearchStatus {
+  Pending
+  Active
+  Success
+  Error
+}
+
+model Search {
+  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  created DateTime @default(now())
+  updated DateTime @default(now())
+  status SearchStatus
+  hitCount String?
+  refreshes Refresh[]
+  parameters SearchParameter[]
+  results SearchResult[]
+  @@map("searches")
+}
+
+enum SearchParameterName {
+  FromDate
+  OnlyActive
+  OrganisationNumber
+  SelectedCounty
+  ShowToolbar
+  ToDate
+  id
+  page
+  sortDirection
+  sortOrder
+}
+
+model SearchParameter {
+  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  created DateTime @default(now())
+  updated DateTime @default(now())
+  searchId String @db.Uuid
+  name SearchParameterName
+  value String
+  search Search @relation(fields: [searchId], references: [id])
+  @@map("search_parameters")
+}
+
+model SearchResult {
+  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  created DateTime @default(now())
+  updated DateTime @default(now())
+  searchId String @db.Uuid
+  caseName String
+  companyName String
+  companyCode String
+  documentCode String
+  documentDate String
+  documentType String
+  notifications Notification[]
+  search Search @relation(fields: [searchId], references: [id])
+  @@map("search_results")
+}
+
 
 model Subscription {
   id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
