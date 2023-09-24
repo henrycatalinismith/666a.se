@@ -1350,13 +1350,6 @@ chokidar@^3.5.3:
   optionalDependencies:
     fsevents "~2.3.2"
 
-chrome-aws-lambda@^10.1.0:
-  version "10.1.0"
-  resolved "https://registry.yarnpkg.com/chrome-aws-lambda/-/chrome-aws-lambda-10.1.0.tgz#ac43b4cdfc1fbb2275c62effada560858099501e"
-  integrity sha512-NZQVf+J4kqG4sVhRm3WNmOfzY0OtTSm+S8rg77pwePa9RCYHzhnzRs8YvNI6L9tALIW6RpmefWiPURt3vURXcw==
-  dependencies:
-    lambdafs "^2.0.3"
-
 chromium-bidi@0.4.27:
   version "0.4.27"
   resolved "https://registry.yarnpkg.com/chromium-bidi/-/chromium-bidi-0.4.27.tgz#6b12b9cb4d43f66803258cb3b2c4a857e5911cc7"
@@ -3024,13 +3017,6 @@ keyv@^4.5.3:
   dependencies:
     json-buffer "3.0.1"
 
-lambdafs@^2.0.3:
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/lambdafs/-/lambdafs-2.1.1.tgz#4bf8d3037b6c61bbb4a22ab05c73ee47964c25ed"
-  integrity sha512-x5k8JcoJWkWLvCVBzrl4pzvkEHSgSBqFjg3Dpsc4AcTMq7oUMym4cL/gRTZ6VM4mUMY+M0dIbQ+V1c1tsqqanQ==
-  dependencies:
-    tar-fs "^2.1.1"
-
 language-subtag-registry@~0.3.2:
   version "0.3.22"
   resolved "https://registry.yarnpkg.com/language-subtag-registry/-/language-subtag-registry-0.3.22.tgz#2e1500861b2e457eba7e7ae86877cbd08fa1fd1d"
@@ -4492,7 +4478,7 @@ tapable@^2.2.0:
   resolved "https://registry.yarnpkg.com/tapable/-/tapable-2.2.1.tgz#1967a73ef4060a82f12ab96af86d52fdb76eeca0"
   integrity sha512-GNzQvQTOIP6RyTfE2Qxb8ZVlNmw0n88vp1szwWRimP02mnTsx3Wtn5qRdqY9w2XduFNUgvOwhNnQsjwCp+kqaQ==
 
-tar-fs@*, tar-fs@3.0.4:
+tar-fs@3.0.4:
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/tar-fs/-/tar-fs-3.0.4.tgz#a21dc60a2d5d9f55e0089ccd78124f1d3771dbbf"
   integrity sha512-5AFQU8b9qLfZCX9zp2duONhPmZv0hGYiBPJsyUdqMjzq/mqVpy/rEUSeHk1+YitmxugaptgBh5oDGU3VsAJq4w==
