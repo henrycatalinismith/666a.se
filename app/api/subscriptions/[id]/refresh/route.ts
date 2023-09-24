@@ -98,13 +98,13 @@ export async function POST(request: any) {
   })
 
   await prisma.notification.createMany({
-    data: searchResults.map(searchResult => ({
+    data: searchResults.map((searchResult) => ({
       subscriptionId: subscription.id,
       refreshId: refresh.id,
       userId: subscription.user.id,
       searchResultId: searchResult.id,
       emailStatus: NotificationEmailStatus.Pending,
-    }))
+    })),
   })
 
   return NextResponse.json({

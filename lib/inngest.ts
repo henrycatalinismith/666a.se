@@ -1,5 +1,8 @@
 import { EventSchemas, Inngest } from 'inngest'
 
+import prisma from './database'
+
+/*
 type DayCreated = {
   data: {
     id: string
@@ -41,14 +44,15 @@ type StubCreated = {
     index: number
   }
 }
+*/
 
 type Events = {
-  '666a/day.created': DayCreated
-  '666a/scan.created': ScanCreated
-  '666a/scan.completed': ScanCompleted
-  '666a/chunk.started': ChunkStarted
-  '666a/chunk.completed': ChunkCompleted
-  '666a/stub.created': StubCreated
+  // '666a/day.created': DayCreated
+  // '666a/scan.created': ScanCreated
+  // '666a/scan.completed': ScanCompleted
+  // '666a/chunk.started': ChunkStarted
+  // '666a/chunk.completed': ChunkCompleted
+  // '666a/stub.created': StubCreated
 }
 
 export const inngest = new Inngest({
@@ -56,6 +60,22 @@ export const inngest = new Inngest({
   schemas: new EventSchemas().fromRecord<Events>(),
 })
 
+export const dailySubscriptionRefresh = inngest.createFunction(
+  { name: 'Refresh subscriptions' },
+  { cron: 'TZ=Europe/Stockholm 0 20 * * *' },
+  async ({ step }) => {
+    const subscriptions = await step.run(
+      'Load subscriptions',
+      async () =>
+        await prisma.subscription.findMany({
+          orderBy: { created: 'asc' },
+        })
+    )
+    console.log(subscriptions)
+  }
+)
+
+/*
 export const createScan = inngest.createFunction(
   { name: 'Create scan' },
   { event: '666a/day.created' },
@@ -158,3 +178,4 @@ export const ingestStub = inngest.createFunction(
     )
   }
 )
+*/
