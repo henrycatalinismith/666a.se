@@ -87,6 +87,7 @@ export async function POST(request: any) {
       searchId: search.id,
       caseName: row.caseName,
       companyName: row.companyName,
+      companyCode: '',
       documentCode: row.documentCode,
       documentDate: row.documentDate,
       documentType: row.documentType,
