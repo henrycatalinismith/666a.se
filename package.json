@@ -31,6 +31,7 @@
     "@vercel/postgres": "^0.4.2",
     "autoprefixer": "10.4.15",
     "bcryptjs": "^2.4.3",
+    "chrome-aws-lambda": "^10.1.0",
     "class-variance-authority": "^0.7.0",
     "encoding": "^0.1.13",
     "eslint": "^8.49.0",
