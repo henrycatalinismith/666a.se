@@ -41,3 +41,5 @@ gem "sentry-ruby", "~> 5.11"
 gem "sentry-rails", "~> 5.11"
 
 gem "devise", "~> 4.9"
+
+gem "actionmailer", "~> 7.0"
