@@ -31,3 +31,5 @@ group :development do
   # gem "spring"
 end
 
+
+gem "litestack", "~> 0.3.0"
