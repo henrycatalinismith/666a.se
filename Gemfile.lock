@@ -223,6 +223,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  actionmailer (~> 7.0)
   debug
   devise (~> 4.9)
   dockerfile-rails (>= 1.5)
