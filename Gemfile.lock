@@ -73,6 +73,8 @@ GEM
     debug (1.8.0)
       irb (>= 1.5.0)
       reline (>= 0.3.1)
+    dockerfile-rails (1.5.10)
+      rails (>= 3.0.0)
     erubi (1.12.0)
     globalid (1.2.1)
       activesupport (>= 6.1)
@@ -121,7 +123,11 @@ GEM
     net-smtp (0.4.0)
       net-protocol
     nio4r (2.5.9)
+    nokogiri (1.15.4-aarch64-linux)
+      racc (~> 1.4)
     nokogiri (1.15.4-arm64-darwin)
+      racc (~> 1.4)
+    nokogiri (1.15.4-x86_64-linux)
       racc (~> 1.4)
     oj (3.16.1)
     psych (5.1.0)
@@ -166,6 +172,11 @@ GEM
     reline (0.3.8)
       io-console (~> 0.5)
     ruby2_keywords (0.0.5)
+    sentry-rails (5.11.0)
+      railties (>= 5.0)
+      sentry-ruby (~> 5.11.0)
+    sentry-ruby (5.11.0)
+      concurrent-ruby (~> 1.0, >= 1.0.2)
     sprockets (4.2.1)
       concurrent-ruby (~> 1.0)
       rack (>= 2.2.4, < 4)
@@ -173,9 +184,15 @@ GEM
       actionpack (>= 5.2)
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
+    sqlite3 (1.6.6-aarch64-linux)
     sqlite3 (1.6.6-arm64-darwin)
+    sqlite3 (1.6.6-x86_64-linux)
     stringio (3.0.8)
+    tailwindcss-rails (2.0.30-aarch64-linux)
+      railties (>= 6.0.0)
     tailwindcss-rails (2.0.30-arm64-darwin)
+      railties (>= 6.0.0)
+    tailwindcss-rails (2.0.30-x86_64-linux)
       railties (>= 6.0.0)
     thor (1.2.2)
     tilt (2.3.0)
@@ -188,13 +205,18 @@ GEM
     zeitwerk (2.6.12)
 
 PLATFORMS
+  aarch64-linux
   arm64-darwin-22
+  x86_64-linux
 
 DEPENDENCIES
   debug
+  dockerfile-rails (>= 1.5)
   litestack (~> 0.3.0)
   puma (~> 5.0)
   rails (~> 7.0.8)
+  sentry-rails (~> 5.11)
+  sentry-ruby (~> 5.11)
   sprockets-rails
   sqlite3 (~> 1.4)
   tailwindcss-rails
