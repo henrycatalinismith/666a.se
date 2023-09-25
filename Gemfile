@@ -39,3 +39,5 @@ gem "dockerfile-rails", ">= 1.5", :group => :development
 gem "sentry-ruby", "~> 5.11"
 
 gem "sentry-rails", "~> 5.11"
+
+gem "devise", "~> 4.9"
