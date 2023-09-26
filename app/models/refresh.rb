@@ -1,5 +1,6 @@
 class Refresh < ApplicationRecord
   belongs_to :subscription
+  has_many :notifications
   has_many :searches
 
   enum status: {

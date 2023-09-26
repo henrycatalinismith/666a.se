@@ -12,6 +12,16 @@
     <% end %>
   </p>
 
+  <% if @user.notifications.count > 0 %>
+    <ol>
+      <% @user.notifications.each do |notification| %>
+        <li>
+          <%= notification.result.document_code %>
+        </li>
+      <% end %>
+    </ol>
+  <% end %>
+
   <div class="flex flex-row gap-4">
     <%= button_to(
       "Sign out",
