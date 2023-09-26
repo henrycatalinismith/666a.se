@@ -10,13 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_09_26_191248) do
+ActiveRecord::Schema[7.1].define(version: 2023_09_26_193516) do
   create_table "refreshes", id: :string, default: -> { "ULID()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "subscription_id", null: false
     t.integer "status"
+    t.string "search_id", null: false
+    t.index ["search_id"], name: "index_refreshes_on_search_id"
     t.index ["subscription_id"], name: "index_refreshes_on_subscription_id"
+  end
+
+  create_table "searches", id: :string, default: -> { "ULID()" }, force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "status"
+    t.string "hit_count"
   end
 
   create_table "subscriptions", id: :string, default: -> { "ULID()" }, force: :cascade do |t|
@@ -41,6 +50,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_09_26_191248) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "refreshes", "searches"
   add_foreign_key "refreshes", "subscriptions"
   add_foreign_key "subscriptions", "users"
 end

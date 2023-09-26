@@ -15,6 +15,29 @@ namespace :subscriptions do
       end
 
       # refresh = subscription.refreshes.create(status: :pending)
+      # search = Search.create(status: :pending)
+      # search.parameters.create(name: "FromDate", value: today)
+      # search.parameters.create(name: "ToDate", value: today)
+      # search.parameters.create(name: "OrganisationNumber", value: subscription.company_code)
+
+      # begin
+      #   response = perform_search(search)
+      # rescue
+      #   search.status = :error
+      # end
+
+      # search.hit_count = response.hit_count
+      # response.results.each do |result|
+      #   search.results.create(
+      #     case_name: result[:case_name],
+      #     company_code: result[:company_code],
+      #     document_code: result[:document_code],
+      #     document_date: result[:document_date],
+      #     document_type: result[:document_type],
+      #   )
+      # end
+      # search.status = :success
+      
     end
   end
 end
