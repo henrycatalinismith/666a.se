@@ -1,0 +1,20 @@
+<div class="flex flex-col gap-4">
+
+  <h1 class="font-bold text-4xl">
+    Dashboard
+  </h1>
+
+  <p>
+    Hey <%= @user.name %>. You're subscribed to email alerts for Work Environment Authority filings regarding company <%= @user.company_code %>.
+  </p>
+
+  <div class="flex flex-row gap-4">
+    <%= button_to(
+      "Sign out",
+      destroy_user_session_path,
+      method: :delete,
+      class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+    ) %>
+  </div>
+
+</div>
