@@ -31,3 +31,17 @@
 
 en:
   hello: "Hello world"
+
+  activerecord:
+    errors:
+      messages:
+        invalid_company_code: "must be six digits, then a hyphen, then four digits, e.g. 123456-7890"
+
+  helpers:
+    label:
+      user: 
+        name: "Name"
+        company_code: "Company Code"
+        email: "Email"
+        password: "Password"
+        password_confirmation: "Confirm Password"
