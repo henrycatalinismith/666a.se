@@ -2,7 +2,9 @@
 
 class DeviseCreateUsers < ActiveRecord::Migration[7.0]
   def change
-    create_table :users do |t|
+    create_table :users, id: false do |t|
+      t.primary_key :id, :string, default: -> { "ULID()" }
+
       ## Database authenticatable
       t.string :email,              null: false, default: ""
       t.string :encrypted_password, null: false, default: ""
