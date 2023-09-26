@@ -4,8 +4,8 @@ class RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   def create
-    puts super
-    puts current_user.inspect
+    super
+    current_user.subscriptions.create(user_id: current_user.id, company_code: current_user.company_code)
   end
 
   protected

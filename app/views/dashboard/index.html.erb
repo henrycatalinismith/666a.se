@@ -5,7 +5,7 @@
   </h1>
 
   <p>
-    Hey <%= @user.name %>. You're subscribed to email alerts for Work Environment Authority filings regarding company <%= @user.company_code %>.
+    Hey <%= @user.name %>. You're subscribed to email alerts for Work Environment Authority filings regarding company <%= @user.subscriptions.first.company_code %>.
   </p>
 
   <div class="flex flex-row gap-4">
