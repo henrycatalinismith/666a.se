@@ -24,13 +24,3 @@ console_command = "/rails/bin/rails console"
 [[statics]]
   guest_path = "/rails/public"
   url_prefix = "/"
-
-[processes]
-  # The command below is used to launch a Rails server; be sure to
-  # replace with the command you're using to launch your server.
-  web = "bin/rails fly:server"
-  cron = "supercronic /app/crontab"
-
-# Make sure there's only one `processes` entry under `[[services]]`
-[[services]]
-  processes = ["web"]
