@@ -3,7 +3,7 @@ class Refresh < ApplicationRecord
   has_many :notifications
   has_many :searches
 
-  enum status: {
+  enum :status, {
     pending: 0,
     active: 1,
     success: 2,

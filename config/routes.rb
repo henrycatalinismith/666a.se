@@ -15,5 +15,6 @@ Rails.application.routes.draw do
 
   authenticated :user do
     get "/dashboard", to: "dashboard#index"
+    post "/subscriptions/:id/refresh", to: "subscriptions#refresh"
   end
 end

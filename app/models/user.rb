@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   has_many :subscriptions
   has_many :notifications, through: :subscriptions
+  has_many :results, through: :notifications
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
