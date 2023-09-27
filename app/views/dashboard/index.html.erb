@@ -7,9 +7,12 @@
   <p>
     Hey <%= @user.name %>.
     You're subscribed to email alerts for Work Environment Authority filings regarding company <%= @user.subscriptions.first.company_code %>.
-    <% if @user.subscriptions.first.refreshes.count == 0 %>
+    <% if @last_refresh == nil %>
       Your subscription hasn't been refreshed yet.
+    <% else %>
+      Your subscription was last refreshed <%= time_ago_in_words(@last_refresh.created_at) %> ago.
     <% end %>
+
   </p>
 
   <% if @user.notifications.count > 0 %>
@@ -23,6 +26,12 @@
   <% end %>
 
   <div class="flex flex-row gap-4">
+    <%= button_to(
+      "Refresh",
+      "/subscriptions/#{@user.subscriptions.first.id}/refresh",
+      method: :post,
+      class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+    ) %>
     <%= button_to(
       "Sign out",
       destroy_user_session_path,
