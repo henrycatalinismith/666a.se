@@ -121,6 +121,10 @@ GEM
       warden (~> 1.2.3)
     dockerfile-rails (1.5.10)
       rails (>= 3.0.0)
+    dotenv (2.8.1)
+    dotenv-rails (2.8.1)
+      dotenv (= 2.8.1)
+      railties (>= 3.2)
     drb (2.1.1)
       ruby2_keywords
     erubi (1.12.0)
@@ -257,6 +261,7 @@ DEPENDENCIES
   debug
   devise (~> 4.9)
   dockerfile-rails (>= 1.5)
+  dotenv-rails
   litestack (~> 0.3.0)
   puma (~> 5.0)
   rails!

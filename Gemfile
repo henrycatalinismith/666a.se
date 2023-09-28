@@ -46,3 +46,5 @@ gem "actionmailer", "~> 7.0"
 gem "sqlite-ulid", "~> 0.2.1"
 
 gem "rufus-scheduler", "~> 3.9"
+
+gem "dotenv-rails", groups: [:development, :test]
