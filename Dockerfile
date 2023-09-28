@@ -19,7 +19,6 @@ ENV RAILS_ENV="production" \
 RUN gem update --system --no-document && \
     gem install -N bundler
 
-
 # Throw-away build stage to reduce size of final image
 FROM base as build
 
@@ -37,7 +36,6 @@ COPY --link . .
 
 # Precompiling assets for production without requiring secret RAILS_MASTER_KEY
 RUN SECRET_KEY_BASE=DUMMY ./bin/rails assets:precompile
-
 
 # Final stage for app image
 FROM base
@@ -58,7 +56,7 @@ RUN useradd rails --create-home --shell /bin/bash && \
 USER rails:rails
 
 # Deployment options
-ENV DATABASE_URL="sqlite3:///data/production.sqlite3" \
+ENV DATABASE_URL="sqlite3:///data/production/data.sqlite3" \
     RAILS_LOG_TO_STDOUT="1" \
     RAILS_SERVE_STATIC_FILES="true"
 

@@ -35,3 +35,5 @@
 /db/**/*.sqlite3
 /db/**/*.sqlite3-*
 production.sqlite3
+
+.env

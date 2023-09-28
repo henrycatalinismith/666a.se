@@ -15,7 +15,6 @@ class RefreshSubscriptionJob < ApplicationJob
 
     refresh = subscription.refreshes.create(status: :pending)
 
-    date = date
     search = refresh.searches.create(status: :pending)
     host = "www.av.se"
     path = "/om-oss/sok-i-arbetsmiljoverkets-diarium/"
@@ -59,7 +58,9 @@ class RefreshSubscriptionJob < ApplicationJob
     search.save
 
     search.results.each do |result|
-      if subscription.user.results.where(document_code: result.document_code).nil? then
+      user_notifications = subscription.user.notifications
+      has_seen_document = user_notifications.any? { |n| n.result.document_code == result.document_code }
+      if not has_seen_document then
         result.notifications.create(
           refresh_id: refresh.id
         )

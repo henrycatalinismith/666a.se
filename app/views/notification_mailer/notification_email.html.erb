@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+
+    <h1>
+      Welcome to example.com, <%= @user.name %>
+    </h1>
+
+    <p>
+      New document filed.
+    </p>
+
+    <h1>
+      Hey <%= @user.name %>, check out <%= @result.document_code %>!
+    </h1>
+
+    <p>
+      You're subscribed to email updates for Work Environment Authority filings
+      about company <%= @result.company_name %>, and we spotted a new filing
+      today. 
+    </p>
+
+    <table>
+      <tr>
+        <td scope="row">Case name</td>
+        <td><%= @result.case_name %></td>
+      </tr>
+      <tr>
+        <td scope="row">Document type</td>
+        <td><%= @result.document_type %></td>
+      </tr>
+      <tr>
+        <td scope="row">Document code</td>
+        <td><%= @result.document_code %></td>
+      </tr>
+    </table>
+
+    <p>
+      More information's available about it on the Work Environment Authority's
+      website at the link below.
+      <a href="https://www.av.se/om-oss/sok-i-arbetsmiljoverkets-diarium/?id=<%= @result.document_code %>">
+        https://www.av.se/om-oss/sok-i-arbetsmiljoverkets-diarium/?id=<%= @result.document_code %>
+      </a>
+    </p>
+
+    <p>
+      You can email them for a free copy of the document if it sounds like
+      something you need to read.
+    </p>
+
+  </body>
+</html>
