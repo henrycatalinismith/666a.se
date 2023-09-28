@@ -1,20 +1,21 @@
+require "uri"
+require "net/http"
+
 class RefreshSubscriptionJob < ApplicationJob
   queue_as :default
 
-  def perform(subscription)
-    puts "refreshing!"
-    puts subscription.id
-    puts subscription.company_code
+  def perform(subscription, date)
+    puts "RefreshSubscriptionJob: begin"
 
     ongoing_refreshes = subscription.refreshes.where(status: [:active, :pending])
     if ongoing_refreshes.count > 0 then
-      puts "subscription #{subscription.id} already being refreshed"
+      puts "RefreshSubscriptionJob: duplicate of #{ongoing_refreshes.first.id}"
       return
     end
 
-    date = "2023-08-30"
     refresh = subscription.refreshes.create(status: :pending)
 
+    date = date
     search = refresh.searches.create(status: :pending)
     host = "www.av.se"
     path = "/om-oss/sok-i-arbetsmiljoverkets-diarium/"
@@ -28,41 +29,46 @@ class RefreshSubscriptionJob < ApplicationJob
     search.save
 
     begin
-      Puppeteer.launch(headless: true) do |browser|
-        page = browser.new_page
-        page.goto search.url, wait_until: 'domcontentloaded'
-        search.hit_count = page.eval_on_selector(".hit-count", "e => e.innerText")
-        page.query_selector_all("#handling-results tbody tr").each do |row|
-          search.results.create(
-            case_name: row.eval_on_selector("td:nth-child(2)", "e => e.innerText"),
-            company_code: row.eval_on_selector("td:nth-child(5)", "e => e.innerText").split(/\n/)[1],
-            company_name: row.eval_on_selector("td:nth-child(5)", "e => e.innerText").split(/\n/)[0],
-            document_code: row.eval_on_selector("td:nth-child(1)", "e => e.innerText"),
-            document_type: row.eval_on_selector("td:nth-child(3)", "e => e.innerText"),
-            document_date: row.eval_on_selector("td:nth-child(4)", "e => e.innerText"),
-          )
-        end
+      uri = URI(search.url)
+      response = Net::HTTP.get_response(uri)
+      document = Nokogiri::HTML.parse(response.body)
+      search.hit_count = document.css(".hit-count").text.strip
+      rows = document.css("#handling-results tbody tr")
+      rows.each do |row|
+        search.results.create(
+          case_name: row.css("td:nth-child(2)").text.strip,
+          company_code: row.css("td:nth-child(5)").text.strip.split(/\n/)[1].strip,
+          company_name: row.css("td:nth-child(5)").text.strip.split(/\n/)[0].strip,
+          document_code: row.css("td:nth-child(1)").text.strip,
+          document_date: row.css("td:nth-child(4)").text.strip,
+          document_type: row.css("td:nth-child(3)").text.strip,
+        )
       end
-    rescue
+    rescue => error
       search.status = :error
       search.save
       refresh.status = :error
       refresh.save
+
+      puts "RefreshSubscriptionJob: error"
+      puts error.message
+      return
     end
 
     search.status = :success
     search.save
 
     search.results.each do |result|
-      if !subscription.user.results.where(document_code: result.document_code).nil? then
-        return
+      if subscription.user.results.where(document_code: result.document_code).nil? then
+        result.notifications.create(
+          refresh_id: refresh.id
+        )
       end
-      result.notifications.create(
-        refresh_id: refresh.id
-      )
     end
 
     refresh.status = :success
     refresh.save
+
+    puts "RefreshSubscriptionJob: end"
   end
 end
