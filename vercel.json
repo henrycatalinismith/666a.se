@@ -1,3 +1,0 @@
-{
-  "buildCommand": "yarn prisma generate && yarn prisma migrate deploy && yarn next build"
-}
