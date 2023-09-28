@@ -5,7 +5,9 @@ class RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     super
-    current_user.subscriptions.create(user_id: current_user.id, company_code: current_user.company_code)
+    if !current_user.nil? then
+      current_user.subscriptions.create(user_id: current_user.id, company_code: current_user.company_code)
+    end
   end
 
   protected

@@ -45,4 +45,4 @@ gem "actionmailer", "~> 7.0"
 
 gem "sqlite-ulid", "~> 0.2.1"
 
-gem "puppeteer-ruby", "~> 0.45.3"
+gem "rufus-scheduler", "~> 3.9"
