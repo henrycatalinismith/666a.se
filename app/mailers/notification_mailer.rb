@@ -1,6 +1,4 @@
 class NotificationMailer < ApplicationMailer
-  default from: "hen@666a.se"
-
   def notification_email()
     @notification = params[:notification]
     @result = @notification.result

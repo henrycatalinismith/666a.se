@@ -1,7 +1,7 @@
 <div class="flex flex-col gap-4">
 
   <h1 class="text-2xl font-bold">
-    Register
+    <%= t("registrations.new.title") %>
   </h1>
 
   <%= form_for(
@@ -13,36 +13,46 @@
 
     <%= render "devise/shared/error_messages", resource: resource %>
 
-    <div class="field">
-      <%= f.label :name %><br />
+    <div class="<%= @field %>">
+      <%= f.label :name %>
       <%= f.text_field :name %>
     </div>
 
-    <div class="field">
-      <%= f.label :company_code %><br />
+    <div class="<%= @field %>">
+      <%= f.label :locale %>
+      <%= f.select(:locale, options_for_select(
+        I18n.available_locales.map { |locale| [
+          t("locales.#{locale}", :locale => locale),
+          locale
+        ]
+      }, I18n.locale)) %>
+    </div>
+
+    <%=
+       %>
+
+    <div class="<%= @field %>">
+      <%= f.label :company_code %>
       <%= f.text_field :company_code %>
     </div>
 
-    <div class="field">
-      <%= f.label :email %><br />
+    <div class="<%= @field %>">
+      <%= f.label :email %>
       <%= f.email_field :email, autocomplete: "email" %>
     </div>
 
-    <div class="field">
+    <div class="<%= @field %>">
       <%= f.label :password %>
-      <% if @minimum_password_length %>
-        <em>(<%= @minimum_password_length %> characters minimum)</em>
-      <% end %><br />
       <%= f.password_field :password, autocomplete: "new-password" %>
     </div>
 
-    <div class="field">
-      <%= f.label :password_confirmation %><br />
+    <div class="<%= @field %>">
+      <%= f.label :password_confirmation %>
       <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
     </div>
 
     <div class="actions">
-      <%= f.submit "Sign up" %>
+      <%= f.submit t("registrations.new.button") %>
     </div>
 
   <% end %>

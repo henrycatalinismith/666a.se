@@ -1,47 +1,73 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t "hello"
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t("hello") %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# The following keys must be escaped otherwise they will not be retrieved by
-# the default I18n backend:
-#
-# true, false, on, off, yes, no
-#
-# Instead, surround them with single quotes.
-#
-# en:
-#   "true": "foo"
-#
-# To learn more, please read the Rails Internationalization guide
-# available at https://guides.rubyonrails.org/i18n.html.
-
 en:
-  hello: "Hello world"
+
+  home:
+    index:
+      blurb: "Automatic Work Environment Authority email notifications."
+      pitch: "Stop worrying how long since you last remembered to check. Start hearing about new d ocuments as soon as they're filed."
+      login: "Login"
+      register: "Register"
+      dashboard: "Dashboard"
+
+  registrations:
+    new:
+      title: "Register"
+      min_chars: "%{n} characters minimum"
+      button: "Sign up"
+
+  sessions:
+    new:
+      title: "Login"
+      button: "Login"
+
+  dashboard:
+    index:
+      title: "Dashboard"
+      hello: "Hey %{name}."
+      subscription: "You're subscribed to email alerts for Work Environment Authority filings regarding %{company}."
+      last_refresh:
+        never: "Your subscription hasn't been refreshed yet."
+        date: "Your subscription was last refreshed %{when} ago."
+      logout: "Sign out"
+  
+  notification_email:
+    title: >
+      Hey %{name}, check out %{document_code}!
+    subscription: >
+      You're subscribed to email updates for Work Environment Authority filings
+      about %{company}, and we spotted a new filing today.
+    link_preamble: >
+      More information's available about it on the Work Environment Authority's
+      website at the link below.
+    email_instructions: >
+      You can email them for a free copy of the document if it sounds like
+      something you need to read.
+
+  errors:
+    messages:
+      not_saved:
+        one: "1 error prohibited this %{resource} from being saved:"
+        other: "%{count} errors prohibited this %{resource} from being saved:"
+
+  helpers:
+    label:
+      user:
+        name: "Name"
+        locale: "Language"
+        company_code: "Company Code"
+        email: "Email"
+        password: "Password"
+        password_confirmation: "Confirm Password"
+        remember_me: "Remember me"
+  
+  locales:
+    en: English
+    sv: Swedish
 
   activerecord:
     errors:
       messages:
         invalid_company_code: "must be six digits, then a hyphen, then four digits, e.g. 123456-7890"
 
-  helpers:
-    label:
-      user: 
-        name: "Name"
-        company_code: "Company Code"
-        email: "Email"
-        password: "Password"
-        password_confirmation: "Confirm Password"
+  devise:
+    sessions:
+      signed_out: ""

@@ -1,16 +1,16 @@
 <div class="flex flex-col gap-4">
 
   <h1 class="font-bold text-4xl">
-    Dashboard
+    <%=t("dashboard.index.title")%>
   </h1>
 
   <p>
-    Hey <%= @user.name %>.
-    You're subscribed to email alerts for Work Environment Authority filings regarding company <%= @user.subscriptions.first.company_code %>.
+    <%=t("dashboard.index.hello", name: @user.name)%>
+    <%=t("dashboard.index.subscription", company: @user.subscriptions.first.company_code)%>
     <% if @last_refresh == nil %>
-      Your subscription hasn't been refreshed yet.
+      <%=t("dashboard.index.last_refresh.never")%>
     <% else %>
-      Your subscription was last refreshed <%= time_ago_in_words(@last_refresh.created_at) %> ago.
+      <%=t("dashboard.index.last_refresh.date", when: time_ago_in_words(@last_refresh.created_at))%>
     <% end %>
 
   </p>
@@ -44,7 +44,7 @@
     ) %>
 
     <%= button_to(
-      "Sign out",
+      t("dashboard.index.logout"),
       destroy_user_session_path,
       method: :delete,
       class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"

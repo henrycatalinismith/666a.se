@@ -11,6 +11,10 @@ class TailwindBuilder < ActionView::Helpers::FormBuilder
     super(attribute, options.reverse_merge(class: "block input border-gray-600 rounded-md shadow-sm focus:ring focus:ring-indigo-200 f"))
   end
 
+  def select(method, choices = nil, options = {}, html_options = {}, &block)
+    super(method, choices, options, html_options.merge(class: "block input border-gray-600 rounded-md shadow-sm focus:ring focus:ring-indigo-200 f min-w-full"), &block)
+  end
+
   def email_field(attribute, options={})
     super(attribute, options.reverse_merge(class: "block input border-gray-600 rounded-md shadow-sm focus:ring focus:ring-indigo-200 f"))
   end
