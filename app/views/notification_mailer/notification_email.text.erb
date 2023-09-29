@@ -1,15 +1,15 @@
-Hey <%= @user.name %>, check out <%= @result.document_code %>!
+<%= t("notification_email.title", {
+  name: @user.name,
+  document_code: @result.document_code,
+}) %>
 
-You're subscribed to email updates for Work Environment Authority filings about
-company <%= @result.company_name %>, and we spotted a new filing today. 
+<%= t("notification_email.subscription", {
+  company: @result.company_name,
+}) %>
 
-Case name: <%= @result.case_name %>
-Document type: <%= @result.document_type %>
-Document code: <%= @result.document_code %>
+<%= @result.document_code %>: <%= @result.document_type %>
 
-More information's available about it on the Work Environment Authority's
-website at the link below.
+<%= t("notification_email.link_preamble")
 https://www.av.se/om-oss/sok-i-arbetsmiljoverkets-diarium/?id=<%= @result.document_code %>
 
-You can email them for a free copy of the document if it sounds like something
-you need to read.
+<%= t("notification_email.email_instructions") %>

@@ -5,20 +5,31 @@
   </h1>
 
   <p>
-    Automated work environment authority email notifications
+    <%=t("home.index.blurb")%>
+  </p>
+
+  <p>
+    <%= t("home.index.pitch")%>
   </p>
 
   <div class="flex flex-row gap-4">
     <% if user_signed_in? %>
-      <%= button_to(
-        "Sign out",
-        destroy_user_session_path,
-        method: :delete,
+      <%= link_to(
+        t("home.index.dashboard"),
+        "/dashboard",
         class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
       ) %>
     <% else %>
-      <%= link_to "Login", new_user_session_path, class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
-      <%= link_to "Register", new_user_registration_path, class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded", method: :post %>
+      <%= link_to(
+        t("home.index.login"),
+        new_user_session_path,
+        class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+      ) %>
+      <%= link_to(
+        t("home.index.register"),
+        new_user_registration_path,
+        class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded", method: :post
+      ) %>
     <% end %>
   </div>
 
