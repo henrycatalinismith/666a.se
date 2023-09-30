@@ -3,7 +3,7 @@
     as: @resource_name,
     builder: TailwindBuilder,
     url: session_path(@resource_name),
-    :html => {class: "flex flex-col gap-4" }) do |f| %>
+    :html => {class: "flex flex-col gap-4 max-w-xs" }) do |f| %>
 
   <div class="<%= @field %>">
     <%= f.label :email %>

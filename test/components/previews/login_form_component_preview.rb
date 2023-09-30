@@ -1,5 +1,5 @@
 class LoginFormComponentPreview < ViewComponent::Preview
-  def with_default_title
+  def default
     render(LoginFormComponent.new())
   end
 end
