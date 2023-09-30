@@ -1,8 +1,4 @@
-# frozen_string_literal: true
-
 class LoginFormComponent < ViewComponent::Base
-  # include ActionText::Engine.helpers
-
   def initialize()
     @resource = User.new
     @resource_name = :user

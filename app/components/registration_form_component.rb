@@ -1,5 +1,4 @@
 class RegistrationFormComponent < ViewComponent::Base
-
   def initialize()
     @resource = User.new
     @resource_name = :user
