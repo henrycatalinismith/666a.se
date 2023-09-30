@@ -5,28 +5,28 @@
   </h1>
 
   <p>
-    <%=t("home.index.blurb")%>
+    <%=t(".blurb")%>
   </p>
 
   <p>
-    <%= t("home.index.pitch")%>
+    <%= t(".pitch")%>
   </p>
 
   <div class="flex flex-row gap-4">
     <% if user_signed_in? %>
       <%= link_to(
-        t("home.index.dashboard"),
+        t(".dashboard"),
         "/dashboard",
         class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
       ) %>
     <% else %>
       <%= link_to(
-        t("home.index.login"),
+        t(".login"),
         new_user_session_path,
         class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
       ) %>
       <%= link_to(
-        t("home.index.register"),
+        t(".register"),
         new_user_registration_path,
         class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded", method: :post
       ) %>

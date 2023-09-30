@@ -1,0 +1,17 @@
+en:
+  title: "Dashboard"
+  hello: "Hey %{name}."
+  subscription: "You're subscribed to email alerts for Work Environment Authority filings regarding %{company}."
+  last_refresh:
+    never: "Your subscription hasn't been refreshed yet."
+    date: "Your subscription was last refreshed %{when} ago."
+  logout: "Sign out"
+
+sv:
+  title: "Startsidan"
+  hello: "Hej %{name}."
+  subscription: "Du prenumererar på e-postaviseringar för allmänna handlingar hos arbetsmiljöverket avseende %{company}."
+  last_refresh:
+    never: "Din prenumeration har inte uppdaterats än."
+    date: "Din prenumeration uppdaterades senast för %{when} sedan."
+  logout: "Logga ut"

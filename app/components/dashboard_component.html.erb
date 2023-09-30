@@ -1,16 +1,16 @@
 <div class="flex flex-col gap-4">
 
   <h1 class="font-bold text-4xl">
-    <%=t("dashboard.index.title")%>
+    <%=t(".title")%>
   </h1>
 
   <p>
-    <%=t("dashboard.index.hello", name: @user.name)%>
-    <%=t("dashboard.index.subscription", company: @user.subscriptions.first.company_code)%>
+    <%=t(".hello", name: @user.name)%>
+    <%=t(".subscription", company: @user.subscriptions.first.company_code)%>
     <% if @last_refresh == nil %>
-      <%=t("dashboard.index.last_refresh.never")%>
+      <%=t(".last_refresh.never")%>
     <% else %>
-      <%=t("dashboard.index.last_refresh.date", when: time_ago_in_words(@last_refresh.created_at))%>
+      <%=t(".last_refresh.date", when: time_ago_in_words(@last_refresh.created_at))%>
     <% end %>
 
   </p>
@@ -44,7 +44,7 @@
     ) %>
 
     <%= button_to(
-      t("dashboard.index.logout"),
+      t(".logout"),
       destroy_user_session_path,
       method: :delete,
       class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
