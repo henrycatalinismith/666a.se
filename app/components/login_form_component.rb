@@ -6,6 +6,7 @@ class LoginFormComponent < ViewComponent::Base
   def initialize()
     @resource = User.new
     @resource_name = :user
+    @field = "w-64 flex flex-col"
   end
 
   def main_app

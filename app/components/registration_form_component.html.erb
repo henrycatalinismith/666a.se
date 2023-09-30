@@ -3,7 +3,7 @@
   as: @resource_name,
   url: registration_path(@resource_name),
   builder: TailwindBuilder,
-  :html => {class: "flex flex-col gap-4" }) do |f| %>
+  :html => {class: "flex flex-col gap-4 max-w-xs" }) do |f| %>
 
   <%= render "devise/shared/error_messages", resource: @resource %>
 

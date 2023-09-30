@@ -1,5 +1,5 @@
 class RegistrationFormComponentPreview < ViewComponent::Preview
-  def with_default_title
+  def default
     render(RegistrationFormComponent.new())
   end
 end
