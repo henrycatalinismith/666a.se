@@ -18,4 +18,8 @@ Rails.application.routes.draw do
     post "/subscriptions/:id/refresh", to: "subscriptions#refresh"
     post "/notifications/:id/email", to: "notifications#email"
   end
+
+  if Rails.env.development?
+    mount Lookbook::Engine, at: "/lookbook"
+  end
 end
