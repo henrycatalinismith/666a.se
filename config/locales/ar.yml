@@ -1,5 +1,13 @@
 ar:
 
+  registration:
+    title: "تسجيل الدخول"
+    button: "تسجيل الدخول"
+
+  login:
+    title: "تسجيل الدخول"
+    button: "تسجيل الدخول"
+
   locales:
     en: الإنجليزية
     sv: السويدية
