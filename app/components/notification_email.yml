@@ -1,0 +1,26 @@
+en:
+  title: >
+    Hey %{name}, check out %{document_code}!
+  subscription: >
+    You're subscribed to email updates for Work Environment Authority filings
+    about %{company}, and we spotted a new filing today.
+  link_preamble: >
+    More information's available about it on the Work Environment Authority's
+    website at the link below.
+  email_instructions: >
+    You can email them for a free copy of the document if it sounds like
+    something you need to read.
+
+sv:
+  title: >
+    Hej %{name}, kolla in %{document_code}!
+  subscription: >
+    Du prenumererar på e-postaviseringar för allmänna handlingar hos
+    arbetsmiljöverket avseende %{company}, och vi upptäckte en ny ansökan
+    idag.
+  link_preamble: >
+    Mer information finns tillgänglig på arbetsmiljöverket hemsida på länken
+    nedan.
+  email_instructions: >
+    Du kan mejla dem för en gratis kopia av dokumentet om det verkar som något
+    du behöver läsa.

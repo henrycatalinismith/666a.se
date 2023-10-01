@@ -7,14 +7,14 @@
     <body>
 
       <h1>
-        <%= t("notification_email.title",
+        <%= t(".title",
         name: @user.name,
         document_code: @result.document_code,
       ) %>
       </h1>
 
       <p>
-        <%= t("notification_email.subscription",
+        <%= t(".subscription",
         company: "",
       ) %>
       </p>
@@ -25,34 +25,34 @@
       </p>
 
       <p>
-        <%= t("notification_email.link_preamble") %>
+        <%= t(".link_preamble") %>
         <a href="https://www.av.se/om-oss/sok-i-arbetsmiljoverkets-diarium/?id=<%= @result.document_code %>">
           https://www.av.se/om-oss/sok-i-arbetsmiljoverkets-diarium/?id=<%= @result.document_code %>
         </a>
       </p>
 
       <p>
-        <%= t("notification_email.email_instructions") %>
+        <%= t(".email_instructions") %>
       </p>
 
     </body>
   </html>
 <% elsif @format == "text" %>
 
-  <%= t("notification_email.title",
+  <%= t(".title",
   name: @user.name,
   document_code: @result.document_code,
 ) %>
 
-  <%= t("notification_email.subscription",
+  <%= t(".subscription",
   company: @result.company_name,
 ) %>
 
   <%= @result.document_code %>: <%= @result.document_type %>
 
-  <%= t("notification_email.link_preamble") %>
+  <%= t(".link_preamble") %>
   https://www.av.se/om-oss/sok-i-arbetsmiljoverkets-diarium/?id=<%= @result.document_code %>
 
-  <%= t("notification_email.email_instructions") %>
+  <%= t(".email_instructions") %>
 
 <% end %>
