@@ -1,6 +1,8 @@
 en:
   blurb: "Automatic Work Environment Authority email notifications."
-  pitch: "Stop worrying how long since you last remembered to check. Start hearing about new d ocuments as soon as they're filed."
+  pitch: >
+    Stop worrying how long since you last remembered to check. Start hearing
+    about new documents as soon as they're filed.
   login: "Login"
   register: "Register"
   dashboard: "Dashboard"

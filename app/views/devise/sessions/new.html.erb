@@ -1,4 +1,4 @@
-<div class="flex flex-col gap-4">
+<div class="flex flex-col gap-8">
 
   <h1 class="text-2xl font-bold">
     <%= t("login.title") %>
@@ -9,7 +9,7 @@
     as: resource_name,
     builder: TailwindBuilder,
     url: session_path(resource_name),
-    :html => {class: "flex flex-col gap-4 max-w-xs" }) do |f| %>
+    :html => {class: "flex flex-col gap-8 max-w-xs" }) do |f| %>
 
     <div class="w-64 flex flex-col">
       <%= f.label :email %>

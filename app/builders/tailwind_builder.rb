@@ -24,7 +24,7 @@ class TailwindBuilder < ActionView::Helpers::FormBuilder
   end
 
   def label(attribute, options={})
-    super(attribute, options.reverse_merge(class: ""))
+    super(attribute, options.reverse_merge(class: "font-bold"))
   end
 
   def submit(attribute, options={})

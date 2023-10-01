@@ -1,5 +1,15 @@
-<%= render(NotificationEmailComponent.new(
-  format: "text",
-  user: @user,
-  result: @result,
-)) %>
+<%= t("notification_email.title",
+  name: @user.name,
+  document_code: @result.document_code,
+) %>
+
+<%= t("notification_email.subscription",
+  company: @result.company_name,
+) %>
+
+<%= @result.document_code %>: <%= @result.document_type %>
+
+<%= t("notification_email.link_preamble") %>
+https://www.av.se/om-oss/sok-i-arbetsmiljoverkets-diarium/?id=<%= @result.document_code %>
+
+<%= t("notification_email.email_instructions") %>

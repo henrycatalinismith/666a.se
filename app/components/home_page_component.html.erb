@@ -1,36 +1,54 @@
-<div class="flex flex-col gap-4">
+  <section class="container relative mx-auto py-4 ">
+    <div class="relative z-10 gap-8 items-center lg:flex">
+      <div class="flex-1 max-w-lg py-5 sm:mx-auto sm:text-center lg:max-w-max lg:text-left flex flex-col gap-8">
 
-  <h1 class="font-bold text-4xl">
-    666a
-  </h1>
+        <h1 class="text-3xl text-gray-800 font-semibold md:text-4xl">
+          Automated
+          <span class="text-indigo-600">
+            work environment authority
+          </span>
+          email notifications
+        </h1>
 
-  <p>
-    <%=t(".blurb")%>
-  </p>
+        <p class="text-gray-500 leading-relaxed">
+          <%=t(".pitch")%>
+        </p>
 
-  <p>
-    <%= t(".pitch")%>
-  </p>
+        <div class="flex flex-row gap-4 xs:justify-center lg:justify-start">
+          <% if user_signed_in? %>
+            <%= link_to(
+              t(".dashboard"),
+              "/dashboard",
+              class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            ) %>
+          <% else %>
+            <%= link_to(
+              t(".register"),
+              new_user_registration_path,
+              class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded flex-1", method: :post
+            ) %>
+            <%= link_to(
+              t(".login"),
+              new_user_session_path,
+              class: "text-blue-500 hover:bg-blue-700 hover:text-white font-bold py-2 px-4 rounded flex-1"
+            ) %>
+          <% end %>
+        </div>
 
-  <div class="flex flex-row gap-4">
-    <% if user_signed_in? %>
-      <%= link_to(
-        t(".dashboard"),
-        "/dashboard",
-        class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-      ) %>
-    <% else %>
-      <%= link_to(
-        t(".login"),
-        new_user_session_path,
-        class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-      ) %>
-      <%= link_to(
-        t(".register"),
-        new_user_registration_path,
-        class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded", method: :post
-      ) %>
-    <% end %>
-  </div>
-
-</div>
+      </div>
+      <div class="flex-1 mt-5 mx-auto sm:w-9/12 lg:mt-0 lg:w-auto">
+        <Image
+          src="/hero.png"
+          alt="Hey henry,
+You're subscribed to email updates for Arbetsmiljöverket filings about company 556744-3337. A new public filing was made today for that company.
+Case name: Inspektion inom Ovrig tillsyn.
+Document type: Tjänsteanteckning.
+Document code: 2023/040689-3.
+More information's available about it on Arbetsmiliöverket's website at the link below."
+          class="w-full"
+          width={704}
+          height={535}
+        />
+      </div>
+    </div>
+  </section>

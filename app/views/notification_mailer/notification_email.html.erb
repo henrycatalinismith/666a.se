@@ -1,5 +1,38 @@
-<%= render(NotificationEmailComponent.new(
-  format: "html",
-  user: @user,
-  result: @result,
-)) %>
+<!doctype html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body dir="<%= I18n.locale == :ar ? "rtl" : "ltr" %>">
+
+    <h1>
+      <%= t("notification_email.title",
+        name: @user.name,
+        document_code: @result.document_code,
+      ) %>
+    </h1>
+
+    <p>
+      <%= t("notification_email.subscription",
+        company: @result.company_name,
+      ) %>
+    </p>
+
+    <p>
+      <%= @result.document_code %>:
+      <%= @result.document_type %>
+    </p>
+
+    <p>
+      <%= t("notification_email.link_preamble") %>
+      <a href="https://www.av.se/om-oss/sok-i-arbetsmiljoverkets-diarium/?id=<%= @result.document_code %>">
+        https://www.av.se/om-oss/sok-i-arbetsmiljoverkets-diarium/?id=<%= @result.document_code %>
+      </a>
+    </p>
+
+    <p>
+      <%= t("notification_email.email_instructions") %>
+    </p>
+
+  </body>
+</html>
