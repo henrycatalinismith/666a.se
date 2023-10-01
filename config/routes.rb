@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     :controllers => {
       :registrations => "registrations",
     },
-    :path => '',
+    :path => "",
     :path_names => {
       :sign_in => "login",
       :sign_out => "logout",

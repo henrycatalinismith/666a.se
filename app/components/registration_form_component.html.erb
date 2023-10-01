@@ -1,13 +1,13 @@
 <div class="flex flex-col gap-4">
 
   <h1 class="text-2xl font-bold">
-    <%= t("registrations.new.title") %>
+    <%= t(".title") %>
   </h1>
 
   <%= form_for(
     @resource,
     as: @resource_name,
-    url: registration_path(@resource_name),
+    url: "/register",
     builder: TailwindBuilder,
     :html => {class: "flex flex-col gap-4 max-w-xs" }) do |f| %>
 
@@ -52,7 +52,7 @@
     </div>
 
     <div class="actions">
-      <%= f.submit t("registrations.new.button") %>
+      <%= f.submit t(".button") %>
     </div>
 
   <% end %>

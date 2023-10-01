@@ -1,0 +1,72 @@
+ar:
+
+  locales:
+    en: الإنجليزية
+    sv: السويدية
+    ar: العربية
+
+
+  errors:
+    messages:
+      not_saved:
+        one: "حدثت خطأ واحد ومنع هذا %{resource} من الحفظ:"
+        other: "%{count} أخطاء وقعت ومنعت هذا %{resource} من الحفظ:"
+
+  helpers:
+    label:
+      user:
+        name: "الاسم"
+        locale: "اللغة"
+        company_code: "رمز الشركة"
+        email: "البريد الإلكتروني"
+        password: "كلمة المرور"
+        password_confirmation: "تأكيد كلمة المرور"
+        remember_me: "تذكرني"
+
+  activerecord:
+    errors:
+      messages:
+        empty: "لا يمكن ان تكون فارغة"
+        blank: "لا يمكن ان تكون فارغة"
+        invalid_company_code: "يجب أن يكون بصيغة ستة أرقام، ثم علامة الواصلة (-)، ثم أربعة أرقام، مثل 123456-7890"
+
+
+  datetime:
+    distance_in_words:
+      half_a_minute: "نصف دقيقة"
+      less_than_x_seconds:
+        one:   "أقل من ثانية"
+        other: "ثواني %{count}أقل من "
+      x_seconds:
+        one:   "ثانية"
+        other: "%{count}ثواني "
+      less_than_x_minutes:
+        one:   "أقل من دقيقة"
+        other: "دقائق%{count}أقل من "
+      x_minutes:
+        one:   "دقيقة"
+        other: "%{count} دقائق"
+      about_x_hours:
+        one:   "حوالي ساعة"
+        other: "ساعات %{count}حوالي "
+      x_hours:
+        one:   "%{count} ساعة"
+        other: "%{count} ساعات"
+      x_days:
+        one:   "يوم"
+        other: "%{count} أيام"
+      about_x_months:
+        one:   "حوالي شهر"
+        other: "أشهر  %{count} حوالي"
+      x_months:
+        one:   "شهر"
+        other: "%{count} أشهر"
+      about_x_years:
+        one:   "حوالي سنة"
+        other: "سنوات  %{count}حوالي "
+      over_x_years:
+        one:   "اكثر من سنة"
+        other: "سنوات  %{count}أكثر من "
+      almost_x_years:
+        one:   "تقريبا سنة"
+        other: "سنوات %{count} نقريبا"
