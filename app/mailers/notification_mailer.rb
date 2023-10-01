@@ -3,9 +3,10 @@ class NotificationMailer < ApplicationMailer
     @notification = params[:notification]
     @result = @notification.result
     @user = @notification.refresh.subscription.user
+    @url = "https://www.av.se/om-oss/sok-i-arbetsmiljoverkets-diarium/?id=" + @result.document_code
     mail(
       to: @user.email,
-      subject: "Work Environment Authority document alert: #{@result.document_code}"
+      subject: t("notification_email.title", document_code: @result.document_code),
     )
   end
 end
