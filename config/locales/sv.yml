@@ -1,16 +1,5 @@
 sv:
 
-  registrations:
-    new:
-      title: "Kom igång"
-      min_chars: "minst %{n} tecken"
-      button: "Kom igång"
-
-  sessions:
-    new:
-      title: "Logga In"
-      button: "Logga In"
-
   helpers:
     label:
       user:
@@ -25,6 +14,7 @@ sv:
   locales:
     en: Engelska
     sv: Svenska
+    ar: Arabiska
 
   activerecord:
     errors:

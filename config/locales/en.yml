@@ -1,24 +1,5 @@
 en:
 
-  home:
-    index:
-      blurb: "Automatic Work Environment Authority email notifications."
-      pitch: "Stop worrying how long since you last remembered to check. Start hearing about new d ocuments as soon as they're filed."
-      login: "Login"
-      register: "Register"
-      dashboard: "Dashboard"
-
-  registrations:
-    new:
-      title: "Register"
-      min_chars: "%{n} characters minimum"
-      button: "Sign up"
-
-  sessions:
-    new:
-      title: "Login"
-      button: "Login"
-
   errors:
     messages:
       not_saved:

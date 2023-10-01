@@ -15,3 +15,13 @@ sv:
     never: "Din prenumeration har inte uppdaterats än."
     date: "Din prenumeration uppdaterades senast för %{when} sedan."
   logout: "Logga ut"
+
+ar:
+  title: "لوحة التحكم"
+  hello: "مرحبًا %{name}."
+  subscription: "أنت مشترك في تنبيهات البريد الإلكتروني بخصوص ملفات الهيئة العامة لبيئة العمل المتعلقة بـ %{company}."
+  last_refresh:
+    never: "لم يتم تحديث اشتراكك بعد."
+    date: "تم تحديث اشتراكك آخر مرة قبل %{when}."
+  logout: "تسجيل الخروج"
+
