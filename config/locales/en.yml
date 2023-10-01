@@ -7,6 +7,19 @@ en:
     title: "Login"
     button: "Login"
 
+  notification_email:
+    title: >
+      Hey %{name}, check out %{document_code}!
+    subscription: >
+      You're subscribed to email updates for Work Environment Authority filings
+      about %{company}, and we spotted a new filing today.
+    link_preamble: >
+      More information's available about it on the Work Environment Authority's
+      website at the link below.
+    email_instructions: >
+      You can email them for a free copy of the document if it sounds like
+      something you need to read.
+
   errors:
     messages:
       not_saved:
@@ -23,7 +36,7 @@ en:
         password: "Password"
         password_confirmation: "Confirm Password"
         remember_me: "Remember me"
-  
+
   locales:
     en: English
     sv: Swedish

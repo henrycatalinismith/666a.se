@@ -8,6 +8,25 @@ sv:
     title: "Logga In"
     button: "Logga In"
 
+  notification_email:
+    title: >
+      Hej %{name}, kolla in %{document_code}!
+    subscription: >
+      Du prenumererar på e-postaviseringar för allmänna handlingar hos
+      arbetsmiljöverket avseende %{company}, och vi upptäckte en ny ansökan
+      idag.
+    link_preamble: >
+      Mer information finns tillgänglig på arbetsmiljöverket hemsida på länken
+      nedan.
+    email_instructions: >
+      Du kan mejla dem för en gratis kopia av dokumentet om det verkar som något
+      du behöver läsa.
+
+  locales:
+    en: Engelska
+    sv: Svenska
+    ar: Arabiska
+
   helpers:
     label:
       user:
@@ -18,11 +37,6 @@ sv:
         password: "Lösenord"
         password_confirmation: "Bekräfta lösenord"
         remember_me: "Kom ihåg mig"
-  
-  locales:
-    en: Engelska
-    sv: Svenska
-    ar: Arabiska
 
   activerecord:
     errors:
