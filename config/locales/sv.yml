@@ -10,13 +10,15 @@ sv:
 
   notification_email:
     title: >
-      Hej %{name}, kolla in %{document_code}!
+      Dokumentmeddelande: %{document_code}
+    greeting: >
+      Hej %{name},
     subscription: >
       Du prenumererar på e-postaviseringar för allmänna handlingar hos
       arbetsmiljöverket avseende %{company}, och vi upptäckte en ny ansökan
       idag.
     link_preamble: >
-      Mer information finns tillgänglig på arbetsmiljöverket hemsida på länken
+      Mer information finns tillgänglig på arbetsmiljöverkets hemsida på länken
       nedan.
     email_instructions: >
       Du kan mejla dem för en gratis kopia av dokumentet om det verkar som något

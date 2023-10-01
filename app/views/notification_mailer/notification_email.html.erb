@@ -3,14 +3,19 @@
   <head>
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
-  <body dir="<%= I18n.locale == :ar ? "rtl" : "ltr" %>">
+  <body dir="<%= I18n.locale == :ar ? "rtl" : "ltr" %>" style="font-family: sans-serif">
 
-    <h1>
+    <h1 style="font-size: 1.2rem">
       <%= t("notification_email.title",
-        name: @user.name,
         document_code: @result.document_code,
       ) %>
     </h1>
+
+    <p>
+      <%= t("notification_email.greeting",
+        name: @user.name,
+      ) %>
+    </p>
 
     <p>
       <%= t("notification_email.subscription",
@@ -18,15 +23,22 @@
       ) %>
     </p>
 
-    <p>
-      <%= @result.document_code %>:
-      <%= @result.document_type %>
+    <p style="font-size: 1.4rem">
+      <a href="<%= @url %>">
+        <%= @result.document_code %>:
+        <% if I18n.locale == "sv" %>
+          <%= @result.document_type %>
+        <% else %>
+          <%= t("document_type." + @result.document_type) %>
+        <% end %>
+      </a>
     </p>
 
     <p>
       <%= t("notification_email.link_preamble") %>
-      <a href="https://www.av.se/om-oss/sok-i-arbetsmiljoverkets-diarium/?id=<%= @result.document_code %>">
-        https://www.av.se/om-oss/sok-i-arbetsmiljoverkets-diarium/?id=<%= @result.document_code %>
+      <br />
+      <a href="<%= @url %>">
+        <%= @url %>
       </a>
     </p>
 

@@ -4,7 +4,8 @@ class NotificationEmailPreview < ActionMailer::Preview
     @notification.result = Result.new(
       company_name: "EXEMPEL AB",
       document_code: "000000-0000",
-      document_type: "Exempel",
+      document_date: Date.today,
+      document_type: "Komplettering",
     )
     @notification.refresh = Refresh.new
     @notification.refresh.subscription = Subscription.new
