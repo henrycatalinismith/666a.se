@@ -1,5 +1,13 @@
 sv:
 
+  registration:
+    title: "Kom igång"
+    button: "Kom igång"
+
+  login:
+    title: "Logga In"
+    button: "Logga In"
+
   helpers:
     label:
       user:

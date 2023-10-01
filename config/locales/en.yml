@@ -1,4 +1,11 @@
 en:
+  registration:
+    title: "Register"
+    button: "Sign up"
+
+  login:
+    title: "Login"
+    button: "Login"
 
   errors:
     messages:
@@ -20,6 +27,7 @@ en:
   locales:
     en: English
     sv: Swedish
+    ar: Arabic
 
   activerecord:
     errors:
