@@ -1,5 +1,5 @@
 en:
-  blurb: "Automatic Work Environment Authority email notifications."
+  blurb: "Work Environment Authority email alerts"
   pitch: >
     Stop worrying how long since you last remembered to check. Start hearing
     about new documents as soon as they're filed.
@@ -8,7 +8,7 @@ en:
   dashboard: "Dashboard"
 
 sv: 
-  blurb: "Automatiska e-postaviseringar om arbetsmiljöverket"
+  blurb: "E-postaviseringar om arbetsmiljöverket"
   pitch: "Ta reda på nya dokument så snart de publiceras. Ingen mer ångest över att glömma att kolla."
   login: "Logga in"
   register: "Kom igång"
