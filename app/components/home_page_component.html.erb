@@ -1,20 +1,16 @@
   <section class="container relative mx-auto py-4 ">
     <div class="relative z-10 gap-8 items-center lg:flex">
-      <div class="flex-1 max-w-lg py-5 sm:mx-auto sm:text-center lg:max-w-max lg:text-left flex flex-col gap-8">
+      <div class="flex-1 max-w-lg py-5 sm:mx-auto sm:text-center lg:max-w-lg lg:text-left flex flex-col gap-4">
 
         <h1 class="text-3xl text-gray-800 font-semibold md:text-4xl">
-          Automated
-          <span class="text-indigo-600">
-            work environment authority
-          </span>
-          email notifications
+          <%= t(".blurb") %>
         </h1>
 
-        <p class="text-gray-500 leading-relaxed">
+        <p class="text-gray-500 leading-relaxed text-xl">
           <%=t(".pitch")%>
         </p>
 
-        <div class="flex flex-row gap-4 xs:justify-center lg:justify-start">
+        <div class="flex flex-row gap-4 xs:justify-center lg:justify-start max-w-sm">
           <% if user_signed_in? %>
             <%= link_to(
               t(".dashboard"),
@@ -36,19 +32,16 @@
         </div>
 
       </div>
-      <div class="flex-1 mt-5 mx-auto sm:w-9/12 lg:mt-0 lg:w-auto">
-        <Image
-          src="/hero.png"
-          alt="Hey henry,
-You're subscribed to email updates for Arbetsmiljöverket filings about company 556744-3337. A new public filing was made today for that company.
-Case name: Inspektion inom Ovrig tillsyn.
-Document type: Tjänsteanteckning.
-Document code: 2023/040689-3.
-More information's available about it on Arbetsmiliöverket's website at the link below."
-          class="w-full"
-          width={704}
-          height={535}
-        />
-      </div>
+
+      <div class="relative mx-auto border-gray-800 dark:border-gray-800 bg-gray-800 border-[14px] rounded-[2.5rem] h-[600px] w-[300px]">
+    <div class="h-[32px] w-[3px] bg-gray-800 dark:bg-gray-800 absolute -left-[17px] top-[72px] rounded-l-lg"></div>
+    <div class="h-[46px] w-[3px] bg-gray-800 dark:bg-gray-800 absolute -left-[17px] top-[124px] rounded-l-lg"></div>
+    <div class="h-[46px] w-[3px] bg-gray-800 dark:bg-gray-800 absolute -left-[17px] top-[178px] rounded-l-lg"></div>
+    <div class="h-[64px] w-[3px] bg-gray-800 dark:bg-gray-800 absolute -right-[17px] top-[142px] rounded-r-lg"></div>
+    <div class="rounded-[2rem] overflow-hidden w-[272px] h-[572px] bg-white dark:bg-gray-800">
+        <img src="/email-<%= I18n.locale %>.png" class="w-[272px] h-[572px]" alt="">
+    </div>
+</div>
+
     </div>
   </section>
