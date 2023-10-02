@@ -1,6 +1,6 @@
   <section class="container relative mx-auto py-4 ">
     <div class="relative z-10 gap-8 items-center lg:flex">
-      <div class="flex-1 max-w-lg py-5 sm:mx-auto sm:text-center lg:max-w-lg lg:text-left flex flex-col gap-4">
+      <div class="flex-1 max-w-lg py-5 sm:mx-auto items-center sm:items-start sm:text-center lg:max-w-lg lg:text-left flex flex-col gap-4">
 
         <span class="text-9xl">✉️</span>
 
@@ -12,7 +12,7 @@
           <%=t(".pitch")%>
         </p>
 
-        <div class="flex flex-row gap-4 xs:justify-center lg:justify-start max-w-sm">
+        <div class="flex flex-row gap-4 xs:justify-center sm:justify-start ">
           <% if user_signed_in? %>
             <%= link_to(
               t(".dashboard"),
@@ -23,12 +23,12 @@
             <%= link_to(
               t(".register"),
               new_user_registration_path,
-              class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded flex-1", method: :post
+              class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded flex-1 sm:min-w-full", method: :post
             ) %>
             <%= link_to(
               t(".login"),
               new_user_session_path,
-              class: "text-blue-500 hover:bg-blue-700 hover:text-white font-bold py-2 px-4 rounded flex-1"
+              class: "text-blue-500 hover:bg-blue-700 hover:text-white font-bold py-2 px-4 rounded flex-1 sm:min-w-full"
             ) %>
           <% end %>
         </div>
