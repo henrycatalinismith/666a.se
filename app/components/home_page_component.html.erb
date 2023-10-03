@@ -1,4 +1,4 @@
-  <section class="container flex flex-col items-center gap-8 md:flex-row">
+  <section class="container flex flex-col items-center gap-8 md:flex-row py-8 min-h-[50vh]">
 
     <div class="
       py5 items-center flex flex-col gap-4
@@ -43,4 +43,18 @@
       </div>
     </div>
 
+</section>
+
+<section class="flex flex-col flex=1 w-full items-center gap-8 bg-slate-200 min-h-[50vh] py-8 justify-center">
+  <div class="container ">
+    <ol class="flex flex-col gap-4">
+      <% ["Privacy Policy", "Terms of Service", "Accessibility Statement"].map do |name| %>
+        <li>
+          <a href="" class="text-blue-700">
+            <%= name %>
+          </a>
+        </li>
+      <% end %>
+    </ol>
+  </div>
 </section>
