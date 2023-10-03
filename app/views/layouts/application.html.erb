@@ -11,6 +11,7 @@
   </head>
 
   <body dir="<%= I18n.locale == :ar ? "rtl" : "ltr" %>">
+    <%= yield(:header) %>
     <main class="container mx-auto p-8 flex flex-col">
       <p class="notice"><%= notice %></p>
       <p class="alert"><%= alert %></p>

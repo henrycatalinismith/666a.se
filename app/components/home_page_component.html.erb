@@ -1,49 +1,46 @@
-  <section class="container relative mx-auto py-4 ">
-    <div class="relative z-10 gap-8 items-center lg:flex">
-      <div class="flex-1 max-w-lg py-5 sm:mx-auto items-center sm:items-start sm:text-center lg:max-w-lg lg:text-left flex flex-col gap-4">
+  <section class="container flex flex-col items-center gap-8 md:flex-row">
 
-        <span class="text-9xl">✉️</span>
+    <div class="
+      py5 items-center flex flex-col gap-4
+      sm:mx-auto sm:items-start
+      md:flex-2
+    ">
 
-        <h1 class="text-3xl text-gray-800 font-semibold md:text-4xl">
-          <%= t(".blurb") %>
-        </h1>
+      <img alt="" src="/logo.png" class="max-w-[100px]" />
 
-        <p class="text-gray-500 leading-relaxed text-xl">
-          <%=t(".pitch")%>
-        </p>
+      <h1 class="text-center sm:text-start text-3xl text-gray-800 font-semibold md:text-4xl">
+        <%= t(".blurb") %>
+      </h1>
 
-        <div class="flex flex-row gap-4 xs:justify-center sm:justify-start ">
-          <% if user_signed_in? %>
-            <%= link_to(
-              t(".dashboard"),
-              "/dashboard",
-              class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-            ) %>
-          <% else %>
-            <%= link_to(
-              t(".register"),
-              new_user_registration_path,
-              class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded flex-1 sm:min-w-full", method: :post
-            ) %>
-            <%= link_to(
-              t(".login"),
-              new_user_session_path,
-              class: "text-blue-500 hover:bg-blue-700 hover:text-white font-bold py-2 px-4 rounded flex-1 sm:min-w-full"
-            ) %>
-          <% end %>
-        </div>
+      <p class="text-center sm:text-start text-gray-500 leading-relaxed text-xl">
+        <%=t(".pitch")%>
+      </p>
 
+      <div class="flex flex-col gap-4 items-center xs:flex-row xs:justify-start"> <!--xs:justify-center sm:justify-start ">-->
+        <%= link_to(
+          t(".register"),
+          new_user_registration_path,
+          class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded flex-1 sm:min-w-full", method: :post
+        ) %>
+        <%= link_to(
+          t(".login"),
+          new_user_session_path,
+          class: "text-blue-500 hover:bg-blue-700 hover:text-white font-bold py-2 px-4 rounded flex-1 sm:min-w-full"
+        ) %>
       </div>
 
-      <div class="relative mx-auto border-gray-800 dark:border-gray-800 bg-gray-800 border-[14px] rounded-[2.5rem] h-[600px] w-[300px]">
-    <div class="h-[32px] w-[3px] bg-gray-800 dark:bg-gray-800 absolute -left-[17px] top-[72px] rounded-l-lg"></div>
-    <div class="h-[46px] w-[3px] bg-gray-800 dark:bg-gray-800 absolute -left-[17px] top-[124px] rounded-l-lg"></div>
-    <div class="h-[46px] w-[3px] bg-gray-800 dark:bg-gray-800 absolute -left-[17px] top-[178px] rounded-l-lg"></div>
-    <div class="h-[64px] w-[3px] bg-gray-800 dark:bg-gray-800 absolute -right-[17px] top-[142px] rounded-r-lg"></div>
-    <div class="rounded-[2rem] overflow-hidden w-[272px] h-[572px] bg-white dark:bg-gray-800">
-        <img src="/email-<%= I18n.locale %>.png" class="w-[272px] h-[572px]" alt="">
     </div>
-</div>
 
+    <div class="flex-1">
+      <div class="relative border-gray-800 dark:border-gray-800 bg-gray-800 border-[14px] rounded-[2.5rem] h-[600px] w-[300px]">
+        <div class="h-[32px] w-[3px] bg-gray-800 dark:bg-gray-800 absolute -left-[17px] top-[72px] rounded-l-lg"></div>
+        <div class="h-[46px] w-[3px] bg-gray-800 dark:bg-gray-800 absolute -left-[17px] top-[124px] rounded-l-lg"></div>
+        <div class="h-[46px] w-[3px] bg-gray-800 dark:bg-gray-800 absolute -left-[17px] top-[178px] rounded-l-lg"></div>
+        <div class="h-[64px] w-[3px] bg-gray-800 dark:bg-gray-800 absolute -right-[17px] top-[142px] rounded-r-lg"></div>
+        <div class="rounded-[2rem] overflow-hidden w-[272px] h-[572px] bg-white dark:bg-gray-800">
+          <img src="/email-<%= I18n.locale %>.png" class="w-[272px] h-[572px]" alt="">
+        </div>
+      </div>
     </div>
-  </section>
+
+</section>
