@@ -1,8 +1,9 @@
 en:
-  blurb: "Work Environment Authority email alerts"
+  blurb: "Work Environment Email Alerts"
   pitch: >
-    Stop worrying how long since you last remembered to check. Start hearing
-    about new documents as soon as they're filed.
+    Stop worrying how long since you last remembered to check for public filings
+    at the Work Environment Authority. Start hearing about new documents as soon
+    as they're filed.
   login: "Login"
   register: "Register"
   dashboard: "Dashboard"
