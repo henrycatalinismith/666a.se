@@ -1,0 +1,32 @@
+<div class="container flex flex-col gap-8 w-full p-8">
+
+  <h1 class="text-3xl font-bold">
+    Change Name
+  </h1>
+
+  <p>
+    Your name's important because it affects the deliverability of the email
+    notifications. Your document alerts from 666a will include the name you give
+    here. If that name matches the one you've told your email provider, your
+    666a emails are less likely to end up in your spam folder.
+  </p>
+
+  <%= form_for(
+    current_user,
+    as: "users",
+    url: "/users/#{current_user.id}",
+    builder: TailwindBuilder,
+    :html => {class: "flex flex-col gap-8 max-w-xs" }) do |f| %>
+
+    <div class="w-64 flex flex-col">
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit "Save" %>
+    </div>
+
+  <% end %>
+
+</div>
