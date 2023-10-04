@@ -25,6 +25,7 @@ Rails.application.routes.draw do
 
   authenticated :user do
     get "/dashboard", to: "dashboard#index"
+    delete "/subscriptions/:id", to: "subscriptions#destroy"
     post "/subscriptions/:id/refresh", to: "subscriptions#refresh"
     post "/notifications/:id/email", to: "notifications#email"
   end
