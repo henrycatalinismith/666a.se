@@ -7,6 +7,9 @@ en:
   login: "Login"
   register: "Register"
   dashboard: "Dashboard"
+  accessibility: Accessibility Statement
+  privacy: Privacy Policy
+  terms: Terms of Service
 
 sv: 
   blurb: "E-postaviseringar om arbetsmiljöverket"

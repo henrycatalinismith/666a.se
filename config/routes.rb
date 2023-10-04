@@ -2,6 +2,10 @@
 Rails.application.routes.draw do
   root 'home#index'
 
+  get "/accessibility", to: "policies#accessibility"
+  get "/privacy", to: "policies#privacy"
+  get "/terms", to: "policies#terms"
+
   devise_for :users,
     :controllers => {
       :registrations => "registrations",

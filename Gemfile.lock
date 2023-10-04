@@ -293,6 +293,7 @@ DEPENDENCIES
   lookbook (>= 2.1.1)
   puma (~> 5.0)
   rails!
+  redcarpet (~> 3.6)
   rufus-scheduler (~> 3.9)
   sentry-rails (~> 5.11)
   sentry-ruby (~> 5.11)
@@ -307,4 +308,4 @@ RUBY VERSION
    ruby 3.2.2p53
 
 BUNDLED WITH
-   2.4.10
+   2.4.20

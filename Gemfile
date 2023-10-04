@@ -50,3 +50,5 @@ gem "rufus-scheduler", "~> 3.9"
 
 gem "dotenv-rails", groups: [:development, :test]
 gem "view_component", "~> 3.6"
+
+gem "redcarpet", "~> 3.6"
