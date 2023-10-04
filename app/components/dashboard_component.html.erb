@@ -1,55 +1,94 @@
-<div class="container flex flex-col gap-8 w-full p-8">
+<%# <div class="container grid grid-flow-col grid-cols-2 auto-cols-max w-full p-8 gap-8"> %>
+<div class="container flex flex-col gap-10 w-full p-8">
 
   <h1 class="font-bold text-4xl">
     <%=t(".title")%>
   </h1>
 
+  <div class="flex flex-col gap-8 md:flex-row">
+
+    <%= render(DashboardCardComponent.new(title: "Account")) do |component| %>
+      <% component.with_body do %>
+        <div class="flex flex-col gap-2">
+          <%= render(DashboardAccountPropertyComponent.new(
+            name: "Name",
+            value: @user.name,
+          )) %>
+
+          <%= render(DashboardAccountPropertyComponent.new(
+            name: "Email",
+            value: @user.email,
+          )) %>
+
+          <%= render(DashboardAccountPropertyComponent.new(
+            name: "Language",
+            value: @user.locale,
+          )) %>
+        </div>
+      <% end %>
+    <% end %>
+
+    <%= render(DashboardCardComponent.new(title: "Subscriptions")) do |component| %>
+      <% component.with_body do %>
+        <% @user.subscriptions.each do |subscription| %>
+          <%= subscription.company_code %>
+        <% end %>
+      <% end %>
+    <% end %>
+
+  </div>
+
+  <div class="flex flex-col gap-8 md:flex-row">
+
+    <%= render(DashboardCardComponent.new(title: "Notifications")) do |component| %>
+      <% component.with_body do %>
+        <% @user.notifications.each do |notification| %>
+          <%= notification.result.document_code %>
+        <% end %>
+      <% end %>
+    <% end %>
+
+    <%= render(DashboardCardComponent.new(title: "Actions")) do |component| %>
+      <% component.with_body do %>
+        <div class="flex flex-col gap-4">
+          <% unless @user.notifications.empty? %>
+            <%= button_to(
+              "Email",
+              "/notifications/#{@user.notifications.last.id}/email",
+              method: :post,
+              class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            ) %>
+          <% end %>
+
+          <%= button_to(
+            "Refresh",
+            "/subscriptions/#{@user.subscriptions.first.id}/refresh",
+            method: :post,
+            class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          ) %>
+
+          <%= button_to(
+            t(".logout"),
+            destroy_user_session_path,
+            method: :delete,
+            class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          ) %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+
+</div>
+
+<div class="container flex flex-col gap-4 w-full p-8">
   <p>
-    <%=t(".hello", name: @user.name)%>
-    <%=t(".subscription", company: @user.subscriptions.first.company_code)%>
     <% if @last_refresh == nil %>
       <%=t(".last_refresh.never")%>
     <% else %>
       <%=t(".last_refresh.date", when: time_ago_in_words(@last_refresh.created_at))%>
     <% end %>
-
   </p>
 
-  <% if @user.notifications.count > 0 %>
-    <ol>
-      <% @user.notifications.each do |notification| %>
-        <li>
-          <%= notification.result.document_code %>
-        </li>
-      <% end %>
-    </ol>
-  <% end %>
 
-  <div class="flex flex-row gap-4">
-
-    <% unless @user.notifications.empty? %>
-      <%= button_to(
-        "Email",
-        "/notifications/#{@user.notifications.last.id}/email",
-        method: :post,
-        class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-      ) %>
-    <% end %>
-
-    <%= button_to(
-      "Refresh",
-      "/subscriptions/#{@user.subscriptions.first.id}/refresh",
-      method: :post,
-      class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-    ) %>
-
-    <%= button_to(
-      t(".logout"),
-      destroy_user_session_path,
-      method: :delete,
-      class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-    ) %>
-
-  </div>
 
 </div>
