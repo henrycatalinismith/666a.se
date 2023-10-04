@@ -2,6 +2,10 @@
 Rails.application.routes.draw do
   root 'home#index'
 
+  get "/name", to: "users#name"
+  get "/email", to: "users#email"
+  get "/language", to: "users#language"
+
   get "/accessibility", to: "policies#accessibility"
   get "/privacy", to: "policies#privacy"
   get "/terms", to: "policies#terms"

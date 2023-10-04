@@ -13,16 +13,19 @@
           <%= render(DashboardAccountPropertyComponent.new(
             name: "Name",
             value: @user.name,
+            href: "name",
           )) %>
 
           <%= render(DashboardAccountPropertyComponent.new(
             name: "Email",
             value: @user.email,
+            href: "email",
           )) %>
 
           <%= render(DashboardAccountPropertyComponent.new(
             name: "Language",
             value: @user.locale,
+            href: "language",
           )) %>
         </div>
       <% end %>

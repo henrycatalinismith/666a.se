@@ -1,0 +1,30 @@
+<div class="container flex flex-col gap-8 w-full p-8">
+
+  <h1 class="text-3xl font-bold">
+    Change Language
+  </h1>
+
+  <%= form_for(
+    current_user,
+    as: "users",
+    url: "/users/#{current_user.id}",
+    builder: TailwindBuilder,
+    :html => {class: "flex flex-col gap-8 max-w-xs" }) do |f| %>
+
+    <div class="w-64 flex flex-col">
+      <%= f.label :locale %>
+      <%= f.select(:locale, options_for_select(
+        I18n.available_locales.map { |locale| [
+          t("locales.#{locale}", :locale => locale),
+          locale
+        ]
+      }, I18n.locale)) %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit "Save" %>
+    </div>
+
+  <% end %>
+
+</div>
