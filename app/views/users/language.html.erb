@@ -6,7 +6,7 @@
 
   <%= form_for(
     current_user,
-    as: "users",
+    as: "user",
     url: "/users/#{current_user.id}",
     builder: TailwindBuilder,
     :html => {class: "flex flex-col gap-8 max-w-xs" }) do |f| %>

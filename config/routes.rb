@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get "/name", to: "users#name"
   get "/email", to: "users#email"
   get "/language", to: "users#language"
+  patch "/users/:id", to: "users#update"
 
   get "/accessibility", to: "policies#accessibility"
   get "/privacy", to: "policies#privacy"
