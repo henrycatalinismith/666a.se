@@ -48,10 +48,10 @@
 <section class="flex flex-col flex=1 w-full items-center gap-8 bg-slate-200 min-h-[50vh] justify-center">
   <div class="container p-8">
     <ol class="flex flex-col gap-4">
-      <% ["Privacy Policy", "Terms of Service", "Accessibility Statement"].map do |name| %>
+      <% [:accessibility, :privacy, :terms].map do |name| %>
         <li>
-          <a href="" class="text-blue-700">
-            <%= name %>
+          <a href="/<%= name %>" class="text-blue-700">
+            <%= t(".#{name}") %>
           </a>
         </li>
       <% end %>

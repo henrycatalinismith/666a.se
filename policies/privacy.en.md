@@ -1,0 +1,3 @@
+# Privacy Policy
+
+Lorem ipsum.
