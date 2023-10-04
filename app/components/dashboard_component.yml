@@ -3,8 +3,8 @@ en:
   hello: "Hey %{name}."
   subscription: "You're subscribed to email alerts for Work Environment Authority filings regarding %{company}."
   last_refresh:
-    never: "Your subscription hasn't been refreshed yet."
-    date: "Your subscription was last refreshed %{when} ago."
+    never: "Not refreshed yet"
+    date: "Refreshed %{when} ago."
   logout: "Sign out"
 
 sv:
