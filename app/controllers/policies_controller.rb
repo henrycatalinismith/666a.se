@@ -6,8 +6,12 @@ class PolicyRender < Redcarpet::Render::HTML
     when 1
       %(<h1 class="text-3xl font-bold">#{text}</h1>)
     else
-      %(<h#{header_level} class="text-xl">#{text}</h#{header_level}>)
+      %(<h#{header_level} class="text-xl font-bold">#{text}</h#{header_level}>)
     end
+  end
+
+  def link(href, title, text)
+    %(<a class="text-blue-700 underline" href="#{href}">#{text}</a>)
   end
 end
 
