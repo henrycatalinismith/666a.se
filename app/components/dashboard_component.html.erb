@@ -14,32 +14,38 @@
         <%# </a> %>
       <%# <% end %>
       <% component.with_body do %>
-        <% @user.subscriptions.each do |subscription| %>
-          <% last_refresh = subscription.refreshes.last %>
+        <% if @subscriptions.empty? then %>
+          <a href="/follow" class="font-bold border-dashed border-2 border-indigo-100 rounded-md w-full flex-1 block p-8 text-center">
+            Follow a company ➡
+          </a>
+        <% else %>
+          <% @subscriptions.each do |subscription| %>
+            <% last_refresh = subscription.refreshes.last %>
 
-          <div class="flex flex-row justify-between items-center">
-            <div class="flex flex-col max-w-full overflow-hidden">
-              <div class="font-mono">
-                <%= subscription.company_code %>
+            <div class="flex flex-row justify-between items-center">
+              <div class="flex flex-col max-w-full overflow-hidden">
+                <div class="font-mono">
+                  <%= subscription.company_code %>
+                </div>
+                <div class="truncate">
+                  <% if last_refresh == nil %>
+                    <%=t(".last_refresh.never")%>
+                  <% else %>
+                    <%=t(".last_refresh.date", when: time_ago_in_words(last_refresh.created_at))%>
+                  <% end %>
+                </div>
               </div>
-              <div class="truncate">
-                <% if last_refresh == nil %>
-                  <%=t(".last_refresh.never")%>
-                <% else %>
-                  <%=t(".last_refresh.date", when: time_ago_in_words(last_refresh.created_at))%>
-                <% end %>
-              </div>
+
+              <%= button_to(
+                "Delete",
+                "/subscriptions/#{@user.subscriptions.first.id}",
+                method: :delete,
+                class: "min-w-max-content text-red-500 hover:bg-red-700 hover:text-white font-bold py-2 px-4 rounded"
+              ) %>
+
             </div>
 
-            <%= button_to(
-              "Delete",
-              "/subscriptions/#{@user.subscriptions.first.id}",
-              method: :delete,
-              class: "min-w-max-content text-red-500 hover:bg-red-700 hover:text-white font-bold py-2 px-4 rounded"
-            ) %>
-
-          </div>
-
+          <% end %>
         <% end %>
       <% end %>
     <% end %>
@@ -102,12 +108,14 @@
             ) %>
           <% end %>
 
-          <%= button_to(
-            "Refresh",
-            "/subscriptions/#{@user.subscriptions.first.id}/refresh",
-            method: :post,
-            class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-          ) %>
+          <% unless @subscriptions.empty? then %>
+            <%= button_to(
+              "Refresh",
+              "/subscriptions/#{@user.subscriptions.first.id}/refresh",
+              method: :post,
+              class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            ) %>
+          <% end %>
 
         </div>
       <% end %>

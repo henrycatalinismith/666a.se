@@ -15,7 +15,7 @@ class RefreshSubscriptionJob < ApplicationJob
 
     refresh = subscription.refreshes.create(status: :pending)
 
-    search = refresh.searches.create(status: :pending)
+    search = Search.new
     host = "www.av.se"
     path = "/om-oss/sok-i-arbetsmiljoverkets-diarium/"
     query = {
@@ -26,6 +26,9 @@ class RefreshSubscriptionJob < ApplicationJob
     search.url = "https://#{host}#{path}?#{query}"
     search.status = :active
     search.save
+
+    refresh.search = search
+    refresh.save
 
     begin
       uri = URI(search.url)
