@@ -1,5 +1,12 @@
 sv:
 
+  home:
+    blurb: "E-postaviseringar om arbetsmiljöverket"
+    pitch: "Ta reda på nya dokument så snart de publiceras. Ingen mer ångest över att glömma att kolla."
+    login: "Logga in"
+    register: "Kom igång"
+    dashboard: "Startsida"
+
   registration:
     title: "Kom igång"
     button: "Kom igång"
