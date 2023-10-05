@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_10_04_043759) do
+ActiveRecord::Schema[7.1].define(version: 2023_10_05_131706) do
   create_table "notifications", id: :string, default: -> { "ULID()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -26,6 +26,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_04_043759) do
     t.datetime "updated_at", null: false
     t.string "subscription_id", null: false
     t.integer "status"
+    t.string "search_id"
+    t.index ["search_id"], name: "index_refreshes_on_search_id"
     t.index ["subscription_id"], name: "index_refreshes_on_subscription_id"
   end
 
@@ -48,8 +50,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_04_043759) do
     t.integer "status"
     t.string "hit_count"
     t.string "url"
-    t.string "refresh_id"
-    t.index ["refresh_id"], name: "index_searches_on_refresh_id"
   end
 
   create_table "subscriptions", id: :string, default: -> { "ULID()" }, force: :cascade do |t|
@@ -79,8 +79,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_04_043759) do
 
   add_foreign_key "notifications", "refreshes"
   add_foreign_key "notifications", "results"
+  add_foreign_key "refreshes", "searches"
   add_foreign_key "refreshes", "subscriptions"
   add_foreign_key "results", "searches"
-  add_foreign_key "searches", "refreshes"
   add_foreign_key "subscriptions", "users"
 end

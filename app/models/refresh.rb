@@ -1,7 +1,7 @@
 class Refresh < ApplicationRecord
   belongs_to :subscription
-  has_many :notifications
-  has_many :searches
+  belongs_to :search
+  has_many :notifications, dependent: :destroy
 
   enum :status, {
     pending: 0,

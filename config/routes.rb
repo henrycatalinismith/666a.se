@@ -2,10 +2,6 @@
 Rails.application.routes.draw do
   root 'home#index'
 
-  get "/name", to: "users#name"
-  get "/email", to: "users#email"
-  get "/language", to: "users#language"
-  patch "/users/:id", to: "users#update"
 
   get "/accessibility", to: "policies#accessibility"
   get "/privacy", to: "policies#privacy"
@@ -28,6 +24,14 @@ Rails.application.routes.draw do
     delete "/subscriptions/:id", to: "subscriptions#destroy"
     post "/subscriptions/:id/refresh", to: "subscriptions#refresh"
     post "/notifications/:id/email", to: "notifications#email"
+
+    get "/name", to: "users#name"
+    get "/email", to: "users#email"
+    get "/language", to: "users#language"
+    patch "/users/:id", to: "users#update"
+
+    get "/follow", to: "subscriptions#new"
+    post "/follow", to: "subscriptions#create"
   end
 
   if Rails.env.development?

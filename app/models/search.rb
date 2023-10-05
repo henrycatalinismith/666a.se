@@ -1,5 +1,5 @@
 class Search < ApplicationRecord
-  belongs_to :refresh
+  has_many :refreshes
   has_many :results
 
   enum status: {
