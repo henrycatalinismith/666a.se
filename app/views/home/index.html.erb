@@ -17,16 +17,31 @@
       </p>
 
       <div class="flex flex-col gap-4 items-center xs:flex-row xs:justify-start"> <!--xs:justify-center sm:justify-start ">-->
-        <%= link_to(
-          t("home.register"),
-          new_user_registration_path,
-          class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded flex-1 sm:min-w-full", method: :post
-        ) %>
-        <%= link_to(
-          t("home.login"),
-          new_user_session_path,
-          class: "text-blue-500 hover:bg-blue-700 hover:text-white font-bold py-2 px-4 rounded flex-1 sm:min-w-full"
-        ) %>
+        <% if current_user.nil? then %>
+          <%= link_to(
+            t("home.register"),
+            new_user_registration_path,
+            class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded flex-1 sm:min-w-full", method: :post
+          ) %>
+          <%= link_to(
+            t("home.login"),
+            new_user_session_path,
+            class: "text-blue-500 hover:bg-blue-700 hover:text-white font-bold py-2 px-4 rounded flex-1 sm:min-w-full"
+          ) %>
+        <% else %>
+          <%= link_to(
+            "Dashboard",
+            "/dashboard",
+            class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded flex-1 sm:min-w-full", method: :post
+          ) %>
+          <%= button_to(
+            t("dashboard.logout"),
+            destroy_user_session_path,
+            method: :delete,
+            class: "text-red-700 hover:bg-red-500 hover:text-white py-2 font-bold px-4 rounded whitespace-nowrap"
+          ) %>
+        <% end %>
+
       </div>
 
     </div>
