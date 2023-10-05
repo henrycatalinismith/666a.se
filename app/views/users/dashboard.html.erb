@@ -86,9 +86,16 @@
 
         <%= render partial: "dashboard-account-property", :locals => {
           name: "Language",
-          value: @user.locale,
+          value: t("locales.#{locale}"),
           href: "language",
           text: "Change language",
+        } %>
+
+        <%= render partial: "dashboard-account-property", :locals => {
+          name: "Password",
+          value: "***********",
+          href: "password",
+          text: "Change password",
         } %>
       </section>
 
