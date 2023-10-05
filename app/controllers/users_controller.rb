@@ -8,6 +8,15 @@ class UsersController < ApplicationController
     end
   end
 
+  def account
+    @user = current_user
+  end
+
+  def dashboard
+    @user = current_user
+    @subscriptions = @user.subscriptions
+  end
+
   def email
   end
 

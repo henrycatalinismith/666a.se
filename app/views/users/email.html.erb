@@ -1,8 +1,8 @@
 <div class="container flex flex-col gap-8 w-full p-8">
 
-  <h1 class="text-3xl font-bold">
-    Change Email
-  </h1>
+  <%= render layout: "shared/h1" do %>
+    Email
+  <% end %>
 
   <p>
     Your email address is crucial for 666a because it's an email notification
@@ -16,10 +16,10 @@
     builder: TailwindBuilder,
     :html => {class: "flex flex-col gap-8 max-w-xs" }) do |f| %>
 
-    <div class="w-64 flex flex-col">
+    <%= render layout: "shared/field" do %>
       <%= f.label :email %>
       <%= f.text_field :email %>
-    </div>
+    <% end %>
 
     <div class="actions">
       <%= f.submit "Save" %>
