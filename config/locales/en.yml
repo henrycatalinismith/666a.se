@@ -7,6 +7,15 @@ en:
     title: "Login"
     button: "Login"
 
+  dashboard:
+    title: "Dashboard"
+    hello: "Hey %{name}."
+    subscription: "You're subscribed to email alerts for Work Environment Authority filings regarding %{company}."
+    last_refresh:
+      never: "Not refreshed yet"
+      date: "Refreshed %{when} ago."
+    logout: "Sign out"
+
   notification_email:
     title: >
       Document Alert: %{document_code}

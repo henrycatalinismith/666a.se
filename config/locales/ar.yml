@@ -8,6 +8,15 @@ ar:
     title: "تسجيل الدخول"
     button: "تسجيل الدخول"
 
+  dashboard:
+    title: "لوحة التحكم"
+    hello: "مرحبًا %{name}."
+    subscription: "أنت مشترك في تنبيهات البريد الإلكتروني بخصوص ملفات الهيئة العامة لبيئة العمل المتعلقة بـ %{company}."
+    last_refresh:
+      never: "لم يتم تحديث اشتراكك بعد."
+      date: "تم تحديث اشتراكك آخر مرة قبل %{when}."
+    logout: "تسجيل الخروج"
+
   notification_email:
     title: >
       تنبيه المستند: %{document_code}

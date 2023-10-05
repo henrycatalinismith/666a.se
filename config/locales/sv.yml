@@ -7,6 +7,15 @@ sv:
   login:
     title: "Logga In"
     button: "Logga In"
+  
+  dashboard:
+    title: "Startsidan"
+    hello: "Hej %{name}."
+    subscription: "Du prenumererar på e-postaviseringar för allmänna handlingar hos arbetsmiljöverket avseende %{company}."
+    last_refresh:
+      never: "Din prenumeration har inte uppdaterats än."
+      date: "Din prenumeration uppdaterades senast för %{when} sedan."
+    logout: "Logga ut"
 
   notification_email:
     title: >

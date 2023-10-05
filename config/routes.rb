@@ -20,14 +20,16 @@ Rails.application.routes.draw do
     }
 
   authenticated :user do
-    get "/dashboard", to: "dashboard#index"
     delete "/subscriptions/:id", to: "subscriptions#destroy"
     post "/subscriptions/:id/refresh", to: "subscriptions#refresh"
     post "/notifications/:id/email", to: "notifications#email"
 
+    get "/account", to: "users#account"
+    get "/dashboard", to: "users#dashboard"
     get "/name", to: "users#name"
     get "/email", to: "users#email"
     get "/language", to: "users#language"
+
     patch "/users/:id", to: "users#update"
 
     get "/follow", to: "subscriptions#new"
