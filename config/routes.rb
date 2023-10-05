@@ -17,7 +17,12 @@ Rails.application.routes.draw do
       :sign_in => "login",
       :sign_out => "logout",
       :sign_up => "register",
+      :password => "password",
     }
+
+    devise_scope :user do
+      get 'password', to: 'registrations#edit'
+    end
 
   authenticated :user do
     delete "/subscriptions/:id", to: "subscriptions#destroy"
