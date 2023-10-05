@@ -9,21 +9,21 @@
       <img alt="" src="/logo.png" class="max-w-[100px]" />
 
       <h1 class="text-center sm:text-start text-3xl text-gray-800 font-semibold md:text-4xl">
-        <%= t(".blurb") %>
+        <%= t("home.blurb") %>
       </h1>
 
       <p class="text-center sm:text-start text-gray-500 leading-relaxed text-xl">
-        <%=t(".pitch")%>
+        <%=t("home.pitch")%>
       </p>
 
       <div class="flex flex-col gap-4 items-center xs:flex-row xs:justify-start"> <!--xs:justify-center sm:justify-start ">-->
         <%= link_to(
-          t(".register"),
+          t("home.register"),
           new_user_registration_path,
           class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded flex-1 sm:min-w-full", method: :post
         ) %>
         <%= link_to(
-          t(".login"),
+          t("home.login"),
           new_user_session_path,
           class: "text-blue-500 hover:bg-blue-700 hover:text-white font-bold py-2 px-4 rounded flex-1 sm:min-w-full"
         ) %>
@@ -51,7 +51,7 @@
       <% [:accessibility, :privacy, :terms].map do |name| %>
         <li>
           <a href="/<%= name %>" class="text-blue-700">
-            <%= t(".#{name}") %>
+            <%= t("home.#{name}") %>
           </a>
         </li>
       <% end %>

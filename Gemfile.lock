@@ -302,7 +302,6 @@ DEPENDENCIES
   sqlite3 (~> 1.4)
   tailwindcss-rails
   tzinfo-data
-  view_component (~> 3.6)
 
 RUBY VERSION
    ruby 3.2.2p53
