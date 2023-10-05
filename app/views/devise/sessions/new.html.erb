@@ -1,8 +1,8 @@
 <div class="container flex flex-col gap-8 w-full p-8">
 
-  <h1 class="text-2xl font-bold">
+  <%= render layout: "shared/h1" do %>
     <%= t("login.title") %>
-  </h1>
+  <% end %>
 
   <%= form_for(
     resource,
@@ -11,15 +11,15 @@
     url: session_path(resource_name),
     :html => {class: "flex flex-col gap-8 max-w-xs" }) do |f| %>
 
-    <div class="w-64 flex flex-col">
+    <%= render layout: "shared/field" do %>
       <%= f.label :email %>
       <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-    </div>
+    <% end %>
 
-    <div class="w-64 flex flex-col">
+    <%= render layout: "shared/field" do %>
       <%= f.label :password %>
       <%= f.password_field :password, autocomplete: "current-password" %>
-    </div>
+    <% end %>
 
     <% if devise_mapping.rememberable? %>
       <div class="flex flex-row items-center gap-4">
