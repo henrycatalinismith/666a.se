@@ -1,6 +1,6 @@
 class Role < ApplicationRecord
   belongs_to :user
-  enum status: {
+  enum name: {
     admin: 0,
   }
 end

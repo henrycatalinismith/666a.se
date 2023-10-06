@@ -107,36 +107,35 @@
 
     </div>
 
-    <section class="w-full flex flex-col gap-6 flex-1 p-6 bg-white border border-gray-200 rounded-lg shadow">
-      <div class="flex flex-row justify-between items-center h-8">
-        <h2 class="text-2xl font-bold">
-          Admin
-        </h2>
-      </div>
+    <% if @user.admin? %>
+      <section class="w-full flex flex-col gap-6 flex-1 p-6 bg-white border border-gray-200 rounded-lg shadow">
+        <div class="flex flex-row justify-between items-center h-8">
+          <h2 class="text-2xl font-bold">
+            Admin
+          </h2>
+        </div>
 
-      <div>
-        <% unless @user.notifications.empty? %>
-          <%= button_to(
-            "Email",
-            "/notifications/#{@user.notifications.last.id}/email",
-            method: :post,
-            class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-          ) %>
-        <% end %>
+        <div>
+          <% unless @user.notifications.empty? %>
+            <%= button_to(
+              "Email",
+              "/notifications/#{@user.notifications.last.id}/email",
+              method: :post,
+              class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            ) %>
+          <% end %>
 
-        <% unless @subscriptions.empty? then %>
-          <%= button_to(
-            "Refresh",
-            "/subscriptions/#{@user.subscriptions.first.id}/refresh",
-            method: :post,
-            class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-          ) %>
-        <% end %>
-      </div>
-    </section>
+          <% unless @subscriptions.empty? then %>
+            <%= button_to(
+              "Refresh",
+              "/subscriptions/#{@user.subscriptions.first.id}/refresh",
+              method: :post,
+              class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            ) %>
+          <% end %>
+        </div>
+      </section>
+    <% end %>
 
   </div>
-
-
-
 </div>

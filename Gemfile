@@ -50,3 +50,7 @@ gem "rufus-scheduler", "~> 3.9"
 gem "dotenv-rails", groups: [:development, :test]
 
 gem "redcarpet", "~> 3.6"
+
+gem "chartkick", "~> 5.0"
+
+gem "importmap-rails", "~> 1.2"

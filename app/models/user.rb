@@ -14,4 +14,8 @@ class User < ApplicationRecord
     with: /\A\d{6}-\d{4}\z/,
     message: :invalid_company_code,
   }
+
+  def admin?
+    !roles.admin.empty?
+  end
 end
