@@ -108,13 +108,24 @@
     </div>
 
     <% if @user.admin? %>
+      <section class="w-full flex flex-col gap-10 flex-1 md:p-6 bg-white md:border md:border-gray-200 md:rounded-lg md:shadow">
+        <div class="flex flex-row justify-between">
+          <h2 class="text-2xl font-bold">
+            Searches
+          </h2>
+          <a class="text-blue-700" href="/stats">more stats</a>
+        </div>
+        <%= line_chart Search.group("strftime('%Y-%m-%d', created_at)").count %>
+      </section>
+    <% end %>
+
+    <% if @user.admin? %>
       <section class="w-full flex flex-col gap-6 flex-1 p-6 bg-white border border-gray-200 rounded-lg shadow">
         <div class="flex flex-row justify-between items-center h-8">
           <h2 class="text-2xl font-bold">
             Admin
           </h2>
         </div>
-
         <div>
           <% unless @user.notifications.empty? %>
             <%= button_to(
@@ -124,7 +135,6 @@
               class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
             ) %>
           <% end %>
-
           <% unless @subscriptions.empty? then %>
             <%= button_to(
               "Refresh",

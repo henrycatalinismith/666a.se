@@ -54,3 +54,5 @@ gem "redcarpet", "~> 3.6"
 gem "chartkick", "~> 5.0"
 
 gem "importmap-rails", "~> 1.2"
+
+gem "groupdate", "~> 6.4"
