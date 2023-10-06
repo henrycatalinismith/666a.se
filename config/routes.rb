@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get "/accessibility", to: "policies#accessibility"
   get "/privacy", to: "policies#privacy"
   get "/terms", to: "policies#terms"
+  get "/forgot", to: "users#forgot"
 
   devise_for :users,
     :controllers => {

@@ -28,8 +28,13 @@
       </div>
     <% end %>
 
-    <div class="actions">
+    <div class="flex flex-row gap-4">
       <%= f.submit(t("login.button")) %>
+      <%= link_to(
+        "Forgot password",
+        "/forgot",
+        class: "text-blue-700 underline py-2 px-4 rounded flex-1 sm:min-w-full", method: :post
+      ) %>
     </div>
   <% end %>
 
