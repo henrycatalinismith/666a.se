@@ -1,7 +1,0 @@
-<div class="container flex flex-col gap-8 w-full p-8">
-  <%= render layout: "shared/h1" do %>
-    Stats
-  <% end %>
-
-  <%= line_chart User.group(:email).count %>
-</div>
