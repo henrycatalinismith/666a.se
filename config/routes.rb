@@ -2,7 +2,6 @@
 Rails.application.routes.draw do
   root 'home#index'
 
-
   get "/accessibility", to: "policies#accessibility"
   get "/privacy", to: "policies#privacy"
   get "/terms", to: "policies#terms"
@@ -20,9 +19,9 @@ Rails.application.routes.draw do
       :password => "password",
     }
 
-    devise_scope :user do
-      get 'password', to: 'registrations#edit'
-    end
+  devise_scope :user do
+    get 'password', to: 'registrations#edit'
+  end
 
   authenticated :user do
     delete "/subscriptions/:id", to: "subscriptions#destroy"
@@ -31,17 +30,10 @@ Rails.application.routes.draw do
 
     get "/account", to: "users#account"
     get "/dashboard", to: "users#dashboard"
-    get "/name", to: "users#name"
-    get "/email", to: "users#email"
-    get "/language", to: "users#language"
 
-    patch "/users/:id", to: "users#update"
-
-    get "/follow", to: "subscriptions#new"
-    post "/follow", to: "subscriptions#create"
-  end
-
-  if Rails.env.development?
-    mount Lookbook::Engine, at: "/lookbook"
+    match "/name", to: "users#name", via: [:get, :patch]
+    match "/email", to: "users#email", via: [:get, :patch]
+    match "/language", to: "users#language", via: [:get, :patch]
+    match "/follow", to: "subscriptions#new", via: [:get, :post]
   end
 end

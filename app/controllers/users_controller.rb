@@ -1,13 +1,6 @@
 class UsersController < ApplicationController
   layout "internal"
 
-  def update
-    if current_user.update(params[:user].permit(:name, :email, :locale)) then
-      redirect_to "/dashboard"
-      flash[:notice] = "user was updated."
-    end
-  end
-
   def account
     @user = current_user
   end
@@ -18,11 +11,29 @@ class UsersController < ApplicationController
   end
 
   def email
+    if request.patch?
+      if current_user.update(params[:user].permit(:email)) then
+        redirect_to "/dashboard"
+        flash[:notice] = "email updated"
+      end
+    end
   end
 
   def language
+    if request.patch?
+      if current_user.update(params[:user].permit(:language)) then
+        redirect_to "/dashboard"
+        flash[:notice] = "language updated"
+      end
+    end
   end
 
   def name
+    if request.patch?
+      if current_user.update(params[:user].permit(:name)) then
+        redirect_to "/dashboard"
+        flash[:notice] = "name updated"
+      end
+    end
   end
 end
