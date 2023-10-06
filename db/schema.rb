@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_10_05_131706) do
+ActiveRecord::Schema[7.1].define(version: 2023_10_06_184645) do
   create_table "notifications", id: :string, default: -> { "ULID()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -42,6 +42,14 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_05_131706) do
     t.string "document_date"
     t.string "document_type"
     t.index ["search_id"], name: "index_results_on_search_id"
+  end
+
+  create_table "roles", id: :string, default: -> { "ULID()" }, force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "name"
+    t.string "user_id", null: false
+    t.index ["user_id"], name: "index_roles_on_user_id"
   end
 
   create_table "searches", id: :string, default: -> { "ULID()" }, force: :cascade do |t|
@@ -82,5 +90,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_05_131706) do
   add_foreign_key "refreshes", "searches"
   add_foreign_key "refreshes", "subscriptions"
   add_foreign_key "results", "searches"
+  add_foreign_key "roles", "users"
   add_foreign_key "subscriptions", "users"
 end
