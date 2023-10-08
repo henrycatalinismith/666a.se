@@ -37,3 +37,5 @@
 production.sqlite3
 
 .env
+/node_modules/
+yarn.lock

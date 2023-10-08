@@ -3,9 +3,7 @@ en:
   home:
     blurb: "Work Environment Email Alerts"
     pitch: >
-      Stop worrying how long since you last remembered to check for public filings
-      at the Work Environment Authority. Start hearing about new documents as soon
-      as they're filed.
+      Get notified in your inbox whenever there's a new public filing at the Work Environment Authority.
     login: "Login"
     register: "Register"
     dashboard: "Dashboard"
