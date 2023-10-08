@@ -13,6 +13,22 @@ class PolicyRender < Redcarpet::Render::HTML
   def link(href, title, text)
     %(<a class="text-blue-700 underline" href="#{href}">#{text}</a>)
   end
+
+  def table(header, body)
+    %(<table><thead>#{header}</thead><tbody>#{body}</tbody></table>)
+  end
+
+  def table_row(content)
+    %(<tr class="">#{content}</tr>)
+  end
+
+  def table_cell(content, alignment, header)
+    if header then
+      %(<th class="text-left">#{content}</th>)
+    else
+      %(<td class="align-top py-4 first:pr-4">#{content}</td>)
+    end
+  end
 end
 
 class PoliciesController < ApplicationController
@@ -37,7 +53,8 @@ class PoliciesController < ApplicationController
     filename = Rails.root.join("policies", "#{name}.en.md")
     markdown = File.read(filename)
     renderer = PolicyRender.new()
-    redcarpet = Redcarpet::Markdown.new(renderer, extensions = {})
+    redcarpet = Redcarpet::Markdown.new(renderer, :tables => true)
+    @policy = name
     @html = redcarpet.render(markdown)
   end
 end
