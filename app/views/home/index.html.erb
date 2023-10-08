@@ -8,7 +8,7 @@
 
       <%# <img alt="" src="/logo-black-64.png" class="max-w-[100px]" /> %>
 
-      <h1 class="text-center sm:text-start text-3xl text-gray-800 font-semibold md:text-4xl">
+      <h1 class="text-4xl tracking-tight font-extrabold text-gray-900">
         <%= t("home.blurb") %>
       </h1>
 
@@ -47,12 +47,12 @@
     </div>
 
     <div class="flex-1">
-      <div class="relative border-gray-800 dark:border-gray-800 bg-gray-800 border-[14px] rounded-[2.5rem] h-[600px] w-[300px]">
-        <div class="h-[32px] w-[3px] bg-gray-800 dark:bg-gray-800 absolute -left-[17px] top-[72px] rounded-l-lg"></div>
-        <div class="h-[46px] w-[3px] bg-gray-800 dark:bg-gray-800 absolute -left-[17px] top-[124px] rounded-l-lg"></div>
-        <div class="h-[46px] w-[3px] bg-gray-800 dark:bg-gray-800 absolute -left-[17px] top-[178px] rounded-l-lg"></div>
-        <div class="h-[64px] w-[3px] bg-gray-800 dark:bg-gray-800 absolute -right-[17px] top-[142px] rounded-r-lg"></div>
-        <div class="rounded-[2rem] overflow-hidden w-[272px] h-[572px] bg-white dark:bg-gray-800">
+      <div class="relative border-gray-800 bg-gray-800 border-[14px] rounded-[2.5rem] h-[600px] w-[300px]">
+        <div class="h-[32px] w-[3px] bg-gray-800 absolute -left-[17px] top-[72px] rounded-l-lg"></div>
+        <div class="h-[46px] w-[3px] bg-gray-800 absolute -left-[17px] top-[124px] rounded-l-lg"></div>
+        <div class="h-[46px] w-[3px] bg-gray-800 absolute -left-[17px] top-[178px] rounded-l-lg"></div>
+        <div class="h-[64px] w-[3px] bg-gray-800 absolute -right-[17px] top-[142px] rounded-r-lg"></div>
+        <div class="rounded-[2rem] overflow-hidden w-[272px] h-[572px] bg-white">
           <img src="/email-<%= I18n.locale %>.png" class="w-[272px] h-[572px]" alt="">
         </div>
       </div>
@@ -61,10 +61,96 @@
 </section>
 
 <section class="container flex flex-col items-center gap-8 px-8 py-8 min-h-[50vh]">
-  <h2>
-    <i class="fa-solid fa-flag"></i>
-    <i class="fa-regular fa-bell"></i>
-  </h2>
+
+  <div class="py-8 mx-auto max-w-screen-xl sm:py-16 w-full">
+
+    <div class="max-w-screen-md mb-8 lg:mb-16">
+      <h2 class="mb-4 text-3xl tracking-tight font-extrabold text-gray-900">
+        Designed for people like you
+      </h2>
+      <p class="text-gray-500 sm:text-xl">
+        666a is the product of real world experience on the front lines of the Swedish labour movement.
+      </p>
+    </div>
+
+    <div class="space-y-8 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-12 md:space-y-0">
+
+      <div class="flex flex-col gap-4">
+        <div class="rounded-full bg-cyan-200 w-8 h-8 aspect-square grid place-items-center">
+          <i class="fa-solid fa-shield "></i>
+        </div>
+        <h3 class="text-xl font-bold">
+          Safety Officer
+        </h3>
+        <p class="text-gray-500">
+          No more relying on the employer to remember to inform you.
+        </p>
+      </div>
+
+      <div class="flex flex-col gap-4">
+        <div class="rounded-full bg-cyan-200 w-8 h-8 aspect-square grid place-items-center">
+          <i class="fa-solid fa-hat-wizard "></i>
+        </div>
+        <h3 class="text-xl font-bold">
+          Union Rep
+        </h3>
+        <p class="text-gray-500">
+          Keep your members up to date with the latest news.
+        </p>
+      </div>
+
+      <div class="flex flex-col gap-4">
+        <div class="rounded-full bg-cyan-200 w-8 h-8 aspect-square grid place-items-center">
+          <i class="fa-solid fa-phone "></i>
+        </div>
+        <h3 class="text-xl font-bold">
+          Ombudsman
+        </h3>
+        <p class="text-gray-500">
+          Support local union organising by upgrading your situational awareness.
+        </p>
+      </div>
+
+      <div class="flex flex-col gap-4">
+        <div class="rounded-full bg-cyan-200 w-8 h-8 aspect-square grid place-items-center">
+          <i class="fa-solid fa-fire "></i>
+        </div>
+        <h3 class="text-xl font-bold">
+          Organizer
+        </h3>
+        <p class="text-gray-500">
+          Stay alert for work environment issues affecting your campaigns. 
+        </p>
+      </div>
+
+      <div class="flex flex-col gap-4">
+        <div class="rounded-full bg-cyan-200 w-8 h-8 aspect-square grid place-items-center">
+          <i class="fa-solid fa-briefcase "></i>
+        </div>
+        <h3 class="text-xl font-bold">
+          Employee
+        </h3>
+        <p class="text-gray-500">
+          Learn the real context behind your employer's next HR announcement.
+        </p>
+      </div>
+
+      <div class="flex flex-col gap-4">
+        <div class="rounded-full bg-cyan-200 w-8 h-8 aspect-square grid place-items-center">
+          <i class="fa-solid fa-newspaper "></i>
+        </div>
+        <h3 class="text-xl font-bold">
+          Journalist
+        </h3>
+        <p class="text-gray-500">
+          Be first on the scene at Sweden's next big work environment story.
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+
 </section>
 
 <section class="flex flex-col flex=1 w-full items-center gap-8 bg-slate-200 min-h-[50vh] justify-center">
