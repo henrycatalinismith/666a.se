@@ -24,6 +24,8 @@ Rails.application.routes.draw do
     get 'password', to: 'registrations#edit'
   end
 
+  get "/delete", to: "users#delete"
+
   authenticated :user do
     delete "/subscriptions/:id", to: "subscriptions#destroy"
     post "/subscriptions/:id/refresh", to: "subscriptions#refresh"
@@ -31,6 +33,8 @@ Rails.application.routes.draw do
 
     get "/account", to: "users#account"
     get "/dashboard", to: "users#dashboard"
+
+    post "/delete", to: "users#delete"
 
     match "/name", to: "users#name", via: [:get, :patch]
     match "/email", to: "users#email", via: [:get, :patch]
