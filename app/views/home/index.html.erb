@@ -21,18 +21,18 @@
           <%= link_to(
             t("home.register"),
             new_user_registration_path,
-            class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded flex-1 sm:min-w-full", method: :post
+            class: "bg-cyan-300 hover:bg-cyan-200 text-black font-bold py-2 px-4 rounded flex-1 sm:min-w-full", method: :post
           ) %>
           <%= link_to(
             t("home.login"),
             new_user_session_path,
-            class: "text-blue-500 hover:bg-blue-700 hover:text-white font-bold py-2 px-4 rounded flex-1 sm:min-w-full"
+            class: "text-cyan-800 hover:bg-cyan-100 font-bold py-2 px-4 rounded flex-1 sm:min-w-full"
           ) %>
         <% else %>
           <%= link_to(
             "Dashboard",
             "/dashboard",
-            class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded flex-1 sm:min-w-full", method: :post
+            class: "bg-cyan-300 hover:bg-cyan-200 text-black font-bold py-2 px-4 rounded flex-1 sm:min-w-full", method: :post
           ) %>
           <%= button_to(
             t("dashboard.logout"),
@@ -60,97 +60,5 @@
 
 </section>
 
-<section class="container flex flex-col items-center gap-8 px-8 py-8 min-h-[50vh]">
-
-  <div class="py-8 mx-auto max-w-screen-xl sm:py-16 w-full">
-
-    <div class="max-w-screen-md mb-8 lg:mb-16">
-      <h2 class="mb-4 text-3xl tracking-tight font-extrabold text-gray-900">
-        Designed for people like you
-      </h2>
-      <p class="text-gray-500 sm:text-xl">
-        666a is the product of real world experience on the front lines of the Swedish labour movement.
-      </p>
-    </div>
-
-    <div class="space-y-8 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-12 md:space-y-0">
-
-      <div class="flex flex-col gap-4">
-        <div class="rounded-full bg-cyan-200 w-8 h-8 aspect-square grid place-items-center">
-          <i class="fa-solid fa-shield "></i>
-        </div>
-        <h3 class="text-xl font-bold">
-          Safety Officer
-        </h3>
-        <p class="text-gray-500">
-          No more relying on the employer to remember to inform you.
-        </p>
-      </div>
-
-      <div class="flex flex-col gap-4">
-        <div class="rounded-full bg-cyan-200 w-8 h-8 aspect-square grid place-items-center">
-          <i class="fa-solid fa-hat-wizard "></i>
-        </div>
-        <h3 class="text-xl font-bold">
-          Union Rep
-        </h3>
-        <p class="text-gray-500">
-          Keep your members up to date with the latest news.
-        </p>
-      </div>
-
-      <div class="flex flex-col gap-4">
-        <div class="rounded-full bg-cyan-200 w-8 h-8 aspect-square grid place-items-center">
-          <i class="fa-solid fa-phone "></i>
-        </div>
-        <h3 class="text-xl font-bold">
-          Ombudsman
-        </h3>
-        <p class="text-gray-500">
-          Support local union organising by upgrading your situational awareness.
-        </p>
-      </div>
-
-      <div class="flex flex-col gap-4">
-        <div class="rounded-full bg-cyan-200 w-8 h-8 aspect-square grid place-items-center">
-          <i class="fa-solid fa-fire "></i>
-        </div>
-        <h3 class="text-xl font-bold">
-          Organizer
-        </h3>
-        <p class="text-gray-500">
-          Stay alert for work environment issues affecting your campaigns. 
-        </p>
-      </div>
-
-      <div class="flex flex-col gap-4">
-        <div class="rounded-full bg-cyan-200 w-8 h-8 aspect-square grid place-items-center">
-          <i class="fa-solid fa-briefcase "></i>
-        </div>
-        <h3 class="text-xl font-bold">
-          Employee
-        </h3>
-        <p class="text-gray-500">
-          Learn the real context behind your employer's next HR announcement.
-        </p>
-      </div>
-
-      <div class="flex flex-col gap-4">
-        <div class="rounded-full bg-cyan-200 w-8 h-8 aspect-square grid place-items-center">
-          <i class="fa-solid fa-newspaper "></i>
-        </div>
-        <h3 class="text-xl font-bold">
-          Journalist
-        </h3>
-        <p class="text-gray-500">
-          Be first on the scene at Sweden's next big work environment story.
-        </p>
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
+<%= render "home/target-audience" %>
 <%= render "home/footer" %>
