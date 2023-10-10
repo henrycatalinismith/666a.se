@@ -9,18 +9,17 @@
     class="text-blue-700 underline"
     href="https://gdpr.eu/article-17-right-to-be-forgotten/">Article 17 of the
     GDPR</a>. Deleting your accout will trigger removal of all your personal
-    data from 666a. This isn't one of those sites that keeps your data but marks
-    it as "deleted" when you do this. Hit the button below and your data is <em>gone</em>.
+    data from 666a.
   </p>
 
   <% if @user.nil? then %>
 
     <div>
-    <%= link_to(
-      t("home.login"),
-      new_user_session_path,
-      class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-    ) %>
+      <%= link_to(
+        t("home.login"),
+        new_user_session_path,
+        class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+      ) %>
     </div>
 
   <% else %>
@@ -30,7 +29,8 @@
       as: "user",
       url: "/delete",
       builder: TailwindBuilder,
-      :html => {class: "flex flex-col gap-8 max-w-xs" }, method: :post) do |f| %>
+      html: {class: "flex flex-col gap-8 max-w-xs" },
+      method: :post) do |f| %>
       <div class="actions">
         <%= f.submit "Delete" %>
       </div>

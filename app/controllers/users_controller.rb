@@ -12,7 +12,7 @@ class UsersController < ApplicationController
 
   def delete
     session[:referer] = :delete
-    if request.post? and !current_user.nil? then
+    if request.post? and !current_user.nil? and current_user.destroy then
       redirect_to "/", :notice => "BALEETED"
     end
     @user = current_user

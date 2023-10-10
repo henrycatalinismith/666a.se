@@ -1,8 +1,8 @@
 class User < ApplicationRecord
-  has_many :subscriptions
+  has_many :subscription, dependent: :destroy
   has_many :notifications, through: :subscriptions
   has_many :results, through: :notifications
-  has_many :roles
+  has_many :role, dependent: :destroy
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
