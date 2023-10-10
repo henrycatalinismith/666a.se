@@ -28,7 +28,8 @@ class TailwindBuilder < ActionView::Helpers::FormBuilder
   end
 
   def submit(attribute, options={})
-    super(attribute, options.reverse_merge(class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"))
+    super(attribute, options.reverse_merge(class: "bg-cyan-300 hover:bg-cyan-200 text-black font-bold py-2 px-4 rounded"))
+    # bg-cyan-300 hover:bg-cyan-200 text-black font-bold 
   end
 
 end
