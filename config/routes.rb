@@ -24,6 +24,7 @@ Rails.application.routes.draw do
     get 'password', to: 'registrations#edit'
   end
 
+  get "/follow", to: "subscriptions#new"
   get "/delete", to: "users#delete"
 
   get "/:year/:month/:day/:slug",
@@ -42,6 +43,7 @@ Rails.application.routes.draw do
     get "/dashboard", to: "users#dashboard"
 
     post "/delete", to: "users#delete"
+    post "/follow", to: "subscriptions#new"
 
     match "/name", to: "users#name", via: [:get, :patch]
     match "/email", to: "users#email", via: [:get, :patch]

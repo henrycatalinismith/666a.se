@@ -2,15 +2,13 @@ class SubscriptionsController < ApplicationController
   layout "internal"
 
   def new
-    @subscription = Subscription.new
-  end
-
-  def create
-    @subscription = current_user.subscriptions.create(company_code: params[:subscription][:company_code])
-    if @subscription.valid?
-      redirect_to "/dashboard", :notice => "Subscription created"
+    if request.post?
+      @subscription = current_user.subscriptions.create(company_code: params[:subscription][:company_code])
+      if @subscription.valid?
+        redirect_to "/dashboard", :notice => "Subscription created"
+      end
     else
-      render template: "subscriptions/new"
+      @subscription = Subscription.new
     end
   end
 
