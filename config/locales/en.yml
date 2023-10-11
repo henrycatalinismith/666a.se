@@ -3,7 +3,7 @@ en:
   home:
     blurb: "Work Environment Email Alerts"
     pitch: >
-      Get notified in your inbox whenever there's a new public filing at the Work Environment Authority.
+      Get notified in your inbox whenever there's a new public filing about your employer at the Work Environment Authority.
     login: "Login"
     register: "Register"
     dashboard: "Dashboard"

@@ -34,7 +34,7 @@ end
 class NewsController < ApplicationController
   def show
     article(params[:year], params[:month], params[:day], params[:slug])
-    render template: "policies/show", layout: "internal"
+    render template: "news/show", layout: "internal"
   end
 
   private
