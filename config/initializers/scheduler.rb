@@ -7,5 +7,5 @@ return if defined?(Rails::Console) || Rails.env.test? || File.split($PROGRAM_NAM
 scheduler = Rufus::Scheduler.singleton
 scheduler.cron("0 7 * * *") do
   yesterday = Date.yesterday.strftime
-  DailyRefreshJob.perform_later(Time.now.strftime("%F"))
+  DailyRefreshJob.perform_later(yesterday)
 end
