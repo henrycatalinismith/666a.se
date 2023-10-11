@@ -19,7 +19,7 @@ class PolicyRender < Redcarpet::Render::HTML
   end
 
   def table_row(content)
-    %(<tr class="">#{content}</tr>)
+    %(<tr class="border-b border-gray-300">#{content}</tr>)
   end
 
   def table_cell(content, alignment, header)
