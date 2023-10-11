@@ -10,11 +10,26 @@ class ArticleRender < Redcarpet::Render::HTML
     case header_level
     when 1
       %(
-        <div>
+        <div class="flex flex-col gap-2">
           <h1 class="text-3xl font-bold">#{text}</h1>
-          <time class="text-xl text-gray-500" datetime="#{@date.strftime("%Y-%m-%d")}">
-            #{@date.strftime("%Y-%m-%d")}
-          </time>
+
+          <div class="flex items-center divide-x-2 divide-gray-300">
+            <time class="pr-4 text-gray-500" datetime="#{@date.strftime("%Y-%m-%d")}">
+              #{@date.strftime("%Y-%m-%d")}
+            </time>
+
+            <div class="pl-4 flex flex-row gap-2 items-center">
+              <img
+                class="w-6 h-6 rounded-full"
+                src="/henry-32.jpeg"
+                alt="Photo of Henry"
+              />
+              <span class="pr-3 font-medium text-gray-500 ">
+                Henry
+              </span>
+            </div>
+          </div>
+
         </div>
       )
     else
