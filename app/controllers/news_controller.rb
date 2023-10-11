@@ -1,10 +1,22 @@
 require "redcarpet"
 
 class ArticleRender < Redcarpet::Render::HTML
+  def initialize(date:)
+    super
+    @date = date
+  end
+
   def header(text, header_level)
     case header_level
     when 1
-      %(<h1 class="text-3xl font-bold">#{text}</h1>)
+      %(
+        <div>
+          <h1 class="text-3xl font-bold">#{text}</h1>
+          <time class="text-xl text-gray-500" datetime="#{@date.strftime("%Y-%m-%d")}">
+            #{@date.strftime("%Y-%m-%d")}
+          </time>
+        </div>
+      )
     else
       %(<h#{header_level} class="text-xl font-bold">#{text}</h#{header_level}>)
     end
@@ -40,9 +52,10 @@ class NewsController < ApplicationController
   private
 
   def article(year, month, day, slug)
+    @date = Date.parse("#{year}-#{month}-#{day}")
     filename = Rails.root.join("news", "#{year}-#{month}-#{day}-#{slug}.en.md")
     markdown = File.read(filename)
-    renderer = ArticleRender.new()
+    renderer = ArticleRender.new(date: @date)
     redcarpet = Redcarpet::Markdown.new(renderer, :tables => true)
     @html = redcarpet.render(markdown)
   end
