@@ -2,22 +2,22 @@
 
   <div class="
     py5 items-center flex flex-col gap-4
-    sm:mx-auto sm:items-start
+    md:mx-auto md:items-start
     md:flex-2
   ">
 
 
-    <img alt="" src="/logo-128.png" class="max-w-[128px]" />
+    <img alt="" src="/logo-128.png" class="max-w-[128px] aspect-1" />
 
-    <h1 class="text-4xl tracking-tight font-extrabold text-gray-900">
+    <h1 class="text-4xl text-center tracking-tight font-extrabold text-gray-900 md:text-left">
       <%= t("home.blurb") %>
     </h1>
 
-    <p class="text-center sm:text-start text-gray-500 leading-relaxed text-xl">
+    <p class="text-center md:text-start text-gray-500 leading-relaxed text-xl">
       <%=t("home.pitch")%>
     </p>
 
-    <div class="flex flex-col gap-4 items-center xs:flex-row xs:justify-start"> <!--xs:justify-center sm:justify-start ">-->
+    <div class="flex flex-col gap-4 items-center md:flex-row md:justify-start"> <!--xs:justify-center sm:justify-start ">-->
       <% if current_user.nil? then %>
         <%= link_to(
           t("home.register"),
