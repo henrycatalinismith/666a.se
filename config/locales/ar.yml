@@ -25,6 +25,7 @@ ar:
     logout: "تسجيل الخروج"
 
   notification_email:
+    subject: "تنبيه المستند"
     title: >
       تنبيه المستند: %{document_code}
     greeting:

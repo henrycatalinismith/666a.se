@@ -25,6 +25,7 @@ sv:
     logout: "Logga ut"
 
   notification_email:
+    subject: "⛧ Dokumentmeddelande"
     title: >
       Dokumentmeddelande: %{document_code}
     greeting: >
