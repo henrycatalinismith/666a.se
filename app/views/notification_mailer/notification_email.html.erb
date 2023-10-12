@@ -1,12 +1,13 @@
 <!doctype html>
 <html>
   <head>
-    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    <meta name="format-detection" content="telephone=no" />
   </head>
   <body dir="<%= I18n.locale == :ar ? "rtl" : "ltr" %>" style="font-family: sans-serif">
 
-    <h1 style="font-size: 1.2rem">
-      <img src="https://666a.se/logo-64.png" />
+    <h1 style="display: flex; align-items: center; column-gap: 0.5rem; font-size: 1.2rem">
+      <img src="https://666a.se/logo-32.png" />
       <%= t("notification_email.title",
         document_code: @result.document_code,
       ) %>
@@ -24,7 +25,7 @@
       ) %>
     </p>
 
-    <p style="font-size: 1.4rem">
+    <p style="font-size: 1.1rem">
       <a href="<%= @url %>">
         <%= @result.document_code %>:
         <% if I18n.locale == "sv" %>
@@ -44,7 +45,7 @@
     </p>
 
     <p>
-      <%= t("notification_email.email_instructions") %>
+      <%= t("notification_email.email_instructions").html_safe %>
     </p>
 
   </body>
