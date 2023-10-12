@@ -29,8 +29,8 @@ en:
     logout: "Sign out"
 
   notification_email:
-    title: >
-      Document Alert: %{document_code}
+    subject: "⛧ Document Alert"
+    title: "Document Alert: %{document_code}"
     greeting: >
       Hey %{name},
     subscription: >

@@ -7,7 +7,7 @@ class NotificationMailer < ApplicationMailer
     I18n.with_locale(@user.locale) do
       mail(
         to: @user.email,
-        subject: t("notification_email.title", document_code: @result.document_code),
+        subject: t("notification_email.subject"),
         from: "666a <hen@666a.se>"
       )
     end
