@@ -10,7 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_10_06_184645) do
+ActiveRecord::Schema[7.1].define(version: 2023_10_13_175956) do
+  create_table "days", id: :string, default: -> { "ULID()" }, force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.date "date"
+    t.index ["date"], name: "index_days_on_date", unique: true
+  end
+
   create_table "notifications", id: :string, default: -> { "ULID()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -47,8 +54,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_06_184645) do
   create_table "roles", id: :string, default: -> { "ULID()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "name"
     t.string "user_id", null: false
+    t.integer "name"
     t.index ["user_id"], name: "index_roles_on_user_id"
   end
 
