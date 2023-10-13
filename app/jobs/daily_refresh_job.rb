@@ -9,5 +9,6 @@ class DailyRefreshJob < ApplicationJob
       RefreshSubscriptionJob.perform_later(subscription, date)
     end
     puts "DailyRefreshJob: end"
+    Day.create(date: Date.today)
   end
 end
