@@ -1,11 +1,11 @@
 class Result < ApplicationRecord
   belongs_to :search
   has_many :notifications
+  has_many :metadatas
+  alias_method :metadata, :metadatas
   after_commit :document_metadata
 
   def document_metadata
-    puts "after_commit: begin"
-    DocumentMetadataJob.perform_later(document_code)
-    puts "after_commit: end"
+    MetadataFetchJob.perform_later(id, document_code)
   end
 end

@@ -1,15 +1,15 @@
 require "uri"
 require "net/http"
 
-class RefreshSubscriptionJob < ApplicationJob
+class SubscriptionRefreshJob < ApplicationJob
   queue_as :default
 
   def perform(subscription, date)
-    puts "RefreshSubscriptionJob: begin"
+    puts "SubscriptionRefreshJob: begin"
 
     ongoing_refreshes = subscription.refreshes.where(status: [:active, :pending])
     if ongoing_refreshes.count > 0 then
-      puts "RefreshSubscriptionJob: duplicate of #{ongoing_refreshes.first.id}"
+      puts "SubscriptionRefreshJob: duplicate of #{ongoing_refreshes.first.id}"
       return
     end
 
@@ -52,7 +52,7 @@ class RefreshSubscriptionJob < ApplicationJob
       refresh.status = :error
       refresh.save
 
-      puts "RefreshSubscriptionJob: error"
+      puts "SubscriptionRefreshJob: error"
       puts error.message
       return
     end
@@ -73,6 +73,6 @@ class RefreshSubscriptionJob < ApplicationJob
     refresh.status = :success
     refresh.save
 
-    puts "RefreshSubscriptionJob: end"
+    puts "SubscriptionRefreshJob: end"
   end
 end

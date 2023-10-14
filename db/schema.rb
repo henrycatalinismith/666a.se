@@ -10,12 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_10_14_174428) do
+ActiveRecord::Schema[7.1].define(version: 2023_10_14_175505) do
   create_table "days", id: :string, default: -> { "ULID()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.date "date"
     t.index ["date"], name: "index_days_on_date", unique: true
+  end
+
+  create_table "metadata", id: :string, default: -> { "ULID()" }, force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "result_id", null: false
+    t.string "name"
+    t.string "value"
+    t.index ["result_id"], name: "index_metadata_on_result_id"
   end
 
   create_table "notifications", id: :string, default: -> { "ULID()" }, force: :cascade do |t|
@@ -92,6 +101,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_14_174428) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "metadata", "results"
   add_foreign_key "notifications", "refreshes"
   add_foreign_key "notifications", "results"
   add_foreign_key "refreshes", "searches"

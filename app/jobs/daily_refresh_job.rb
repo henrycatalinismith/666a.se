@@ -6,9 +6,8 @@ class DailyRefreshJob < ApplicationJob
     subscriptions = Subscription.all
     puts "DailyRefreshJob: #{subscriptions.count}"
     subscriptions.each_with_index do |subscription, i|
-      RefreshSubscriptionJob.perform_later(subscription, date)
+      SubscriptionRefreshJob.perform_later(subscription, date)
     end
     puts "DailyRefreshJob: end"
-    Day.create(date: Date.today)
   end
 end
