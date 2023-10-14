@@ -1,10 +1,10 @@
 require "uri"
 require "net/http"
 
-class DocumentMetadataJob < ApplicationJob
+class MetadataFetchJob < ApplicationJob
   queue_as :default
 
-  def perform(document_code)
+  def perform(result_id, document_code)
     puts "DocumentMetadataJob: begin"
     puts "#{document_code}"
 
@@ -17,9 +17,16 @@ class DocumentMetadataJob < ApplicationJob
     response = Net::HTTP.get_response(uri)
     document = Nokogiri::HTML.parse(response.body)
 
+    dt = document.css("dt").map { |e| e.text.strip }
     dd = document.css("dd").map { |e| e.text.strip }
+    metadata = Hash[dt.zip(dd)]
 
-    puts dd.inspect
+    result = Result.find(result_id)
+    metadata.each do |name, value|
+      result.metadata.create({ name:, value: })
+    end
+
+    puts metadata.inspect
 
     puts "DocumentMetadataJob: end"
   end
