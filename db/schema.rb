@@ -10,12 +10,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_10_13_175956) do
+ActiveRecord::Schema[7.1].define(version: 2023_10_14_124343) do
   create_table "days", id: :string, default: -> { "ULID()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.date "date"
     t.index ["date"], name: "index_days_on_date", unique: true
+  end
+
+  create_table "documents", id: :string, default: -> { "ULID()" }, force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "document_code"
+    t.string "document_type"
+    t.integer "document_direction"
+    t.date "document_date"
+    t.string "case_code"
+    t.string "case_name"
+    t.integer "case_status"
+    t.text "company_code"
+    t.text "company_name"
+    t.string "workplace_code"
+    t.string "workplace_name"
+    t.string "municipality_code"
+    t.string "municipality_name"
+    t.string "county_code"
+    t.string "county_name"
   end
 
   create_table "notifications", id: :string, default: -> { "ULID()" }, force: :cascade do |t|
