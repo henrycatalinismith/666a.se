@@ -18,12 +18,12 @@ class DayJob < ApplicationJob
       return
     end
 
-    if cascade then
-      SearchJob.perform_later(day.date, cascade)
+    if Time.now < Time.parse("19:00") then
+      self.class.set(wait: 5.minutes).perform_later(date, cascade)
     end
 
-    if Time.now < Time.parse("19:00") then
-      self.class.set(wait: 5.minutes).perform_later(date)
+    if cascade then
+      SearchJob.perform_later(day.date, cascade)
     end
 
     puts "DayJob: end"

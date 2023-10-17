@@ -37,7 +37,7 @@ class ResultJob < ApplicationJob
     puts "ResultJob: end"
 
     if cascade then
-      DocumentJob.set(wait: index.seconds).perform_later(@result.document_code, cascade)
+      DocumentJob.set(wait: 1.seconds).perform_later(@result.document_code, cascade)
     end
   end
 end
