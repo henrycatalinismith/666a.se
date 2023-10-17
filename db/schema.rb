@@ -10,12 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_10_17_035156) do
+ActiveRecord::Schema[7.1].define(version: 2023_10_17_042558) do
   create_table "days", id: :string, default: -> { "ULID()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.date "date"
-    t.integer "status"
+    t.integer "ingestion_status"
     t.index ["date"], name: "index_days_on_date", unique: true
   end
 
@@ -84,7 +84,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_17_035156) do
     t.datetime "updated_at", null: false
     t.string "day_id", null: false
     t.integer "page_number"
-    t.integer "status"
+    t.integer "result_status"
     t.string "hit_count"
     t.index ["day_id"], name: "index_searches_on_day_id"
   end
