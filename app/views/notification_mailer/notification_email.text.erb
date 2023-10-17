@@ -1,0 +1,18 @@
+<%= t("notification_email.title",
+  document_code: @document.document_code,
+) %>
+
+<%= t("notification_email.greeting",
+  name: @user.name,
+) %>
+
+<%= t("notification_email.subscription",
+  company: @document.company_name,
+) %>
+
+<%= @document.document_code %>: <%= I18n.locale == "sv" ? @document.document_type : t("document_type." + @document.document_type) %>
+
+<%= t("notification_email.link_preamble") %>
+https://www.av.se/om-oss/sok-i-arbetsmiljoverkets-diarium/?id=<%= @document.document_code %>
+
+<%= t("notification_email.email_instructions") %>

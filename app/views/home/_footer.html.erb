@@ -1,0 +1,25 @@
+<section class="flex flex-col flex=1 w-full items-center gap-8 bg-slate-200 min-h-[50vh] justify-center">
+  <div class="container p-8">
+    <ol class="flex flex-col gap-4">
+
+      <%= render partial: "home/footer-link", locals: {
+        href: "/accessibility",
+        icon: "fa-universal-access",
+        text: t("home.accessibility"),
+      } %>
+
+      <%= render partial: "home/footer-link", locals: {
+        href: "/privacy",
+        icon: "fa-user-secret",
+        text: t("home.privacy"),
+      } %>
+
+      <%= render partial: "home/footer-link", locals: {
+        href: "/terms",
+        icon: "fa-gavel",
+        text: t("home.terms"),
+      } %>
+
+    </ol>
+  </div>
+</section>

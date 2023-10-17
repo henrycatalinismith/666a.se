@@ -1,0 +1,56 @@
+<section class="container flex flex-col items-center gap-8 px-8 py-8 min-h-[50vh]">
+
+  <div class="py-8 mx-auto max-w-screen-xl sm:py-16 w-full">
+
+    <div class="max-w-screen-md mb-8 lg:mb-16">
+      <h2 class="mb-4 text-3xl tracking-tight font-extrabold text-gray-900">
+        Designed for people like you
+      </h2>
+      <p class="text-gray-500 sm:text-xl">
+        666a is the product of real world experience on the front lines of the Swedish labour movement.
+      </p>
+    </div>
+
+    <div class="space-y-8 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-12 md:space-y-0">
+
+      <%= render partial: "home/target-audience-member", locals: {
+        icon: "fa-shield",
+        heading: "Safety Officer",
+        text: "No more relying on the employer to remember to inform you.",
+      } %>
+
+      <%= render partial: "home/target-audience-member", locals: {
+        icon: "fa-hat-wizard",
+        heading: "Union Rep",
+        text: "Keep your members up to date with the latest news.",
+      } %>
+
+      <%= render partial: "home/target-audience-member", locals: {
+        icon: "fa-hammer",
+        heading: "Employee",
+        text: "Learn the real context behind your employer's next HR announcement.",
+      } %>
+
+      <%= render partial: "home/target-audience-member", locals: {
+        icon: "fa-briefcase",
+        heading: "Ombudsman",
+        text: "Support local union organising by upgrading your situational awareness.",
+      } %>
+
+      <%= render partial: "home/target-audience-member", locals: {
+        icon: "fa-fire",
+        heading: "Organizer",
+        text: "Stay alert for work environment issues affecting your campaigns.",
+      } %>
+
+      <%= render partial: "home/target-audience-member", locals: {
+        icon: "fa-newspaper",
+        heading: "Journalist",
+        text: "Be first on the scene at Sweden's next big work environment story.",
+      } %>
+
+    </div>
+
+  </div>
+
+</section>

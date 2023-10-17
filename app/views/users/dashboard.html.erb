@@ -1,0 +1,130 @@
+<div class="container flex flex-col gap-10 w-full p-8">
+
+  <%= render layout: "shared/h1" do %>
+    Dashboard
+  <% end %>
+
+  <div class="flex flex-col gap-14 md:gap-8 md:flex-row">
+
+    <section class="w-full flex flex-col gap-10 flex-1 md:p-6 bg-white md:border md:border-gray-200 md:rounded-lg md:shadow">
+
+      <div class="flex flex-row justify-between h-8">
+        <h2 class="text-2xl font-bold">
+          Companies
+        </h2>
+
+        <%= link_to(
+          "Add",
+          "/follow",
+          class: "min-width-max-content hover:bg-slate-400 text-blue-700 hover:text-white py-2 px-4 whitespace-nowrap rounded h-min"
+        ) %>
+      </div>
+    
+      <div class="flex flex-col gap-8">
+        <% if @subscriptions.empty? then %>
+            <a href="/follow" class="font-bold border-dashed border-2 border-indigo-100 rounded-md w-full flex-1 block p-8 text-center">
+              Follow a company ➡
+            </a>
+          <% else %>
+            <% @subscriptions.each do |subscription| %>
+
+              <div class="flex flex-row justify-between items-center">
+                <div class="flex flex-col max-w-full overflow-hidden">
+                  <div class="font-mono">
+                    <%= subscription.company_code %>
+                  </div>
+                  <div class="truncate">
+                    --
+                  </div>
+                </div>
+
+                <%= button_to(
+                  "Unfollow",
+                  "/subscriptions/#{@user.subscriptions.first.id}",
+                  method: :delete,
+                  class: "min-w-max-content text-red-700 hover:bg-red-700 hover:text-white py-2 px-4 rounded"
+                ) %>
+
+              </div>
+
+            <% end %>
+          <% end %>
+      </div>
+    </section>
+
+    <section class="w-full flex flex-col gap-10 flex-1 md:p-6 bg-white md:border md:border-gray-200 md:rounded-lg md:shadow">
+
+      <div class="flex flex-row justify-between items-center h-8">
+
+        <h2 class="text-2xl font-bold">
+          Account
+        </h2>
+
+        <%= button_to(
+          t("dashboard.logout"),
+          destroy_user_session_path,
+          method: :delete,
+          class: "text-red-700 hover:bg-red-500 hover:text-white py-2 px-4 rounded"
+        ) %>
+
+      </div>
+
+      <div class="flex flex-col gap-8">
+
+        <%= render partial: "dashboard-account-property", :locals => {
+          name: "Name",
+          value: @user.name,
+          href: "name",
+          text: "Update name",
+        } %>
+
+        <%= render partial: "dashboard-account-property", :locals => {
+          name: "Email",
+          value: @user.email,
+          href: "email",
+          text: "Update email",
+        } %>
+
+        <%= render partial: "dashboard-account-property", :locals => {
+          name: "Language",
+          value: t("locales.#{locale}"),
+          href: "language",
+          text: "Change language",
+        } %>
+
+        <%= render partial: "dashboard-account-property", :locals => {
+          name: "Password",
+          value: "***********",
+          href: "password",
+          text: "Change password",
+        } %>
+      </section>
+
+    </div>
+
+    <% if @user.admin? %>
+      <section class="w-full flex flex-col gap-10 flex-1 md:p-6 bg-white md:border md:border-gray-200 md:rounded-lg md:shadow">
+        <div class="flex flex-row justify-between">
+          <h2 class="text-2xl font-bold">
+            Searches
+          </h2>
+          <a class="text-blue-700" href="/stats">more stats</a>
+        </div>
+        <%= line_chart Search.group("strftime('%Y-%m-%d', created_at)").count %>
+      </section>
+    <% end %>
+
+    <% if @user.admin? %>
+      <section class="w-full flex flex-col gap-6 flex-1 p-6 bg-white border border-gray-200 rounded-lg shadow">
+        <div class="flex flex-row justify-between items-center h-8">
+          <h2 class="text-2xl font-bold">
+            Admin
+          </h2>
+        </div>
+        <div>
+        </div>
+      </section>
+    <% end %>
+
+  </div>
+</div>

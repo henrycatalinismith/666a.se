@@ -1,0 +1,23 @@
+<div class="container p-8 flex flex-col gap-8 md:flex-row">
+
+  <div class="flex flex-col gap-4 flex-1">
+    <%= @html.html_safe %>
+  </div>
+
+  <div class="flex flex-col gap-4 h-min md:p-4 md:w-80 md:border md:border-gray-200 md:rounded-lg md:shadow">
+    <h2 class="text-xl font-bold">
+      Archive
+    </h2>
+
+    <ol class="flex flex-col gap-4">
+
+      <%= render partial: "news/link", locals: {
+        href: "/2023/11/01/launch",
+        text: "Announcing 666a",
+      } %>
+
+    </ol>
+
+  </div>
+
+</div>
