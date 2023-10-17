@@ -42,5 +42,9 @@ class DocumentJob < ApplicationJob
     @result.document_ready!
 
     puts "DocumentJob: end"
+    
+    if cascade then
+      NotificationJob.set(wait: index.seconds).perform_later(document_code, cascade)
+    end
   end
 end
