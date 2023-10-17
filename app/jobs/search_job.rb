@@ -4,7 +4,7 @@ class SearchJob < ApplicationJob
   rescue_from(StandardError) do |exception|
     puts exception.message
     puts exception.backtrace
-    @search.error! unless @search.nil?
+    @search.result_error! unless @search.nil?
   end
 
   def perform(date, cascade = false)
@@ -18,7 +18,7 @@ class SearchJob < ApplicationJob
       page_number: day.next_page_number,
     )
 
-    @search.active!
+    @search.result_fetching!
     puts @search.url
     uri = URI(@search.url)
     response = Net::HTTP.get_response(uri)
@@ -51,7 +51,7 @@ class SearchJob < ApplicationJob
       )
     end
 
-    @search.success!
+    @search.result_ready!
 
     if cascade then
       @search.results.each_with_index do |result, index|

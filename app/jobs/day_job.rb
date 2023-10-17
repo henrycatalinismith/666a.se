@@ -14,7 +14,7 @@ class DayJob < ApplicationJob
     end
 
     if day.looks_dormant? then
-      day.success!
+      day.ingestion_complete!
       return
     end
 

@@ -4,12 +4,12 @@ class Day < ApplicationRecord
   scope :today, -> { where(date: Date.today) }
   scope :yesterday, -> { where(date: Date.yesterday) }
 
-  enum status: {
-    pending: 0,
-    active: 1,
-    success: 2,
-    error: 3,
-    aborted: 4,
+  enum ingestion_status: {
+    ingestion_pending: 0,
+    ingestion_active: 1,
+    ingestion_complete: 2,
+    ingestion_error: 3,
+    ingestion_aborted: 4,
   }
 
   def next_page_number
@@ -17,7 +17,7 @@ class Day < ApplicationRecord
       return 1
     end
 
-    last_search = searches.success.latest.first
+    last_search = searches.result_ready.latest.first
     if last_search.results.count < 10 then
       return last_search.page_number
     end
