@@ -1,9 +1,9 @@
 class NotificationMailer < ApplicationMailer
   def notification_email()
     @notification = params[:notification]
-    @result = @notification.result
-    @user = @notification.refresh.subscription.user
-    @url = "https://www.av.se/om-oss/sok-i-arbetsmiljoverkets-diarium/?id=" + @result.document_code
+    @document = @notification.document
+    @user = @notification.subscription.user
+    @url = "https://www.av.se/om-oss/sok-i-arbetsmiljoverkets-diarium/?id=" + @document.document_code
     I18n.with_locale(@user.locale) do
       mail(
         to: @user.email,

@@ -27,7 +27,6 @@
             </a>
           <% else %>
             <% @subscriptions.each do |subscription| %>
-              <% last_refresh = subscription.refreshes.last %>
 
               <div class="flex flex-row justify-between items-center">
                 <div class="flex flex-col max-w-full overflow-hidden">
@@ -35,11 +34,7 @@
                     <%= subscription.company_code %>
                   </div>
                   <div class="truncate">
-                    <% if last_refresh == nil %>
-                      <%=t("dashboard.last_refresh.never")%>
-                    <% else %>
-                      <%=t("dashboard.last_refresh.date", when: time_ago_in_words(last_refresh.created_at))%>
-                    <% end %>
+                    --
                   </div>
                 </div>
 
@@ -127,22 +122,6 @@
           </h2>
         </div>
         <div>
-          <% unless @user.notifications.empty? %>
-            <%= button_to(
-              "Email",
-              "/notifications/#{@user.notifications.last.id}/email",
-              method: :post,
-              class: "bg-cyan-200 hover:bg-cyan-300 text-black font-bold py-2 px-4 rounded"
-            ) %>
-          <% end %>
-          <% unless @subscriptions.empty? then %>
-            <%= button_to(
-              "Refresh",
-              "/subscriptions/#{@user.subscriptions.first.id}/refresh",
-              method: :post,
-              class: "bg-cyan-200 hover:bg-cyan-300 text-black font-bold py-2 px-4 rounded"
-            ) %>
-          <% end %>
         </div>
       </section>
     <% end %>

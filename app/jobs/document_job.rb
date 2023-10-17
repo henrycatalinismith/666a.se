@@ -30,6 +30,14 @@ class DocumentJob < ApplicationJob
     end
 
     document = @result.to_document
+
+    if !document.company_code.nil? then
+      subscription_count = Subscription.where(company_code: document.company_code).count
+      document.notification_status = subscription_count > 0 ? :notification_pending : :notification_needless
+    else
+      document.notification_status = :notification_needless
+    end
+
     document.save
     @result.document_ready!
 

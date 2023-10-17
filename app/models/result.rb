@@ -27,9 +27,9 @@ class Result < ApplicationRecord
   def document_direction
     direction = JSON.parse(metadata)["Inkommande/Utgående"]
     if direction == "Inkommande" then
-      return :incoming
+      return :document_incoming
     elsif direction == "Utgående" then
-      return :outgoing
+      return :document_outgoing
     end
   end
 
@@ -40,9 +40,9 @@ class Result < ApplicationRecord
   def case_status
     status = JSON.parse(metadata)["Pågående/Avslutat"]
     if status == "Pågående" then
-      return :ongoing
+      return :case_ongoing
     elsif status == "Avslutat" then
-      return :concluded
+      return :case_concluded
     end
   end
 
