@@ -6,5 +6,5 @@ return if defined?(Rails::Console) || Rails.env.test? || File.split($PROGRAM_NAM
 
 scheduler = Rufus::Scheduler.singleton
 scheduler.cron("*/5 7-20 * * *") do
-  DayJob.perform_later()
+  # DayJob.perform_later()
 end
