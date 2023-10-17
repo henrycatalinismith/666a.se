@@ -1,0 +1,57 @@
+<div class="container flex flex-col gap-8 w-full p-8">
+
+  <%= render layout: "shared/h1" do %>
+    <%= t("registration.title") %>
+  <% end %>
+
+  <%= form_for(
+    resource,
+    as: resource_name,
+    url: registration_path(resource_name),
+    builder: TailwindBuilder,
+    :html => {class: "flex flex-col gap-8 max-w-xs" }) do |f| %>
+
+    <%= render "devise/shared/error_messages", resource: resource %>
+
+    <%= render layout: "shared/field" do %>
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+    <% end %>
+
+    <%= render layout: "shared/field" do %>
+      <%= f.label :locale %>
+      <%= f.select(:locale, options_for_select(
+        I18n.available_locales.map { |locale| [
+          t("locales.#{locale}", :locale => locale),
+          locale
+        ]
+      }, I18n.locale)) %>
+    <% end %>
+
+    <%= render layout: "shared/field" do %>
+      <%= f.label :company_code %>
+      <%= f.text_field :company_code, :placeholder => "123456-7890" %>
+    <% end %>
+
+    <%= render layout: "shared/field" do %>
+      <%= f.label :email %>
+      <%= f.email_field :email, autocomplete: "email" %>
+    <% end %>
+
+    <%= render layout: "shared/field" do %>
+      <%= f.label :password %>
+      <%= f.password_field :password, autocomplete: "new-password" %>
+    <% end %>
+
+    <%= render layout: "shared/field" do %>
+      <%= f.label :password_confirmation %>
+      <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+    <% end %>
+
+    <div class="actions">
+      <%= f.submit t("registration.button") %>
+    </div>
+
+  <% end %>
+
+</div>

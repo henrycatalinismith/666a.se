@@ -1,0 +1,30 @@
+<div class="container flex flex-col gap-8 w-full p-8">
+
+  <%= render layout: "shared/h1" do %>
+    Email
+  <% end %>
+
+  <p>
+    Your email address is crucial for 666a because it's an email notification
+    service. So double check your changes before you hit save.
+  </p>
+
+  <%= form_for(
+    current_user,
+    as: "user",
+    url: "/email",
+    builder: TailwindBuilder,
+    :html => {class: "flex flex-col gap-8 max-w-xs" }) do |f| %>
+
+    <%= render layout: "shared/field" do %>
+      <%= f.label :email %>
+      <%= f.text_field :email %>
+    <% end %>
+
+    <div class="actions">
+      <%= f.submit "Save" %>
+    </div>
+
+  <% end %>
+
+</div>

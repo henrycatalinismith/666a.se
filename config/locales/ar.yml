@@ -1,0 +1,230 @@
+ar:
+
+  home:
+    blurb: "إشعارات بريد إلكتروني تلقائية من الهيئة العامة لبيئة العمل."
+    pitch: "توقف عن القلق حول متى آخر مرة تذكرت فيها أن تتحقق. ابدأ في الاستماع إلى أخبار الوثائق الجديدة بمجرد تقديمها."
+    login: "تسجيل الدخول"
+    register: "التسجيل"
+    dashboard: "لوحة التحكم"
+
+  registration:
+    title: "تسجيل الدخول"
+    button: "تسجيل الدخول"
+
+  login:
+    title: "تسجيل الدخول"
+    button: "تسجيل الدخول"
+
+  dashboard:
+    title: "لوحة التحكم"
+    hello: "مرحبًا %{name}."
+    subscription: "أنت مشترك في تنبيهات البريد الإلكتروني بخصوص ملفات الهيئة العامة لبيئة العمل المتعلقة بـ %{company}."
+    last_refresh:
+      never: "لم يتم تحديث اشتراكك بعد."
+      date: "تم تحديث اشتراكك آخر مرة قبل %{when}."
+    logout: "تسجيل الخروج"
+
+  notification_email:
+    subject: "تنبيه المستند"
+    title: >
+      تنبيه المستند: %{document_code}
+    greeting:
+      مرحبًا %{name}
+    subscription: >
+      أنت مشترك في تحديثات البريد الإلكتروني للملفات التي تخص الهيئة العامة لبيئة العمل حول %{company}، ورصدنا ملفًا جديدًا اليوم.
+    link_preamble: >
+      المزيد من المعلومات متاحة حول ذلك على موقع الهيئة العامة لبيئة العمل على الرابط أدناه.
+    email_instructions: >
+      يمكنك مراسلتهم للحصول على نسخة مجانية من الوثيقة إذا بدا لك أنها شيء تحتاج إلى قراءته.
+
+  locales:
+    en: الإنجليزية
+    sv: السويدية
+    ar: العربية
+
+  errors:
+    messages:
+      not_saved:
+        one: "حدثت خطأ واحد ومنع هذا %{resource} من الحفظ:"
+        other: "%{count} أخطاء وقعت ومنعت هذا %{resource} من الحفظ:"
+
+  helpers:
+    label:
+      user:
+        name: "الاسم"
+        locale: "اللغة"
+        company_code: "رمز الشركة"
+        email: "البريد الإلكتروني"
+        password: "كلمة المرور"
+        password_confirmation: "تأكيد كلمة المرور"
+        remember_me: "تذكرني"
+
+  activerecord:
+    errors:
+      messages:
+        empty: "لا يمكن ان تكون فارغة"
+        blank: "لا يمكن ان تكون فارغة"
+        invalid_company_code: "يجب أن يكون بصيغة ستة أرقام، ثم علامة الواصلة (-)، ثم أربعة أرقام، مثل 123456-7890"
+
+
+  datetime:
+    distance_in_words:
+      half_a_minute: "نصف دقيقة"
+      less_than_x_seconds:
+        one:   "أقل من ثانية"
+        other: "ثواني %{count}أقل من "
+      x_seconds:
+        one:   "ثانية"
+        other: "%{count}ثواني "
+      less_than_x_minutes:
+        one:   "أقل من دقيقة"
+        other: "دقائق%{count}أقل من "
+      x_minutes:
+        one:   "دقيقة"
+        other: "%{count} دقائق"
+      about_x_hours:
+        one:   "حوالي ساعة"
+        other: "ساعات %{count}حوالي "
+      x_hours:
+        one:   "%{count} ساعة"
+        other: "%{count} ساعات"
+      x_days:
+        one:   "يوم"
+        other: "%{count} أيام"
+      about_x_months:
+        one:   "حوالي شهر"
+        other: "أشهر  %{count} حوالي"
+      x_months:
+        one:   "شهر"
+        other: "%{count} أشهر"
+      about_x_years:
+        one:   "حوالي سنة"
+        other: "سنوات  %{count}حوالي "
+      over_x_years:
+        one:   "اكثر من سنة"
+        other: "سنوات  %{count}أكثر من "
+      almost_x_years:
+        one:   "تقريبا سنة"
+        other: "سنوات %{count} نقريبا"
+
+  document_type:
+    "Anbud (vinnande)": "عرض (فائز)"
+    "Anbud (övriga)": "عروض أخرى"
+    "Anbudsförfrågan/offertförfrågan": "استفسار عن العطاء / استفسار عن العرض"
+    "Anmälan": "إخطار"
+    "Anmälan av byggarbetsplats": "إخطار بموقع البناء"
+    "Anmälan om dödsfall": "إخطار بالوفاة"
+    "Anmälan om miljöfarlig verksamhet (Kännedomskopia)": "إخطار بالأنشطة البيئية الخطرة (نسخة للتوعية)"
+    "Anmälan om misstänkt missförhållande på arbetsplats": "إخطار بالسلوك الغير ملائم المشتبه به في مكان العمل"
+    "Anmälan om olycka": "إخطار بالحادث"
+    "Anmälan om tillbud": "إخطار بالحادث الشبه خطير"
+    "Anmälan om uppställning av mobilt krossverk": "إخطار بتركيب الكسارة المتنقلة"
+    "Anmälan om utstationering": "إخطار بالنقل الزمني"
+    "Anmälan till kommissionen": "إخطار للهيئة"
+    "Anmälan, asbest": "إخطار بالأسبستوس"
+    "Anmälan, rapport från medicinsk kontroll": "إخطار بتقرير الفحص الطبي"
+    "Anmälan, rapport från yrkeshygienisk mätning": "إخطار بتقرير القياس الصناعي للصحة المهنية"
+    "Anmälan, smittämnen": "إخطار بالمواد المعدية"
+    "Anmälan,Säkerhetsrapport/Tillsynsprogram från miljöfarlig verksamhet/SEVESO": "إخطار، تقرير أمان / برنامج رصد للأنشطة البيئية الخطرة / SEVESO"
+    "Annons": "إعلان"
+    "Anskaffningsbeslut": "قرار الاقتناء"
+    "Ansökan": "طلب"
+    "Ansökan om att inkassera avgift": "طلب لجمع الرسوم"
+    "Ansökan om påförande av avgift": "طلب فرض رسوم"
+    "Ansökan om vitesutdömande": "طلب فرض غرامة"
+    "Arbetsmiljöverkets författningssamling": "مجموعة اللوائح لهيئة بيئة العمل"
+    "Avgiftsföreläggande": "إرجاء الرسوم"
+    "Avtal": "اتفاقية"
+    "Begäran från skyddsombud om ingripande": "طلب من ممثل العمال للأمان للتدخل"
+    "Begäran om avtalsjustering": "طلب لتعديل الاتفاقية"
+    "Begäran om förlängd svarstid": "طلب لمزيد من الوقت للاستجابة"
+    "Begäran om kompletterande uppgifter": "طلب معلومات إضافية"
+    "Begäran om komplettering": "طلب تكميلي"
+    "Begäran om yttrande": "طلب رأي"
+    "Begäran/Förfrågan om uppgifter/synpunkter": "طلب/استفسار عن معلومات/ملاحظات"
+    "Behovsanalys/marknadsanalys": "تحليل الاحتياجات/تحليل السوق"
+    "Bekräftelse/Svar/Uppmaning till uppgiftslämnare": "تأكيد/رد/تحفيز لمزود المعلومات"
+    "Beslut": "قرار"
+    "Beslut om att avvisa skyddsombudets begäran": "قرار رفض طلب ممثل العمال للأمان"
+    "Beslut om att inte meddela oمنعمنعمفرضةعلىالعممل الفوري": "قرار عدم إصدار منع فوري"
+    "Beslut om ärende avslutas (avslutsbrev)": "قرار إغلاق القضية (رسالة إغلاق)"
+    "Beslut om avbruten upphandling": "قرار إلغاء العطاء"
+    "Beslut om avskrivning av skyddsombudets begäran": "قرار إلغاء طلب ممثل العمال للأمان"
+    "Beslut om avslag av skyddsombudets begäran": "قرار رفض طلب ممثل العمال للأمان"
+    "Beslut om avvisning": "قرار رفض"
+    "Beslut om förbud med vite": "قرار بالمنع مع غرامة"
+    "Beslut om förbud utan vite": "قرار بالمنع بدون غرامة"
+    "Beslut om föreläggande med vite": "قرار بالأمر مع غرامة"
+    "Beslut om föreläggande utan vite": "قرار بالأمر بدون غرامة"
+    "Beslut om prövningstillstånd": "قرار بالسماح بالطعن"
+    "Beslut om slutligt omedelbart förbud": "قرار بالمنع الفوري النهائي"
+    "Beslut om tillfälligt omedelbart förbud": "قرار بالمنع الفوري المؤقت"
+    "Beslut om upphävande av tillfälligt förbud": "قرار برفع المنع المؤقت"
+    "Beslut om ändring": "قرار بالتعديل"
+    "Beslut rörande begäran om förlängd svarstid": "قرار بشأن طلب تمديد الوقت للاستجابة"
+    "Dokumenterad bedömning inklusive brister ومتطلبات": "تقدير موثق بما في ذلك العيوب والمتطلبات"
+    "Dom": "حكم"
+    "Dom/beslut": "حكم/قرار"
+    "Faktaunderlag": "أساس الحقائق"
+    "Frågor från anbudsgivare och information till anbudsgivare": "أسئلة من مقدمي العروض ومعلومات لمقدمي العروض"
+    "Föranmälan": "إخطار مسبق"
+    "Föreskriftsförslag Externt": "مقترح لائحة خارجية"
+    "Föreskriftsförslag Internt": "مقترح لائحة داخلية"
+    "Förfrågan/Information om inträffad arbetsolycka": "استفسار/معلومات حول حادث العمل الحالي"
+    "Förlängd svarstid - Begäran/beslut": "وقت الاستجابة الممتد - طلب/قرار"
+    "Förlängning av avtal": "تمديد الاتفاقية"
+    "Förrättningsprotokoll": "بروتوكول الفحص"
+    "Förstudierapport": "تقرير الدراسة الأولية"
+    "Förändring av avtal (justering eller tillägg)": "تغيير الاتفاقية (تعديل أو إضافة)"
+    "Inbjudan att lämna intresseanmälan": "دعوة لتقديم تعبيرات الاهتمام"
+    "Information om att ärende avslutas": "معلومات حول إغلاق القضية"
+    "Information ur e-skada": "معلومات من الضرر الإلكتروني"
+    "Information ur RAPEX/ICSMS": "معلومات من RAPEX/ICSMS"
+    "Inspektionsmeddelande": "إشعار التفتيش"
+    "Intresseanmälan": "تعبير عن الاهتمام"
+    "Intyg återkommande besiktning": "شهادة فحص دوري"
+    "Kallelse": "استدعاء"
+    "Kompletterande uppgifter": "معلومات إضافية"
+    "Komplettering": "تكميل"
+    "Konsekvensutredning/beslut om att ingen behövs": "تقييم التأثير/قرار بعدم الحاجة"
+    "Kvittens": "إيصال"
+    "Meddelande om att Arbetsmiljöverkets godtagit invändningarna": "إشعار بقبول الاعتراضات من جهاز بيئة العمل السويدي"
+    "Meddelande om skyddsombudsstopp": "إشعار بإيقاف ممثل العمال للأمان"
+    "Missiv till domstol": "رسالة إلى المحكمة"
+    "Mötesanteckningar": "محضر الاجتماع"
+    "Notifiering": "إشعار"
+    "Omprövningsrapport": "تقرير المراجعة"
+    "Parallelluppställning": "ترتيب متوازي"
+    "Påminnelse": "تذكير"
+    "Rapport": "تقرير"
+    "Rapport - utredning, olycksfall, tillbud": "تقرير - تحقيق، حادث، حادث قريب"
+    "Registrerat besök": "زيارة مسجلة"
+    "Sammanställning av inkomna externa remissvar": "ملخص الاستجابات الخارجية المتلقاة"
+    "Skyddsombudets återkallande av begäran": "إلغاء طلب ممثل العمال للأمان"
+    "Svar på avgiftsföreläggande": "الرد على فرض الرسوم"
+    "Svar på kravskrivelse": "الرد على خطاب الطلب"
+    "Svar/synpunkter på föreskriftsförslag Externt": "الرد/التعليقات على مقترح لائحة خارجية"
+    "Svar/synpunkter på föreskriftsförslag Internt": "الرد/التعليقات على مقترح لائحة داخلية"
+    "Tilldelningsbeslut": "قرار الإسناد"
+    "Tillsynsmeddelande": "إشعار الرقابة"
+    "Tips från annan myndighet om misstänkt missförhållande på arbetsplats": "نصيحة من جهة حكومية أخرى بشأن السلوك المشتبه به في مكان العمل"
+    "Tips om misstänkt missförhållande på arbetsplats": "نصيحة بشأن السلوك المشتبه به في مكان العمل"
+    "Tjänsteanteckning": "مذكرة الخدمة"
+    "Trycklov": "تصريح الطباعة"
+    "Underrättelse": "إخطار"
+    "Underrättelse om föreläggande/förbud": "إخطار بالأمر/المنع"
+    "Uppdragsdirektiv/plan": "توجيهات المهمة/الخطة"
+    "Uppföljning av krav": "متابعة المتطلبات"
+    "Uppgifter/synpunkter": "معلومات/ملاحظات"
+    "Upphandlingsprotokoll (utvärdering)": "بروتوكول العطاء (التقييم)"
+    "Uppsägning av avtal": "إنهاء الاتفاقية"
+    "Vidarebefordran till annan aktör": "التوجيه إلى جهة أخرى"
+    "Yttrande": "رأي"
+    "Återtagande av ansökan": "سحب الطلب"
+    "Öppningsprotokoll": "بروتوكول الافتتاح"
+    "Överklagande": "استئناف"
+    "Övrig korrespondens (frågor/svar/synpunkter/info)": "مراسلة أخرى (أسئلة/إجابات/ملاحظات/معلومات)"
+    "Övriga handlingar - Avgiftsutdömande": "وثائق أخرى - فرض الرسوم"
+    "Övriga handlingar - Överklagande": "وثائق أخرى - استئناف"
+    "Övriga handlingar administrera اقتناء": "وثائق أخرى - إدارة الاقتناء"
+    "Övriga handlingar inspektion": "وثائق أخرى - تفتيش"

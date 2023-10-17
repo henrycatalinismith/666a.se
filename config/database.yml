@@ -1,0 +1,28 @@
+# SQLite. Versions 3.8.0 and up are supported.
+#   gem install sqlite3
+#
+#   Ensure the SQLite 3 gem is defined in your Gemfile
+#   gem "sqlite3"
+#
+# `Litesupport.root.join("data.sqlite3")` stores
+# application data in the path `./db/#{Rails.env}/data.sqlite3`
+#
+# idle_timeout should be set to zero, to avoid recycling sqlite connections
+# and losing the page cache
+# 
+default: &default
+  adapter: litedb
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  idle_timeout: 0
+  database: <%= Litesupport.root.join("data.sqlite3") %>
+  extensions:
+    - sqlite_ulid
+
+development:
+  <<: *default
+
+test:
+  <<: *default
+
+production:
+  <<: *default

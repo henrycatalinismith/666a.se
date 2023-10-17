@@ -1,0 +1,35 @@
+<div class="container flex flex-col gap-8 w-full p-8">
+  <%= render layout: "shared/h1" do %>
+    Stats
+  <% end %>
+
+  <section class="w-full flex flex-col gap-10 flex-1 md:p-6 bg-white md:border md:border-gray-200 md:rounded-lg md:shadow">
+    <h2 class="text-2xl">
+      Searches
+    </h2>
+    <%= line_chart Search.group("strftime('%Y-%m-%d', created_at)").count %>
+  </section>
+
+  <div class="flex flex-col gap-14 md:gap-8 md:flex-row">
+    <section class="w-full flex flex-col gap-10 flex-1 md:p-6 bg-white md:border md:border-gray-200 md:rounded-lg md:shadow">
+      <h2 class="text-2xl">
+        Notifications
+      </h2>
+      <%= line_chart Notification.group("strftime('%Y-%m-%d', created_at)").count %>
+    </section>
+    <section class="w-full flex flex-col gap-10 flex-1 md:p-6 bg-white md:border md:border-gray-200 md:rounded-lg md:shadow">
+      <h2 class="text-2xl">
+        User Locales
+      </h2>
+      <%= pie_chart User.group(:locale).count %>
+    </section>
+  </div>
+
+  <section class="w-full flex flex-col gap-10 flex-1 md:p-6 bg-white md:border md:border-gray-200 md:rounded-lg md:shadow">
+    <h2 class="text-2xl">
+      Signups
+    </h2>
+    <%= line_chart User.group("strftime('%Y-%m-%d', created_at)").count %>
+  </section>
+
+</div>
