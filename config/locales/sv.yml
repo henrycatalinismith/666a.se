@@ -1,0 +1,118 @@
+sv:
+
+  home:
+    blurb: "E-postaviseringar om arbetsmiljöverket"
+    pitch: "Ta reda på nya dokument så snart de publiceras. Ingen mer ångest över att glömma att kolla."
+    login: "Logga in"
+    register: "Kom igång"
+    dashboard: "Startsida"
+
+  registration:
+    title: "Kom igång"
+    button: "Kom igång"
+
+  login:
+    title: "Logga In"
+    button: "Logga In"
+  
+  dashboard:
+    title: "Startsidan"
+    hello: "Hej %{name}."
+    subscription: "Du prenumererar på e-postaviseringar för allmänna handlingar hos arbetsmiljöverket avseende %{company}."
+    last_refresh:
+      never: "Din prenumeration har inte uppdaterats än."
+      date: "Din prenumeration uppdaterades senast för %{when} sedan."
+    logout: "Logga ut"
+
+  notification_email:
+    subject: "⛧ Dokumentmeddelande"
+    title: >
+      Dokumentmeddelande: %{document_code}
+    greeting: >
+      Hej %{name},
+    subscription: >
+      Du prenumererar på e-postaviseringar för allmänna handlingar hos
+      arbetsmiljöverket avseende %{company}, och vi upptäckte en ny ansökan
+      idag.
+    link_preamble: >
+      Mer information finns tillgänglig på arbetsmiljöverkets hemsida på länken
+      nedan.
+    email_instructions: >
+      Du kan mejla dem för en gratis kopia av dokumentet om det verkar som något
+      du behöver läsa.
+
+  locales:
+    en: Engelska
+    sv: Svenska
+    ar: Arabiska
+
+  helpers:
+    label:
+      user:
+        name: "Namn"
+        locale: "Språk"
+        company_code: "Organisationsnummer"
+        email: "E-post"
+        password: "Lösenord"
+        password_confirmation: "Bekräfta lösenord"
+        remember_me: "Kom ihåg mig"
+
+  activerecord:
+    errors:
+      messages:
+        empty: "får ej vara tom"
+        blank: "måste anges"
+        invalid_company_code: "måste vara sex siffror, följt av ett bindestreck, och sedan fyra siffror, t.ex. 123456-7890"
+
+  datetime:
+    distance_in_words:
+      half_a_minute: "en halv minut"
+      less_than_x_seconds:
+        one:   "mindre än en sekund"
+        other: "mindre än %{count} sekunder"
+      x_seconds:
+        one:   "en sekund"
+        other: "%{count} sekunder"
+      less_than_x_minutes:
+        one:   "mindre än en minut"
+        other: "mindre än %{count} minuter"
+      x_minutes:
+        one:   "en minut"
+        other: "%{count} minuter"
+      about_x_hours:
+        one:   "ungefär en timme"
+        other: "ungefär %{count} timmar"
+      x_hours:
+        one:   "1 timme"
+        other: "%{count} timmar"
+      x_days:
+        one:   "en dag"
+        other: "%{count} dagar"
+      about_x_months:
+        one:   "ungefär en månad"
+        other: "ungefär %{count} månader"
+      x_months:
+        one:   "en månad"
+        other: "%{count} månader"
+      about_x_years:
+        one:   "ungefär ett år"
+        other: "ungefär %{count} år"
+      over_x_years:
+        one:   "mer än ett år"
+        other: "mer än %{count} år"
+      almost_x_years:
+        one:   "nästan 1 år"
+        other: "nästan %{count} år"
+
+  devise:
+    failure:
+      invalid: Ogiltigt e-post eller lösenord.
+    registrations:
+      user:
+        signed_up: ""
+    sessions:
+      already_signed_out: Utloggad framgångsrikt.
+      new:
+        sign_in: Logga in
+      signed_in: Inloggad med framgång.
+      signed_out: Utloggad framgångsrikt.

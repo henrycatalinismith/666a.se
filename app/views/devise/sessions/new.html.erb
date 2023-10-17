@@ -1,0 +1,41 @@
+<div class="container flex flex-col gap-8 w-full p-8">
+
+  <%= render layout: "shared/h1" do %>
+    <%= t("login.title") %>
+  <% end %>
+
+  <%= form_for(
+    resource,
+    as: resource_name,
+    builder: TailwindBuilder,
+    url: session_path(resource_name),
+    :html => {class: "flex flex-col gap-8 max-w-xs" }) do |f| %>
+
+    <%= render layout: "shared/field" do %>
+      <%= f.label :email %>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <% end %>
+
+    <%= render layout: "shared/field" do %>
+      <%= f.label :password %>
+      <%= f.password_field :password, autocomplete: "current-password" %>
+    <% end %>
+
+    <% if devise_mapping.rememberable? %>
+      <div class="flex flex-row items-center gap-4">
+        <%= f.check_box :remember_me %>
+        <%= f.label :remember_me %>
+      </div>
+    <% end %>
+
+    <div class="flex flex-row gap-4">
+      <%= f.submit(t("login.button")) %>
+      <%= link_to(
+        "Forgot password",
+        "/forgot",
+        class: "text-blue-700 underline py-2 px-4 rounded flex-1 sm:min-w-full", method: :post
+      ) %>
+    </div>
+  <% end %>
+
+</div>

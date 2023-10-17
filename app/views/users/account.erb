@@ -1,0 +1,32 @@
+<div class="container flex flex-col gap-10 w-full p-8">
+
+  <%= render layout: "shared/h1" do %>
+    Account
+  <% end %>
+
+  <div class="flex flex-col gap-2 max-w-lg">
+
+    <%= render partial: "account-property", :locals => {
+      name: "Name",
+      value: @user.name,
+      href: "name",
+      text: "Update name",
+    } %>
+
+    <%= render partial: "account-property", :locals => {
+      name: "Email",
+      value: @user.email,
+      href: "email",
+      text: "Update email",
+    } %>
+
+    <%= render partial: "account-property", :locals => {
+      name: "Language",
+      value: @user.locale,
+      href: "language",
+      text: "Change language",
+    } %>
+
+  </div>
+
+</div>

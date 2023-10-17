@@ -1,0 +1,62 @@
+<section class="container flex flex-col items-center gap-8 md:flex-row px-8 py-8 min-h-[50vh]">
+
+  <div class="
+    py5 items-center flex flex-col gap-4
+    md:mx-auto md:items-start
+    md:flex-2
+  ">
+
+
+    <img alt="" src="/logo-128.png" class="max-w-[128px] aspect-1" />
+
+    <h1 class="text-4xl text-center tracking-tight font-extrabold text-gray-900 md:text-left">
+      <%= t("home.blurb") %>
+    </h1>
+
+    <p class="text-center md:text-start text-gray-500 leading-relaxed text-xl">
+      <%=t("home.pitch")%>
+    </p>
+
+    <div class="flex flex-col gap-4 items-center md:flex-row md:justify-start"> <!--xs:justify-center sm:justify-start ">-->
+      <% if current_user.nil? then %>
+        <%= link_to(
+          t("home.register"),
+          new_user_registration_path,
+          class: "bg-cyan-300 hover:bg-cyan-200 text-black font-bold py-2 px-4 rounded flex-1 sm:min-w-full",
+        ) %>
+        <%= link_to(
+          t("home.login"),
+          new_user_session_path,
+          class: "text-cyan-800 hover:bg-cyan-100 font-bold py-2 px-4 rounded flex-1 sm:min-w-full"
+        ) %>
+      <% else %>
+        <%= link_to(
+          "Dashboard",
+          "/dashboard",
+          class: "bg-cyan-300 hover:bg-cyan-200 text-black font-bold py-2 px-4 rounded flex-1 sm:min-w-full", method: :post
+        ) %>
+        <%= button_to(
+          t("dashboard.logout"),
+          destroy_user_session_path,
+          method: :delete,
+          class: "text-red-700 hover:bg-red-500 hover:text-white py-2 font-bold px-4 rounded whitespace-nowrap"
+        ) %>
+      <% end %>
+
+    </div>
+
+  </div>
+
+  <div class="flex-1">
+    <div class="relative border-gray-800 bg-gray-800 border-[14px] rounded-[2.5rem] h-[600px] w-[300px]">
+      <div class="h-[32px] w-[3px] bg-gray-800 absolute -left-[17px] top-[72px] rounded-l-lg"></div>
+      <div class="h-[46px] w-[3px] bg-gray-800 absolute -left-[17px] top-[124px] rounded-l-lg"></div>
+      <div class="h-[46px] w-[3px] bg-gray-800 absolute -left-[17px] top-[178px] rounded-l-lg"></div>
+      <div class="h-[64px] w-[3px] bg-gray-800 absolute -right-[17px] top-[142px] rounded-r-lg"></div>
+      <div class="rounded-[2rem] overflow-hidden w-[272px] h-[572px] bg-white">
+        <img src="/email-<%= I18n.locale %>.png" class="w-[272px] h-[572px]" alt="">
+      </div>
+    </div>
+  </div>
+
+</section>
