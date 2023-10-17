@@ -2,12 +2,12 @@ class Search < ApplicationRecord
   belongs_to :day
   has_many :results, dependent: :destroy
 
-  enum status: {
-    pending: 0,
-    active: 1,
-    success: 2,
-    error: 3,
-    aborted: 4,
+  enum result_status: {
+    result_pending: 0,
+    result_fetching: 1,
+    result_ready: 2,
+    result_error: 3,
+    result_aborted: 4,
   }
 
   scope :retrospective, ->(date) { where("created_at >= ?", date + 1.day) }
