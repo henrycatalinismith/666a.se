@@ -14,9 +14,9 @@ class ResultTest < ActiveSupport::TestCase
 
   test "document_direction" do
     result = Result.new(metadata: {"Inkommande/Utgående": "Inkommande"}.to_json)
-    assert result.document_direction == :incoming
+    assert result.document_direction == :document_incoming
     result = Result.new(metadata: {"Inkommande/Utgående": "Utgående"}.to_json)
-    assert result.document_direction == :outgoing
+    assert result.document_direction == :document_outgoing
   end
 
   test "document_type" do
@@ -36,9 +36,9 @@ class ResultTest < ActiveSupport::TestCase
 
   test "case_status" do
     result = Result.new(metadata: {"Pågående/Avslutat": "Pågående"}.to_json)
-    assert result.case_status == :ongoing
+    assert result.case_status == :case_ongoing
     result = Result.new(metadata: {"Pågående/Avslutat": "Avslutat"}.to_json)
-    assert result.case_status == :concluded
+    assert result.case_status == :case_concluded
   end
 
   test "company_code" do

@@ -19,7 +19,7 @@
     <h1 style="display: flex; align-items: center; column-gap: 0.5rem; font-size: 1.2rem">
       <img src="https://666a.se/logo-32.png" />
       <%= t("notification_email.title",
-        document_code: @result.document_code,
+        document_code: @document.document_code,
       ) %>
     </h1>
 
@@ -31,17 +31,17 @@
 
     <p>
       <%= t("notification_email.subscription",
-        company: @result.company_name,
+        company: @document.company_name,
       ) %>
     </p>
 
     <p style="font-size: 1.1rem">
       <a href="<%= @url %>">
-        <%= @result.document_code %>:
+        <%= @document.document_code %>:
         <% if I18n.locale == "sv" %>
-          <%= @result.document_type %>
+          <%= @document.document_type %>
         <% else %>
-          <%= t("document_type." + @result.document_type) %>
+          <%= t("document_type." + @document.document_type) %>
         <% end %>
       </a>
     </p>

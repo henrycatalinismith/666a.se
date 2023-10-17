@@ -36,8 +36,8 @@ class SearchJob < ApplicationJob
     rows.each do |row|
       document_code = row['Handlingsnummer']
       document_exists = !Document.find_by(document_code:).nil?
-      document_status = document_exists ? :metadata_aborted : :metadata_pending
-      metadata_status = document_exists ? :document_ready : :document_ready
+      document_status = document_exists ? :document_ready : :document_pending
+      metadata_status = document_exists ? :metadata_aborted : :metadata_pending
       @search.results.create(
         metadata_status:,
         document_status:,

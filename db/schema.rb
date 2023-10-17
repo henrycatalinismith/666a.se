@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_10_16_181132) do
+ActiveRecord::Schema[7.1].define(version: 2023_10_17_030052) do
   create_table "days", id: :string, default: -> { "ULID()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -37,7 +37,20 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_16_181132) do
     t.string "county_name"
     t.string "municipality_code"
     t.string "municipality_name"
+    t.integer "notification_status"
     t.index ["document_code"], name: "index_documents_on_document_code", unique: true
+    t.index ["notification_status"], name: "index_documents_on_notification_status"
+  end
+
+  create_table "notifications", id: :string, default: -> { "ULID()" }, force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "document_id", null: false
+    t.string "subscription_id", null: false
+    t.integer "email_status"
+    t.index ["document_id", "subscription_id"], name: "index_notifications_on_document_id_and_subscription_id", unique: true
+    t.index ["document_id"], name: "index_notifications_on_document_id"
+    t.index ["subscription_id"], name: "index_notifications_on_subscription_id"
   end
 
   create_table "results", id: :string, default: -> { "ULID()" }, force: :cascade do |t|
@@ -100,6 +113,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_16_181132) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "notifications", "documents"
+  add_foreign_key "notifications", "subscriptions"
   add_foreign_key "results", "searches"
   add_foreign_key "roles", "users"
   add_foreign_key "searches", "days"
