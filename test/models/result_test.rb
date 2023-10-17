@@ -29,6 +29,11 @@ class ResultTest < ActiveSupport::TestCase
     assert result.case_code == "2023/058211"
   end
 
+  test "case_date" do
+    result = Result.new(metadata: {"Datum": "2023-09-20"}.to_json)
+    assert result.case_date == "2023-09-20"
+  end
+
   test "case_name" do
     result = Result.new(case_name: "abc")
     assert result.case_name == "abc"

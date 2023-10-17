@@ -53,9 +53,9 @@ class SearchJob < ApplicationJob
     @search.success!
     
     if cascade then
-      @search.results.each do |result|
+      @search.results.each_with_index do |result, index|
         if result.metadata_status == :metadata_pending then
-          ResultJob.perform_later(result.document_code, cascade)
+          ResultJob.set(wait: index.seconds).perform_later(result.document_code, cascade)
         end
       end
     end

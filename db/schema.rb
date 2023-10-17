@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_10_17_030052) do
+ActiveRecord::Schema[7.1].define(version: 2023_10_17_035156) do
   create_table "days", id: :string, default: -> { "ULID()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -38,6 +38,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_17_030052) do
     t.string "municipality_code"
     t.string "municipality_name"
     t.integer "notification_status"
+    t.date "case_date"
     t.index ["document_code"], name: "index_documents_on_document_code", unique: true
     t.index ["notification_status"], name: "index_documents_on_notification_status"
   end

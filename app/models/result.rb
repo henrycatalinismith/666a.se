@@ -37,6 +37,10 @@ class Result < ApplicationRecord
     return JSON.parse(metadata)["Diarienummer"]
   end
 
+  def case_date
+    return JSON.parse(metadata)["Datum"]
+  end
+
   def case_status
     status = JSON.parse(metadata)["Pågående/Avslutat"]
     if status == "Pågående" then
@@ -141,6 +145,7 @@ class Result < ApplicationRecord
       document_direction: document_direction,
       document_type: document_type,
       case_code: case_code,
+      case_date: case_date,
       case_name: case_name,
       case_status: case_status,
       company_code: company_code,
