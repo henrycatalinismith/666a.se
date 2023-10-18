@@ -51,4 +51,8 @@ class Day < ApplicationRecord
   def ymd
     date.strftime("%Y-%m-%d")
   end
+
+  def documents
+    Document.where("document_code in (?)", results.map(&:document_code))
+  end
 end
