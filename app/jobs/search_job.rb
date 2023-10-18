@@ -14,7 +14,7 @@ class SearchJob < ApplicationJob
     end
 
     @search = day.searches.create(
-      status: :pending,
+      result_status: :result_pending,
       page_number: day.next_page_number,
     )
 

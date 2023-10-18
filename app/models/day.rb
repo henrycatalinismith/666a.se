@@ -1,5 +1,6 @@
 class Day < ApplicationRecord
   has_many :searches
+  has_many :results, through: :searches
 
   scope :today, -> { where(date: Date.today) }
   scope :yesterday, -> { where(date: Date.yesterday) }
@@ -13,7 +14,7 @@ class Day < ApplicationRecord
   }
 
   def next_page_number
-    if searches.success.count == 0 then
+    if searches.result_ready.count == 0 then
       return 1
     end
 
@@ -34,7 +35,7 @@ class Day < ApplicationRecord
       return false
     end
 
-    two_latest_searches = searches.success.retrospective(date).latest.take(2)
+    two_latest_searches = searches.result_ready.retrospective(date).latest.take(2)
     if two_latest_searches.count < 2 then
       return false
     end
