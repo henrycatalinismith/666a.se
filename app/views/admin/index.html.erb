@@ -3,10 +3,13 @@
     Admin
   <% end %>
 
-
   <ol class="flex flex-col gap-4">
-
-
+    <% @days.each do |day| %>
+      <li>
+        <a href="/admin/<%= day.ymd %>">
+        <%= day.ymd %>
+      </li>
+    <% end %>
   </ol>
 
 </div>

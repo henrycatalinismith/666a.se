@@ -4,6 +4,8 @@ class Day < ApplicationRecord
 
   scope :today, -> { where(date: Date.today) }
   scope :yesterday, -> { where(date: Date.yesterday) }
+  scope :chronological, -> { order(date: :asc) }
+  scope :reverse_chronological, -> { order(date: :desc) }
 
   enum ingestion_status: {
     ingestion_pending: 0,
@@ -44,5 +46,9 @@ class Day < ApplicationRecord
     same_result_count = two_latest_searches[0].results.count == two_latest_searches[1].results.count
     no_new_results = same_page_number and same_result_count
     return no_new_results
+  end
+
+  def ymd
+    date.strftime("%Y-%m-%d")
   end
 end
