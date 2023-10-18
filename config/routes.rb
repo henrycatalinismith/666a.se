@@ -52,5 +52,9 @@ Rails.application.routes.draw do
 
     get "/admin", to: "admin#index"
     get "/stats", to: "admin#stats"
+
+    get "/admin/:date",
+      to: "admin#day", 
+      :date => /(19|20)\d{2}-([1-9]|1[0-2])-(0[0-9]|1[0-9]|2[0-9]|3[0-1])/
   end
 end
