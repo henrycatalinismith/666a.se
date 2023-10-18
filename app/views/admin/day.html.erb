@@ -3,5 +3,17 @@
     <%= @day.ymd %>
   <% end %>
 
+  <dl>
+
+    <dt>Searches</dt>
+    <dd><%= @day.searches.count %></dd>
+
+    <dt>Results</dt>
+    <dd><%= @day.results.count %></dd>
+
+    <dt>Documents</dt>
+    <dd><%= @day.documents.count %></dd>
+
+  </dl>
 
 </div>
