@@ -18,7 +18,7 @@ class DayJob < ApplicationJob
       return
     end
 
-    if Time.now < Time.parse("19:00") then
+    if Time.now < Time.parse("22:00") then
       self.class.set(wait: 1.minutes).perform_later(date, cascade)
     end
 
