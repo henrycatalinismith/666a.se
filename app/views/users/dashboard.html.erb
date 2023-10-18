@@ -110,7 +110,7 @@
           </h2>
           <a class="text-blue-700" href="/stats">more stats</a>
         </div>
-        <%= line_chart Search.group("strftime('%Y-%m-%d', created_at)").count %>
+        <%= column_chart Day.all.map { |d| [d.date.strftime("%Y-%m-%d"), d.searches.count] }.to_h %>
       </section>
     <% end %>
 
