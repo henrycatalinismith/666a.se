@@ -5,6 +5,6 @@ require "rufus-scheduler"
 return if defined?(Rails::Console) || Rails.env.test? || File.split($PROGRAM_NAME).last == 'rake'
 
 scheduler = Rufus::Scheduler.singleton
-scheduler.cron("*/5 7-20 * * *") do
-  # DayJob.perform_later()
+scheduler.cron("0 9 * * *") do
+  MorningJob.perform_later(Date.yesterday.strftime("%Y-%m-%d"), true)
 end

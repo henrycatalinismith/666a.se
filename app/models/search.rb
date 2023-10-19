@@ -12,6 +12,8 @@ class Search < ApplicationRecord
 
   scope :retrospective, ->(date) { where("created_at >= ?", date + 1.day) }
   scope :latest, -> { order(created_at: :desc) }
+  scope :chronological, -> { order(date: :asc) }
+  scope :reverse_chronological, -> { order(date: :desc) }
 
   def parameters
     {
@@ -28,5 +30,9 @@ class Search < ApplicationRecord
     path = "/om-oss/sok-i-arbetsmiljoverkets-diarium/"
     query = parameters.to_query
     "https://#{host}#{path}?#{query}"
+  end
+
+  def result_count
+    hit_count.match(/(\d+) träffar/)[1].to_i
   end
 end
