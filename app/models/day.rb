@@ -55,4 +55,8 @@ class Day < ApplicationRecord
   def documents
     Document.where("document_code in (?)", results.map(&:document_code))
   end
+
+  def remote_total
+    searches.reverse_chronological.last.result_count
+  end
 end
