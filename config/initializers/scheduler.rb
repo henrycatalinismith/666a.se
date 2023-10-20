@@ -13,7 +13,35 @@ scheduler.cron("0 9 * * *") do
   })
 end
 
-scheduler.cron("45 10 * * *") do
+scheduler.cron("0 11 * * *") do
+  BackfillJob.perform_later({
+    :cascade => true,
+    :notify => false,
+  })
+end
+
+scheduler.cron("0 13 * * *") do
+  BackfillJob.perform_later({
+    :cascade => true,
+    :notify => false,
+  })
+end
+
+scheduler.cron("0 15 * * *") do
+  BackfillJob.perform_later({
+    :cascade => true,
+    :notify => false,
+  })
+end
+
+scheduler.cron("0 17 * * *") do
+  BackfillJob.perform_later({
+    :cascade => true,
+    :notify => false,
+  })
+end
+
+scheduler.cron("0 19 * * *") do
   BackfillJob.perform_later({
     :cascade => true,
     :notify => false,
