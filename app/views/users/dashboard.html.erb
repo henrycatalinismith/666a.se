@@ -106,11 +106,11 @@
       <section class="w-full flex flex-col gap-10 flex-1 md:p-6 bg-white md:border md:border-gray-200 md:rounded-lg md:shadow">
         <div class="flex flex-row justify-between">
           <h2 class="text-2xl font-bold">
-            Searches
+            Documents
           </h2>
           <a class="text-blue-700" href="/stats">more stats</a>
         </div>
-        <%= column_chart Day.all.map { |d| [d.date.strftime("%Y-%m-%d"), d.searches.count] }.to_h %>
+        <%= column_chart Day.chronological.map { |d| [d.date.strftime("%Y-%m-%d"), d.documents.count] }.to_h %>
       </section>
     <% end %>
 
