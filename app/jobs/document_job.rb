@@ -10,7 +10,7 @@ class DocumentJob < ApplicationJob
     @result.document_error! unless @result.nil?
   end
 
-  def perform(document_code = nil, cascade = false)
+  def perform(document_code = nil, options = {})
     puts "DocumentJob: begin"
 
     if document_code.nil? then
@@ -43,8 +43,8 @@ class DocumentJob < ApplicationJob
 
     puts "DocumentJob: end"
     
-    if cascade then
-      NotificationJob.set(wait: 1.seconds).perform_later(document_code, cascade)
+    if options[:notify] and document.notification_pending? then
+      NotificationJob.set(wait: 1.seconds).perform_later(document_code, options)
     end
   end
 end
