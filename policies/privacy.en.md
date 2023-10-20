@@ -8,6 +8,14 @@
 | Email | An email address is required in order to register an account. It can also be updated after registration. |
 | Company | A company ID must be provided in order to register an account. It can be changed after registration, and further companies can be added. |
 
+## Sensitive Perosnal Data
+
+According to article 9 of the GDPR, trade union membership is an example of a special category of especially sensitive personal data.
+Your name, email address and company subscription data may explicitly or implicitly reveal your trade union membership.
+Thus, processing your personal data is prohibited by paragraph one of article 9.
+Paragraph two section a grants an exemption to this prohibition where the data subject gives explicit consent.
+Your acceptance of this privacy policy therefore constitutes consent under paragraph 2.a.
+
 ## Purpose
 
 | Data | What it's for |
@@ -18,7 +26,9 @@
 
 ## Recipients
 
-.
+Aggregated, anonimized statistical data may be made available to trusted third parties from time to time.
+Examples of this might include "average number of company subscriptions per user", or "total signups during February".
+Specific individual information will never be disclosed to third parties in this manner.
 
 ## Retention
 
