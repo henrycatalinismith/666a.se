@@ -56,6 +56,23 @@ class ArticleRender < Redcarpet::Render::HTML
       %(<td class="align-top py-4 first:pr-4">#{content}</td>)
     end
   end
+
+  def footnote_ref(number)
+     %(<sup id="fnref#{number}"><a class="text-blue-700 font-bold" href="#fn#{number}">[#{number}]</a></sup>)
+  end
+
+  def footnotes(content)
+    %(<div class="py-8">#{content}</div>)
+  end
+
+  def footnote_def(content, number)
+    %(
+      <li id="fn#{number}" class="flex flex-row gap-2">
+        <span class="font-bold">[#{number}]</span>
+        #{content}
+      </li>
+    )
+  end
 end
 
 class NewsController < ApplicationController
@@ -71,7 +88,7 @@ class NewsController < ApplicationController
     filename = Rails.root.join("news", "#{year}-#{month}-#{day}-#{slug}.en.md")
     markdown = File.read(filename)
     renderer = ArticleRender.new(date: @date)
-    redcarpet = Redcarpet::Markdown.new(renderer, :tables => true)
+    redcarpet = Redcarpet::Markdown.new(renderer, :tables => true, :footnotes => true, :autolink => true)
     @html = redcarpet.render(markdown)
   end
 end
