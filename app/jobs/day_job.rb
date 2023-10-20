@@ -3,7 +3,7 @@ require "time"
 class DayJob < ApplicationJob
   queue_as :default
 
-  def perform(date, cascade = false)
+  def perform(date, options = {})
     puts "DayJob: begin"
 
     day = Day.find_by(date:)
@@ -19,11 +19,11 @@ class DayJob < ApplicationJob
     end
 
     if Time.now < Time.parse("22:00") then
-      self.class.set(wait: 30.seconds).perform_later(date, cascade)
+      self.class.set(wait: 30.seconds).perform_later(date, options)
     end
 
-    if cascade then
-      SearchJob.perform_later(day.date, cascade)
+    if options[:cascade] then
+      SearchJob.perform_later(day.date, options)
     end
 
     puts "DayJob: end"

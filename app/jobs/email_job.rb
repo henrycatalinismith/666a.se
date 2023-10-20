@@ -7,7 +7,7 @@ class EmailJob < ApplicationJob
     @notification.email_error! unless @notification.nil?
   end
 
-  def perform(notification_id = nil)
+  def perform(notification_id = nil, options = {})
     puts "EmailJob: begin"
 
     if notification_id.nil? then

@@ -7,7 +7,7 @@ class SearchJob < ApplicationJob
     @search.result_error! unless @search.nil?
   end
 
-  def perform(date, cascade = false)
+  def perform(date, options = {})
     day = Day.find_by(date: date)
     if day.nil? then
       return
@@ -53,10 +53,10 @@ class SearchJob < ApplicationJob
 
     @search.result_ready!
 
-    if cascade then
+    if options[:cascade] then
       @search.results.each_with_index do |result, index|
         if result.metadata_pending? then
-          ResultJob.set(wait: index.seconds).perform_later(result.document_code, cascade)
+          ResultJob.set(wait: index.seconds).perform_later(result.document_code, options)
         end
       end
     end
