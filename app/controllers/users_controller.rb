@@ -6,11 +6,13 @@ class UsersController < ApplicationController
   end
 
   def dashboard
+    @page_title = "666a – dashboard"
     @user = current_user
     @subscriptions = @user.subscriptions
   end
 
   def delete
+    @page_title = "666a – delete account"
     session[:referer] = :delete
     if request.post? and !current_user.nil? and current_user.destroy then
       redirect_to "/", :notice => "BALEETED"
@@ -19,6 +21,7 @@ class UsersController < ApplicationController
   end
 
   def email
+    @page_title = "666a – email"
     if request.patch?
       if current_user.update(params[:user].permit(:email)) then
         redirect_to "/dashboard"
@@ -28,6 +31,7 @@ class UsersController < ApplicationController
   end
 
   def language
+    @page_title = "666a – language"
     if request.patch?
       if current_user.update(params[:user].permit(:language)) then
         redirect_to "/dashboard"
@@ -37,6 +41,7 @@ class UsersController < ApplicationController
   end
 
   def name
+    @page_title = "666a – name"
     if request.patch?
       if current_user.update(params[:user].permit(:name)) then
         redirect_to "/dashboard"
