@@ -10,14 +10,10 @@ class NotificationJob < ApplicationJob
     @document.notification_error! unless @document.nil?
   end
 
-  def perform(document_code = nil, cascade = false)
+  def perform(document_code, options = {})
     puts "NotificationJob: begin"
 
-    if document_code.nil? then
-      @document = Document.notification_pending.first
-    else
-      @document = Document.find_by(document_code:)
-    end
+    @document = Document.find_by(document_code:)
     if @document.nil? then
       return
     end
@@ -38,9 +34,9 @@ class NotificationJob < ApplicationJob
 
     puts "NotificationJob: end"
 
-    if cascade then
+    if options[:cascade] then
       notifications.each_with_index do |notification, index|
-        EmailJob.set(wait: index.seconds).perform_later(notification.id)
+        EmailJob.set(wait: index.seconds).perform_later(notification.id, options)
       end
     end
   end

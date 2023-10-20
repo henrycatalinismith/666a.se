@@ -10,7 +10,7 @@ class ResultJob < ApplicationJob
     @result.metadata_error! unless @result.nil?
   end
 
-  def perform(document_code = nil, cascade = false)
+  def perform(document_code = nil, options = {})
     puts "ResultJob: begin"
 
     if document_code.nil? then
@@ -36,8 +36,8 @@ class ResultJob < ApplicationJob
 
     puts "ResultJob: end"
 
-    if cascade then
-      DocumentJob.set(wait: 1.seconds).perform_later(@result.document_code, cascade)
+    if options[:cascade] then
+      DocumentJob.set(wait: 1.seconds).perform_later(@result.document_code, options)
     end
   end
 end
