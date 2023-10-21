@@ -21,11 +21,15 @@ class SubscriptionsController < ApplicationController
     redirect_to "/dashboard", :notice => "Subscription deleted"
   end
 
-  def refresh
+  def unsubscribe
     @subscription = Subscription.find_by_id(params[:id])
-    date = Time.now.strftime("%F")
-    #SubscriptionRefreshJob.perform_later(@subscription, "2023-08-30")
-    SubscriptionRefreshJob.perform_later(@subscription, "2023-05-09")
-    redirect_to "/dashboard", :notice => "Queued"
+    if @subscription.nil? then
+      raise ActionController::RoutingError.new('Not Found')
+    end
+    if request.get? then
+      @mode = :before
+    elsif request.post? and @subscription.destroy! then
+      @mode = :after
+    end
   end
 end

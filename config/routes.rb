@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   end
 
   get "/follow", to: "subscriptions#new"
+  match "/unsubscribe/:id", to: "subscriptions#unsubscribe", via: [:get, :post]
   get "/delete", to: "users#delete"
 
   get "/:year/:month/:day/:slug",

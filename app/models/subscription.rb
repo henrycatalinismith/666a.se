@@ -1,6 +1,6 @@
 class Subscription < ApplicationRecord
   belongs_to :user
-  has_many :notifications
+  has_many :notifications, dependent: :destroy
 
   enum :status, {
     inactive: 0,
