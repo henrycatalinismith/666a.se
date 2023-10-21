@@ -35,4 +35,28 @@ class AdminController < ApplicationController
       end
     end
   end
+
+  def posts
+    @posts = Post.all
+  end
+
+  def new_post
+    @post = Post.new
+    if request.post? then
+      @post = Post.create(params[:post].permit(:title, :slug, :date, :body))
+      if @post.valid? then
+        redirect_to "/admin/posts"
+        flash[:notice] = "post created"
+      end
+    end
+  end
+
+  def edit_post
+    @post = Post.find_by(slug: params[:slug])
+    if request.patch? then
+      if @post.update(params[:post].permit(:title, :slug, :date, :body)) then
+        flash[:notice] = "post updated"
+      end
+    end
+  end
 end
