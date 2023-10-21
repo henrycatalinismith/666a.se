@@ -53,6 +53,7 @@ Rails.application.routes.draw do
     get "/admin", to: "admin#index"
     get "/admin/policies", to: "admin#policies"
     match "/admin/policies/new", to: "admin#new_policy", via: [:get, :post]
+    match "/admin/policies/:slug", to: "admin#edit_policy", via: [:get, :patch]
     get "/stats", to: "admin#stats"
 
     get "/admin/:date",
