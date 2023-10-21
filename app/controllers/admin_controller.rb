@@ -26,4 +26,13 @@ class AdminController < ApplicationController
       end
     end
   end
+
+  def edit_policy
+    @policy = Policy.find_by(slug: params[:slug])
+    if request.patch? then
+      if @policy.update(params[:policy].permit(:name, :slug, :icon, :body)) then
+        flash[:notice] = "policy updated"
+      end
+    end
+  end
 end
