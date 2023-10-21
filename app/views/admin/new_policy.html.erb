@@ -1,0 +1,48 @@
+<div class="container flex flex-col gap-8 w-full p-8">
+  <%= render layout: "shared/h1" do %>
+    New Policy
+  <% end %>
+
+  <%= form_for(
+    @policy,
+    as: "policy",
+    url: "/admin/policies/new",
+    builder: TailwindBuilder,
+    :html => {class: "flex flex-col gap-8" }) do |f| %>
+
+
+    <% if @policy.errors.any? %>
+      <div class="error error-success note-shadow">
+        <% @policy.errors.full_messages.each do |msg| %>
+          <p><%= msg %></p>
+        <% end %>
+      </div>
+    <% end %>
+
+    <%= render layout: "shared/field" do %>
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+    <% end %>
+
+    <%= render layout: "shared/field" do %>
+      <%= f.label :slug %>
+      <%= f.text_field :slug %>
+    <% end %>
+
+    <%= render layout: "shared/field" do %>
+      <%= f.label :icon %>
+      <%= f.text_field :icon %>
+    <% end %>
+
+    <div class="w-128 flex flex-col">
+      <%= f.label :body %>
+      <%= f.text_area :body, size: "128x32", html: { class: "font-mono" } %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit "Create" %>
+    </div>
+
+  <% end %>
+
+</div>

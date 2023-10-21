@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_10_17_042558) do
+ActiveRecord::Schema[7.1].define(version: 2023_10_21_172416) do
   create_table "days", id: :string, default: -> { "ULID()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -52,6 +52,16 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_17_042558) do
     t.index ["document_id", "subscription_id"], name: "index_notifications_on_document_id_and_subscription_id", unique: true
     t.index ["document_id"], name: "index_notifications_on_document_id"
     t.index ["subscription_id"], name: "index_notifications_on_subscription_id"
+  end
+
+  create_table "policies", id: :string, default: -> { "ULID()" }, force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "name"
+    t.string "icon"
+    t.text "slug"
+    t.string "body"
+    t.index ["slug"], name: "index_policies_on_slug", unique: true
   end
 
   create_table "results", id: :string, default: -> { "ULID()" }, force: :cascade do |t|
