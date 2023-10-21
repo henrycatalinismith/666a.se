@@ -51,6 +51,8 @@ Rails.application.routes.draw do
     match "/follow", to: "subscriptions#new", via: [:get, :post]
 
     get "/admin", to: "admin#index"
+    get "/admin/policies", to: "admin#policies"
+    match "/admin/policies/new", to: "admin#new_policy", via: [:get, :post]
     get "/stats", to: "admin#stats"
 
     get "/admin/:date",
