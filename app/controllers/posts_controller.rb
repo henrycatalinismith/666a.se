@@ -75,7 +75,7 @@ class ArticleRender < Redcarpet::Render::HTML
   end
 end
 
-class NewsController < ApplicationController
+class PostsController < ApplicationController
   def show
     article(params[:year], params[:month], params[:day], params[:slug])
     render template: "news/show", layout: "internal"
@@ -85,10 +85,9 @@ class NewsController < ApplicationController
 
   def article(year, month, day, slug)
     @date = Date.parse("#{year}-#{month}-#{day}")
-    filename = Rails.root.join("news", "#{year}-#{month}-#{day}-#{slug}.en.md")
-    markdown = File.read(filename)
+    @post = Post.find_by(date: @date, slug: slug)
     renderer = ArticleRender.new(date: @date)
     redcarpet = Redcarpet::Markdown.new(renderer, :tables => true, :footnotes => true, :autolink => true)
-    @html = redcarpet.render(markdown)
+    @html = redcarpet.render(@post.body)
   end
 end
