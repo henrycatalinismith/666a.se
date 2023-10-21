@@ -49,12 +49,12 @@ class PoliciesController < ApplicationController
 
   private
 
-  def policy(name)
-    filename = Rails.root.join("policies", "#{name}.en.md")
-    markdown = File.read(filename)
+  def policy(slug)
+    @policy = Policy.find_by(slug: slug)
+    puts @policy.inspect
     renderer = PolicyRender.new()
     redcarpet = Redcarpet::Markdown.new(renderer, :tables => true)
-    @policy = name
-    @html = redcarpet.render(markdown)
+    @html = redcarpet.render(@policy.body)
+    @policies = Policy.all
   end
 end

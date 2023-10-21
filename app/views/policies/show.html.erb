@@ -1,6 +1,7 @@
 <div class="container p-8 flex flex-col gap-8 md:flex-row">
 
   <div class="flex flex-col gap-4 flex-1">
+    <h1 class="text-3xl font-bold"><%= @policy.name %></h1>
     <%= @html.html_safe %>
   </div>
 
@@ -10,25 +11,13 @@
     </h2>
 
     <ol class="flex flex-col gap-4">
-
-      <%= render partial: "policies/link", locals: {
-        href: "/accessibility",
-        icon: "fa-universal-access",
-        text: t("home.accessibility"),
-      } %>
-
-      <%= render partial: "policies/link", locals: {
-        href: "/privacy",
-        icon: "fa-user-secret",
-        text: t("home.privacy"),
-      } %>
-
-      <%= render partial: "policies/link", locals: {
-        href: "/terms",
-        icon: "fa-gavel",
-        text: t("home.terms"),
-      } %>
-
+      <% @policies.each do |policy| %>
+        <%= render partial: "policies/link", locals: {
+          href: "/#{policy.slug}",
+          icon: policy.icon,
+          text: t("home.#{policy.slug}"),
+        } %>
+      <% end %>
     </ol>
 
   </div>
