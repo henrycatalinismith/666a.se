@@ -28,7 +28,7 @@ Rails.application.routes.draw do
   get "/delete", to: "users#delete"
 
   get "/:year/:month/:day/:slug",
-    to: "news#show", 
+    to: "posts#show", 
     :year => /(19|20)\d{2}/,
     :month => /([1-9]|1[0-2])/,
     :day => /(0[0-9]|1[0-9]|2[0-9]|3[0-1])/,

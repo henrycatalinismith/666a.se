@@ -14,7 +14,7 @@
     <% @posts.each do |post| %>
       <li>
         <a class="text-blue-700 underline" href="/admin/posts/<%= post.slug %>">
-          <%= post.name %>
+          <%= post.title %>
         </a>
       </li>
     <% end %>
