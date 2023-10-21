@@ -16,3 +16,5 @@
 https://www.av.se/om-oss/sok-i-arbetsmiljoverkets-diarium/?id=<%= @document.document_code %>
 
 <%= t("notification_email.email_instructions") %>
+
+<%= t("notification_email.unsubscribe", url: @unsubscribe_url).html_safe %>

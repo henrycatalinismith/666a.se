@@ -1,0 +1,26 @@
+<div class="container flex flex-col gap-8 w-full p-8">
+  <%= render layout: "shared/h1" do %>
+    Unsubscribe
+  <% end %>
+
+  <% if @mode == :before %>
+    <p>
+      Use the button below to end your subscription for work environment email
+      alerts for company <%= @subscription.company_code %>.
+    </p>
+      
+    <%= button_to(
+      "Unsubscribe",
+      "/unsubscribe/#{@subscription.id}",
+      method: :post,
+      class: "text-white bg-red-500 hover:bg-red-900 hover:text-white py-2 font-bold px-4 rounded whitespace-nowrap"
+    ) %>
+  <% end %>
+
+  <% if @mode == :after %>
+    <p>
+      You're unsubscribed now.
+    </p>
+  <% end %>
+
+</div>

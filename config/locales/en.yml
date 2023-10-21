@@ -42,6 +42,8 @@ en:
     email_instructions: >
       You can ask the Work Environment Authority for a free copy of the document at <a href="mailto:arbetsmiljoverket@av.se">arbetsmiljoverket@av.se</a> if it sounds like
       something you need to read.
+    unsubscribe:
+      If you don't need these notifications any more, you can <a href="%{url}">unsubscribe</a>.
 
   errors:
     messages:

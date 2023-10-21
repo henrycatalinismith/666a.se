@@ -4,6 +4,7 @@ class NotificationMailer < ApplicationMailer
     @document = @notification.document
     @user = @notification.subscription.user
     @url = "https://www.av.se/om-oss/sok-i-arbetsmiljoverkets-diarium/?id=" + @document.document_code
+    @unsubscribe_url = "https://666a.se/unsubscribe/#{@notification.subscription.id}"
     I18n.with_locale(@user.locale) do
       mail(
         to: @user.email,
