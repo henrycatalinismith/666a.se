@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_10_21_180608) do
+ActiveRecord::Schema[7.1].define(version: 2023_10_22_173107) do
   create_table "days", id: :string, default: -> { "ULID()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -115,8 +115,10 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_21_180608) do
     t.datetime "updated_at", null: false
     t.string "user_id", null: false
     t.string "company_code"
-    t.integer "status", default: 1
-    t.index ["status"], name: "index_subscriptions_on_status"
+    t.integer "subscription_status", default: 1
+    t.integer "subscription_type"
+    t.string "workplace_code"
+    t.index ["subscription_status"], name: "index_subscriptions_on_subscription_status"
     t.index ["user_id"], name: "index_subscriptions_on_user_id"
   end
 
