@@ -86,6 +86,9 @@ class PostsController < ApplicationController
   def article(year, month, day, slug)
     @date = Date.parse("#{year}-#{month}-#{day}")
     @post = Post.find_by(date: @date, slug: slug)
+    if @post.nil? then
+      raise ActionController::RoutingError.new('Not Found')
+    end
     renderer = ArticleRender.new(date: @date)
     redcarpet = Redcarpet::Markdown.new(renderer, :tables => true, :footnotes => true, :autolink => true)
     @html = redcarpet.render(@post.body)
