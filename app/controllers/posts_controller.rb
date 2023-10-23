@@ -78,7 +78,7 @@ end
 class PostsController < ApplicationController
   def show
     article(params[:year], params[:month], params[:day], params[:slug])
-    render template: "news/show", layout: "internal"
+    render template: "posts/show", layout: "internal"
   end
 
   private
