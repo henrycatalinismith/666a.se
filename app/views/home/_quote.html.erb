@@ -5,26 +5,26 @@
   </svg>
   <blockquote>
     <p class="text-2xl italic font-medium text-gray-900">
-      "666a represents a 21st century vision of Sweden's principle of openness (Offentlighetsprincipen) where information is not merely available, but subscribable and multilingual."
+      <%= t("quote.text") %>
     </p>
   </blockquote>
   <figcaption class="flex items-center justify-center mt-6 space-x-3">
     <img
       class="w-6 h-6 rounded-full"
       src="/henry-32.jpeg"
-      alt="Photo of Henry"
+      alt="<%= t("quote.image") %>"
     />
     <div class="flex items-center divide-x-2 divide-gray-500">
       <cite class="pr-3 font-medium text-gray-900">
-        Henry Catalini Smith
+        <%= t("quote.name") %>
       </cite>
       <cite class="pl-3 text-sm text-gray-500">
-        Creator of 666a
+        <%= t("quote.role") %>
       </cite>
     </div>
   </figcaption>
   </div>
   <a href="/2023/10/31/launch-announcement" class="text-blue-500 text-xl">
-    Read more »
+    <%= t("quote.link") %>
   </a>
 </figure>
