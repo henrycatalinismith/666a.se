@@ -8,17 +8,17 @@
       <%= t("quote.text") %>
     </p>
   </blockquote>
-  <figcaption class="flex items-center justify-center mt-6 space-x-3">
+  <figcaption class="flex items-center justify-center mt-6 gap-2">
     <img
       class="w-6 h-6 rounded-full"
       src="/henry-32.jpeg"
       alt="<%= t("quote.image") %>"
     />
-    <div class="flex items-center divide-x-2 divide-gray-500">
-      <cite class="pr-3 font-medium text-gray-900">
+    <div class="flex items-center divide-x-2 divide-gray-500 rtl:divide-x-reverse">
+      <cite class="pe-3 font-medium text-gray-900">
         <%= t("quote.name") %>
       </cite>
-      <cite class="pl-3 text-sm text-gray-500">
+      <cite class="ps-3 text-sm text-gray-500">
         <%= t("quote.role") %>
       </cite>
     </div>
