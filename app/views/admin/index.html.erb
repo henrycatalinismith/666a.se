@@ -4,6 +4,12 @@
   <% end %>
 
   <p>
+    <a class="text-blue-700 underline" href="/admin/days">
+      Days
+    </a>
+  </p>
+
+  <p>
     <a class="text-blue-700 underline" href="/admin/policies">
       Policies
     </a>
@@ -14,15 +20,5 @@
       Posts
     </a>
   </p>
-
-  <ol class="flex flex-col gap-4">
-    <% @days.each do |day| %>
-      <li>
-        <a class="text-blue-700 underline" href="/admin/<%= day.ymd %>">
-          <%= day.ymd %>
-        </a>
-      </li>
-    <% end %>
-  </ol>
 
 </div>
