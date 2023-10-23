@@ -11,6 +11,20 @@ class UsersController < ApplicationController
     @subscriptions = @user.subscriptions
   end
 
+  def download
+    @page_title = "666a – download"
+    @user = current_user
+    if request.post? then
+      send_data(
+        JSON.pretty_generate(@user.to_gdpr_json),
+        filename: "666a-export.json",
+        type: "application/json",
+        #disposition: "attachment"
+        disposition: "inline"
+      )
+    end
+  end
+
   def delete
     @page_title = "666a – delete account"
     session[:referer] = :delete

@@ -1,0 +1,19 @@
+<div class="container flex flex-col gap-10 w-full p-8">
+
+  <%= render layout: "shared/h1" do %>
+    Download
+  <% end %>
+
+  <p>
+    This page provides data subject access request for GDPR compliance purposes.
+    Further details are available in the <a href="/privacy">privacy policy</a>.
+  </p>
+
+  <%= button_to(
+    "Download",
+    "/download",
+    method: :post,
+    class: "min-w-max-content bg-cyan-300 hover:bg-cyan-200 text-black font-bold py-2 px-4 rounded"
+  ) %>
+
+</div>
