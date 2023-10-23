@@ -33,6 +33,9 @@ class Search < ApplicationRecord
   end
 
   def result_count
+    if hit_count == "Det finns inga filtreringsval för detta sökresultat" then
+      return 0
+    end
     hit_count.match(/(\d+) träffar/)[1].to_i
   end
 end

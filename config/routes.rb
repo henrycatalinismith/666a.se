@@ -54,6 +54,7 @@ Rails.application.routes.draw do
     match "/follow", to: "subscriptions#new", via: [:get, :post]
 
     get "/admin", to: "admin#index"
+    get "/admin/days", to: "admin#days"
     get "/admin/policies", to: "admin#policies"
     match "/admin/policies/new", to: "admin#new_policy", via: [:get, :post]
     match "/admin/policies/:slug", to: "admin#edit_policy", via: [:get, :patch]
@@ -64,6 +65,9 @@ Rails.application.routes.draw do
 
     get "/admin/:date",
       to: "admin#day", 
+      :date => /(19|20)\d{2}-([1-9]|1[0-2])-(0[0-9]|1[0-9]|2[0-9]|3[0-1])/
+    post "/admin/:date/job",
+      to: "admin#day_job", 
       :date => /(19|20)\d{2}-([1-9]|1[0-2])-(0[0-9]|1[0-9]|2[0-9]|3[0-1])/
   end
 end
