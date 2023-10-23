@@ -3,7 +3,14 @@ class SubscriptionsController < ApplicationController
 
   def new
     if request.post?
-      @subscription = current_user.subscriptions.create(company_code: params[:subscription][:company_code])
+      company_code = params[:subscription][:company_code]
+      subscription_props = {}
+      if company_code.match(/\A\d{8}\z/) then
+        subscription_props[:workplace_code] = company_code
+      else
+        subscription_props[:company_code] = company_code
+      end
+      @subscription = current_user.subscriptions.create(subscription_props)
       if @subscription.valid?
         redirect_to "/dashboard", :notice => "Subscription created"
       end
