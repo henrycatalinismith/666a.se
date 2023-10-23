@@ -10,6 +10,40 @@ en:
     accessibility: Accessibility Statement
     privacy: Privacy Policy
     terms: Terms of Service
+  
+  quote:
+    text: >
+      666a represents a 21st century vision of Sweden's principle of openness
+      (Offentlighetsprincipen) where information is not merely available, but
+      subscribable and multilingual.
+    image: Photo of Henry
+    name: Henry Catalini Smith
+    role: Creator of 666a
+    link: Read more »
+
+  target_audience:
+    title: Designed for people like you
+    text: 666a is the product of real world experience on the front lines of the Swedish labour movement.
+  
+  target_audience_member:
+    safety_officer:
+      title: Safety Officer
+      text: No more relying on the employer to “remember” to inform you.
+    union_rep:
+      title: Union Rep
+      text: Keep your members up to date with the latest news.
+    employee:
+      title: Employee
+      text: Learn the real context behind your employer's next HR announcement.
+    ombudsman:
+      title: Ombudsman
+      text: Support local union organising by upgrading your situational awareness.
+    organizer:
+      title: Organizer
+      text: Stay alert for work environment issues affecting your campaigns.
+    journalist:
+      title: Journalist
+      text: Be first on the scene at Sweden's next big work environment story.
 
   registration:
     title: "Register"

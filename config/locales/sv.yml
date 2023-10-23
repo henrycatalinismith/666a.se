@@ -1,11 +1,47 @@
 sv:
 
   home:
-    blurb: "E-postaviseringar om arbetsmiljöverket"
-    pitch: "Ta reda på nya dokument så snart de publiceras. Ingen mer ångest över att glömma att kolla."
+    blurb: "E-postaviseringar om arbetsmiljön"
+    pitch: "Ta reda på nya allmänna handlingar hos Arbetsmiljöverket så snart de publiceras."
     login: "Logga in"
     register: "Kom igång"
     dashboard: "Startsida"
+    accessibility: Tillgänglighetsutlåtande
+    privacy: Integritetspolicy
+    terms: Användarvillkor
+  
+  quote:
+    text: >
+      666a representerar en modern vision av offentlighetsprincipen där
+      information inte bara är tillgänglig, utan omedelbar och flerspråkig.
+    image: Bild på Henry
+    name: Henry Catalini Smith
+    role: Skapare av 666a
+    link: Läs mer »
+
+  target_audience:
+    title: Designad för dig
+    text: 666a är en produkt av erfarenheter från den svenska arbetarrörelsens frontlinjer.
+      
+  target_audience_member:
+    safety_officer:
+      title: Skyddsombud
+      text: Sluta lita på att arbetsgivaren "kommer ihåg" att informera dig.
+    union_rep:
+      title: Förtroendevald
+      text: Håll dina medlemmar uppdaterade med de senaste nyheterna.
+    employee:
+      title: Anställd
+      text: Ta reda på sammanhanget för din arbetsgivares nästa HR-meddelande.
+    ombudsman:
+      title: Ombudsman
+      text: Stöd lokal facklig organisering genom uppgraderad situationsmedvetenhet.
+    organizer:
+      title: Organisatör
+      text: Håll koll på arbetsmiljöfrågor som påverkar dina kampanjer.
+    journalist:
+      title: Journalist
+      text: Var först på plats vid Sveriges nästa stora arbetsmiljöhistoria.
 
   registration:
     title: "Kom igång"
