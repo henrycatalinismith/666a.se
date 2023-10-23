@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   has_many :subscriptions, dependent: :destroy
+  has_many :notifications, through: :subscriptions
   has_many :roles, dependent: :destroy
 
   # Include default devise modules. Others available are:
@@ -15,5 +16,20 @@ class User < ApplicationRecord
 
   def admin?
     !roles.admin.empty?
+  end
+
+  def to_gdpr_json
+    {
+      name: name,
+      email: email,
+      language: locale,
+      subscriptions: subscriptions.map { |s| s.company_subscription? ? s.company_code : s.workplace_code },
+      notifications: notifications.map { |n|
+        {
+          date: n.created_at.strftime("%Y-%m-%d"),
+          document: n.document.document_code,
+        }
+      },
+    }
   end
 end

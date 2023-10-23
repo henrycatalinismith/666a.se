@@ -6,8 +6,10 @@ class SubscriptionsController < ApplicationController
       company_code = params[:subscription][:company_code]
       subscription_props = {}
       if company_code.match(/\A\d{8}\z/) then
+        subscription_props[:subscription_type] = :workplace_subscription
         subscription_props[:workplace_code] = company_code
       else
+        subscription_props[:subscription_type] = :company_subscription
         subscription_props[:company_code] = company_code
       end
       @subscription = current_user.subscriptions.create(subscription_props)

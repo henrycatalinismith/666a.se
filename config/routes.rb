@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   get "/follow", to: "subscriptions#new"
   match "/unsubscribe/:id", to: "subscriptions#unsubscribe", via: [:get, :post]
   get "/delete", to: "users#delete"
+  get "/download", to: "users#download"
 
   get "/:year/:month/:day/:slug",
     to: "posts#show", 
@@ -44,6 +45,7 @@ Rails.application.routes.draw do
     get "/dashboard", to: "users#dashboard"
 
     post "/delete", to: "users#delete"
+    post "/download", to: "users#download"
     post "/follow", to: "subscriptions#new"
 
     match "/name", to: "users#name", via: [:get, :patch]
