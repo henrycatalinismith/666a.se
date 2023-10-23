@@ -53,10 +53,12 @@ en:
 
   helpers:
     label:
+      subscription:
+        company_code: "Company / Workplace"
       user:
         name: "Name"
         locale: "Language"
-        company_code: "Company Code"
+        company_code: "Company ID"
         email: "Email"
         password: "Password"
         password_confirmation: "Confirm Password"
