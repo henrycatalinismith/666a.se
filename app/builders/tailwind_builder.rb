@@ -8,7 +8,7 @@ class TailwindBuilder < ActionView::Helpers::FormBuilder
   end
 
   def text_field(attribute, options={})
-    super(attribute, options.reverse_merge(class: "block input border-gray-600 rounded-md shadow-sm focus:ring focus:ring-indigo-200 flex-1"))
+    super(attribute, options.reverse_merge(class: "block input border-gray-600 rounded-md shadow-sm focus:ring focus:ring-indigo-200 flex-1 w-full"))
   end
 
   def select(method, choices = nil, options = {}, html_options = {}, &block)
@@ -16,11 +16,11 @@ class TailwindBuilder < ActionView::Helpers::FormBuilder
   end
 
   def email_field(attribute, options={})
-    super(attribute, options.reverse_merge(class: "block input border-gray-600 rounded-md shadow-sm focus:ring focus:ring-indigo-200"))
+    super(attribute, options.reverse_merge(class: "block input border-gray-600 rounded-md shadow-sm focus:ring focus:ring-indigo-200 w-full"))
   end
 
   def password_field(attribute, options={})
-    super(attribute, options.reverse_merge(class: "block input border-gray-600 rounded-md shadow-sm focus:ring focus:ring-indigo-200"))
+    super(attribute, options.reverse_merge(class: "block input border-gray-600 rounded-md shadow-sm focus:ring focus:ring-indigo-200 w-full"))
   end
 
   def label(attribute, options={})
