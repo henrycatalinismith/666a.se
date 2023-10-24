@@ -62,7 +62,7 @@ class ArticleRender < Redcarpet::Render::HTML
   end
 
   def footnotes(content)
-    %(<div class="py-8">#{content}</div>)
+    %(<hr class="h-px bg-gray-400 border-0 mt-4" /><div class="py-4">#{content}</div>)
   end
 
   def footnote_def(content, number)
@@ -77,20 +77,24 @@ end
 
 class PostsController < ApplicationController
   def show
-    article(params[:year], params[:month], params[:day], params[:slug])
+    post(params[:year], params[:month], params[:day], params[:slug])
     render template: "posts/show", layout: "internal"
   end
 
   private
 
-  def article(year, month, day, slug)
+  def post(year, month, day, slug)
     @date = Date.parse("#{year}-#{month}-#{day}")
     @post = Post.find_by(date: @date, slug: slug)
     if @post.nil? then
       raise ActionController::RoutingError.new('Not Found')
     end
+    body = @post.body_en
+    if I18n.locale == :sv and !@post.body_sv.empty? then
+      body = @post.body_sv
+    end
     renderer = ArticleRender.new(date: @date)
     redcarpet = Redcarpet::Markdown.new(renderer, :tables => true, :footnotes => true, :autolink => true)
-    @html = redcarpet.render(@post.body)
+    @html = redcarpet.render(body)
   end
 end
