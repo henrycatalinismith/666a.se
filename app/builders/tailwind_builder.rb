@@ -7,20 +7,24 @@ class TailwindBuilder < ActionView::Helpers::FormBuilder
     super(attribute, options.reverse_merge(class: "flex flex-col gap-4 max-w-lg"))
   end
 
+  def text_area(attribute, options={})
+    super(attribute, options.reverse_merge(class: "border py-2 px-3 border py-2 px-3 block input border-gray-600 rounded-md shadow-sm focus:ring focus:ring-indigo-200 flex-1 w-full"))
+  end
+
   def text_field(attribute, options={})
-    super(attribute, options.reverse_merge(class: "block input border-gray-600 rounded-md shadow-sm focus:ring focus:ring-indigo-200 flex-1 w-full"))
+    super(attribute, options.reverse_merge(class: "border py-2 px-3 block input border-gray-600 rounded-md shadow-sm focus:ring focus:ring-indigo-200 flex-1 w-full"))
   end
 
   def select(method, choices = nil, options = {}, html_options = {}, &block)
-    super(method, choices, options, html_options.merge(class: "block input border-gray-600 rounded-md shadow-sm focus:ring focus:ring-indigo-200 f min-w-full"), &block)
+    super(method, choices, options, html_options.merge(class: "border py-2 px-3 block input border-gray-600 rounded-md shadow-sm focus:ring focus:ring-indigo-200 f min-w-full"), &block)
   end
 
   def email_field(attribute, options={})
-    super(attribute, options.reverse_merge(class: "block input border-gray-600 rounded-md shadow-sm focus:ring focus:ring-indigo-200 w-full"))
+    super(attribute, options.reverse_merge(class: "border py-2 px-3 block input border-gray-600 rounded-md shadow-sm focus:ring focus:ring-indigo-200 w-full"))
   end
 
   def password_field(attribute, options={})
-    super(attribute, options.reverse_merge(class: "block input border-gray-600 rounded-md shadow-sm focus:ring focus:ring-indigo-200 w-full"))
+    super(attribute, options.reverse_merge(class: "border py-2 px-3 block input border-gray-600 rounded-md shadow-sm focus:ring focus:ring-indigo-200 w-full"))
   end
 
   def label(attribute, options={})
