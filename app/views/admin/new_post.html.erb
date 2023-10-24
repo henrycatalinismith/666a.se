@@ -35,8 +35,13 @@
     <% end %>
 
     <div class="w-128 flex flex-col">
-      <%= f.label :body %>
-      <%= f.text_area :body, size: "128x32", html: { class: "font-mono" } %>
+      <%= f.label :body_en %>
+      <%= f.text_area :body_en, size: "128x32", html: { class: "font-mono" } %>
+    </div>
+
+    <div class="w-128 flex flex-col">
+      <%= f.label :body_sv %>
+      <%= f.text_area :body_sv, size: "128x32", html: { class: "font-mono" } %>
     </div>
 
     <div class="actions">
