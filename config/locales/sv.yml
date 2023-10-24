@@ -83,7 +83,7 @@ sv:
     ar: Arabiska
 
   helpers:
-    label:
+    label: 
       user:
         name: "Namn"
         locale: "Språk"
@@ -94,6 +94,12 @@ sv:
         remember_me: "Kom ihåg mig"
 
   activerecord:
+    attributes:
+      user:
+        name: "Namn"
+        locale: "Språk"
+        company_code: "Organisationsnummer"
+
     errors:
       messages:
         empty: "får ej vara tom"
