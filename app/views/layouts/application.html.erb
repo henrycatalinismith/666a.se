@@ -14,7 +14,11 @@
   <body dir="<%= I18n.locale == :ar ? "rtl" : "ltr" %>">
     <%= yield(:header) %>
     <main class="mx-auto flex flex-col items-center">
-      <p class="notice"><%= notice %></p>
+      <% if notice %>
+        <%= render partial: "ui/flash-message", locals: {
+          text: notice
+        } %>
+      <% end %>
       <p class="alert"><%= alert %></p>
       <%= yield %>
     </main>
