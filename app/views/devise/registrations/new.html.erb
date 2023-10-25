@@ -4,23 +4,6 @@
     <%= t("registration.title") %>
   <% end %>
 
-
-  <div class="flex flex-col gap-2">
-    <p>
-      You need the official ID code for the company you want to follow.
-      This is called their <em lang="sv">organisationsnummer</em> in Swedish.
-      Sweden's Company Registration Office has a <a class="text-blue-700 underline" href="https://foretagsinfo.bolagsverket.se/sok-foretagsinformation-web/foretag">company search tool</a> which you can use to find it if you don't already have it.
-      A valid <em lang="sv">organisationsnummer</em> is ten digits with a dash between the six and seventh, like <tt>123456-7890</tt>.</p>
-    </p>
-
-    <p>
-      You can also subscribe to a workplace CFAR number if you prefer.
-      For large employers with hundreds of workplaces, such as city councils, CFAR subscriptions might be better.
-      Statistics Sweden provides a <a class="text-blue-700 underline" href="https://cfarnrsok.scb.se/">workplace search tool</a> that you can use to find a CFAR if you don't already know it.
-      A valid CFAR is eight digits, like <tt>12345678</tt>.
-    </p>
-  </div>
-
   <%= form_for(
     resource,
     as: resource_name,
@@ -46,13 +29,14 @@
     <% end %>
 
     <%= render layout: "shared/field" do %>
-      <div class="flex flex-row justify-between">
-        <%= f.label :company_code %>
-        <a href="/follow" target="_blank" class="text-blue-700 ">
-          help
-        </a>
-      </div>
+      <%= f.label :company_code %>
       <%= f.text_field :company_code, :placeholder => "123456-7890" %>
+      <a class="text-blue-700 underline" href="https://foretagsinfo.bolagsverket.se/sok-foretagsinformation-web/foretag">
+        Company ID search tool
+      </a>
+      <a class="text-blue-700 underline" href="https://cfarnrsok.scb.se/">
+        Workplace ID search tool
+      </a>
     <% end %>
 
     <%= render layout: "shared/field" do %>
