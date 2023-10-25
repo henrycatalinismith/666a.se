@@ -44,6 +44,11 @@
       <%= f.text_area :body_sv, size: "128x32", html: { class: "font-mono" } %>
     </div>
 
+    <div class="w-128 flex flex-col">
+      <%= f.label :description %>
+      <%= f.text_area :description, size: "128x8" %>
+    </div>
+
     <div class="actions">
       <%= f.submit "Create" %>
     </div>
