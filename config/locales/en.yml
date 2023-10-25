@@ -69,7 +69,7 @@ en:
       Hey %{name},
     subscription: >
       You're subscribed to email updates for Work Environment Authority filings
-      about %{company}. A new document's been detected.
+      about %{target}. A new document's been detected.
     link_preamble: >
       More information's available about it on the Work Environment Authority's
       website at the link below.
