@@ -20,29 +20,33 @@
     </p>
   </div>
 
-  <%= form_for(
-    @subscription,
-    as: "subscription",
-    url: "/follow",
-    builder: TailwindBuilder,
-    :html => {class: "flex flex-col gap-8 max-w-xs" }) do |f| %>
+  <% if !current_user.nil? then %>
 
-    <% if @subscription.errors.any? %>
-      <div class="error error-success note-shadow">
-        <% @subscription.errors.full_messages.each do |msg| %>
-          <p><%= msg %></p>
-        <% end %>
+    <%= form_for(
+      @subscription,
+      as: "subscription",
+      url: "/follow",
+      builder: TailwindBuilder,
+      :html => {class: "flex flex-col gap-8 max-w-xs" }) do |f| %>
+
+      <% if @subscription.errors.any? %>
+        <div class="error error-success note-shadow">
+          <% @subscription.errors.full_messages.each do |msg| %>
+            <p><%= msg %></p>
+          <% end %>
+        </div>
+      <% end %>
+
+      <div class="w-64 flex flex-col">
+        <%= f.label :company_code %>
+        <%= f.text_field :company_code %>
       </div>
+
+      <div class="actions">
+        <%= f.submit "Save" %>
+      </div>
+
     <% end %>
-
-    <div class="w-64 flex flex-col">
-      <%= f.label :company_code %>
-      <%= f.text_field :company_code %>
-    </div>
-
-    <div class="actions">
-      <%= f.submit "Save" %>
-    </div>
 
   <% end %>
 

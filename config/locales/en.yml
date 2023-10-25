@@ -92,7 +92,7 @@ en:
       user:
         name: "Name"
         locale: "Language"
-        company_code: "Company ID"
+        company_code: "Company / Workplace ID"
         email: "Email"
         password: "Password"
         password_confirmation: "Confirm Password"
