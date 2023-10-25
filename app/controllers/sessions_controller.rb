@@ -3,6 +3,7 @@ class SessionsController < Devise::SessionsController
 
   def create
     super
+    flash.delete(:notice)
   end
 
   def after_sign_in_path_for(resource)
