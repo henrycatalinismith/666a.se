@@ -7,7 +7,7 @@
 ) %>
 
 <%= t("notification_email.subscription",
-  company: @document.company_name,
+  target: @target,
 ) %>
 
 <%= @document.document_code %>: <%= I18n.locale == "sv" ? @document.document_type : t("document_type." + @document.document_type) %>
