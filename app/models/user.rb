@@ -10,7 +10,7 @@ class User < ApplicationRecord
   
   validates :name, presence: true
   validates :company_code, format: {
-    with: /\A\d{6}-\d{4}\z/,
+    with: /\A(\d{6}-\d{4}|\d{8})\z/,
     message: :invalid_company_code,
   }
 
