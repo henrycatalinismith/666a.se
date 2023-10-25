@@ -7,7 +7,16 @@ class RegistrationsController < Devise::RegistrationsController
   def create
     super
     if !current_user.nil? then
-      current_user.subscriptions.create(user_id: current_user.id, company_code: current_user.company_code)
+      subscription_props = {}
+      subscription_props[:user_id] = current_user.id
+      if current_user.company_code.match(/\A\d{8}\z/) then
+        subscription_props[:subscription_type] = :workplace_subscription
+        subscription_props[:workplace_code] = current_user.company_code
+      else
+        subscription_props[:subscription_type] = :company_subscription
+        subscription_props[:company_code] = current_user.company_code
+      end
+      current_user.subscriptions.create(subscription_props)
     end
   end
 
