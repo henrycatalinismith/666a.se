@@ -22,19 +22,19 @@ en:
     link: Read more »
 
   target_audience:
-    title: Designed for people like you
-    text: 666a is the product of real world experience on the front lines of the Swedish labour movement.
+    title: Designed for you
+    text: 666a is for anyone who needs to keep up to date about a particular work environment.
   
   target_audience_member:
     safety_officer:
       title: Safety Officer
-      text: No more relying on the employer to “remember” to inform you.
+      text: Catch up on anything the employer forgets to inform you about.
     union_rep:
       title: Union Rep
       text: Keep your members up to date with the latest news.
     employee:
       title: Employee
-      text: Learn the real context behind your employer's next HR announcement.
+      text: Learn more about how your workplace functions and changes.
     ombudsman:
       title: Ombudsman
       text: Support local union organising by upgrading your situational awareness.
@@ -43,11 +43,13 @@ en:
       text: Stay alert for work environment issues affecting your campaigns.
     journalist:
       title: Journalist
-      text: Be first on the scene at Sweden's next big work environment story.
+      text: Be first to know how workplaces are changing and developing.
 
   registration:
     title: "Register"
     button: "Sign up"
+    company_code_search: "Company ID search tool"
+    workplace_code_search: "Workplace ID search tool"
 
   login:
     title: "Login"
