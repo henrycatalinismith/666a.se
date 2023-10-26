@@ -32,10 +32,10 @@
       <%= f.label :company_code %>
       <%= f.text_field :company_code, :placeholder => "123456-7890" %>
       <a class="text-blue-700 underline" href="https://foretagsinfo.bolagsverket.se/sok-foretagsinformation-web/foretag">
-        Company ID search tool
+        <%= t("registration.company_code_search") %>
       </a>
       <a class="text-blue-700 underline" href="https://cfarnrsok.scb.se/">
-        Workplace ID search tool
+        <%= t("registration.workplace_code_search") %>
       </a>
     <% end %>
 
