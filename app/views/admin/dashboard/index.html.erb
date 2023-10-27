@@ -1,0 +1,34 @@
+<div class="container flex flex-col gap-8 w-full p-8">
+  <%= render layout: "shared/h1" do %>
+    Admin
+  <% end %>
+
+  <section class="w-full flex flex-col gap-10 flex-1 md:p-6 bg-white md:border md:border-gray-200 md:rounded-lg md:shadow">
+    <div class="flex flex-row justify-between">
+      <h2 class="text-2xl font-bold">
+        Documents
+      </h2>
+      <a class="text-blue-700" href="/admin/stats">more stats</a>
+    </div>
+    <%= column_chart Day.chronological.map { |d| [d.date.strftime("%Y-%m-%d"), d.documents.count] }.to_h %>
+  </section>
+
+  <p>
+    <a class="text-blue-700 underline" href="/admin/days">
+      Days
+    </a>
+  </p>
+
+  <p>
+    <a class="text-blue-700 underline" href="/admin/policies">
+      Policies
+    </a>
+  </p>
+
+  <p>
+    <a class="text-blue-700 underline" href="/admin/posts">
+      Posts
+    </a>
+  </p>
+
+</div>

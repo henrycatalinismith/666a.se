@@ -7,7 +7,7 @@
     <h2 class="text-2xl">
       Searches
     </h2>
-    <%= column_chart Day.chronological.map { |d| [d.date.strftime("%Y-%m-%d"), Search.where('DATE(created_at) = ?', d.date).count] }.to_h %>
+    <%= column_chart Day.chronological.map { |d| [d.date.strftime("%Y-%m-%d"), WorkEnvironment::Search.where('DATE(created_at) = ?', d.date).count] }.to_h %>
   </section>
 
   <section class="w-full flex flex-col gap-10 flex-1 md:p-6 bg-white md:border md:border-gray-200 md:rounded-lg md:shadow">
@@ -29,7 +29,7 @@
     <h2 class="text-2xl">
       Notification
     </h2>
-    <%= column_chart Day.chronological.map { |d| [d.date.strftime("%Y-%m-%d"), Notification.where('DATE(created_at) = ?', d.date).count] }.to_h %>
+    <%= column_chart Day.chronological.map { |d| [d.date.strftime("%Y-%m-%d"), WorkEnvironment::Notification.where('DATE(created_at) = ?', d.date).count] }.to_h %>
   </section>
 
   <div class="flex flex-col gap-14 md:gap-8 md:flex-row">
@@ -37,7 +37,7 @@
       <h2 class="text-2xl">
         Notification Email Statuses
       </h2>
-      <%= pie_chart Notification.group(:email_status).count %>
+      <%= pie_chart WorkEnvironment::Notification.group(:email_status).count %>
     </section>
     <section class="w-full flex flex-col gap-10 flex-1 md:p-6 bg-white md:border md:border-gray-200 md:rounded-lg md:shadow">
       <h2 class="text-2xl">
@@ -52,13 +52,13 @@
       <h2 class="text-2xl">
         Search Result Statuses
       </h2>
-      <%= pie_chart Search.group(:result_status).count %>
+      <%= pie_chart WorkEnvironment::Search.group(:result_status).count %>
     </section>
     <section class="w-full flex flex-col gap-10 flex-1 md:p-6 bg-white md:border md:border-gray-200 md:rounded-lg md:shadow">
       <h2 class="text-2xl">
         Result Metadata Statuses
       </h2>
-      <%= pie_chart Result.group(:metadata_status).count %>
+      <%= pie_chart WorkEnvironment::Result.group(:metadata_status).count %>
     </section>
   </div>
 
