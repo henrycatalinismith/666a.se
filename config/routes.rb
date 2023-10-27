@@ -43,6 +43,26 @@ Rails.application.routes.draw do
     end
   end
 
+  namespace :admin do
+    authenticated :user do
+      get "/", to: "dashboard#index"
+      get "/days", to: "days#index"
+      get "/days/:date", to: "days#show", :date => /(19|20)\d{2}-([1-9]|1[0-2])-(0[0-9]|1[0-9]|2[0-9]|3[0-1])/
+      post "/days/:date/job",
+        to: "days#job", 
+        :date => /(19|20)\d{2}-([1-9]|1[0-2])-(0[0-9]|1[0-9]|2[0-9]|3[0-1])/
+      get "/policies", to: "policies#index"
+      match "/policies/new", to: "policies#new", via: [:get, :post]
+      match "/policies/:slug", to: "policies#edit", via: [:get, :patch]
+
+      get "/posts", to: "posts#index"
+      match "/posts/new", to: "posts#new", via: [:get, :post]
+      match "/posts/:slug", to: "posts#edit", via: [:get, :patch]
+
+      get "/stats", to: "stats#index"
+    end
+  end
+
   authenticated :user do
     get "/account", to: "users#account"
     get "/dashboard", to: "users#dashboard"
@@ -54,21 +74,5 @@ Rails.application.routes.draw do
     match "/email", to: "users#email", via: [:get, :patch]
     match "/language", to: "users#language", via: [:get, :patch]
 
-    get "/admin", to: "admin#index"
-    get "/admin/days", to: "admin#days"
-    get "/admin/policies", to: "admin#policies"
-    match "/admin/policies/new", to: "admin#new_policy", via: [:get, :post]
-    match "/admin/policies/:slug", to: "admin#edit_policy", via: [:get, :patch]
-    get "/admin/posts", to: "admin#posts"
-    match "/admin/posts/new", to: "admin#new_post", via: [:get, :post]
-    match "/admin/posts/:slug", to: "admin#edit_post", via: [:get, :patch]
-    get "/stats", to: "admin#stats"
-
-    get "/admin/:date",
-      to: "admin#day", 
-      :date => /(19|20)\d{2}-([1-9]|1[0-2])-(0[0-9]|1[0-9]|2[0-9]|3[0-1])/
-    post "/admin/:date/job",
-      to: "admin#day_job", 
-      :date => /(19|20)\d{2}-([1-9]|1[0-2])-(0[0-9]|1[0-9]|2[0-9]|3[0-1])/
   end
 end
