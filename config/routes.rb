@@ -51,6 +51,11 @@ Rails.application.routes.draw do
       post "/days/:date/job",
         to: "days#job", 
         :date => /(19|20)\d{2}-([1-9]|1[0-2])-(0[0-9]|1[0-9]|2[0-9]|3[0-1])/
+
+      get "/legal-documents", to: "legal_documents#index"
+      match "/legal-documents/new", to: "legal_documents#new", via: [:get, :post]
+      match "/legal-documents/:slug", to: "legal_documents#edit", via: [:get, :patch]
+
       get "/policies", to: "policies#index"
       match "/policies/new", to: "policies#new", via: [:get, :post]
       match "/policies/:slug", to: "policies#edit", via: [:get, :patch]
