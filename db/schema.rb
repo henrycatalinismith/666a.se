@@ -10,13 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_10_27_173650) do
+ActiveRecord::Schema[7.1].define(version: 2023_10_27_174248) do
   create_table "days", id: :string, default: -> { "ULID()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.date "date"
     t.integer "ingestion_status"
     t.index ["date"], name: "index_days_on_date", unique: true
+  end
+
+  create_table "legal_documents", force: :cascade do |t|
+    t.string "document_name"
+    t.string "document_code"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["document_code"], name: "index_legal_documents_on_document_code", unique: true
   end
 
   create_table "policies", id: :string, default: -> { "ULID()" }, force: :cascade do |t|
