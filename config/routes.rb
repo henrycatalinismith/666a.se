@@ -24,8 +24,6 @@ Rails.application.routes.draw do
     get 'password', to: 'registrations#edit'
   end
 
-  get "/follow", to: "subscriptions#new"
-  match "/unsubscribe/:id", to: "subscriptions#unsubscribe", via: [:get, :post]
   get "/delete", to: "users#delete"
   get "/download", to: "users#download"
 
@@ -36,8 +34,16 @@ Rails.application.routes.draw do
     :day => /(0[0-9]|1[0-9]|2[0-9]|3[0-1])/,
     :slug => /[a-z0-9-]+/
 
+  scope module: :work_environment do
+    get "/follow", to: "subscriptions#new"
+    match "/unsubscribe/:id", to: "subscriptions#unsubscribe", via: [:get, :post]
+    authenticated :user do
+      delete "/subscriptions/:id", to: "subscriptions#destroy"
+      post "/follow", to: "subscriptions#new"
+    end
+  end
+
   authenticated :user do
-    delete "/subscriptions/:id", to: "subscriptions#destroy"
     post "/subscriptions/:id/refresh", to: "subscriptions#refresh"
     post "/notifications/:id/email", to: "notifications#email"
 
@@ -46,7 +52,6 @@ Rails.application.routes.draw do
 
     post "/delete", to: "users#delete"
     post "/download", to: "users#download"
-    post "/follow", to: "subscriptions#new"
 
     match "/name", to: "users#name", via: [:get, :patch]
     match "/email", to: "users#email", via: [:get, :patch]
