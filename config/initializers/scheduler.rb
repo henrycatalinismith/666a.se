@@ -7,42 +7,42 @@ return if defined?(Rails::Console) || Rails.env.test? || File.split($PROGRAM_NAM
 scheduler = Rufus::Scheduler.singleton
 
 scheduler.cron("0 9 * * *") do
-  MorningJob.perform_later(Date.yesterday.strftime("%Y-%m-%d"), {
+  WorkEnvironment::MorningJob.perform_later(Date.yesterday.strftime("%Y-%m-%d"), {
     :cascade => true,
     :notify => true,
   })
 end
 
 scheduler.cron("0 11 * * *") do
-  BackfillJob.perform_later({
+  WorkEnvironment::BackfillJob.perform_later({
     :cascade => true,
     :notify => false,
   })
 end
 
 scheduler.cron("0 13 * * *") do
-  BackfillJob.perform_later({
+  WorkEnvironment::BackfillJob.perform_later({
     :cascade => true,
     :notify => false,
   })
 end
 
 scheduler.cron("0 15 * * *") do
-  BackfillJob.perform_later({
+  WorkEnvironment::BackfillJob.perform_later({
     :cascade => true,
     :notify => false,
   })
 end
 
 scheduler.cron("0 17 * * *") do
-  BackfillJob.perform_later({
+  WorkEnvironment::BackfillJob.perform_later({
     :cascade => true,
     :notify => false,
   })
 end
 
 scheduler.cron("0 19 * * *") do
-  BackfillJob.perform_later({
+  WorkEnvironment::BackfillJob.perform_later({
     :cascade => true,
     :notify => false,
   })

@@ -1,6 +1,6 @@
 class User < ApplicationRecord
-  has_many :subscriptions, dependent: :destroy
-  has_many :notifications, through: :subscriptions
+  has_many :subscriptions, dependent: :destroy, class_name: "WorkEnvironment::Subscription"
+  has_many :notifications, through: :subscriptions, class_name: "WorkEnvironment::Notification"
   has_many :roles, dependent: :destroy
 
   # Include default devise modules. Others available are:
