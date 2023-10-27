@@ -44,9 +44,6 @@ Rails.application.routes.draw do
   end
 
   authenticated :user do
-    post "/subscriptions/:id/refresh", to: "subscriptions#refresh"
-    post "/notifications/:id/email", to: "notifications#email"
-
     get "/account", to: "users#account"
     get "/dashboard", to: "users#dashboard"
 
@@ -56,7 +53,6 @@ Rails.application.routes.draw do
     match "/name", to: "users#name", via: [:get, :patch]
     match "/email", to: "users#email", via: [:get, :patch]
     match "/language", to: "users#language", via: [:get, :patch]
-    match "/follow", to: "subscriptions#new", via: [:get, :post]
 
     get "/admin", to: "admin#index"
     get "/admin/days", to: "admin#days"

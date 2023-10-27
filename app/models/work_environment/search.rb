@@ -1,5 +1,7 @@
 module WorkEnvironment
   class Search < ApplicationRecord
+    self.table_name = "work_environment_searches"
+
     belongs_to :day
     has_many :results, dependent: :destroy
 

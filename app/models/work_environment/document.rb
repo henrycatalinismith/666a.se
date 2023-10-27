@@ -1,5 +1,7 @@
 module WorkEnvironment
   class Document < ApplicationRecord
+    self.table_name = "work_environment_documents"
+
     has_many :notifications
 
     enum document_direction: {

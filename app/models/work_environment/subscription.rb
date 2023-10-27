@@ -1,5 +1,7 @@
 module WorkEnvironment
   class Subscription < ApplicationRecord
+    self.table_name = "work_environment_subscriptions"
+
     belongs_to :user
     has_many :notifications, dependent: :destroy
 
