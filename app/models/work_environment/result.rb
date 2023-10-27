@@ -1,5 +1,7 @@
 module WorkEnvironment
   class Result < ApplicationRecord
+    self.table_name = "work_environment_results"
+
     belongs_to :search
 
     enum metadata_status: {

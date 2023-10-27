@@ -1,5 +1,7 @@
 module WorkEnvironment
   class Notification < ApplicationRecord
+    self.table_name = "work_environment_notifications"
+
     belongs_to :document
     belongs_to :subscription
 
