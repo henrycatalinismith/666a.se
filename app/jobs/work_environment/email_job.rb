@@ -1,30 +1,28 @@
-module WorkEnvironment
-  class EmailJob < ApplicationJob
-    queue_as :default
+class WorkEnvironment::EmailJob < ApplicationJob
+  queue_as :default
 
-    rescue_from(StandardError) do |exception|
-      puts exception.message
-      puts exception.backtrace
-      @notification.email_error! unless @notification.nil?
+  rescue_from(StandardError) do |exception|
+    puts exception.message
+    puts exception.backtrace
+    @notification.email_error! unless @notification.nil?
+  end
+
+  def perform(notification_id = nil, options = {})
+    puts "EmailJob: begin"
+
+    if notification_id.nil? then
+      @notification = Notification.email_pending.first
+    else
+      @notification = Notification.find(notification_id)
+    end
+    if @notification.nil? then
+      return
     end
 
-    def perform(notification_id = nil, options = {})
-      puts "EmailJob: begin"
+    NotificationMailer.with(notification: @notification).notification_email.deliver_now
 
-      if notification_id.nil? then
-        @notification = Notification.email_pending.first
-      else
-        @notification = Notification.find(notification_id)
-      end
-      if @notification.nil? then
-        return
-      end
+    @notification.email_success!
 
-      NotificationMailer.with(notification: @notification).notification_email.deliver_now
-
-      @notification.email_success!
-
-      puts "EmailJob: end"
-    end
+    puts "EmailJob: end"
   end
 end
