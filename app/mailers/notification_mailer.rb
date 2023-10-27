@@ -10,7 +10,7 @@ class NotificationMailer < ApplicationMailer
       mail(
         to: @user.email,
         subject: t("notification_email.subject"),
-        from: "666a <henry@666a.se>"
+        from: "666:a <henry@666a.se>"
       )
     end
   end
