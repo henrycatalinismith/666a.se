@@ -9,6 +9,7 @@
         Documents
       </h2>
       <a class="text-blue-700" href="/admin/stats">more stats</a>
+
     </div>
     <%= column_chart Day.chronological.map { |d| [d.date.strftime("%Y-%m-%d"), d.documents.count] }.to_h %>
   </section>
@@ -16,6 +17,12 @@
   <p>
     <a class="text-blue-700 underline" href="/admin/days">
       Days
+    </a>
+  </p>
+
+  <p>
+    <a class="text-blue-700 underline" href="/admin/legal-documents">
+      Legal Documents
     </a>
   </p>
 
