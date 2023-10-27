@@ -7,7 +7,7 @@
   <ol class="flex flex-col gap-4">
     <% @days.each do |day| %>
       <li>
-        <a class="text-blue-700 underline" href="/admin/<%= day.ymd %>">
+        <a class="text-blue-700 underline" href="/admin/days/<%= day.ymd %>">
           <%= day.ymd %>
         </a>
       </li>
