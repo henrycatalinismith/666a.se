@@ -53,7 +53,7 @@ class Day < ApplicationRecord
   end
 
   def documents
-    Document.where("document_code in (?)", results.map(&:document_code))
+    WorkEnvironment::Document.where("document_code in (?)", results.map(&:document_code))
   end
 
   def remote_total
