@@ -1,6 +1,6 @@
 class Day < ApplicationRecord
-  has_many :searches
-  has_many :results, through: :searches
+  has_many :searches, class_name: "WorkEnvironment::Search"
+  has_many :results, through: :searches, class_name: "WorkEnvironment::Result"
 
   scope :today, -> { where(date: Date.today) }
   scope :yesterday, -> { where(date: Date.yesterday) }
