@@ -23,7 +23,7 @@ class WorkEnvironment::DayJob < ApplicationJob
     end
 
     if options[:cascade] then
-      SearchJob.perform_later(day.date, options)
+      WorkEnvironment::SearchJob.perform_later(day.date, options)
     end
 
     puts "DayJob: end"

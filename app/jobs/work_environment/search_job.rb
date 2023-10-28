@@ -35,7 +35,7 @@ class WorkEnvironment::SearchJob < ApplicationJob
 
     rows.each do |row|
       document_code = row['Handlingsnummer']
-      document = Document.find_by(document_code:)
+      document = WorkEnvironment::Document.find_by(document_code:)
       document_exists = !document.nil?
       document_status = document_exists ? :document_ready : :document_pending
       metadata_status = document_exists ? :metadata_aborted : :metadata_pending
@@ -56,7 +56,7 @@ class WorkEnvironment::SearchJob < ApplicationJob
     if options[:cascade] then
       @search.results.each_with_index do |result, index|
         if result.metadata_pending? then
-          ResultJob.set(wait: index.seconds).perform_later(result.document_code, options)
+          WorkEnvironment::ResultJob.set(wait: index.seconds).perform_later(result.document_code, options)
         end
       end
     end

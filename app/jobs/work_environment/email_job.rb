@@ -11,9 +11,9 @@ class WorkEnvironment::EmailJob < ApplicationJob
     puts "EmailJob: begin"
 
     if notification_id.nil? then
-      @notification = Notification.email_pending.first
+      @notification = WorkEnvironment::Notification.email_pending.first
     else
-      @notification = Notification.find(notification_id)
+      @notification = WorkEnvironment::Notification.find(notification_id)
     end
     if @notification.nil? then
       return

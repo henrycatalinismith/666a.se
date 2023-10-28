@@ -14,16 +14,16 @@ class WorkEnvironment::DocumentJob < ApplicationJob
     puts "DocumentJob: begin"
 
     if document_code.nil? then
-      @result = Result.metadata_ready.document_pending.first
+      @result = WorkEnvironment::Result.metadata_ready.document_pending.first
     else
-      @result = Result.find_by(document_code:)
+      @result = WorkEnvironment::Result.find_by(document_code:)
     end
     if @result.nil? then
       return
     end
 
     @result.document_active!
-    document = Document.find_by(document_code: @result.document_code)
+    document = WorkEnvironment::Document.find_by(document_code: @result.document_code)
     if !document.nil? then
       @result.document_ready!
       return
@@ -32,7 +32,7 @@ class WorkEnvironment::DocumentJob < ApplicationJob
     document = @result.to_document
 
     if !document.company_code.nil? then
-      subscription_count = Subscription.where(company_code: document.company_code).count
+      subscription_count = WorkEnvironment::Subscription.where(company_code: document.company_code).count
       document.notification_status = subscription_count > 0 ? :notification_pending : :notification_needless
     else
       document.notification_status = :notification_needless
@@ -44,7 +44,7 @@ class WorkEnvironment::DocumentJob < ApplicationJob
     puts "DocumentJob: end"
     
     if options[:notify] and document.notification_pending? then
-      NotificationJob.set(wait: 1.seconds).perform_later(document_code, options)
+      WorkEnvironment::NotificationJob.set(wait: 1.seconds).perform_later(document_code, options)
     end
   end
 end
