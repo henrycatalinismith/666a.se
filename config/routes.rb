@@ -47,14 +47,17 @@ Rails.application.routes.draw do
     authenticated :user do
       get "/", to: "dashboard#index"
       get "/days", to: "days#index"
-      get "/days/:date", to: "days#show", :date => /(19|20)\d{2}-([1-9]|1[0-2])-(0[0-9]|1[0-9]|2[0-9]|3[0-1])/
+      get "/days/:date", to: "days#show", :date => /(19|20)\d{2}-(\d{2})-(0[0-9]|1[0-9]|2[0-9]|3[0-1])/
       post "/days/:date/job",
         to: "days#job", 
-        :date => /(19|20)\d{2}-([1-9]|1[0-2])-(0[0-9]|1[0-9]|2[0-9]|3[0-1])/
+        :date => /(19|20)\d{2}-(\d{2})-(0[0-9]|1[0-9]|2[0-9]|3[0-1])/
 
       get "/legal-documents", to: "legal_documents#index"
       match "/legal-documents/new", to: "legal_documents#new", via: [:get, :post]
       match "/legal-documents/:slug", to: "legal_documents#edit", via: [:get, :patch]
+
+      match "/legal-documents/:slug/revisions/new", to: "legal_revisions#new", via: [:get, :post]
+      match "/legal-documents/:slug/revisions/:revision_code", to: "legal_revisions#edit", via: [:get, :patch]
 
       get "/policies", to: "policies#index"
       match "/policies/new", to: "policies#new", via: [:get, :post]
