@@ -10,7 +10,7 @@ class WorkEnvironment::MorningJob < ApplicationJob
     active_days = Day.ingestion_active
     active_days.each_with_index do |day, index|
       if options[:cascade] then
-        DayJob.set(wait: index.seconds).perform_later(day.date, options)
+        WorkEnvironment::DayJob.set(wait: index.seconds).perform_later(day.date, options)
       end
     end
   end

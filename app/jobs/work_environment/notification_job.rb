@@ -13,16 +13,16 @@ class WorkEnvironment::NotificationJob < ApplicationJob
   def perform(document_code, options = {})
     puts "NotificationJob: begin"
 
-    @document = Document.find_by(document_code:)
+    @document = WorkEnvironment::Document.find_by(document_code:)
     if @document.nil? then
       return
     end
 
-    subscriptions = Subscription.where(company_code: @document.company_code)
+    subscriptions = WorkEnvironment::Subscription.where(company_code: @document.company_code)
     notifications = []
     subscriptions.each do |subscription|
       if !subscription.has_notification?(@document.id) then
-        notifications << Notification.create(
+        notifications << WorkEnvironment::Notification.create(
           email_status: :email_pending, 
           subscription_id: subscription.id,
           document_id: @document.id,
@@ -36,7 +36,7 @@ class WorkEnvironment::NotificationJob < ApplicationJob
 
     if options[:cascade] then
       notifications.each_with_index do |notification, index|
-        EmailJob.set(wait: index.seconds).perform_later(notification.id, options)
+        WorkEnvironment::EmailJob.set(wait: index.seconds).perform_later(notification.id, options)
       end
     end
   end

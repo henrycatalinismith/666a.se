@@ -14,9 +14,9 @@ class WorkEnvironment::ResultJob < ApplicationJob
     puts "ResultJob: begin"
 
     if document_code.nil? then
-      @result = Result.metadata_pending.first
+      @result = WorkEnvironment::Result.metadata_pending.first
     else
-      @result = Result.find_by(document_code:)
+      @result = WorkEnvironment::Result.find_by(document_code:)
     end
 
     if @result.nil? then
@@ -37,7 +37,7 @@ class WorkEnvironment::ResultJob < ApplicationJob
     puts "ResultJob: end"
 
     if options[:cascade] then
-      DocumentJob.set(wait: 1.seconds).perform_later(@result.document_code, options)
+      WorkEnvironment::DocumentJob.set(wait: 1.seconds).perform_later(@result.document_code, options)
     end
   end
 end
