@@ -12,7 +12,7 @@ class WorkEnvironment::BackfillJob < ApplicationJob
     end
 
     if options[:cascade] then
-      DayJob.set(wait: 1.seconds).perform_later(day.date, options)
+      WorkEnvironment::DayJob.set(wait: 1.seconds).perform_later(day.date, options)
     end
   end
 end
