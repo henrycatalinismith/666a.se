@@ -67,19 +67,20 @@ sv:
   notification_email:
     subject: "⛧ Dokumentmeddelande"
     title: >
-      Dokumentmeddelande: %{document_code}
+      Ny Dokument: %{document_code}
     greeting: >
       Hej %{name},
     subscription: >
       Du prenumererar på e-postaviseringar för allmänna handlingar hos
-      arbetsmiljöverket avseende %{company}, och vi upptäckte en ny ansökan
-      idag.
+      arbetsmiljöverket avseende %{target}, och vi upptäckte en ny dokument idag.
     link_preamble: >
       Mer information finns tillgänglig på arbetsmiljöverkets hemsida på länken
       nedan.
     email_instructions: >
       Du kan mejla dem för en gratis kopia av dokumentet om det verkar som något
       du behöver läsa.
+    unsubscribe:
+      Om du inte längre vill ha dessa aviseringar kan du <a href="%{url}">avsluta prenumerationen</a>.
 
   locales:
     en: Engelska

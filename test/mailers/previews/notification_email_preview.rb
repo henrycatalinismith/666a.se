@@ -1,13 +1,13 @@
 class NotificationEmailPreview < ActionMailer::Preview
   def company_subscription
-    @notification = Notification.new
-    @notification.document = Document.new(
+    @notification = WorkEnvironment::Notification.new
+    @notification.document = WorkEnvironment::Document.new(
       company_name: "EXEMPEL AB",
       document_code: "000000-0000",
       document_date: Date.today,
       document_type: "Komplettering",
     )
-    @notification.subscription = Subscription.new(
+    @notification.subscription = WorkEnvironment::Subscription.new(
       id: "abcdef12345",
       subscription_type: :company_subscription,
      )
@@ -16,14 +16,14 @@ class NotificationEmailPreview < ActionMailer::Preview
   end
 
   def workplace_subscription
-    @notification = Notification.new
-    @notification.document = Document.new(
+    @notification = WorkEnvironment::Notification.new
+    @notification.document = WorkEnvironment::Document.new(
       workplace_name: "FÖRKSOLAN EXEMPEL",
       document_code: "000000-0000",
       document_date: Date.today,
       document_type: "Komplettering",
     )
-    @notification.subscription = Subscription.new(
+    @notification.subscription = WorkEnvironment::Subscription.new(
       id: "abcdef12345",
       subscription_type: :workplace_subscription,
     )
