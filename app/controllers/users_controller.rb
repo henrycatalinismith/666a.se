@@ -47,7 +47,7 @@ class UsersController < ApplicationController
   def language
     @page_title = "666:a – language"
     if request.patch?
-      if current_user.update(params[:user].permit(:language)) then
+      if current_user.update(params[:user].permit(:locale)) then
         redirect_to "/dashboard"
         flash[:notice] = "language updated"
       end
