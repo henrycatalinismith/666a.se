@@ -6,7 +6,7 @@
   <%= form_for(
     @revision,
     as: "revision",
-    url: "/admin/legal-documents/#{@document.document_code}/revisions/#{@revision.revision_code}",
+    url: "/admin/legal/revisions/#{@revision.revision_code}",
     builder: TailwindBuilder,
     :html => {class: "flex flex-col gap-8" }) do |f| %>
 
@@ -41,7 +41,7 @@
 
     <%= link_to(
       "New",
-      "/admin/legal-documents/#{@document.document_code}/revisions/#{@revision.revision_code}/elements/new",
+      "/admin/legal/elements/new?revision_code=#{@revision.revision_code}",
       class: "w-max bg-slate-400 text-blue-700 text-white py-2 px-4 whitespace-nowrap rounded h-min"
     ) %>
 

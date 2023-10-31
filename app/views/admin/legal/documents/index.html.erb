@@ -6,14 +6,14 @@
 
   <%= link_to(
     "New",
-    "/admin/legal-documents/new",
+    "/admin/legal/documents/new",
     class: "w-max bg-slate-400 text-blue-700 text-white py-2 px-4 whitespace-nowrap rounded h-min"
   ) %>
 
   <ol class="flex flex-col gap-4">
     <% @documents.each do |document| %>
       <li>
-        <a class="text-blue-700 underline" href="/admin/legal-documents/<%= document.document_code %>">
+        <a class="text-blue-700 underline" href="/admin/legal/documents/<%= document.document_code %>">
           <%= document.document_name %>
         </a>
       </li>

@@ -1,4 +1,4 @@
-class Admin::DaysController < ApplicationController
+class Admin::DaysController < AdminController
   layout "internal"
 
   def index

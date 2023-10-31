@@ -57,15 +57,21 @@ Rails.application.routes.draw do
         to: "days#job", 
         :date => /(19|20)\d{2}-(\d{2})-(0[0-9]|1[0-9]|2[0-9]|3[0-1])/
 
-      get "/legal-documents", to: "legal_documents#index"
-      match "/legal-documents/new", to: "legal_documents#new", via: [:get, :post]
-      match "/legal-documents/:slug", to: "legal_documents#edit", via: [:get, :patch]
+      namespace :legal do
+        resources :documents
+        resources :revisions
+        resources :elements
+      end
 
-      match "/legal-documents/:slug/revisions/new", to: "legal_revisions#new", via: [:get, :post]
-      match "/legal-documents/:slug/revisions/:revision_code", to: "legal_revisions#edit", via: [:get, :patch]
+      # get "/legal/documents", to: "legal_documents#index"
+      # match "/legal-documents/new", to: "legal_documents#new", via: [:get, :post]
+      # match "/legal-documents/:slug", to: "legal_documents#edit", via: [:get, :patch]
 
-      match "/legal-documents/:document_code/revisions/:revision_code/elements/new", to: "legal_elements#new", via: [:get, :post]
-      match "/legal-documents/:document_code/revisions/:revision_code/elements/:element_code", to: "legal_elements#edit", via: [:get, :patch]
+      # match "/legal/revisions/new", to: "legal_revisions#new", via: [:get, :post]
+      # match "/legal/revisions/:revision_code", to: "legal_revisions#edit", via: [:get, :patch]
+
+      # match "/legal-documents/:document_code/revisions/:revision_code/elements/new", to: "legal_elements#new", via: [:get, :post]
+      # match "/legal-documents/:document_code/revisions/:revision_code/elements/:element_code", to: "legal_elements#edit", via: [:get, :patch]
 
       get "/policies", to: "policies#index"
       match "/policies/new", to: "policies#new", via: [:get, :post]

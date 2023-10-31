@@ -1,4 +1,4 @@
-class Admin::StatsController < ApplicationController
+class Admin::StatsController < AdminController
   layout "internal"
 
   def index
