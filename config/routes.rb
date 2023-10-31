@@ -7,6 +7,11 @@ Rails.application.routes.draw do
   get "/terms", to: "policies#terms"
   get "/forgot", to: "users#forgot"
 
+  scope module: :legal do
+    get "/⛧/:document_code", to: "documents#show"
+    get "/⛧/:document_code/:revision_code", to: "revisions#show"
+  end
+
   devise_for :users,
     :controllers => {
       :registrations => "registrations",
