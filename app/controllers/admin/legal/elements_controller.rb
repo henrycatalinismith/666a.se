@@ -12,6 +12,14 @@ class Admin::Legal::ElementsController < AdminController
     end
   end
 
+  def update
+    @element = Legal::Element.find_by(element_code: params[:id])
+    if @element.update(params[:element].permit(:element_type, :element_index, :element_code, :element_text))
+      flash[:notice] = "element updated"
+      redirect_to "/admin/legal/elements/#{@element.element_code}"
+    end
+  end
+
   def new
     @revision = Legal::Revision.find_by(revision_code: params[:revision_code])
     @document = @revision.document
