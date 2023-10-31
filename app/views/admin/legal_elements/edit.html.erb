@@ -1,0 +1,60 @@
+<div class="container flex flex-col gap-8 w-full p-8">
+  <%= render layout: "shared/h1" do %>
+    Edit Legal Element
+  <% end %>
+
+  <p>
+    <%= @document.document_name %>
+    <br />
+    <%= @revision.revision_name %>
+    <br />
+    <%= @element.element_code %>
+  </p>
+
+  <%= form_for(
+    @element,
+    as: "element",
+    url: "/admin/legal-documents/#{@document.document_code}/revisions/#{@revision.revision_code}/elements/#{@element.element_code}",
+    builder: TailwindBuilder,
+    :html => {class: "flex flex-col gap-8" }) do |f| %>
+
+    <% if @element.errors.any? %>
+      <div class="error error-success note-shadow">
+        <% @element.errors.full_messages.each do |msg| %>
+          <p><%= msg %></p>
+        <% end %>
+      </div>
+    <% end %>
+
+    <%= render layout: "shared/field" do %>
+      <%= f.label :element_index %>
+      <%= f.text_field :element_index %>
+    <% end %>
+
+    <%= render layout: "shared/field" do %>
+      <%= f.label :element_type %>
+      <%= f.text_field :element_type %>
+    <% end %>
+
+    <%= render layout: "shared/field" do %>
+      <%= f.label :element_locale %>
+      <%= f.text_field :element_locale %>
+    <% end %>
+
+    <%= render layout: "shared/field" do %>
+      <%= f.label :element_code %>
+      <%= f.text_field :element_code %>
+    <% end %>
+
+    <div class="w-128 flex flex-col">
+      <%= f.label :element_text %>
+      <%= f.text_area :element_text, size: "128x8", html: { class: "font-mono" } %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit "Create" %>
+    </div>
+
+  <% end %>
+
+</div>
