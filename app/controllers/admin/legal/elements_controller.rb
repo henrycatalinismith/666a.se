@@ -6,7 +6,7 @@ class Admin::Legal::ElementsController < AdminController
     @revision = @document.revisions.find_by(revision_code: params[:revision_code])
     @element = @revision.elements.find_by(element_code: params[:element_code])
     if request.patch? then
-      if @element.update(params[:element].permit(:element_type, :element_index, :element_locale, :element_code, :element_text))
+      if @element.update(params[:element].permit(:element_type, :element_index, :element_code, :element_text))
         flash[:notice] = "element updated"
       end
     end
@@ -16,6 +16,8 @@ class Admin::Legal::ElementsController < AdminController
     @revision = Legal::Revision.find_by(revision_code: params[:revision_code])
     @document = @revision.document
     @element = @revision.elements.new
+    @index = @revision.elements.count
+    @prev = @revision.elements.index_order.last
   end
 
   def create
@@ -23,7 +25,7 @@ class Admin::Legal::ElementsController < AdminController
     if @revision.nil?
       raise ActionController::RoutingError.new('Not Found')
     end
-    @element = @revision.elements.create(params[:element].permit(:element_type, :element_index, :element_locale, :element_code, :element_text))
+    @element = @revision.elements.create(params[:element].permit(:element_type, :element_index, :element_code, :element_text))
     if @element.valid? then
       redirect_to "/admin/legal/elements/#{@element.element_code}"
       flash[:notice] = "element created"

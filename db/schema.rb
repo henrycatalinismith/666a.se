@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_10_31_190012) do
+ActiveRecord::Schema[7.1].define(version: 2023_10_31_211444) do
   create_table "days", id: :string, default: -> { "ULID()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -32,7 +32,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_31_190012) do
     t.datetime "updated_at", null: false
     t.string "revision_id", null: false
     t.string "element_type"
-    t.string "element_locale"
     t.string "element_code"
     t.string "element_text"
     t.decimal "element_index"

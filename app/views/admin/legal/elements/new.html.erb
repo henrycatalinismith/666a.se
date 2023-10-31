@@ -4,9 +4,11 @@
   <% end %>
 
   <p>
-    <%= @document.document_name %>
+    Document: <%= @document.document_name %>
     <br />
-    <%= @revision.revision_name %>
+    Revision: <%= @revision.revision_name %>
+    <br />
+    Previous element: <%= @prev.element_code %>
   </p>
 
   <%= form_for(
@@ -28,17 +30,12 @@
 
     <%= render layout: "shared/field" do %>
       <%= f.label :element_index %>
-      <%= f.text_field :element_index %>
+      <%= f.text_field :element_index, value: @index %>
     <% end %>
 
     <%= render layout: "shared/field" do %>
       <%= f.label :element_type %>
       <%= f.text_field :element_type %>
-    <% end %>
-
-    <%= render layout: "shared/field" do %>
-      <%= f.label :element_locale %>
-      <%= f.text_field :element_locale %>
     <% end %>
 
     <%= render layout: "shared/field" do %>
