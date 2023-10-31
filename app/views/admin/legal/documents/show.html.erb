@@ -6,7 +6,7 @@
   <%= form_for(
     @document,
     as: "document",
-    url: "/admin/legal-documents/#{@document.document_code}",
+    url: "/admin/legal/documents/#{@document.document_code}",
     builder: TailwindBuilder,
     :html => {class: "flex flex-col gap-8" }) do |f| %>
 
@@ -42,14 +42,14 @@
 
     <%= link_to(
       "New",
-      "/admin/legal-documents/#{@document.document_code}/revisions/new",
+      "/admin/legal/revisions/new?document_code=#{@document.document_code}",
       class: "w-max bg-slate-400 text-blue-700 text-white py-2 px-4 whitespace-nowrap rounded h-min"
     ) %>
 
     <ol class="flex flex-col gap-4">
       <% @document.revisions.each do |revision| %>
         <li>
-          <a class="text-blue-700 underline" href="/admin/legal-documents/<%= @document.document_code %>/revisions/<%= revision.revision_code %>">
+          <a class="text-blue-700 underline" href="/admin/legal/revisions/<%= revision.revision_code %>">
             <%= revision.revision_name %>
           </a>
         </li>

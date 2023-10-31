@@ -1,4 +1,4 @@
-class Admin::PostsController < ApplicationController
+class Admin::PostsController < AdminController
   layout "internal"
 
   def index

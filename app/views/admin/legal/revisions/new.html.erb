@@ -6,7 +6,7 @@
   <%= form_for(
     @revision,
     as: "revision",
-    url: "/admin/legal-documents/#{@document.document_code}/revisions/new",
+    url: "/admin/legal/revisions",
     builder: TailwindBuilder,
     :html => {class: "flex flex-col gap-8" }) do |f| %>
 
@@ -17,6 +17,8 @@
         <% end %>
       </div>
     <% end %>
+
+   <%= hidden_field(:revision, :document_code, :value => @document.document_code) %>
 
     <%= render layout: "shared/field" do %>
       <%= f.label :revision_name %>

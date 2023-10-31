@@ -1,4 +1,4 @@
-class Admin::PoliciesController < ApplicationController
+class Admin::PoliciesController < AdminController
   layout "internal"
 
   def index

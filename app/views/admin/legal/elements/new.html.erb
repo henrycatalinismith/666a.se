@@ -12,7 +12,7 @@
   <%= form_for(
     @element,
     as: "element",
-    url: "/admin/legal-documents/#{@document.document_code}/revisions/#{@revision.revision_code}/elements/new",
+    url: "/admin/legal/elements",
     builder: TailwindBuilder,
     :html => {class: "flex flex-col gap-8" }) do |f| %>
 
@@ -23,6 +23,8 @@
         <% end %>
       </div>
     <% end %>
+
+    <%= hidden_field(:element, :revision_code, :value => @revision.revision_code) %>
 
     <%= render layout: "shared/field" do %>
       <%= f.label :element_index %>
