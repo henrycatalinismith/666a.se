@@ -52,10 +52,20 @@
 
   <% end %>
 
-  <%= link_to(
-    "New",
-    "/admin/legal/elements/new?revision_code=#{@revision.revision_code}",
-    class: "w-max bg-slate-400 text-blue-700 text-white py-2 px-4 whitespace-nowrap rounded h-min"
-  ) %>
+  <div class="flex flex-row gap-4">
+
+    <%= link_to(
+      "New",
+      "/admin/legal/elements/new?revision_code=#{@revision.revision_code}",
+      class: "w-max bg-slate-400 text-blue-700 text-white py-2 px-4 whitespace-nowrap rounded h-min"
+    ) %>
+
+    <%= link_to(
+      "New paragraph",
+      "/admin/legal/elements/new?revision_code=#{@revision.revision_code}&type=new_paragraph",
+      class: "w-max bg-slate-400 text-blue-700 text-white py-2 px-4 whitespace-nowrap rounded h-min"
+    ) %>
+
+  </div>
 
 </div>
