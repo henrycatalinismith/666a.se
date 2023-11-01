@@ -25,7 +25,16 @@ class Admin::Legal::ElementsController < AdminController
     @document = @revision.document
     @element = @revision.elements.new
     @index = @revision.elements.count
-    @prev = @revision.elements.index_order.last
+    @prev = @revision.elements.order(element_index: :desc).first
+
+    if @prev.element_code.match(/\AK\dP\d\Z/) then
+      @element.element_type = "md"
+      @element.element_code = "#{@prev.element_code}S1"
+    elsif @prev.element_code.match(/\AK\dP\dS\d\Z/) then
+      smatch = @prev.element_code.match(/\A(K\dP\dS)(\d)\Z/) 
+      @element.element_type = "md"
+      @element.element_code = "#{smatch[1]}#{smatch[2].to_i+1}"
+    end
   end
 
   def create
@@ -33,7 +42,12 @@ class Admin::Legal::ElementsController < AdminController
     if @revision.nil?
       raise ActionController::RoutingError.new('Not Found')
     end
-    @element = @revision.elements.create(params[:element].permit(:element_type, :element_index, :element_code, :element_text))
+    @element = @revision.elements.new(params[:element].permit(:element_type, :element_index, :element_code, :element_text))
+    pmatch = @element.element_code.match(/P(\d)\Z/)
+    if pmatch and @element.element_text.empty? then
+      @element.element_text = "#{pmatch[1]} §"
+    end
+    @element.save
     if @element.valid? then
       redirect_to "/admin/legal/elements/#{@element.element_code}"
       flash[:notice] = "element created"
