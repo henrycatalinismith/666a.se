@@ -1,3 +1,8 @@
+require "redcarpet"
+
+class LegalRender < Redcarpet::Render::HTML
+end
+
 class Legal::RevisionsController < ApplicationController
   layout "internal"
 
@@ -11,5 +16,7 @@ class Legal::RevisionsController < ApplicationController
       raise ActionController::RoutingError.new('Not Found')
     end
     @elements = @revision.elements
+    renderer = LegalRender.new()
+    @redcarpet = Redcarpet::Markdown.new(renderer, :tables => true)
   end
 end
