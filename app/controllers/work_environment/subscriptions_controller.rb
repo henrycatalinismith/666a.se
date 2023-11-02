@@ -17,12 +17,12 @@ class WorkEnvironment::SubscriptionsController < ApplicationController
         redirect_to "/dashboard", :notice => "Subscription created"
       end
     else
-      @subscription = Subscription.new
+      @subscription = WorkEnvironment::Subscription.new
     end
   end
 
   def destroy
-    @subscription = Subscription.find_by_id(params[:id])
+    @subscription = WorkEnvironment::Subscription.find_by_id(params[:id])
     if @subscription.user_id != current_user.id then
       return
     end
