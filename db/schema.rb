@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_10_31_211444) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_03_193216) do
   create_table "days", id: :string, default: -> { "ULID()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -49,6 +49,16 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_31_211444) do
     t.index "\"element_locale\"", name: "index_legal_revisions_on_element_locale"
     t.index ["document_id"], name: "index_legal_revisions_on_document_id"
     t.index ["revision_code"], name: "index_legal_revisions_on_revision_code"
+  end
+
+  create_table "legal_translations", id: :string, default: -> { "ULID()" }, force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "element_id", null: false
+    t.string "translation_locale"
+    t.string "translation_text"
+    t.index ["element_id"], name: "index_legal_translations_on_element_id"
+    t.index ["translation_locale"], name: "index_legal_translations_on_translation_locale"
   end
 
   create_table "policies", id: :string, default: -> { "ULID()" }, force: :cascade do |t|
@@ -173,6 +183,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_31_211444) do
 
   add_foreign_key "legal_elements", "legal_revisions", column: "revision_id"
   add_foreign_key "legal_revisions", "legal_documents", column: "document_id"
+  add_foreign_key "legal_translations", "legal_elements", column: "element_id"
   add_foreign_key "roles", "users"
   add_foreign_key "work_environment_notifications", "work_environment_documents", column: "document_id"
   add_foreign_key "work_environment_notifications", "work_environment_subscriptions", column: "subscription_id"
