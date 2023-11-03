@@ -61,6 +61,7 @@ Rails.application.routes.draw do
         resources :documents
         resources :revisions
         resources :elements
+        resources :translations
       end
 
       get "/policies", to: "policies#index"
