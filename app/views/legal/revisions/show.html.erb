@@ -1,25 +1,61 @@
 <div class="container flex flex-col gap-10 w-full p-8">
 
-  <div>
-    <% @elements.each do |element| %>
-      <% if element.element_type == "h1" %>
-        <h1 class="text-3xl font-bold">
-          <%= element.element_text %>
-        </h1>
-      <% elsif element.element_type == "h2" %>
-        <h2 class="text-2xl font-bold mt-8">
-          <%= element.element_text %>
-        </h2>
-      <% elsif element.element_type == "h3" %>
-        <h3 class="text-xl mt-4">
-          <%= element.element_text %>
-        </h3>
-      <% else %>
-        <div class="mt-1">
-          <%= @redcarpet.render(element.element_text).html_safe %>
-        </div>
-      <% end %>
-    <% end %>
-  </div>
+  <table>
+    <thead>
+      <th width="50%"></th>
+      <th width="50%"></th>
+    </thead>
+    <tbody>
+      <% @elements.each do |element| %>
+        <tr>
+          <% if element.element_type == "h1" %>
+            <td>
+              <h1 class="text-3xl font-bold">
+                <%= element.translations.first.translation_text %>
+              </h1>
+            </td>
+            <td>
+              <h1 class="text-3xl font-bold">
+                <%= element.element_text %>
+              </h1>
+            </td>
+          <% elsif element.element_type == "h2" %>
+            <td>
+              <h2 class="text-2xl font-bold mt-8">
+                <%= element.translations.first.translation_text %>
+              </h2>
+            </td>
+            <td>
+              <h2 class="text-2xl font-bold mt-8">
+                <%= element.element_text %>
+              </h2>
+            </td>
+          <% elsif element.element_type == "h3" %>
+            <td>
+              <h3 class="text-xl mt-4">
+                <%= element.translations.first.translation_text %>
+              </h3>
+            </td>
+            <td>
+              <h3 class="text-xl mt-4">
+                <%= element.element_text %>
+              </h3>
+            </td>
+          <% else %>
+            <td>
+              <div class="mt-1">
+                <%= @redcarpet.render(element.translations.first.translation_text).html_safe  %>
+              </div>
+            </td>
+            <td>
+              <div class="mt-1">
+                <%= @redcarpet.render(element.element_text).html_safe %>
+              </div>
+            </td>
+          <% end %>
+        <% end %>
+      </tr>
+    </tbody>
+  </table>
 
 </div>
