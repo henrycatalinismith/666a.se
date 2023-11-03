@@ -1,6 +1,13 @@
 require "redcarpet"
 
 class LegalRender < Redcarpet::Render::HTML
+  def list(contents, list_type)
+    if list_type == "ordered" then
+      %(<ol class="list-decimal">#{contents}</ol>)
+    else
+      %(<ul class="">#{contents}</ul>)
+    end
+  end
 end
 
 class Legal::RevisionsController < ApplicationController

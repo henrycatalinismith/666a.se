@@ -50,7 +50,7 @@
 
                 <%= button_to(
                   "Remove",
-                  "/subscriptions/#{@user.subscriptions.first.id}",
+                  "/subscriptions/#{subscription.id}",
                   method: :delete,
                   class: "min-w-max-content text-red-700 hover:bg-red-700 hover:text-white py-2 px-4 rounded"
                 ) %>

@@ -48,8 +48,8 @@
     <ol class="flex flex-col gap-4">
       <% @revision.elements.each do |element| %>
         <li>
-          <a class="text-blue-700 underline" href="/admin/legal/elements/<%= element.element_code %>">
-            <%= element.element_code %>
+          <a class="text-blue-700 underline" href="/admin/legal/elements/<%= element.id %>">
+            <%= element.element_code.empty? ? element.element_text : element.element_code %>
           </a>
         </li>
       <% end %>

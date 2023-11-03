@@ -13,10 +13,10 @@ class Admin::Legal::ElementsController < AdminController
   end
 
   def update
-    @element = Legal::Element.find_by(element_code: params[:id])
+    @element = Legal::Element.find(params[:id])
     if @element.update(params[:element].permit(:element_type, :element_index, :element_code, :element_text))
       flash[:notice] = "element updated"
-      redirect_to "/admin/legal/elements/#{@element.element_code}"
+      redirect_to "/admin/legal/elements/#{@element.id}"
     end
   end
 
@@ -36,8 +36,8 @@ class Admin::Legal::ElementsController < AdminController
     elsif @prev.element_code.match(/\AK+\dP\d+\Z/) then
       @element.element_type = "md"
       @element.element_code = "#{@prev.element_code}S1"
-    elsif @prev.element_code.match(/\AK\d+P\dS\d+\Z/) then
-      smatch = @prev.element_code.match(/\A(K\d+P\dS)(\d+)\Z/) 
+    elsif @prev.element_code.match(/\AK\d+P\d+S\d+\Z/) then
+      smatch = @prev.element_code.match(/\A(K\d+P\d+S)(\d+)\Z/) 
       @element.element_type = "md"
       @element.element_code = "#{smatch[1]}#{smatch[2].to_i+1}"
     end
@@ -55,13 +55,13 @@ class Admin::Legal::ElementsController < AdminController
     end
     @element.save
     if @element.valid? then
-      redirect_to "/admin/legal/elements/#{@element.element_code}"
+      redirect_to "/admin/legal/elements/#{@element.id}"
       flash[:notice] = "element created"
     end
   end
 
   def show
-    @element = Legal::Element.find_by(element_code: params[:id])
+    @element = Legal::Element.find(params[:id])
     @revision = @element.revision
     @document = @revision.document
   end
