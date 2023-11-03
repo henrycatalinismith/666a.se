@@ -14,7 +14,7 @@
   <%= form_for(
     @element,
     as: "element",
-    url: "/admin/legal/elements/#{@element.element_code}",
+    url: "/admin/legal/elements/#{@element.id}",
     builder: TailwindBuilder,
     :html => {class: "flex flex-col gap-8" }) do |f| %>
 
