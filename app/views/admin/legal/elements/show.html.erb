@@ -68,4 +68,28 @@
 
   </div>
 
+  <% @element.translations.each do |translation| %>
+    <h2 class="text-2xl bold">
+      <%= translation.translation_locale %>
+    </h2>
+
+    <%= form_for(
+      translation,
+      as: "translation",
+      url: "/admin/legal/translations/#{translation.id}",
+      builder: TailwindBuilder,
+      :html => {class: "flex flex-col gap-8" }) do |f| %>
+
+      <div class="w-128 flex flex-col">
+        <%= f.label :translation_text %>
+        <%= f.text_area :translation_text, size: "128x8", html: { class: "font-mono" } %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit "Update" %>
+      </div>
+
+  <% end %>
+<% end %>
+
 </div>
