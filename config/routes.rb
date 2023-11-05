@@ -8,7 +8,6 @@ Rails.application.routes.draw do
   get "/forgot", to: "users#forgot"
 
   scope module: :legal do
-    get "/⛧/:document_code", to: "documents#show"
     get "/:document_code/:revision_code",
       to: "revisions#show",
       document_code: /\d{4}:\d{4}/,

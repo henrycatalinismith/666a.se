@@ -1,7 +1,7 @@
 <div class="container flex flex-col gap-10 w-full p-8">
 
   <%= render layout: "shared/h1" do %>
-    Dashboard
+    <%= t("dashboard.title") %>
   <% end %>
 
   <div class="flex flex-col gap-14 md:gap-8 md:flex-row">
@@ -10,11 +10,11 @@
 
       <div class="flex flex-row justify-between h-8">
         <h2 class="text-2xl font-bold">
-          Alerts
+          <%= t("dashboard.alerts") %>
         </h2>
 
         <%= link_to(
-          "Add",
+          t("dashboard.follow"),
           "/follow",
           class: "min-width-max-content hover:bg-slate-400 text-blue-700 hover:text-white py-2 px-4 whitespace-nowrap rounded h-min"
         ) %>
@@ -40,16 +40,20 @@
                   <div class="truncate text-slate-500">
                     <% if subscription.company_subscription? %>
                       <i class="fa-solid fa-people-group text-xs"></i>
-                      <span class="text-xs">Company</span>
+                      <span class="text-xs">
+                        <%= t("dashboard.company") %>
+                      </span>
                     <% else %>
                       <i class="fa-solid fa-building text-xs"></i>
-                      <span class="text-xs">Workplace</span>
+                      <span class="text-xs">
+                        <%= t("dashboard.workplace") %>
+                      </span>
                     <% end %>
                   </div>
                 </div>
 
                 <%= button_to(
-                  "Remove",
+                  t("dashboard.unfollow"),
                   "/subscriptions/#{subscription.id}",
                   method: :delete,
                   class: "min-w-max-content text-red-700 hover:bg-red-700 hover:text-white py-2 px-4 rounded"
@@ -67,7 +71,7 @@
       <div class="flex flex-row justify-between items-center h-8">
 
         <h2 class="text-2xl font-bold">
-          Account
+          <%= t("dashboard.account") %>
         </h2>
 
         <%= button_to(
@@ -82,31 +86,31 @@
       <div class="flex flex-col gap-8">
 
         <%= render partial: "dashboard-account-property", :locals => {
-          name: "Name",
+          name: t("dashboard.name"),
           value: @user.name,
           href: "name",
-          text: "Update name",
+          text: t("dashboard.change_name"),
         } %>
 
         <%= render partial: "dashboard-account-property", :locals => {
-          name: "Email",
+          name: t("dashboard.email"),
           value: @user.email,
           href: "email",
-          text: "Update email",
+          text: t("dashboard.change_email"),
         } %>
 
         <%= render partial: "dashboard-account-property", :locals => {
-          name: "Language",
+          name: t("dashboard.language"),
           value: t("locales.#{locale}"),
           href: "language",
-          text: "Change language",
+          text: t("dashboard.change_language"),
         } %>
 
         <%= render partial: "dashboard-account-property", :locals => {
-          name: "Password",
+          name: t("dashboard.password"),
           value: "***********",
           href: "password",
-          text: "Change password",
+          text: t("dashboard.change_password"),
         } %>
       </section>
 

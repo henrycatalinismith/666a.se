@@ -57,11 +57,20 @@ sv:
   
   dashboard:
     title: "Startsidan"
-    hello: "Hej %{name}."
-    subscription: "Du prenumererar på e-postaviseringar för allmänna handlingar hos arbetsmiljöverket avseende %{target}."
-    last_refresh:
-      never: "Din prenumeration har inte uppdaterats än."
-      date: "Din prenumeration uppdaterades senast för %{when} sedan."
+    alerts: "Notiser"
+    follow: "Ny"
+    company: "Företag"
+    workplace: "Arbetsplats"
+    unfollow: "Ta bort"
+    account: "Konto"
+    name: "Namn"
+    change_name: "Ändra namn"
+    email: "Mejladress"
+    change_email: "Ändra e-postadress"
+    language: "Språk"
+    change_language: "Ändra språk"
+    password: "Lösenord"
+    change_password: "Ändra lösenord"
     logout: "Logga ut"
 
   notification_email:

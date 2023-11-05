@@ -56,11 +56,20 @@ en:
 
   dashboard:
     title: "Dashboard"
-    hello: "Hey %{name}."
-    subscription: "You're subscribed to email alerts for Work Environment Authority filings regarding %{company}."
-    last_refresh:
-      never: "Not refreshed yet"
-      date: "Refreshed %{when} ago."
+    alerts: "Alerts"
+    follow: "Add"
+    company: "Company"
+    workplace: "Workplace"
+    unfollow: "Remove"
+    account: "Account"
+    name: "Name"
+    change_name: "Update name"
+    email: "Email"
+    change_email: "Update email"
+    language: "Language"
+    change_language: "Change language"
+    password: "Password"
+    change_password: "Change password"
     logout: "Sign out"
 
   notification_email:
