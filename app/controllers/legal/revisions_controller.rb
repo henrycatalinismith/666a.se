@@ -22,7 +22,11 @@ class Legal::RevisionsController < ApplicationController
     if @revision.nil? then
       raise ActionController::RoutingError.new('Not Found')
     end
-    @elements = @revision.elements
+
+    left = @revision.elements.map { |e| e.translate("sv") }
+    right = @revision.elements.map { |e| e.translate("en") }
+    @elements = left.zip(right)
+
     renderer = LegalRender.new()
     @redcarpet = Redcarpet::Markdown.new(renderer, :tables => true)
   end
