@@ -5,6 +5,7 @@
       <th width="50%"></th>
       <th width="50%"></th>
     </thead>
+
     <tbody>
       <% @elements.each do |element| %>
         <tr>
@@ -42,16 +43,7 @@
               </h3>
             </td>
           <% else %>
-            <td>
-              <div class="mt-1">
-                <%= @redcarpet.render(element.translations.first.translation_text).html_safe  %>
-              </div>
-            </td>
-            <td>
-              <div class="mt-1">
-                <%= @redcarpet.render(element.element_text).html_safe %>
-              </div>
-            </td>
+
           <% end %>
         <% end %>
       </tr>

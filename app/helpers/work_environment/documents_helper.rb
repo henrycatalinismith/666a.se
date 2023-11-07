@@ -1,0 +1,2 @@
+module WorkEnvironment::DocumentsHelper
+end
