@@ -5,19 +5,20 @@
       <th width="50%"></th>
       <th width="50%"></th>
     </thead>
+
     <tbody>
       <% @elements.each do |left, right| %>
         <tr>
           <% if left.element_type == "h1" %>
             <td>
-              <h1 class="text-3xl font-bold">
+              <% h1 do %>
                 <%= left.element_text %>
-              </h1>
+              <% end %>
             </td>
             <td>
-              <h1 class="text-3xl font-bold">
+              <% h1 do %>
                 <%= right.element_text %>
-              </h1>
+              <% end %>
             </td>
           <% elsif left.element_type == "h2" %>
             <td>

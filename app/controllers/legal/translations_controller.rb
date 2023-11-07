@@ -61,7 +61,6 @@ class Legal::TranslationsController < ApplicationController
 
     left = elements.map { |e| e.translate(params[:left_locale]) }
     right = elements.map { |e| e.translate(params[:right_locale]) }
-
     @elements = left.zip(right)
 
     renderer = LegalRender.new()
