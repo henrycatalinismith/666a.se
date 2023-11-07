@@ -1,0 +1,2 @@
+module Legal::DocumentsHelper
+end

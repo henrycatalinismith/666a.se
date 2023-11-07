@@ -27,18 +27,42 @@ class Legal::TranslationsController < ApplicationController
       raise ActionController::RoutingError.new('Not Found')
     end
 
-    if @element.element_type == "h3" then
+    elements = []
+
+    if @element.element_type == "h3" or @element.element_type == "h2" then
       next_section = @revision.elements
         .where("element_index > ?", @element.element_index)
-        .where("element_type = ?", "h3")
+        .where("element_type = ?", @element.element_type)
         .order(:element_index)
         .first
-      @elements = @revision.elements
+      elements = @revision.elements
         .where("element_index >= ?", @element.element_index)
         .where("element_index < ?", next_section.element_index)
         .order(:element_index)
-      puts next_section.inspect
+        .to_a
     end
+
+    if @element.element_type == "h3" then
+      prev_h2 = @revision
+        .elements
+        .where("element_index < ?", @element.element_index)
+        .where("element_type = ?", "h2")
+        .order(:element_index)
+        .last
+      if !prev_h2.nil? then
+        elements.unshift prev_h2
+      end
+    end
+
+    h1 = @revision.elements.where("element_type = ?", "h1").first
+    if !h1.nil? then
+      elements.unshift h1
+    end
+
+    left = elements.map { |e| e.translate(params[:left_locale]) }
+    right = elements.map { |e| e.translate(params[:right_locale]) }
+
+    @elements = left.zip(right)
 
     renderer = LegalRender.new()
     @redcarpet = Redcarpet::Markdown.new(renderer, :tables => true)
