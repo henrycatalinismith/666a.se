@@ -12,10 +12,12 @@ Rails.application.routes.draw do
       to: "revisions#show",
       document_code: /\d{4}:\d{4}/,
       revision_code: /\d{4}:\d+/
-    get "/:document_code/:revision_code/:element_code/:locale",
+    get "/:document_code/:revision_code/:element_code/:left_locale\::right_locale",
       to: "translations#show",
       document_code: /\d{4}:\d{4}/,
-      revision_code: /\d{4}:\d+/
+      revision_code: /\d{4}:\d+/,
+      left_locale: /[a-z]{2}/,
+      right_locale: /[a-z]{2}/
   end
 
   devise_for :users,
