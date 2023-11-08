@@ -10,15 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_03_193216) do
-  create_table "days", id: :string, default: -> { "ULID()" }, force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.date "date"
-    t.integer "ingestion_status"
-    t.index ["date"], name: "index_days_on_date", unique: true
-  end
-
+ActiveRecord::Schema[7.1].define(version: 2023_11_08_105718) do
   create_table "legal_documents", id: :string, default: -> { "ULID()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -59,6 +51,14 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_03_193216) do
     t.string "translation_text"
     t.index ["element_id"], name: "index_legal_translations_on_element_id"
     t.index ["translation_locale"], name: "index_legal_translations_on_translation_locale"
+  end
+
+  create_table "period_days", id: :string, default: -> { "ULID()" }, force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.date "date"
+    t.integer "ingestion_status"
+    t.index ["date"], name: "index_period_days_on_date", unique: true
   end
 
   create_table "policies", id: :string, default: -> { "ULID()" }, force: :cascade do |t|
@@ -188,6 +188,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_03_193216) do
   add_foreign_key "work_environment_notifications", "work_environment_documents", column: "document_id"
   add_foreign_key "work_environment_notifications", "work_environment_subscriptions", column: "subscription_id"
   add_foreign_key "work_environment_results", "work_environment_searches", column: "search_id"
-  add_foreign_key "work_environment_searches", "days"
+  add_foreign_key "work_environment_searches", "period_days", column: "day_id"
   add_foreign_key "work_environment_subscriptions", "users"
 end

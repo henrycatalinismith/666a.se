@@ -8,7 +8,7 @@ class WorkEnvironment::SearchJob < ApplicationJob
   end
 
   def perform(date, options = {})
-    day = Day.find_by(date: date)
+    day = Period::Day.find_by(date: date)
     if day.nil? then
       return
     end
