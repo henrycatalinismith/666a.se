@@ -61,15 +61,17 @@ Rails.application.routes.draw do
       get "/", to: "dashboard#index"
       get "/days", to: "days#index"
       get "/days/:date", to: "days#show", :date => /(19|20)\d{2}-(\d{2})-(0[0-9]|1[0-9]|2[0-9]|3[0-1])/
-      post "/days/:date/job",
-        to: "days#job", 
-        :date => /(19|20)\d{2}-(\d{2})-(0[0-9]|1[0-9]|2[0-9]|3[0-1])/
 
       namespace :legal do
         resources :documents
         resources :revisions
         resources :elements
         resources :translations
+      end
+
+      namespace :period do
+        resources :days
+        post "/days/:id/job", to: "days#job"
       end
 
       get "/policies", to: "policies#index"
