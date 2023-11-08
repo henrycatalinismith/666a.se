@@ -1,4 +1,8 @@
-<div class="container flex flex-col gap-10 w-full p-8">
+<div class="container flex flex-col gap-10 w-full p-2">
+
+  <%= h1 do %>
+    <%= @elements.first[1].element_text %>
+  <% end %>
 
   <table>
     <thead>
@@ -10,48 +14,36 @@
       <% @elements.each do |left, right| %>
         <tr>
           <% if left.element_type == "h1" %>
-            <td>
-              <% h1 do %>
-                <%= left.element_text %>
-              <% end %>
+            <td class="text-xl font-bold align-top">
+              <%= left.element_text %>
             </td>
-            <td>
-              <% h1 do %>
-                <%= right.element_text %>
-              <% end %>
+            <td class="text-xl font-bold align-top">
+              <%= right.element_text %>
             </td>
           <% elsif left.element_type == "h2" %>
-            <td>
-              <h2 class="text-2xl font-bold mt-8">
-                <%= left.element_text %>
-              </h2>
+            <td class="text-xl font-bold py-4 align-top max-w-[9px] overflow-hidden text-ellipsis">
+              <%= left.element_text %>
             </td>
-            <td>
-              <h2 class="text-2xl font-bold mt-8">
-                <%= right.element_text %>
-              </h2>
+            <td class="text-xl font-bold py-4 align-top">
+              <%= right.element_text %>
             </td>
           <% elsif left.element_type == "h3" %>
-            <td>
-              <h3 class="text-xl mt-4">
+            <td class="text-xl font-bold pt-4 align-top">
+              <a class="text-blue-700 " href="/<%= @document.document_code %>/<%= @revision.revision_code %>/<%= left.element_code %>/sv:en">
                 <%= left.element_text %>
-              </h3>
+              </a>
             </td>
-            <td>
-              <h3 class="text-xl mt-4">
+            <td class="text-xl font-bold pt-4 align-top">
+              <a class="text-blue-700 " href="/<%= @document.document_code %>/<%= @revision.revision_code %>/<%= left.element_code %>/sv:en">
                 <%= right.element_text %>
-              </h3>
+              </a>
             </td>
           <% else %>
-            <td>
-              <div class="line-clamp-1">
-                <%= @redcarpet.render(left.element_text).html_safe %>
-              </div>
+            <td class="py-4 align-top">
+              <%= @redcarpet.render(left.element_text).html_safe %>
             </td>
-            <td>
-              <div class="line-clamp-1">
-                <%= @redcarpet.render(right.element_text).html_safe %>
-              </div>
+            <td class="py-4 align-top">
+              <%= @redcarpet.render(right.element_text).html_safe %>
             </td>
           <% end %>
         <% end %>
