@@ -4,7 +4,9 @@ class WorkEnvironment::MorningJob < ApplicationJob
   def perform(date, options = {})
     day = Period::Day.find_by(date:)
     if day.nil? then
-      day = Period::Day.create(date: date, ingestion_status: :ingestion_active)
+      Period::CreateDayJob.perform_now(date)
+      day = Period::Day.find_by(date: date)
+      day.ingestion_active!
     end
 
     active_days = Period::Day.ingestion_active
