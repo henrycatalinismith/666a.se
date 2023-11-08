@@ -6,7 +6,7 @@ class WorkEnvironment::DayJob < ApplicationJob
   def perform(date, options = {})
     puts "DayJob: begin"
 
-    day = Day.find_by(date:)
+    day = Period::Day.find_by(date:)
 
     puts day.inspect
     if day.nil? then
