@@ -1,5 +1,15 @@
 <div class="container flex flex-col gap-10 w-full p-2 sm:p-8">
 
+  <%= h1 do %>
+    The Swedish Work Environment Act
+    <br />
+    <span class="text-lg leading-1 align-top text-slate-500">
+      Version 2014:659, English translation
+    </span>
+  <% end %>
+
+  <%= render partial: "legal/outdated" %>
+
   <table class="">
     <thead>
       <th width="50%"></th>
@@ -10,52 +20,46 @@
       <% @elements.each do |left, right| %>
         <tr>
           <% if left.element_type == "h1" %>
-            <td>
-              <% h1 do %>
-                <%= left.element_text %>
-              <% end %>
+            <td class="text-xl font-bold align-top <%= both_sides %> <%= left_classes %>">
+              <%= left.element_text %>
             </td>
-            <td>
-              <% h1 do %>
-                <%= right.element_text %>
-              <% end %>
+            <td class="text-xl font-bold align-top <%= both_sides %> <%= right_classes %>">
+              <%= right.element_text %>
             </td>
           <% elsif left.element_type == "h2" %>
-            <td>
-              <h2 class="text-2xl font-bold mt-8">
-                <%= left.element_text %>
-              </h2>
+            <td class="text-xl font-bold py-4 align-top text-ellipsis <%= both_sides %> <%= left_classes %>">
+              <%= left.element_text %>
             </td>
-            <td>
-              <h2 class="text-2xl font-bold mt-8">
-                <%= right.element_text %>
-              </h2>
+            <td class="text-xl font-bold py-4 align-top <%= both_sides %> <%= right_classes %>">
+              <%= right.element_text %>
             </td>
           <% elsif left.element_type == "h3" %>
-            <td class="w-1/2 align-top">
-              <h3 class="text-xl mt-4">
-                <%= left.element_text %>
-              </h3>
+            <td class="text-xl font-bold pt-4 align-top <%= both_sides %> <%= left_classes %>">
+              <%= left.element_text %>
             </td>
-            <td class="w-1/2 align-top">
-              <h3 class="text-xl mt-4">
-                <%= right.element_text %>
-              </h3>
+            <td class="text-xl font-bold pt-4 align-top <%= both_sides %> <%= right_classes %>">
+              <%= right.element_text %>
             </td>
           <% else %>
-            <td class="w-1/2 align-top">
-              <div class="pb-8 pr-4">
-                <%= @redcarpet.render(left.element_text).html_safe %>
-              </div>
+            <td class="py-4 align-top <%= both_sides %> <%= left_classes %>">
+              <%= @redcarpet.render(left.element_text).html_safe %>
             </td>
-            <td class="w-1/2 align-top">
-              <div class="pb-8">
-                <%= @redcarpet.render(right.element_text).html_safe  %>
-              </div>
+            <td class="py-4 align-top <<%= both_sides %> <%= right_classes %>">
+              <%= @redcarpet.render(right.element_text).html_safe  %>
             </td>
           <% end %>
-        <% end %>
+        </tr>
+      <% end %>
+
+      <tr>
+        <td class="<%= both_sides %> <%= left_classes %>">
+          Source: <a class="text-blue-700 underline" href="https://lagen.nu/1977:1160/konsolidering/2014:659">lagen.nu</a>
+        </td>
+        <td class="<%= both_sides %> <%= right_classes %>">
+          Source: <a class="text-blue-700 underline" href="https://www.government.se/government-policy/labour-law-and-work-environment/19771160-work-environment-act-arbetsmiljolagen/">government.se</a>
+        </td>
       </tr>
+
     </tbody>
   </table>
 
