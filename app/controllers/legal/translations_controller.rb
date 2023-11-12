@@ -59,6 +59,10 @@ class Legal::TranslationsController < ApplicationController
       elements.unshift h1
     end
 
+    h2_match = prev_h2.translations.first.translation_text.match(/\AChapter (\d+)/)
+    h3_match = @element.translations.first.translation_text.match(/\ASection ([0-9a-z\.]+)/)
+    @title = "Chapter #{h2_match[1]} Section #{h3_match[1]} of the Swedish Work Environment Act"
+
     left = elements.map { |e| e.translate(params[:left_locale]) }
     right = elements.map { |e| e.translate(params[:right_locale]) }
     @elements = left.zip(right)
