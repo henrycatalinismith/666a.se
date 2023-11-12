@@ -59,8 +59,11 @@ Rails.application.routes.draw do
   namespace :admin do
     authenticated :user do
       get "/", to: "dashboard#index"
-      get "/days", to: "days#index"
-      get "/days/:date", to: "days#show", :date => /(19|20)\d{2}-(\d{2})-(0[0-9]|1[0-9]|2[0-9]|3[0-1])/
+
+      namespace :period do
+        resources :days
+        resources :weeks
+      end
 
       namespace :legal do
         resources :documents

@@ -1,4 +1,5 @@
 class Period::Day < ApplicationRecord
+  belongs_to :week
   has_many :searches, class_name: "WorkEnvironment::Search"
   has_many :results, through: :searches, class_name: "WorkEnvironment::Result"
   scope :today, -> { where(date: Date.today) }
