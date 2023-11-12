@@ -1,0 +1,17 @@
+<div class="container flex flex-col gap-8 w-full p-8">
+
+  <%= render layout: "shared/h1" do %>
+    Weeks
+  <% end %>
+
+  <ol class="flex flex-col gap-4">
+    <% @weeks.each do |week| %>
+      <li>
+        <a class="text-blue-700 underline" href="/admin/period/weeks/<%= week.id %>">
+          <%= week.id %>
+        </a>
+      </li>
+    <% end %>
+  </ol>
+
+</div>
