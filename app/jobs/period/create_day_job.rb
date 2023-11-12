@@ -9,7 +9,10 @@ class Period::CreateDayJob < ApplicationJob
     day = Period::Day.find_by(date:)
 
     if day.nil? then
-      day = Period::Day.create(date: date)
+      day = Period::Day.create(
+        date: date,
+        ingestion_status: :ingestion_pending,
+      )
     end
 
     puts "Period::CreateDayJob: end"
