@@ -1,4 +1,4 @@
-<div class="container flex flex-col gap-8 w-full p-2 py-8">
+<div class="container flex flex-col gap-8 w-full p-4 py-8">
 
   <%= h1 do %>
     The Swedish Work Environment Act
@@ -20,35 +20,35 @@
       <% @elements.each do |left, right| %>
         <tr>
           <% if left.element_type == "h1" %>
-            <td class="text-xl font-bold align-top <%= both_sides %> <%= left_classes %>">
+            <td class="text-base font-bold align-top <%= both_sides %> <%= left_classes %>">
               <%= left.element_text %>
             </td>
-            <td class="text-xl font-bold align-top <%= both_sides %> <%= right_classes %>">
+            <td class="text-base font-bold align-top <%= both_sides %> <%= right_classes %>">
               <%= right.element_text %>
             </td>
           <% elsif left.element_type == "h2" %>
-            <td class="text-xl font-bold py-4 align-top text-ellipsis <%= both_sides %> <%= left_classes %>">
+            <td class="text-base font-bold py-4 align-top text-ellipsis <%= both_sides %> <%= left_classes %>">
               <%= left.element_text %>
             </td>
-            <td class="text-xl font-bold py-4 align-top <%= both_sides %> <%= right_classes %>">
+            <td class="text-base font-bold py-4 align-top <%= both_sides %> <%= right_classes %>">
               <%= right.element_text %>
             </td>
           <% elsif left.element_type == "h3" %>
-            <td class="text-xl font-bold pt-4 align-top <%= both_sides %> <%= left_classes %>">
-              <a class="text-blue-700 " href="/<%= @document.document_code %>/<%= @revision.revision_code %>/<%= left.element_code %>/sv:en">
+            <td class="text-base font-bold pt-4 align-top <%= both_sides %> <%= left_classes %>">
+              <a class="text-blue-700 underline" href="/<%= @document.document_code %>/<%= @revision.revision_code %>/<%= left.element_code %>/sv:en">
                 <%= left.element_text %>
               </a>
             </td>
-            <td class="text-xl font-bold pt-4 align-top <%= both_sides %> <%= right_classes %>">
-              <a class="text-blue-700 " href="/<%= @document.document_code %>/<%= @revision.revision_code %>/<%= left.element_code %>/sv:en">
+            <td class="text-base font-bold pt-4 align-top <%= both_sides %> <%= right_classes %>">
+              <a class="text-blue-700 underline" href="/<%= @document.document_code %>/<%= @revision.revision_code %>/<%= left.element_code %>/sv:en">
                 <%= right.element_text %>
               </a>
             </td>
           <% else %>
-            <td class="py-4 align-top <%= both_sides %> <%= left_classes %>">
+            <td class="text-xs md:text-base py-4 align-top <%= both_sides %> <%= left_classes %>">
               <%= @redcarpet.render(left.element_text).html_safe %>
             </td>
-            <td class="py-4 align-top <<%= both_sides %> <%= right_classes %>">
+            <td class="text-xs md:text-base py-4 align-top <<%= both_sides %> <%= right_classes %>">
               <%= @redcarpet.render(right.element_text).html_safe %>
             </td>
           <% end %>
@@ -56,15 +56,12 @@
       <% end %>
 
       <tr>
-
         <td class="<%= both_sides %> <%= left_classes %>">
           Source: <a class="text-blue-700 underline" href="https://lagen.nu/1977:1160/konsolidering/2014:659">lagen.nu</a>
         </td>
-
         <td class="<%= both_sides %> <%= right_classes %>">
           Source: <a class="text-blue-700 underline" href="https://www.government.se/government-policy/labour-law-and-work-environment/19771160-work-environment-act-arbetsmiljolagen/">government.se</a>
         </td>
-
       </tr>
 
     </tbody>

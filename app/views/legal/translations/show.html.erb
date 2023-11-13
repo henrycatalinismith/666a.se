@@ -5,7 +5,7 @@
   <meta property="og:title" content="<%= @title %>" />
 <% end %>
 
-<div class="container flex flex-col gap-10 w-full p-2 sm:p-8">
+<div class="container flex flex-col gap-10 w-full p-4 sm:p-8">
 
   <%= h1 do %>
     <%= @title %>
@@ -33,31 +33,31 @@
       <% @elements.each do |left, right| %>
         <tr>
           <% if left.element_type == "h1" %>
-            <td class="text-xl font-bold align-top <%= both_sides %> <%= left_classes %>">
+            <td class="text-base font-bold align-top <%= both_sides %> <%= left_classes %>" lang="sv">
               <%= left.element_text %>
             </td>
-            <td class="text-xl font-bold align-top <%= both_sides %> <%= right_classes %>">
+            <td class="text-base font-bold align-top <%= both_sides %> <%= right_classes %>" lang="en">
               <%= right.element_text %>
             </td>
           <% elsif left.element_type == "h2" %>
-            <td class="text-xl font-bold py-4 align-top text-ellipsis <%= both_sides %> <%= left_classes %>">
+            <td class="text-base font-bold py-4 align-top text-ellipsis <%= both_sides %> <%= left_classes %>" lang="sv">
               <%= left.element_text %>
             </td>
-            <td class="text-xl font-bold py-4 align-top <%= both_sides %> <%= right_classes %>">
+            <td class="text-base font-bold py-4 align-top <%= both_sides %> <%= right_classes %>" lang="en">
               <%= right.element_text %>
             </td>
           <% elsif left.element_type == "h3" %>
-            <td class="text-xl font-bold pt-4 align-top <%= both_sides %> <%= left_classes %>">
+            <td class="text-base font-bold pt-4 align-top <%= both_sides %> <%= left_classes %>" lang="sv">
               <%= left.element_text %>
             </td>
-            <td class="text-xl font-bold pt-4 align-top <%= both_sides %> <%= right_classes %>">
+            <td class="text-base font-bold pt-4 align-top <%= both_sides %> <%= right_classes %>" lang="en">
               <%= right.element_text %>
             </td>
           <% else %>
-            <td class="py-4 align-top <%= both_sides %> <%= left_classes %>">
+            <td class="text-xs md:text-base py-4 align-top <%= both_sides %> <%= left_classes %>" lang="sv">
               <%= @redcarpet.render(left.element_text).html_safe %>
             </td>
-            <td class="py-4 align-top <<%= both_sides %> <%= right_classes %>">
+            <td class="text-xs md:text-base py-4 align-top <<%= both_sides %> <%= right_classes %>" lang="en">
               <%= @redcarpet.render(right.element_text).html_safe  %>
             </td>
           <% end %>
