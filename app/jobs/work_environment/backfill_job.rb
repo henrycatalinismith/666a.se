@@ -8,8 +8,10 @@ class WorkEnvironment::BackfillJob < ApplicationJob
       day = earliest_day
     else
       day_before = earliest_day.date - 1.day
-      Period::CreateDayJob.perform_now(day_before)
-      day = Period::Day.find_by(date: day_before)
+      day = Period::Day.create(
+        date: date,
+        ingestion_status: :ingestion_pending,
+      )
       day.ingestion_active!
     end
 
