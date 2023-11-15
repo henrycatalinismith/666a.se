@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_12_065646) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_15_052504) do
   create_table "legal_documents", id: :string, default: -> { "ULID()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -58,7 +58,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_12_065646) do
     t.datetime "updated_at", null: false
     t.date "date"
     t.integer "ingestion_status"
-    t.integer "week_id"
+    t.string "week_id"
     t.index ["date"], name: "index_period_days_on_date", unique: true
     t.index ["week_id"], name: "index_period_days_on_week_id"
   end
@@ -66,8 +66,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_12_065646) do
   create_table "period_weeks", id: :string, default: -> { "ULID()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.date "week_start"
-    t.date "week_end"
     t.string "week_code"
     t.index ["week_code"], name: "index_period_weeks_on_week_code"
   end
