@@ -4,7 +4,16 @@ class WorkEnvironment::MorningJob < ApplicationJob
   def perform(date, options = {})
     day = Period::Day.find_by(date:)
     if day.nil? then
+      week_code = Date.parse(date).strftime("%Y-W%W")
+      week = Period::Week.find_by(week_code: week_code)
+      if week.nil? then
+        week = Period::Week.create(
+          week_code: week_code
+        )
+        week.save!
+      end
       day = Period::Day.create(
+        week_id: week.id,
         date: date,
         ingestion_status: :ingestion_pending,
       )
