@@ -8,8 +8,17 @@ class WorkEnvironment::BackfillJob < ApplicationJob
       day = earliest_day
     else
       day_before = earliest_day.date - 1.day
+      week_code = day_before.strftime("%Y-W%W")
+      week = Period::Week.find_by(week_code: week_code)
+      if week.nil? then
+        week = Period::Week.create(
+          week_code: week_code
+        )
+        week.save!
+      end
       day = Period::Day.create(
-        date: date,
+        week_id: week.id,
+        date: day_before,
         ingestion_status: :ingestion_pending,
       )
       day.ingestion_active!
