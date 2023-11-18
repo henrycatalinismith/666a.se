@@ -32,14 +32,29 @@ class Admin::Legal::ElementsController < AdminController
       return
     elsif type == "new_paragraph" then
       npmatch = @prev.element_code.match(/\AK(\d+)P(\d+)/) 
-      @element.element_type = "h3"
-      @element.element_code = "K#{npmatch[1]}P#{npmatch[2].to_i + 1}"
-      @element.element_text = "#{npmatch[2].to_i + 1} §"
+      if !npmatch.nil? then
+        @element.element_type = "h3"
+        @element.element_code = "K#{npmatch[1]}P#{npmatch[2].to_i + 1}"
+        @element.element_text = "#{npmatch[2].to_i + 1} §"
+      end
+      npmatch = @prev.element_code.match(/\AP(\d+)/) 
+      if !npmatch.nil? then
+        @element.element_type = "h3"
+        @element.element_code = "P#{npmatch[1].to_i + 1}"
+        @element.element_text = "#{npmatch[1].to_i + 1} §"
+      end
     elsif @prev.element_code.match(/\AK+\dP\d+\Z/) then
+      @element.element_type = "md"
+      @element.element_code = "#{@prev.element_code}S1"
+    elsif @prev.element_code.match(/\AP\d+\Z/) then
       @element.element_type = "md"
       @element.element_code = "#{@prev.element_code}S1"
     elsif @prev.element_code.match(/\AK\d+P\d+S\d+\Z/) then
       smatch = @prev.element_code.match(/\A(K\d+P\d+S)(\d+)\Z/) 
+      @element.element_type = "md"
+      @element.element_code = "#{smatch[1]}#{smatch[2].to_i+1}"
+    elsif @prev.element_code.match(/\AP\d+S\d+\Z/) then
+      smatch = @prev.element_code.match(/\A(P\d+S)(\d+)\Z/) 
       @element.element_type = "md"
       @element.element_code = "#{smatch[1]}#{smatch[2].to_i+1}"
     end

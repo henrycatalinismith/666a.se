@@ -1,0 +1,16 @@
+<tr>
+  <td class="<%= both_sides %> <%= left_classes %>">
+    <% if @document.document_code == "1977:1160" then %>
+      Source: <a class="text-blue-700 underline" href="https://lagen.nu/1977:1160/konsolidering/2014:659">lagen.nu</a>
+    <% elsif @document.document_code == "1976:580" then %>
+      Source: <a class="text-blue-700 underline" href="https://www.riksdagen.se/sv/dokument-och-lagar/dokument/svensk-forfattningssamling/lag-1976580-om-medbestammande-i-arbetslivet_sfs-1976-580/">riksdagen.se</a>
+    <% end %>
+  </td>
+  <td class="<%= both_sides %> <%= right_classes %>">
+    <% if @document.document_code == "1977:1160" then %>
+      Source: <a class="text-blue-700 underline" href="https://www.government.se/government-policy/labour-law-and-work-environment/19771160-work-environment-act-arbetsmiljolagen/">government.se</a>
+    <% elsif @document.document_code == "1976:580" then %>
+      Source: <a class="text-blue-700 underline" href="https://www.government.se/government-policy/labour-law-and-work-environment/1976580-employment-co-determination-in-the-workplace-act-lag-om-medbestammande-i-arbetslivet/">government.se</a>
+    <% end %>
+  </td>
+</tr>
