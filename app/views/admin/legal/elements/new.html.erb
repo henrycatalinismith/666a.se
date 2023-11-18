@@ -7,8 +7,10 @@
     Document: <%= @document.document_name %>
     <br />
     Revision: <%= @revision.revision_name %>
-    <br />
-    Previous element: <%= @prev.element_code %>
+    <% if !@prev.nil? then %>
+      <br />
+      Previous element: <%= @prev.element_code %>
+    <% end %>
   </p>
 
   <%= form_for(
