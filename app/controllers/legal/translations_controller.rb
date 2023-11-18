@@ -37,7 +37,7 @@ class Legal::TranslationsController < ApplicationController
         .first
       elements = @revision.elements
         .where("element_index >= ?", @element.element_index)
-        .where("element_index < ?", next_section.element_index)
+        .where("element_index < ?", next_section.nil? ? 9999 : next_section.element_index)
         .order(:element_index)
         .to_a
     end
@@ -59,9 +59,14 @@ class Legal::TranslationsController < ApplicationController
       elements.unshift h1
     end
 
-    h2_match = prev_h2.translations.first.translation_text.match(/\AChapter (\d+)/)
-    h3_match = @element.translations.first.translation_text.match(/\ASection ([0-9a-z\.]+)/)
-    @title = "Chapter #{h2_match[1]} Section #{h3_match[1]} of the Swedish Work Environment Act"
+    if @document.document_code == "1977:1160" then
+      h2_match = prev_h2.translations.first.translation_text.match(/\AChapter (\d+)/)
+      h3_match = @element.translations.first.translation_text.match(/\ASection ([0-9a-z\.]+)/)
+      @title = "Chapter #{h2_match[1]} Section #{h3_match[1]} of the Swedish Work Environment Act"
+    elsif @document.document_code == "1976:580" then
+      h3_match = @element.translations.first.translation_text.match(/\ASection ([0-9a-z\.]+)/)
+      @title = "Section #{h3_match[1]} of the Co-Determination Act"
+    end
 
     left = elements.map { |e| e.translate(params[:left_locale]) }
     right = elements.map { |e| e.translate(params[:right_locale]) }

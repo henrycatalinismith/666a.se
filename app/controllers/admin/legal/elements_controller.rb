@@ -28,7 +28,9 @@ class Admin::Legal::ElementsController < AdminController
     @prev = @revision.elements.order(element_index: :desc).first
 
     type = params[:type]
-    if type == "new_paragraph" then
+    if @revision.elements.count == 0 then
+      return
+    elsif type == "new_paragraph" then
       npmatch = @prev.element_code.match(/\AK(\d+)P(\d+)/) 
       @element.element_type = "h3"
       @element.element_code = "K#{npmatch[1]}P#{npmatch[2].to_i + 1}"
