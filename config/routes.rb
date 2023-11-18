@@ -10,11 +10,11 @@ Rails.application.routes.draw do
   scope module: :legal do
     get "/:document_code/:revision_code",
       to: "revisions#show",
-      document_code: /\d{4}:\d{4}/,
+      document_code: /\d{4}:\d+/,
       revision_code: /\d{4}:\d+/
     get "/:document_code/:revision_code/:element_code/:left_locale\::right_locale",
       to: "translations#show",
-      document_code: /\d{4}:\d{4}/,
+      document_code: /\d{4}:\d+/,
       revision_code: /\d{4}:\d+/,
       left_locale: /[a-z]{2}/,
       right_locale: /[a-z]{2}/
