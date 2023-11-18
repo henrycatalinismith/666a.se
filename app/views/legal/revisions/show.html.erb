@@ -1,10 +1,18 @@
 <div class="container flex flex-col gap-8 w-full p-4 py-8">
 
   <%= h1 do %>
-    The Swedish Work Environment Act
+    <% if @document.document_code == "1977:1160" then %>
+      The Swedish Work Environment Act
+    <% elsif @document.document_code == "1976:580" then %>
+      The Swedish Co-Determination Act
+    <% end %>
     <br />
     <span class="text-lg leading-1 align-top text-slate-500">
-      Version 2014:659, English translation
+      <% if @document.document_code == "1977:1160" then %>
+        Version 2014:659, English translation
+      <% elsif @document.document_code == "1976:580" then %>
+        Version 2021:1114, English translation
+      <% end %>
     </span>
   <% end %>
 
@@ -55,14 +63,7 @@
         </tr>
       <% end %>
 
-      <tr>
-        <td class="<%= both_sides %> <%= left_classes %>">
-          Source: <a class="text-blue-700 underline" href="https://lagen.nu/1977:1160/konsolidering/2014:659">lagen.nu</a>
-        </td>
-        <td class="<%= both_sides %> <%= right_classes %>">
-          Source: <a class="text-blue-700 underline" href="https://www.government.se/government-policy/labour-law-and-work-environment/19771160-work-environment-act-arbetsmiljolagen/">government.se</a>
-        </td>
-      </tr>
+      <%= render partial: "legal/sources" %>
 
     </tbody>
   </table>
