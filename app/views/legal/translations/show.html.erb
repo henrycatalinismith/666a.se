@@ -16,9 +16,15 @@
   <% end %>
 
   <p>
-    <a href="/1977:1160/2014:659" class="text-blue-700 underline">
-      Overview of the entire Work Environment Act
-    </a>
+    <% if @document.document_code == "1977:1160" then %>
+      <a href="/1977:1160/2014:659" class="text-blue-700 underline">
+        Overview of the entire Work Environment Act
+      </a>
+    <% elsif @document.document_code == "1976:580" then %>
+      <a href="/1976:580/2021:1114" class="text-blue-700 underline">
+        Overview of the entire Co-Determination Act
+      </a>
+    <% end %>
   </p>
 
   <%= render partial: "legal/outdated" %>
@@ -64,14 +70,7 @@
         </tr>
       <% end %>
 
-      <tr>
-        <td class="<%= both_sides %> <%= left_classes %>">
-          Source: <a class="text-blue-700 underline" href="https://lagen.nu/1977:1160/konsolidering/2014:659">lagen.nu</a>
-        </td>
-        <td class="<%= both_sides %> <%= right_classes %>">
-          Source: <a class="text-blue-700 underline" href="https://www.government.se/government-policy/labour-law-and-work-environment/19771160-work-environment-act-arbetsmiljolagen/">government.se</a>
-        </td>
-      </tr>
+      <%= render partial: "legal/sources" %>
 
     </tbody>
   </table>
