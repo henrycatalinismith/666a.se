@@ -13,7 +13,7 @@ class WorkEnvironment::DayJob < ApplicationJob
       return
     end
 
-    if day.looks_dormant? then
+    if not options[:force] and day.looks_dormant? then
       day.ingestion_complete!
       return
     end
