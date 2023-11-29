@@ -3,6 +3,11 @@
     <%= @day.ymd %>
   <% end %>
 
+  <p>
+    <a class="text-blue-700 underline" href="<%= "https://www.av.se/om-oss/sok-i-arbetsmiljoverkets-diarium/?SearchText=&OrganisationNumber=&RegisterNumber=&OnlyActive=false&FromDate=#{@day.ymd}&ToDate=#{@day.ymd}&SelectedCounty=&SelectedMunicipality=&SelectedHandlingType=" %>">
+      Diarium
+    </a>
+  </p>
 
   <%= button_to(
     "Update",
