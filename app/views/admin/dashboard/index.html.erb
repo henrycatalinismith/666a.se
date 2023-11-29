@@ -11,7 +11,7 @@
       <a class="text-blue-700" href="/admin/stats">more stats</a>
 
     </div>
-    <%= column_chart Period::Day.chronological.map { |d| [d.date.strftime("%Y-%m-%d"), d.documents.count] }.to_h %>
+    <%= column_chart Period::Day.where('date > ?', 21.days.ago).chronological.map { |d| [d.date.strftime("%Y-%m-%d"), d.documents.count] }.to_h %>
   </section>
 
   <p>
