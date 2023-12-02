@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get "/privacy", to: "policies#privacy"
   get "/terms", to: "policies#terms"
   get "/forgot", to: "users#forgot"
+  get "/sitemap.xml", to: "sitemaps#show", format: "xml", as: "sitemap"
 
   scope module: :legal do
     get "/:document_code/:revision_code",
