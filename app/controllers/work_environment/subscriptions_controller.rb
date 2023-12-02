@@ -31,7 +31,7 @@ class WorkEnvironment::SubscriptionsController < ApplicationController
   end
 
   def unsubscribe
-    @subscription = Subscription.find_by_id(params[:id])
+    @subscription = WorkEnvironment::Subscription.find_by_id(params[:id])
     if @subscription.nil? then
       raise ActionController::RoutingError.new('Not Found')
     end
