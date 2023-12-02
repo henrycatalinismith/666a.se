@@ -2,10 +2,10 @@ require "redcarpet"
 
 class LegalRender < Redcarpet::Render::HTML
   def list(contents, list_type)
-    if list_type == "ordered" then
-      %(<ol class="list-decimal">#{contents}</ol>)
+    if list_type == :ordered then
+      %(<ol class="list-decimal ps-6 pt-4">#{contents}</ol>)
     else
-      %(<ul class="">#{contents}</ul>)
+      %(<ul class="list-disc ps-6 pt-4">#{contents}</ul>)
     end
   end
 end
