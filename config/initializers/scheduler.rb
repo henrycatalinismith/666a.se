@@ -47,3 +47,14 @@ scheduler.cron("0 19 * * *") do
     :notify => false,
   })
 end
+
+scheduler.cron("0 21 * * *") do
+  WorkEnvironment::DayJob.perform_later(
+    2.days.ago.strftime("%Y-%m-%d"),
+    {
+      :cascade => true,
+      :force => true,
+      :notify => true,
+    }
+  )
+end
