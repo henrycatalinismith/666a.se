@@ -60,7 +60,7 @@
               <%= right.element_text %>
             </td>
           <% else %>
-            <td class="text-xs md:text-base py-4 align-top <%= both_sides %> <%= left_classes %>" lang="sv">
+            <td class="text-xs md:text-base lg:text-lg py-4 align-top <%= both_sides %> <%= left_classes %>" lang="sv">
               <%= @redcarpet.render(left.element_text).html_safe %>
             </td>
             <td class="text-xs md:text-base py-4 align-top <<%= both_sides %> <%= right_classes %>" lang="en">
