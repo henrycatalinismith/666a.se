@@ -39,31 +39,31 @@
       <% @elements.each do |left, right| %>
         <tr>
           <% if left.element_type == "h1" %>
-            <td class="text-base font-bold align-top <%= both_sides %> <%= left_classes %>" lang="sv">
+            <td class="text-base lg:text-2xl font-bold align-top <%= both_sides %> <%= left_classes %>" lang="sv">
               <%= left.element_text %>
             </td>
-            <td class="text-base font-bold align-top <%= both_sides %> <%= right_classes %>" lang="en">
+            <td class="text-base lg:text-2xl font-bold align-top <%= both_sides %> <%= right_classes %>" lang="en">
               <%= right.element_text %>
             </td>
           <% elsif left.element_type == "h2" %>
-            <td class="text-base font-bold py-4 align-top text-ellipsis <%= both_sides %> <%= left_classes %>" lang="sv">
+            <td class="text-base lg:text-xl font-bold py-4 align-top text-ellipsis <%= both_sides %> <%= left_classes %>" lang="sv">
               <%= left.element_text %>
             </td>
-            <td class="text-base font-bold py-4 align-top <%= both_sides %> <%= right_classes %>" lang="en">
+            <td class="text-base lg:text-xl font-bold py-4 align-top <%= both_sides %> <%= right_classes %>" lang="en">
               <%= right.element_text %>
             </td>
           <% elsif left.element_type == "h3" %>
-            <td class="text-base font-bold pt-4 align-top <%= both_sides %> <%= left_classes %>" lang="sv">
+            <td class="text-base lg:text-lg font-bold pt-4 align-top <%= both_sides %> <%= left_classes %>" lang="sv">
               <%= left.element_text %>
             </td>
-            <td class="text-base font-bold pt-4 align-top <%= both_sides %> <%= right_classes %>" lang="en">
+            <td class="text-base lg:text-lg font-bold pt-4 align-top <%= both_sides %> <%= right_classes %>" lang="en">
               <%= right.element_text %>
             </td>
           <% else %>
             <td class="text-xs md:text-base lg:text-lg py-4 align-top <%= both_sides %> <%= left_classes %>" lang="sv">
               <%= @redcarpet.render(left.element_text).html_safe %>
             </td>
-            <td class="text-xs md:text-base py-4 align-top <<%= both_sides %> <%= right_classes %>" lang="en">
+            <td class="text-xs md:text-base lg:text-lg py-4 align-top <<%= both_sides %> <%= right_classes %>" lang="en">
               <%= @redcarpet.render(right.element_text).html_safe  %>
             </td>
           <% end %>
