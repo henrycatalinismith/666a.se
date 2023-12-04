@@ -8,7 +8,7 @@
 <div class="container flex flex-col gap-10 w-full p-4 sm:p-8">
 
   <%= h1 do %>
-    <%= @title %>
+    <%= @page_title %>
     <br />
     <span class="text-lg leading-1 align-top text-slate-500">
       Version 2014:659, English translation
@@ -23,6 +23,10 @@
     <% elsif @document.document_code == "1976:580" then %>
       <a href="/1976:580/2021:1114" class="text-blue-700 underline">
         Overview of the entire Co-Determination Act
+      </a>
+    <% elsif @document.document_code == "1982:80" then %>
+      <a href="/1982:80/2022:836" class="text-blue-700 underline">
+        Overview of the entire Employment Protection Act
       </a>
     <% end %>
   </p>
