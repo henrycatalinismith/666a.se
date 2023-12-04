@@ -49,12 +49,19 @@ class Admin::Legal::ElementsController < AdminController
     elsif @prev.element_code.match(/\AP\d+\Z/) then
       @element.element_type = "md"
       @element.element_code = "#{@prev.element_code}S1"
+    elsif @prev.element_code.match(/\AP\d+[a-z]\Z/) then
+      @element.element_type = "md"
+      @element.element_code = "#{@prev.element_code}S1"
     elsif @prev.element_code.match(/\AK\d+P\d+S\d+\Z/) then
       smatch = @prev.element_code.match(/\A(K\d+P\d+S)(\d+)\Z/) 
       @element.element_type = "md"
       @element.element_code = "#{smatch[1]}#{smatch[2].to_i+1}"
     elsif @prev.element_code.match(/\AP\d+S\d+\Z/) then
       smatch = @prev.element_code.match(/\A(P\d+S)(\d+)\Z/) 
+      @element.element_type = "md"
+      @element.element_code = "#{smatch[1]}#{smatch[2].to_i+1}"
+    elsif @prev.element_code.match(/\AP\d+[a-z]S\d+\Z/) then
+      smatch = @prev.element_code.match(/\A(P\d+[a-z]S)(\d+)\Z/) 
       @element.element_type = "md"
       @element.element_code = "#{smatch[1]}#{smatch[2].to_i+1}"
     end
@@ -72,6 +79,17 @@ class Admin::Legal::ElementsController < AdminController
     end
     @element.save
     if @element.valid? then
+      @element.translations.create(
+        translation_locale: "en",
+        translation_text: "",
+      )
+
+      if @element.element_type == "h3" and @element.element_code.match(/P\d/) then
+        match = @element.element_text.match(/\A(\d+) ([a-z])?/)
+        english = "Section #{match[1]}#{match[2]}"
+        @element.translations.first.update(translation_text: english)
+      end
+
       redirect_to "/admin/legal/elements/#{@element.id}"
       flash[:notice] = "element created"
     end
