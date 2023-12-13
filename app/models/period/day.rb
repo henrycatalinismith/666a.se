@@ -4,7 +4,7 @@ class Period::Day < ApplicationRecord
   has_many :results, through: :searches, class_name: "WorkEnvironment::Result"
   scope :today, -> { where(date: Date.today) }
   scope :yesterday, -> { where(date: Date.yesterday) }
-  scope :since_launch, -> { where("date >= ?", "2023-10-31") }
+  scope :since_launch, -> { where("date >= ?", "2023-10-30") }
   scope :chronological, -> { order(date: :asc) }
   scope :reverse_chronological, -> { order(date: :desc) }
 
