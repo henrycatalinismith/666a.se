@@ -3,6 +3,9 @@ class User < ApplicationRecord
   has_many :notifications, through: :subscriptions, class_name: "WorkEnvironment::Notification"
   has_many :roles, dependent: :destroy
 
+  scope :chronological, -> { order(created_at: :asc) }
+  scope :reverse_chronological, -> { order(created_at: :desc) }
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
