@@ -27,8 +27,8 @@
     <dt>Documents</dt>
     <dd><%= @day.documents.count %></dd>
 
-    <dt>Target</dt>
-    <dd><%= @day.remote_total %></dd>
+    <dt>Latest hit count</dt>
+    <dd><%= @day.searches.last.hit_count %></dd>
 
   </dl>
 
