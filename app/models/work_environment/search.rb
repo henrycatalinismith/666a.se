@@ -43,6 +43,6 @@ class WorkEnvironment::Search < ApplicationRecord
     if !matches.nil? then
       return matches[1].to_i
     end
-    return nil
+    return hit_count
   end
 end

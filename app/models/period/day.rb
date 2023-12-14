@@ -58,6 +58,6 @@ class Period::Day < ApplicationRecord
   end
 
   def remote_total
-    searches.reverse_chronological.first.result_count
+    searches.chronological.last.result_count
   end
 end
