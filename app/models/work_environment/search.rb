@@ -36,6 +36,13 @@ class WorkEnvironment::Search < ApplicationRecord
     if hit_count == "Det finns inga filtreringsval för detta sökresultat" then
       return 0
     end
-    hit_count.match(/(\d+) träffar/)[1].to_i
+    if hit_count.nil? then
+      return nil
+    end
+    matches = hit_count.match(/(\d+) träffar/)
+    if !matches.nil? then
+      return matches[1].to_i
+    end
+    return nil
   end
 end

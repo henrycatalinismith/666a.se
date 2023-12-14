@@ -11,7 +11,7 @@ class Admin::Period::DaysController < AdminController
 
   def job
     @day = Period::Day.find(params[:id])
-    WorkEnvironment::SearchJob.perform_later(@day.date, cascade: true, notify: true)
+    WorkEnvironment::DayJob.perform_later(@day.date, cascade: true, force: true, notify: true)
     redirect_to "/admin/period/days/#{@day.id}"
     flash[:notice] = "job queued"
   end
