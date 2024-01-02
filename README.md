@@ -20,6 +20,7 @@ git clone git@github.com:henrycatalinismith/666a.git
 |--------------------|------------------------------------------------|
 | `RAILS_MASTER_KEY` | Encrypting and decrypting the credentials file |
 | `SENDGRID_API_KEY` | Sending email alerts                           |
+| `SENTRY_DSN`       | Error logging                                  |
 
 ## Jobs
 
