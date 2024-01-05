@@ -29,7 +29,11 @@ class ApplicationController < ActionController::Base
     if accept_language.nil?
       return "en"
     end
-    accept_language.scan(/^[a-z]{2}/).first
+    locale = accept_language.scan(/^[a-z]{2}/).first
+    if !["en", "sv", "ar"].include?(locale) then
+      locale = "en"
+    end
+    return locale
   end
 
 end
