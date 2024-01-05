@@ -23,7 +23,7 @@ class Legal::TranslationsController < ApplicationController
       raise ActionController::RoutingError.new('Not Found')
     end
     @element = @revision.elements.find_by(element_code: params[:element_code])
-    if @element.nil? then
+    if @element.nil? or @element.element_type == "md" then
       raise ActionController::RoutingError.new('Not Found')
     end
 
