@@ -6,6 +6,18 @@
 git clone git@github.com:henrycatalinismith/666a.git
 ```
 
+## Services
+
+```mermaid
+flowchart TD
+    GitHub -->|deploys| Fly
+    Fly -->|errors| Sentry
+    Loopia -->|nameserver| Cloudflare
+    Cloudflare -->|dns| Fly
+    Cloudflare -->|dns| SendGrid
+    Fly -->|smtp| SendGrid
+```
+
 ## Dependencies
 
 | Name   | Version  |
@@ -35,3 +47,4 @@ flowchart TD
     F[WorkEnvironment::NotificationJob] --> G
     G[WorkEnvironment::EmailJob]
 ```
+
