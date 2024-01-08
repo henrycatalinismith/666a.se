@@ -3,4 +3,7 @@ class Admin::StatsController < AdminController
 
   def index
   end
+
+  def comparison
+  end
 end

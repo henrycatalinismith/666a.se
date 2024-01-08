@@ -61,6 +61,10 @@ class Period::Day < ApplicationRecord
     searches.chronological.last.result_count
   end
 
+  def last_year
+    Period::Day.find_by(date: date.last_year)
+  end
+
   def tomorrow
     Period::Day.find_by(date: date.tomorrow)
   end
