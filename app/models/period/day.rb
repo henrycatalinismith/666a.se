@@ -60,4 +60,8 @@ class Period::Day < ApplicationRecord
   def remote_total
     searches.chronological.last.result_count
   end
+
+  def tomorrow
+    Period::Day.find_by(date: date.tomorrow)
+  end
 end
