@@ -87,6 +87,7 @@ Rails.application.routes.draw do
       match "/posts/:slug", to: "posts#edit", via: [:get, :patch]
 
       get "/stats", to: "stats#index"
+      get "/stats/comparison", to: "stats#comparison"
     end
   end
 
