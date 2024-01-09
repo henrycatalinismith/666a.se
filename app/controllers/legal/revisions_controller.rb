@@ -23,6 +23,14 @@ class Legal::RevisionsController < ApplicationController
       raise ActionController::RoutingError.new('Not Found')
     end
 
+    if @document.document_code == "1977:1160" then
+      @page_title = "The Swedish Work Environment Act"
+    elsif @document.document_code == "1976:580" then
+      @page_title = "The Swedish Co-Determination Act"
+    elsif @document.document_code == "1982:80" then
+      @page_title = "The Swedish Employment Protection Act"
+    end
+
     left = @revision.elements.map { |e| e.translate("sv") }
     right = @revision.elements.map { |e| e.translate("en") }
     @elements = left.zip(right)
