@@ -7,7 +7,7 @@
     <h2 class="text-2xl">
       2022
     </h2>
-    <%= column_chart Period::Day.chronological.where('date >= ?', "2023-10-23").map { |d| [
+    <%= column_chart Period::Day.chronological.where('date >= ?', "2023-12-01").where('date < ?', "2024-01-01").map { |d| [
       d.last_year.date.strftime("%Y-%m-%d"),
       #d.documents.count,
       d.last_year.documents.count,
@@ -18,9 +18,9 @@
     <h2 class="text-2xl">
       2023
     </h2>
-    <%= column_chart Period::Day.chronological.where('date >= ?', "2023-10-23").map { |d| [
+    <%= column_chart Period::Day.chronological.where('date >= ?', "2023-12-01").where('date < ?', "2024-01-01").map { |d| [
       d.date.strftime("%Y-%m-%d"),
-      d.documents.count,
+      d.documents.where('created_at < ?', "2023-12-31").count,
       # d.last_year.documents.count,
     ] } %>
   </section>
