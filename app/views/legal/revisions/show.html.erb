@@ -1,3 +1,6 @@
+<% content_for(:opengraph) do %>
+  <link rel="canonical" href="https://666a.se/<%= @document.document_code %>/<%= @revision.revision_code %>/" />
+<% end %>
 <div class="container flex flex-col gap-8 w-full p-4 py-8">
 
   <%= h1 do %>

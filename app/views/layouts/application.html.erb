@@ -3,6 +3,7 @@
 
   <head>
     <title><%= @page_title || "666:a" %></title>
+    <% if content_for?(:canonical) %><%= yield :canonical %><% end %>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
