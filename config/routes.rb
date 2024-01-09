@@ -88,6 +88,7 @@ Rails.application.routes.draw do
 
       get "/stats", to: "stats#index"
       get "/stats/comparison", to: "stats#comparison"
+      get "/stats/document-lag", to: "stats#document_lag"
     end
   end
 
