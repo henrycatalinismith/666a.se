@@ -79,6 +79,12 @@ Rails.application.routes.draw do
         post "/weeks/:id/job", to: "weeks#job"
       end
 
+      namespace :work_environment do
+        resources :documents
+        resources :notifications
+        post "/documents/:id/notify", to: "documents#notify"
+      end
+
       get "/policies", to: "policies#index"
       match "/policies/new", to: "policies#new", via: [:get, :post]
       match "/policies/:slug", to: "policies#edit", via: [:get, :patch]
