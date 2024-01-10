@@ -2,6 +2,7 @@ class Admin::StatsController < AdminController
   layout "internal"
 
   def index
+    @days = Period::Day.chronological.since_launch.map(&:date) + [Date.today]
   end
 
   def comparison
