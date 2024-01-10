@@ -1,0 +1,16 @@
+<div class="container flex flex-col gap-8 w-full p-8">
+
+  <%= render layout: "shared/h1" do %>
+    Document
+  <% end %>
+
+  <%= button_to(
+    "Update",
+    "/admin/work_environment/documents/#{@document.id}/notify",
+    method: :post,
+    class: "min-w-max-content bg-cyan-300 hover:bg-cyan-200 text-black font-bold py-2 px-4 rounded"
+  ) %>
+
+  <%= @document.notifications.count %>
+
+</div>
