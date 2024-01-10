@@ -20,8 +20,7 @@ class WorkEnvironment::DayJob < ApplicationJob
 
     if Time.now < Time.parse("23:00") then
       self.class.set(wait: 30.seconds).perform_later(date, {
-        :cascade => true,
-        :notify => false,
+        **options,
         :force => false,
       })
     end

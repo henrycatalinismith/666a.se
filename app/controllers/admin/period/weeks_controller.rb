@@ -21,4 +21,11 @@ class Admin::Period::WeeksController < AdminController
     next_code = "#{next_year}-W#{next_week.to_s.rjust(2, '0')}"
     @next = Period::Week.find_by_week_code(next_code)
   end
+
+  def job
+    @week = Period::Week.find(params[:id])
+    WorkEnvironment::WeekJob.perform_later(@week.week_code, cascade: true, force: true, notify: false)
+    redirect_to "/admin/period/weeks/#{@week.id}"
+    flash[:notice] = "job queued"
+  end
 end

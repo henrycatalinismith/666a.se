@@ -13,6 +13,14 @@ class WorkEnvironment::WeekJob < ApplicationJob
       return
     end
 
+    week.days.each_with_index do |day, index|
+      puts index * 3
+      WorkEnvironment::DayJob.set(wait: (index * 3).minutes).perform_now(day.date, {
+        **options,
+        force: true,
+      })
+    end
+
     puts "WeekJob: end"
   end
 end
