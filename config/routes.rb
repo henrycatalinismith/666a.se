@@ -76,6 +76,7 @@ Rails.application.routes.draw do
       namespace :period do
         resources :days
         post "/days/:id/job", to: "days#job"
+        post "/weeks/:id/job", to: "weeks#job"
       end
 
       get "/policies", to: "policies#index"

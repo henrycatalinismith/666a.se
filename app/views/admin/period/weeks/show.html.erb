@@ -3,6 +3,13 @@
     <%= @week.week_code %>
   <% end %>
 
+  <%= button_to(
+    "Update",
+    "/admin/period/weeks/#{@week.id}/job",
+    method: :post,
+    class: "min-w-max-content bg-cyan-300 hover:bg-cyan-200 text-black font-bold py-2 px-4 rounded"
+  ) %>
+
 
   <% if @prev.present? %>
     <a href="/admin/period/weeks/<%= @prev.id %>" class="text-blue-700 underline">
