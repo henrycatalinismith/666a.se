@@ -7,7 +7,7 @@ class Admin::WorkEnvironment::DocumentsController < AdminController
 
   def notify
     @document = WorkEnvironment::Document.find(params[:id])
-    puts "WorkEnvironment::NotificationJob.perform_now(@document.id, { cascade: true })"
+    WorkEnvironment::NotificationJob.perform_now(@document.id, { cascade: true })
     redirect_to "/admin/work_environment/documents/#{@document.id}"
     flash[:notice] = "job queued"
   end
