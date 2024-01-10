@@ -14,6 +14,11 @@ class Period::CreateWeekJob < ApplicationJob
       )
     end
 
+    monday = Date.parse(week_code)
+    dates = (monday..(monday + 6.days)).to_a
+    orphan_days = Period::Day.where(week_id: nil, date: dates)
+    orphan_days.update_all week_id: week.id
+
     puts "Period::CreateWeekJob: end"
   end
 end
