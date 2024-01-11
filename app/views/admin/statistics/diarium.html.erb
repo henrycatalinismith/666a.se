@@ -1,0 +1,120 @@
+<div class="container flex flex-col gap-8 w-full p-8">
+
+  <%= render partial: "admin/icon-breadcrumbs", locals: {
+    items: [
+      {
+        icon: "fa-solid fa-lock",
+        href: "/admin",
+        text: "Admin",
+      },
+      {
+        icon: "fa-solid fa-chart-line",
+        href: "/admin/statistics",
+        text: "Statistics",
+      },
+    ]
+  } %>
+
+  <%= render partial: "admin/icon-heading", locals: {
+    icon: "fa-solid fa-network-wired",
+    text: "Arbetsmiljöverket's Diarium",
+  } %>
+
+  <section class="w-full flex flex-col gap-10 flex-1 md:p-6 bg-white md:border md:border-gray-200 md:rounded-lg md:shadow">
+    <h2 class="text-2xl">
+      Searches Per Day
+    </h2>
+    <%= column_chart Period::Day.chronological.since_launch.map { |d| [d.date.strftime("%Y-%m-%d"), WorkEnvironment::Search.where('DATE(created_at) = ?', d.date).count] }.to_h %>
+  </section>
+
+  <section class="w-full flex flex-col gap-10 flex-1 md:p-6 bg-white md:border md:border-gray-200 md:rounded-lg md:shadow">
+    <h2 class="text-2xl">
+      Unusual Metadata Statuses Per Day
+    </h2>
+    <% colors = {
+      :metadata_pending => "gray",
+      :metadata_fetching => "blue",
+      :metadata_ready => "green",
+      :metadata_error => "red",
+      :metadata_aborted => "magenta",
+    } %>
+    <%= column_chart [
+      :metadata_pending,
+      :metadata_fetching,
+      #:metadata_ready,
+      :metadata_error,
+      :metadata_aborted,
+    ].map { |status| {
+      name: status,
+      color: colors[status],
+      data: (Period::Day.chronological.last_two_weeks.map(&:date) + [Date.today]).map { |d| [
+        d.strftime("%Y-%m-%d"),
+        WorkEnvironment::Result
+          .where('DATE(created_at) = ?', d)
+          .where(metadata_status: status)
+          .count
+      ]
+    }}} %>
+  </section>
+
+  <section class="w-full flex flex-col gap-10 flex-1 md:p-6 bg-white md:border md:border-gray-200 md:rounded-lg md:shadow">
+    <h2 class="text-2xl">
+      Unusual Document Statuses Per Day
+    </h2>
+    <% colors = {
+      :document_pending => "gray",
+      :document_fetching => "blue",
+      :document_ready => "green",
+      :document_error => "red",
+      :document_aborted => "magenta",
+    } %>
+    <%= column_chart [
+      :document_pending,
+      :document_fetching,
+      #:document_ready,
+      :document_error,
+      :document_aborted,
+    ].map { |status| {
+      name: status,
+      color: colors[status],
+      data: (Period::Day.chronological.last_two_weeks.map(&:date) + [Date.today]).map { |d| [
+        d.strftime("%Y-%m-%d"),
+        WorkEnvironment::Result
+          .where('DATE(created_at) = ?', d)
+          .where(document_status: status)
+          .count
+      ]
+    }}} %>
+  </section>
+
+  <section class="w-full flex flex-col gap-10 flex-1 md:p-6 bg-white md:border md:border-gray-200 md:rounded-lg md:shadow">
+    <h2 class="text-2xl">
+      Unusual Result Statuses Per Day
+    </h2>
+    <% colors = {
+      :result_pending => "gray",
+      :result_fetching => "blue",
+      :result_ready => "green",
+      :result_error => "red",
+      :result_aborted => "magenta",
+    } %>
+    <%= column_chart [
+      :result_pending,
+      :result_fetching,
+      #:result_ready,
+      :result_error,
+      :result_aborted,
+    ].map { |status| {
+      name: status,
+      color: colors[status],
+      data: (Period::Day.chronological.last_two_weeks.map(&:date) + [Date.today]).map { |d| [
+        d.strftime("%Y-%m-%d"),
+        WorkEnvironment::Search
+          .where('DATE(created_at) = ?', d)
+          .where(result_status: status)
+          .count
+      ]
+    }}} %>
+  </section>
+
+</div>
