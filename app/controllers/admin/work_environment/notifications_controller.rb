@@ -8,5 +8,11 @@ class Admin::WorkEnvironment::NotificationsController < AdminController
     @missing = documents.select do |document|
       document.notifications.count == 0
     end
+
+    @recent = WorkEnvironment::Notification.reverse_chronological.limit(64)
+  end
+
+  def show
+    @notification = WorkEnvironment::Notification.find(params[:id])
   end
 end

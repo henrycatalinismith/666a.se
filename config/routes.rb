@@ -61,6 +61,8 @@ Rails.application.routes.draw do
     authenticated :user do
       get "/", to: "dashboard#index"
 
+      resources :users
+
       namespace :period do
         resources :days
         resources :weeks
@@ -95,8 +97,11 @@ Rails.application.routes.draw do
 
       get "/statistics", to: "statistics#index"
       get "/statistics/december_comparison", to: "statistics#december_comparison"
+      get "/statistics/diarium", to: "statistics#diarium"
       get "/statistics/document_lag", to: "statistics#document_lag"
+      get "/statistics/email_metrics", to: "statistics#email_metrics"
       get "/statistics/kitchen_sink", to: "statistics#kitchen_sink"
+      get "/statistics/user_growth", to: "statistics#user_growth"
     end
   end
 

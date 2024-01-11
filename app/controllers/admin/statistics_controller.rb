@@ -31,7 +31,19 @@ class Admin::StatisticsController < AdminController
     puts @lag.inspect
   end
 
+  def diarium
+    @days = Period::Day.chronological.since_launch.map(&:date) + [Date.today]
+  end
+
+  def email_metrics
+    @days = Period::Day.chronological.last_two_weeks.map(&:date) + [Date.today]
+  end
+
   def kitchen_sink
+    @days = Period::Day.chronological.since_launch.map(&:date) + [Date.today]
+  end
+
+  def user_growth
     @days = Period::Day.chronological.since_launch.map(&:date) + [Date.today]
   end
 end

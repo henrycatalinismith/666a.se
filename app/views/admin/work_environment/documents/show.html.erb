@@ -62,8 +62,32 @@
         bottom: { text: "#{@document.municipality_name} (#{@document.municipality_code})", },
       },
 
+      {
+        icon: "fa-solid fa-calendar-days",
+        top: { text: "Created" },
+        bottom: { text: @document.created_at, },
+      },
+
+      {
+        icon: "fa-solid fa-calendar-days",
+        top: { text: "Updated" },
+        bottom: { text: @document.updated_at, },
+      },
+
     ]
 
+  } %>
+
+  <h2 class="text-2xl font-bold">Notifications</h2>
+
+  <%= render partial: "admin/icon-list", locals: {
+    items: @document.notifications.map do |notification|
+      {
+        icon: "fa-solid #{notification.icon}",
+        top: { text: notification.subscription.user.email, href: "/admin/work_environment/notifications/#{notification.id}"  },
+        bottom: { text: notification.created_at },
+      }
+    end
   } %>
 
 </div>
