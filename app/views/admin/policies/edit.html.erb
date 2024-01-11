@@ -1,7 +1,23 @@
 <div class="container flex flex-col gap-8 w-full p-8">
-  <%= render layout: "shared/h1" do %>
-    Edit Policy
-  <% end %>
+  <%= render partial: "admin/icon-breadcrumbs", locals: {
+    items: [
+      {
+        icon: "fa-solid fa-lock",
+        href: "/admin",
+        text: "Admin",
+      },
+      {
+        icon: "fa-solid fa-signature",
+        href: "/admin/policies",
+        text: "Policies",
+      },
+    ]
+  } %>
+
+  <%= render partial: "admin/icon-heading", locals: {
+    icon: "fa-solid fa-signature",
+    text: "Edit Policy",
+  } %>
 
   <%= form_for(
     @policy,

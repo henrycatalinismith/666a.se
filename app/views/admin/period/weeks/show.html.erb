@@ -1,7 +1,24 @@
 <div class="container flex flex-col gap-8 w-full p-8">
-  <%= render layout: "shared/h1" do %>
-    <%= @week.week_code %>
-  <% end %>
+
+  <%= render partial: "admin/icon-breadcrumbs", locals: {
+    items: [
+      {
+        icon: "fa-solid fa-lock",
+        href: "/admin",
+        text: "Admin",
+      },
+      {
+        icon: "fa-solid fa-calendar-week",
+        href: "/admin/period/weeks",
+        text: "Weeks",
+      },
+    ]
+  } %>
+
+  <%= render partial: "admin/icon-heading", locals: {
+    icon: "fa-solid fa-calendar-week",
+    text: @week.week_code,
+  } %>
 
   <%= button_to(
     "Update",

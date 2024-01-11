@@ -1,11 +1,10 @@
-class Admin::StatsController < AdminController
+class Admin::StatisticsController < AdminController
   layout "internal"
 
   def index
-    @days = Period::Day.chronological.since_launch.map(&:date) + [Date.today]
   end
 
-  def comparison
+  def december_comparison
   end
 
   def document_lag
@@ -30,5 +29,9 @@ class Admin::StatsController < AdminController
     end
 
     puts @lag.inspect
+  end
+
+  def kitchen_sink
+    @days = Period::Day.chronological.since_launch.map(&:date) + [Date.today]
   end
 end
