@@ -1,0 +1,44 @@
+<div class="container flex flex-col gap-8 w-full p-8">
+
+  <%= render partial: "admin/icon-breadcrumbs", locals: {
+    items: [
+      {
+        icon: "fa-solid fa-lock",
+        href: "/admin",
+        text: "Admin",
+      },
+    ]
+  } %>
+
+  <%= render partial: "admin/icon-heading", locals: {
+    icon: "fa-solid fa-file-lines",
+    text: "Work Environment Documents",
+  } %>
+
+  <table class="min-w-full divide-y divide-gray-300 max-w-full">
+    <thead>
+      <tr>
+        <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">ID</th>
+        <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">Date</th>
+        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Company</th>
+      </tr>
+    </thead>
+    <tbody class="divide-y divide-gray-200">
+    <% @documents.each do |document| %>
+      <tr>
+        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">
+            <a class="text-blue-700 underline" href="/admin/work_environment/documents/<%= document.id %>">
+          <%= document.document_code %>
+          </a>
+        </td>
+        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">
+          <%= document.document_date.strftime("%Y-%m-%d") %>
+        </td>
+        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">
+          <%= document.company_name %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+
+</div>

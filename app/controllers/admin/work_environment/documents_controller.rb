@@ -1,6 +1,10 @@
 class Admin::WorkEnvironment::DocumentsController < AdminController
   layout "internal"
 
+  def index
+    @documents = WorkEnvironment::Document.reverse_chronological.take(64)
+  end
+
   def show
     @document = WorkEnvironment::Document.find(params[:id])
   end

@@ -1,47 +1,79 @@
 <div class="container flex flex-col gap-8 w-full p-8">
-  <%= render layout: "shared/h1" do %>
-    Admin
-  <% end %>
+  <%= render partial: "admin/icon-heading", locals: {
+    icon: "fa-solid fa-lock",
+    text: "Admin",
+  } %>
+
+
+  <%= render partial: "admin/icon-list", locals: {
+    items: [
+
+      {
+        icon: "fa-solid fa-file-lines",
+        top: { text: "Work Environment Documents", href: "/admin/work_environment/documents"  },
+        bottom: { text: WorkEnvironment::Document.count },
+      },
+
+      {
+        icon: "fa-solid fa-bell",
+        top: { text: "Work Environment Notifications", href: "/admin/work_environment/notifications"  },
+        bottom: { text: WorkEnvironment::Notification.count },
+      },
+
+      {
+        icon: "fa-solid fa-magnifying-glass",
+        top: { text: "Work Environment Searches" },
+        bottom: { text: WorkEnvironment::Search.count },
+      },
+
+      {
+        icon: "fa-solid fa-calendar-days",
+        top: { text: "Days", href: "/admin/period/days"  },
+        bottom: { text: Period::Day.count },
+      },
+
+      {
+        icon: "fa-solid fa-calendar-week",
+        top: { text: "Weeks", href: "/admin/period/weeks"  },
+        bottom: { text: Period::Week.count },
+      },
+
+      {
+        icon: "fa-solid fa-chart-line",
+        top: { text: "Statistics", href: "/admin/statistics/"  },
+        bottom: { text: "#{WorkEnvironment::Notification.last.created_at.strftime("%Y-%m-%d")}" },
+      },
+
+      {
+        icon: "fa-solid fa-book",
+        top: { text: "Legal Documents", href: "/admin/legal/documents"  },
+        bottom: { text: Legal::Document.count },
+      },
+
+      {
+        icon: "fa-solid fa-signature",
+        top: { text: "Policies", href: "/admin/policies/"  },
+        bottom: { text: "#{Policy.count} policies" },
+      },
+
+      {
+        icon: "fa-solid fa-quote-left",
+        top: { text: "Posts", href: "/admin/posts/"  },
+        bottom: { text: "#{Post.count} posts" },
+      },
+
+    ]
+  } %>
 
   <section class="w-full flex flex-col gap-10 flex-1 md:p-6 bg-white md:border md:border-gray-200 md:rounded-lg md:shadow">
     <div class="flex flex-row justify-between">
       <h2 class="text-2xl font-bold">
         Documents
       </h2>
-      <a class="text-blue-700" href="/admin/stats">more stats</a>
+      <a class="text-blue-700" href="/admin/statistics">more statistics</a>
 
     </div>
     <%= column_chart Period::Day.where('date > ?', 21.days.ago).chronological.map { |d| [d.date.strftime("%Y-%m-%d"), d.documents.count] }.to_h %>
   </section>
-
-  <p>
-    <a class="text-blue-700 underline" href="/admin/period/days">
-      Days
-    </a>
-  </p>
-
-  <p>
-    <a class="text-blue-700 underline" href="/admin/period/weeks">
-      Weeks
-    </a>
-  </p>
-
-  <p>
-    <a class="text-blue-700 underline" href="/admin/legal/documents">
-      Legal Documents
-    </a>
-  </p>
-
-  <p>
-    <a class="text-blue-700 underline" href="/admin/policies">
-      Policies
-    </a>
-  </p>
-
-  <p>
-    <a class="text-blue-700 underline" href="/admin/posts">
-      Posts
-    </a>
-  </p>
 
 </div>

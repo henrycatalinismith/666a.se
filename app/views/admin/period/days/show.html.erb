@@ -1,7 +1,23 @@
 <div class="container flex flex-col gap-8 w-full p-8">
-  <%= render layout: "shared/h1" do %>
-    <%= @day.ymd %>
-  <% end %>
+    <%= render partial: "admin/icon-breadcrumbs", locals: {
+    items: [
+      {
+        icon: "fa-solid fa-lock",
+        href: "/admin",
+        text: "Admin",
+      },
+      {
+        icon: "fa-solid fa-calendar-day",
+        href: "/admin/period/days",
+        text: "Days",
+      },
+    ]
+  } %>
+
+  <%= render partial: "admin/icon-heading", locals: {
+    icon: "fa-solid fa-calendar-days",
+    text: @day.ymd ,
+  } %>
 
   <p>
     <a class="text-blue-700 underline" href="<%= "https://www.av.se/om-oss/sok-i-arbetsmiljoverkets-diarium/?SearchText=&OrganisationNumber=&RegisterNumber=&OnlyActive=false&FromDate=#{@day.ymd}&ToDate=#{@day.ymd}&SelectedCounty=&SelectedMunicipality=&SelectedHandlingType=" %>">
