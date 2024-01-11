@@ -1,8 +1,61 @@
 <div class="container flex flex-col gap-8 w-full p-8">
 
-  <%= render layout: "shared/h1" do %>
-    Notification
-  <% end %>
+  <%= render partial: "admin/icon-breadcrumbs", locals: {
+    items: [
+      {
+        icon: "fa-solid fa-lock",
+        href: "/admin",
+        text: "Admin",
+      },
+      {
+        icon: "fa-solid fa-bell",
+        href: "/admin/work_environment/notifications",
+        text: "Work Environment Notifications",
+      },
+    ]
+  } %>
+
+  <%= render partial: "admin/icon-heading", locals: {
+    icon: "fa-solid fa-bell",
+    text: @notification.id,
+  } %>
+
+  <%= render partial: "admin/icon-list", locals: {
+    items: [
+
+      {
+        icon: "fa-solid fa-file-lines",
+        top: { text: @notification.document.document_code, href: "/admin/work_environment/documents/#{@notification.document.id}" },
+        bottom: { text: "#{@notification.document.company_name}", },
+      },
+
+      {
+        icon: "fa-solid fa-user",
+        top: { text: @notification.subscription.user.name, href: "/admin/users/#{@notification.subscription.user.id}" },
+        bottom: { text: "#{@notification.subscription.user.email}", },
+      },
+
+      {
+        icon: "fa-solid #{@notification.icon}",
+        top: { text: "Email Status" },
+        bottom: { text: @notification.email_status, },
+      },
+
+      {
+        icon: "fa-solid fa-calendar-days",
+        top: { text: "Created" },
+        bottom: { text: @notification.created_at, },
+      },
+ 
+      {
+        icon: "fa-solid fa-calendar-days",
+        top: { text: "Updated" },
+        bottom: { text: @notification.updated_at, },
+      },
+
+    ]
+  } %>
+
 
   <%= button_to(
     "send",
@@ -10,8 +63,6 @@
     method: :post,
     class: "min-w-max-content bg-cyan-300 hover:bg-cyan-200 text-black font-bold py-2 px-4 rounded"
   ) %>
-
-  <%= @document.notifications.count %>
 
   <% if Rails.env.development? %>
     <a class="text-blue-700 underline" href="https://666a.se/admin/work_environment/notifications/<%= @notification.id %>">

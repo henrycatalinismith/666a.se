@@ -11,19 +11,19 @@
       {
         icon: "fa-solid fa-file-lines",
         top: { text: "Work Environment Documents", href: "/admin/work_environment/documents"  },
-        bottom: { text: WorkEnvironment::Document.count },
+        bottom: { text: number_with_delimiter(WorkEnvironment::Document.count) },
       },
 
       {
         icon: "fa-solid fa-bell",
         top: { text: "Work Environment Notifications", href: "/admin/work_environment/notifications"  },
-        bottom: { text: WorkEnvironment::Notification.count },
+        bottom: { text: number_with_delimiter(WorkEnvironment::Notification.count) },
       },
 
       {
         icon: "fa-solid fa-magnifying-glass",
         top: { text: "Work Environment Searches" },
-        bottom: { text: WorkEnvironment::Search.count },
+        bottom: { text: number_with_delimiter(WorkEnvironment::Search.count) },
       },
 
       {
@@ -42,6 +42,12 @@
         icon: "fa-solid fa-chart-line",
         top: { text: "Statistics", href: "/admin/statistics/"  },
         bottom: { text: "#{WorkEnvironment::Notification.last.created_at.strftime("%Y-%m-%d")}" },
+      },
+
+      {
+        icon: "fa-solid fa-user",
+        top: { text: "Users", href: "/admin/users/"  },
+        bottom: { text: "#{User.count}" },
       },
 
       {

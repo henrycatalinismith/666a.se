@@ -1,0 +1,50 @@
+<div class="container flex flex-col gap-8 w-full p-8">
+
+  <%= render partial: "admin/icon-breadcrumbs", locals: {
+    items: [
+      {
+        icon: "fa-solid fa-lock",
+        href: "/admin",
+        text: "Admin",
+      },
+      {
+        icon: "fa-solid fa-chart-line",
+        href: "/admin/statistics",
+        text: "Statistics",
+      },
+    ]
+  } %>
+
+  <%= render partial: "admin/icon-heading", locals: {
+    icon: "fa-solid fa-at",
+    text: "Email Metrics",
+  } %>
+
+  <section class="w-full flex flex-col gap-10 flex-1 md:p-6 bg-white md:border md:border-gray-200 md:rounded-lg md:shadow">
+    <h2 class="text-2xl">
+      Daily Email Statuses
+    </h2>
+    <% colors = {
+      :email_pending => "gray",
+      :email_success => "green",
+      :email_error => "red",
+      :email_aborted => "yellow",
+    } %>
+
+    <%= column_chart [
+      :email_pending,
+      :email_success,
+      :email_error,
+      :email_aborted,
+    ].map { |status| {
+      name: status,
+      color: colors[status],
+      data: @days.map { |d| [
+        d.strftime("%Y-%m-%d"),
+        WorkEnvironment::Notification
+          .where('DATE(created_at) = ?', d)
+          .where(email_status: status)
+          .count
+      ]
+    }}} %>
+</div>

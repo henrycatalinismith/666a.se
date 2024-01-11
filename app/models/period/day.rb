@@ -7,6 +7,7 @@ class Period::Day < ApplicationRecord
   scope :since_launch, -> { where("date >= ?", "2023-10-30") }
   scope :chronological, -> { order(date: :asc) }
   scope :reverse_chronological, -> { order(date: :desc) }
+  scope :last_two_weeks, -> { where("date >= ?", 2.weeks.ago) }
 
   enum ingestion_status: {
     ingestion_pending: 0,

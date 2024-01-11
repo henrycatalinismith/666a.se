@@ -11,16 +11,16 @@
   } %>
 
   <%= render partial: "admin/icon-heading", locals: {
-    icon: "fa-solid fa-bell",
-    text: "Work Environment Notifications",
+    icon: "fa-solid fa-user",
+    text: "Users",
   } %>
 
   <%= render partial: "admin/icon-list", locals: {
-    items: @recent.map do |notification|
+    items: @users.map do |user|
       {
-        icon: "fa-solid #{notification.icon}",
-        top: { text: notification.id, href: "/admin/work_environment/notifications/#{notification.id}"  },
-        bottom: { text: notification.created_at },
+        icon: "fa-solid fa-user",
+        top: { text: user.name, href: "/admin/users/#{user.id}"  },
+        bottom: { text: user.email },
       }
     end
   } %>
