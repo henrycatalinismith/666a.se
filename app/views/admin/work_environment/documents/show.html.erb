@@ -1,8 +1,25 @@
 <div class="container flex flex-col gap-8 w-full p-8">
 
-  <%= render layout: "shared/h1" do %>
-    Document
-  <% end %>
+  <%= render partial: "admin/icon-breadcrumbs", locals: {
+    items: [
+      {
+        icon: "fa-solid fa-lock",
+        href: "/admin",
+        text: "Admin",
+      },
+      {
+        icon: "fa-solid fa-file-lines",
+        href: "/admin/work_environment/documents",
+        text: "Work Environment Documents",
+      },
+    ]
+  } %>
+
+  <%= render partial: "admin/icon-heading", locals: {
+    icon: "fa-solid fa-file-lines",
+    text: @document.document_code,
+  } %>
+
 
   <%= button_to(
     "Update",
@@ -18,5 +35,35 @@
       production
     </a>
   <% end %>
+
+  <%= render partial: "admin/icon-list", locals: {
+    items: [
+      {
+        icon: "fa-solid fa-box-archive",
+        top: { text: "Case" },
+        bottom: { text: "#{@document.case_name} (#{@document.case_code})", },
+      },
+
+      {
+        icon: "fa-solid fa-people-group",
+        top: { text: "Company" },
+        bottom: { text: "#{@document.company_name} (#{@document.company_code})", },
+      },
+
+      {
+        icon: "fa-solid fa-earth-europe",
+        top: { text: "County" },
+        bottom: { text: "#{@document.county_name} (#{@document.county_code})", },
+      },
+
+      {
+        icon: "fa-solid fa-city",
+        top: { text: "Municipality" },
+        bottom: { text: "#{@document.municipality_name} (#{@document.municipality_code})", },
+      },
+
+    ]
+
+  } %>
 
 </div>
