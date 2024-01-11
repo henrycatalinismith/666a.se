@@ -1,8 +1,18 @@
 <div class="container flex flex-col gap-10 w-full p-8">
+    <%= render partial: "admin/icon-breadcrumbs", locals: {
+    items: [
+      {
+        icon: "fa-solid fa-lock",
+        href: "/admin",
+        text: "Admin",
+      },
+    ]
+  } %>
 
-  <%= render layout: "shared/h1" do %>
-    Policies
-  <% end %>
+  <%= render partial: "admin/icon-heading", locals: {
+    icon: "fa-solid fa-signature",
+    text: "Policies",
+  } %>
 
   <%= link_to(
     "New",

@@ -1,0 +1,43 @@
+<div class="container flex flex-col gap-8 w-full p-8">
+
+  <%= render partial: "admin/icon-breadcrumbs", locals: {
+    items: [
+      {
+        icon: "fa-solid fa-lock",
+        href: "/admin",
+        text: "Admin",
+      },
+    ]
+  } %>
+
+  <%= render partial: "admin/icon-heading", locals: {
+    icon: "fa-solid fa-chart-line",
+    text: "Statistics",
+  } %>
+
+
+  <%= render partial: "admin/icon-list", locals: {
+    items: [
+
+      {
+        icon: "fa-solid fa-sink",
+        top: { text: "Kitchen Sink", href: "/admin/statistics/kitchen_sink"  },
+        bottom: { text: "Big legacy everything report" },
+      },
+
+      {
+        icon: "fa-solid fa-tree",
+        top: { text: "December Comparison", href: "/admin/statistics/december_comparison"  },
+        bottom: { text: "December 2022 vs December 2023" },
+      },
+
+      {
+        icon: "fa-solid fa-stopwatch",
+        top: { text: "Document Lag", href: "/admin/statistics/document_lag"  },
+        bottom: { text: "Time between official and chronological filing dates" },
+      },
+
+    ]
+  } %>
+
+</div>

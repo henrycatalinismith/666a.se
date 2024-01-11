@@ -93,9 +93,10 @@ Rails.application.routes.draw do
       match "/posts/new", to: "posts#new", via: [:get, :post]
       match "/posts/:slug", to: "posts#edit", via: [:get, :patch]
 
-      get "/stats", to: "stats#index"
-      get "/stats/comparison", to: "stats#comparison"
-      get "/stats/document-lag", to: "stats#document_lag"
+      get "/statistics", to: "statistics#index"
+      get "/statistics/december_comparison", to: "statistics#december_comparison"
+      get "/statistics/document_lag", to: "statistics#document_lag"
+      get "/statistics/kitchen_sink", to: "statistics#kitchen_sink"
     end
   end
 
