@@ -20,6 +20,21 @@
     text: @week.week_code,
   } %>
 
+  <%= render partial: "admin/icon-list", locals: {
+    items: @week.days.map do |day|
+      {
+        icon: "fa-solid fa-calendar-days",
+        top: {
+          text: "#{day.ymd} (#{day.date.strftime("%A")})",
+          href: "/admin/period/days/#{day.id}",
+        },
+        bottom: {
+          text: "#{day.searches.count} searches, #{day.results.count} results, #{day.documents.count} documents",
+        },
+    }
+    end
+  } %>
+
   <%= button_to(
     "Update",
     "/admin/period/weeks/#{@week.id}/job",
@@ -41,52 +56,6 @@
     </a>
   <% end %>
 
-  <h2 class="text-2xl font-bold">
-    Days
-  </h2>
-
-
-  <table class="min-w-full divide-y divide-gray-300">
-    <thead>
-      <tr>
-        <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">Name</th>
-        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Searches</th>
-        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Results</th>
-        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Documents</th>
-        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Target</th>
-      </tr>
-    </thead>
-    <tbody class="divide-y divide-gray-200">
-
-      <% @week.days.chronological.each do |day| %>
-        <tr>
-          <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">
-            <a class="text-blue-700 underline" href="/admin/period/days/<%= day.id %>">
-              <%= day.ymd %>
-            </a>
-          </td>
-
-          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-            <%= day.searches.count %>
-          </td>
-
-          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-            <%= day.results.count %>
-          </td>
-
-          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-            <%= day.documents.count %>
-          </td>
-
-          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-            <%= day.remote_total %>
-          </td>
-
-        </tr>
-      <% end %>
-
-    </tbody>
-  </table>
 
   <div class="flex flex-row justify-between">
     <h2 class="text-2xl font-bold">
