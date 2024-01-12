@@ -12,6 +12,7 @@ class Admin::WorkEnvironment::NotificationsController < AdminController
     @filters = [
       :recent,
       :email_error,
+      :email_pending,
     ]
 
     if params[:filter].present? and @filters.include?(params[:filter].to_sym) then
@@ -24,6 +25,8 @@ class Admin::WorkEnvironment::NotificationsController < AdminController
       @notifications = WorkEnvironment::Notification.reverse_chronological.limit(64)
     elsif @filter == :email_error then
       @notifications = WorkEnvironment::Notification.email_error.reverse_chronological.limit(64)
+    elsif @filter == :email_pending then
+      @notifications = WorkEnvironment::Notification.email_pending.reverse_chronological.limit(64)
     end
   end
 
