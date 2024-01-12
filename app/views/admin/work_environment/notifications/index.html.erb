@@ -15,12 +15,43 @@
     text: "Work Environment Notifications",
   } %>
 
+    <ul role="list" class="divide-y divide-gray-100">
+      <li class="flex justify-between gap-x-6 py-5">
+        <div class="flex min-w-0 gap-x-4">
+          
+          <div class="px-1">
+            <span class="w-12 h-12 rounded-full grid place-content-center border-4 border-black">
+              <i class="fa-solid fa-filter"></i>
+            </span>
+          </div>
+          <div class="min-w-0 flex-auto">
+            <p class="text-md font-semibold leading-6 text-gray-900">
+              Filter
+            </p>
+            <select id="filter" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+              <% @filters.each do |filter| %>
+                <option value="<%= filter %>"><%= filter %></option>
+              <% end %>
+            </select>
+            <script>
+              document.getElementById("filter").addEventListener("change", function() {
+                window.location.href = "/admin/work_environment/notifications?filter=" + this.value;
+              });
+            </script>
+          </div>
+        </div>
+      </li>
+  </ul>
+
   <%= render partial: "admin/icon-list", locals: {
-    items: @recent.map do |notification|
+    items: @notifications.map do |notification|
       {
         icon: "fa-solid #{notification.icon}",
-        top: { text: notification.id, href: "/admin/work_environment/notifications/#{notification.id}"  },
-        bottom: { text: notification.created_at },
+        top: {
+          text: "#{notification.document.company_name}, #{notification.document.document_code}",
+          href: "/admin/work_environment/notifications/#{notification.id}",
+        },
+        bottom: { text: "#{notification.subscription.user.email}, #{notification.created_at}" },
       }
     end
   } %>
