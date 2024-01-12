@@ -33,7 +33,7 @@ class Admin::WorkEnvironment::NotificationsController < AdminController
 
   def send_email
     @notification = WorkEnvironment::Notification.find(params[:id])
-    WorkEnvironment::EmailJob.perform_later(@notification.id, options)
+    WorkEnvironment::EmailJob.perform_later(@notification.id)
     redirect_to "/admin/work_environment/notifications/#{params[:id]}"
     flash[:notice] = "job queued"
   end
