@@ -9,10 +9,32 @@ class Admin::WorkEnvironment::NotificationsController < AdminController
       document.notifications.count == 0
     end
 
-    @recent = WorkEnvironment::Notification.reverse_chronological.limit(64)
+    @filters = [
+      :recent,
+      :email_error,
+    ]
+
+    if params[:filter].present? and @filters.include?(params[:filter].to_sym) then
+      @filter = params[:filter].to_sym
+    else
+      @filter = @filters.first
+    end
+
+    if @filter == :recent then
+      @notifications = WorkEnvironment::Notification.reverse_chronological.limit(64)
+    elsif @filter == :email_error then
+      @notifications = WorkEnvironment::Notification.email_error.reverse_chronological.limit(64)
+    end
   end
 
   def show
     @notification = WorkEnvironment::Notification.find(params[:id])
+  end
+
+  def send_email
+    @notification = WorkEnvironment::Notification.find(params[:id])
+    WorkEnvironment::EmailJob.perform_later(@notification.id, options)
+    redirect_to "/admin/work_environment/notifications/#{params[:id]}"
+    flash[:notice] = "job queued"
   end
 end

@@ -85,6 +85,7 @@ Rails.application.routes.draw do
         resources :documents
         resources :notifications
         post "/documents/:id/notify", to: "documents#notify"
+        post "/notifications/:id/send", to: "notifications#send_email"
       end
 
       get "/policies", to: "policies#index"
