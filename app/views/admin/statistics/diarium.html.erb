@@ -24,7 +24,7 @@
     <h2 class="text-2xl">
       Searches Per Day
     </h2>
-    <%= column_chart Period::Day.chronological.since_launch.map { |d| [d.date.strftime("%Y-%m-%d"), WorkEnvironment::Search.where('DATE(created_at) = ?', d.date).count] }.to_h %>
+    <%= column_chart TimePeriod::Day.chronological.since_launch.map { |d| [d.date.strftime("%Y-%m-%d"), WorkEnvironment::Search.where('DATE(created_at) = ?', d.date).count] }.to_h %>
   </section>
 
   <section class="w-full flex flex-col gap-10 flex-1 md:p-6 bg-white md:border md:border-gray-200 md:rounded-lg md:shadow">
@@ -47,7 +47,7 @@
     ].map { |status| {
       name: status,
       color: colors[status],
-      data: (Period::Day.chronological.last_two_weeks.map(&:date) + [Date.today]).map { |d| [
+      data: (TimePeriod::Day.chronological.last_two_weeks.map(&:date) + [Date.today]).map { |d| [
         d.strftime("%Y-%m-%d"),
         WorkEnvironment::Result
           .where('DATE(created_at) = ?', d)
@@ -77,7 +77,7 @@
     ].map { |status| {
       name: status,
       color: colors[status],
-      data: (Period::Day.chronological.last_two_weeks.map(&:date) + [Date.today]).map { |d| [
+      data: (TimePeriod::Day.chronological.last_two_weeks.map(&:date) + [Date.today]).map { |d| [
         d.strftime("%Y-%m-%d"),
         WorkEnvironment::Result
           .where('DATE(created_at) = ?', d)
@@ -107,7 +107,7 @@
     ].map { |status| {
       name: status,
       color: colors[status],
-      data: (Period::Day.chronological.last_two_weeks.map(&:date) + [Date.today]).map { |d| [
+      data: (TimePeriod::Day.chronological.last_two_weeks.map(&:date) + [Date.today]).map { |d| [
         d.strftime("%Y-%m-%d"),
         WorkEnvironment::Search
           .where('DATE(created_at) = ?', d)

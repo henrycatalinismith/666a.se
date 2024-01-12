@@ -6,7 +6,7 @@ class WorkEnvironment::WeekJob < ApplicationJob
   def perform(week_code, options = {})
     puts "WeekJob: begin"
 
-    week = Period::Week.find_by(week_code: week_code)
+    week = TimePeriod::Week.find_by(week_code: week_code)
 
     puts week.inspect
     if week.nil? then

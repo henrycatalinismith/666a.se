@@ -28,14 +28,14 @@
 
       {
         icon: "fa-solid fa-calendar-days",
-        top: { text: "Days", href: "/admin/period/days"  },
-        bottom: { text: Period::Day.count },
+        top: { text: "Days", href: "/admin/time_period/days"  },
+        bottom: { text: TimePeriod::Day.count },
       },
 
       {
         icon: "fa-solid fa-calendar-week",
-        top: { text: "Weeks", href: "/admin/period/weeks"  },
-        bottom: { text: Period::Week.count },
+        top: { text: "Weeks", href: "/admin/time_period/weeks"  },
+        bottom: { text: TimePeriod::Week.count },
       },
 
       {
@@ -79,7 +79,7 @@
       <a class="text-blue-700" href="/admin/statistics">more statistics</a>
 
     </div>
-    <%= column_chart Period::Day.where('date > ?', 21.days.ago).chronological.map { |d| [d.date.strftime("%Y-%m-%d"), d.documents.count] }.to_h %>
+    <%= column_chart TimePeriod::Day.where('date > ?', 21.days.ago).chronological.map { |d| [d.date.strftime("%Y-%m-%d"), d.documents.count] }.to_h %>
   </section>
 
 </div>

@@ -6,7 +6,7 @@ class WorkEnvironment::PeriodScanJob < ApplicationJob
   def perform(start, finish)
     puts "PeriodScanJob: begin"
 
-    day = Period::Day.find_by(date: start)
+    day = TimePeriod::Day.find_by(date: start)
 
     puts day.inspect
     if day.nil? then

@@ -1,5 +1,5 @@
-module Period
+module TimePeriod
   def self.table_name_prefix
-    "period_"
+    "time_period_"
   end
 end
