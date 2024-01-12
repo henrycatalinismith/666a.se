@@ -1,5 +1,5 @@
 class WorkEnvironment::Search < ApplicationRecord
-  belongs_to :day, class_name: "Period::Day"
+  belongs_to :day, class_name: "TimePeriod::Day"
   has_many :results, dependent: :destroy
 
   enum result_status: {

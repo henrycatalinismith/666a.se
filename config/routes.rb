@@ -63,9 +63,11 @@ Rails.application.routes.draw do
 
       resources :users
 
-      namespace :period do
+      namespace :time_period do
         resources :days
         resources :weeks
+        post "/days/:id/job", to: "days#job"
+        post "/weeks/:id/job", to: "weeks#job"
       end
 
       namespace :legal do
@@ -73,12 +75,6 @@ Rails.application.routes.draw do
         resources :revisions
         resources :elements
         resources :translations
-      end
-
-      namespace :period do
-        resources :days
-        post "/days/:id/job", to: "days#job"
-        post "/weeks/:id/job", to: "weeks#job"
       end
 
       namespace :work_environment do

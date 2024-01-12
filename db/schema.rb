@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_15_052504) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_12_210046) do
   create_table "legal_documents", id: :string, default: -> { "ULID()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -53,23 +53,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_15_052504) do
     t.index ["translation_locale"], name: "index_legal_translations_on_translation_locale"
   end
 
-  create_table "period_days", id: :string, default: -> { "ULID()" }, force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.date "date"
-    t.integer "ingestion_status"
-    t.string "week_id"
-    t.index ["date"], name: "index_period_days_on_date", unique: true
-    t.index ["week_id"], name: "index_period_days_on_week_id"
-  end
-
-  create_table "period_weeks", id: :string, default: -> { "ULID()" }, force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "week_code"
-    t.index ["week_code"], name: "index_period_weeks_on_week_code"
-  end
-
   create_table "policies", id: :string, default: -> { "ULID()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -99,6 +82,23 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_15_052504) do
     t.string "user_id", null: false
     t.integer "name"
     t.index ["user_id"], name: "index_roles_on_user_id"
+  end
+
+  create_table "time_period_days", id: :string, default: -> { "ULID()" }, force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.date "date"
+    t.integer "ingestion_status"
+    t.string "week_id"
+    t.index ["date"], name: "index_time_period_days_on_date", unique: true
+    t.index ["week_id"], name: "index_time_period_days_on_week_id"
+  end
+
+  create_table "time_period_weeks", id: :string, default: -> { "ULID()" }, force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "week_code"
+    t.index ["week_code"], name: "index_time_period_weeks_on_week_code"
   end
 
   create_table "users", id: :string, default: -> { "ULID()" }, force: :cascade do |t|
@@ -193,11 +193,11 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_15_052504) do
   add_foreign_key "legal_elements", "legal_revisions", column: "revision_id"
   add_foreign_key "legal_revisions", "legal_documents", column: "document_id"
   add_foreign_key "legal_translations", "legal_elements", column: "element_id"
-  add_foreign_key "period_days", "period_weeks", column: "week_id"
   add_foreign_key "roles", "users"
+  add_foreign_key "time_period_days", "time_period_weeks", column: "week_id"
   add_foreign_key "work_environment_notifications", "work_environment_documents", column: "document_id"
   add_foreign_key "work_environment_notifications", "work_environment_subscriptions", column: "subscription_id"
   add_foreign_key "work_environment_results", "work_environment_searches", column: "search_id"
-  add_foreign_key "work_environment_searches", "period_days", column: "day_id"
+  add_foreign_key "work_environment_searches", "time_period_days", column: "day_id"
   add_foreign_key "work_environment_subscriptions", "users"
 end

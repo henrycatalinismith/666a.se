@@ -1,4 +1,4 @@
-class Period::Day < ApplicationRecord
+class TimePeriod::Day < ApplicationRecord
   belongs_to :week
   has_many :searches, class_name: "WorkEnvironment::Search"
   has_many :results, through: :searches, class_name: "WorkEnvironment::Result"
@@ -63,10 +63,10 @@ class Period::Day < ApplicationRecord
   end
 
   def last_year
-    Period::Day.find_by(date: date.last_year)
+    TimePeriod::Day.find_by(date: date.last_year)
   end
 
   def tomorrow
-    Period::Day.find_by(date: date.tomorrow)
+    TimePeriod::Day.find_by(date: date.tomorrow)
   end
 end
