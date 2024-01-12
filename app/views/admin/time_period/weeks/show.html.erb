@@ -9,7 +9,7 @@
       },
       {
         icon: "fa-solid fa-calendar-week",
-        href: "/admin/period/weeks",
+        href: "/admin/time_period/weeks",
         text: "Weeks",
       },
     ]
@@ -26,7 +26,7 @@
         icon: "fa-solid fa-calendar-days",
         top: {
           text: "#{day.ymd} (#{day.date.strftime("%A")})",
-          href: "/admin/period/days/#{day.id}",
+          href: "/admin/time_period/days/#{day.id}",
         },
         bottom: {
           text: "#{day.searches.count} searches, #{day.results.count} results, #{day.documents.count} documents",
@@ -37,21 +37,21 @@
 
   <%= button_to(
     "Update",
-    "/admin/period/weeks/#{@week.id}/job",
+    "/admin/time_period/weeks/#{@week.id}/job",
     method: :post,
     class: "min-w-max-content bg-cyan-300 hover:bg-cyan-200 text-black font-bold py-2 px-4 rounded"
   ) %>
 
 
   <% if @prev.present? %>
-    <a href="/admin/period/weeks/<%= @prev.id %>" class="text-blue-700 underline">
+    <a href="/admin/time_period/weeks/<%= @prev.id %>" class="text-blue-700 underline">
       Prev
     </a>
   <% end %>
 
 <%= @next_code %>
   <% if @next.present? %>
-    <a href="/admin/period/weeks/<%= @next.id %>" class="text-blue-700 underline">
+    <a href="/admin/time_period/weeks/<%= @next.id %>" class="text-blue-700 underline">
       Next
     </a>
   <% end %>

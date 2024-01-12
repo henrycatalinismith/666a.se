@@ -20,7 +20,7 @@
     items: @weeks.map do |week|
       {
         icon: "fa-solid fa-calendar-week",
-        top: { text: week.week_code, href: "/admin/period/weeks/#{week.id}"  },
+        top: { text: week.week_code, href: "/admin/time_period/weeks/#{week.id}"  },
         bottom: { text: week.days.count },
       }
     end
