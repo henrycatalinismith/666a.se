@@ -13,301 +13,53 @@ scheduler.cron("0 9 * * *") do
   })
 end
 
-scheduler.cron("0 10 * * *") do
-  WorkEnvironment::DayJob.perform_later(
-    2.days.ago.strftime("%Y-%m-%d"),
-    {
-      :cascade => true,
-      :force => true,
-      :notify => true,
-    }
-  )
+def day_job(hour, minute, date)
+  scheduler.cron("#{minute} #{hour} * * *") do
+    WorkEnvironment::DayJob.perform_later(
+      date.strftime("%Y-%m-%d"),
+      {
+        :cascade => true,
+        :force => true,
+        :notify => true,
+      }
+    )
+  end
 end
 
-scheduler.cron("10 10 * * *") do
-  WorkEnvironment::DayJob.perform_later(
-    3.days.ago.strftime("%Y-%m-%d"),
-    {
-      :cascade => true,
-      :force => true,
-      :notify => true,
-    }
-  )
-end
+day_job(10,  0, 2.days.ago)
 
-scheduler.cron("20 10 * * *") do
-  WorkEnvironment::DayJob.perform_later(
-    4.days.ago.strftime("%Y-%m-%d"),
-    {
-      :cascade => true,
-      :force => true,
-      :notify => true,
-    }
-  )
-end
+day_job(11, 10, 3.days.ago)
+day_job(11, 20, 4.days.ago)
+day_job(11, 30, 5.days.ago)
+day_job(11, 40, 6.days.ago)
+day_job(11, 50, 7.days.ago)
 
-scheduler.cron("30 10 * * *") do
-  WorkEnvironment::DayJob.perform_later(
-    5.days.ago.strftime("%Y-%m-%d"),
-    {
-      :cascade => true,
-      :force => true,
-      :notify => true,
-    }
-  )
-end
+day_job(12,  0, 8.days.ago)
+day_job(12, 10, 9.days.ago)
+day_job(12, 20, 10.days.ago)
+day_job(12, 30, 11.days.ago)
+day_job(12, 40, 12.days.ago)
+day_job(12, 50, 13.days.ago)
 
-scheduler.cron("40 10 * * *") do
-  WorkEnvironment::DayJob.perform_later(
-    6.days.ago.strftime("%Y-%m-%d"),
-    {
-      :cascade => true,
-      :force => true,
-      :notify => true,
-    }
-  )
-end
+day_job(13,  0, 14.days.ago)
+day_job(13, 10, 15.days.ago)
+day_job(13, 20, 16.days.ago)
+day_job(13, 30, 17.days.ago)
+day_job(13, 40, 18.days.ago)
+day_job(13, 50, 19.days.ago)
 
-scheduler.cron("50 10 * * *") do
-  WorkEnvironment::DayJob.perform_later(
-    7.days.ago.strftime("%Y-%m-%d"),
-    {
-      :cascade => true,
-      :force => true,
-      :notify => true,
-    }
-  )
-end
+day_job(14,  0, 20.days.ago)
+day_job(14, 10, 21.days.ago)
+day_job(14, 20, 22.days.ago)
+day_job(14, 30, 23.days.ago)
+day_job(14, 40, 24.days.ago)
+day_job(14, 50, 25.days.ago)
 
-scheduler.cron("0 11 * * *") do
-  WorkEnvironment::DayJob.perform_later(
-    8.days.ago.strftime("%Y-%m-%d"),
-    {
-      :cascade => true,
-      :force => true,
-      :notify => true,
-    }
-  )
-end
-
-scheduler.cron("10 11 * * *") do
-  WorkEnvironment::DayJob.perform_later(
-    9.days.ago.strftime("%Y-%m-%d"),
-    {
-      :cascade => true,
-      :force => true,
-      :notify => true,
-    }
-  )
-end
-
-scheduler.cron("20 11 * * *") do
-  WorkEnvironment::DayJob.perform_later(
-    10.days.ago.strftime("%Y-%m-%d"),
-    {
-      :cascade => true,
-      :force => true,
-      :notify => true,
-    }
-  )
-end
-
-scheduler.cron("30 11 * * *") do
-  WorkEnvironment::DayJob.perform_later(
-    11.days.ago.strftime("%Y-%m-%d"),
-    {
-      :cascade => true,
-      :force => true,
-      :notify => true,
-    }
-  )
-end
-
-scheduler.cron("40 11 * * *") do
-  WorkEnvironment::DayJob.perform_later(
-    12.days.ago.strftime("%Y-%m-%d"),
-    {
-      :cascade => true,
-      :force => true,
-      :notify => true,
-    }
-  )
-end
-
-scheduler.cron("50 11 * * *") do
-  WorkEnvironment::DayJob.perform_later(
-    13.days.ago.strftime("%Y-%m-%d"),
-    {
-      :cascade => true,
-      :force => true,
-      :notify => true,
-    }
-  )
-end
-
-scheduler.cron("0 12 * * *") do
-  WorkEnvironment::DayJob.perform_later(
-    14.days.ago.strftime("%Y-%m-%d"),
-    {
-      :cascade => true,
-      :force => true,
-      :notify => true,
-    }
-  )
-end
-
-scheduler.cron("0 12 * * *") do
-  WorkEnvironment::DayJob.perform_later(
-    15.days.ago.strftime("%Y-%m-%d"),
-    {
-      :cascade => true,
-      :force => true,
-      :notify => true,
-    }
-  )
-end
-
-scheduler.cron("10 12 * * *") do
-  WorkEnvironment::DayJob.perform_later(
-    16.days.ago.strftime("%Y-%m-%d"),
-    {
-      :cascade => true,
-      :force => true,
-      :notify => true,
-    }
-  )
-end
-
-scheduler.cron("20 12 * * *") do
-  WorkEnvironment::DayJob.perform_later(
-    17.days.ago.strftime("%Y-%m-%d"),
-    {
-      :cascade => true,
-      :force => true,
-      :notify => true,
-    }
-  )
-end
-
-scheduler.cron("30 12 * * *") do
-  WorkEnvironment::DayJob.perform_later(
-    18.days.ago.strftime("%Y-%m-%d"),
-    {
-      :cascade => true,
-      :force => true,
-      :notify => true,
-    }
-  )
-end
-
-scheduler.cron("40 12 * * *") do
-  WorkEnvironment::DayJob.perform_later(
-    19.days.ago.strftime("%Y-%m-%d"),
-    {
-      :cascade => true,
-      :force => true,
-      :notify => true,
-    }
-  )
-end
-
-scheduler.cron("50 12 * * *") do
-  WorkEnvironment::DayJob.perform_later(
-    20.days.ago.strftime("%Y-%m-%d"),
-    {
-      :cascade => true,
-      :force => true,
-      :notify => true,
-    }
-  )
-end
-
-scheduler.cron("0 13 * * *") do
-  WorkEnvironment::DayJob.perform_later(
-    21.days.ago.strftime("%Y-%m-%d"),
-    {
-      :cascade => true,
-      :force => true,
-      :notify => true,
-    }
-  )
-end
-scheduler.cron("0 13 * * *") do
-  WorkEnvironment::DayJob.perform_later(
-    22.days.ago.strftime("%Y-%m-%d"),
-    {
-      :cascade => true,
-      :force => true,
-      :notify => true,
-    }
-  )
-end
-
-scheduler.cron("10 13 * * *") do
-  WorkEnvironment::DayJob.perform_later(
-    23.days.ago.strftime("%Y-%m-%d"),
-    {
-      :cascade => true,
-      :force => true,
-      :notify => true,
-    }
-  )
-end
-
-scheduler.cron("20 13 * * *") do
-  WorkEnvironment::DayJob.perform_later(
-    24.days.ago.strftime("%Y-%m-%d"),
-    {
-      :cascade => true,
-      :force => true,
-      :notify => true,
-    }
-  )
-end
-
-scheduler.cron("30 13 * * *") do
-  WorkEnvironment::DayJob.perform_later(
-    25.days.ago.strftime("%Y-%m-%d"),
-    {
-      :cascade => true,
-      :force => true,
-      :notify => true,
-    }
-  )
-end
-
-scheduler.cron("40 13 * * *") do
-  WorkEnvironment::DayJob.perform_later(
-    26.days.ago.strftime("%Y-%m-%d"),
-    {
-      :cascade => true,
-      :force => true,
-      :notify => true,
-    }
-  )
-end
-
-scheduler.cron("50 13 * * *") do
-  WorkEnvironment::DayJob.perform_later(
-    27.days.ago.strftime("%Y-%m-%d"),
-    {
-      :cascade => true,
-      :force => true,
-      :notify => true,
-    }
-  )
-end
-
-scheduler.cron("0 13 * * *") do
-  WorkEnvironment::DayJob.perform_later(
-    28.days.ago.strftime("%Y-%m-%d"),
-    {
-      :cascade => true,
-      :force => true,
-      :notify => true,
-    }
-  )
-end
+day_job(15,  0, 26.days.ago)
+day_job(15, 10, 27.days.ago)
+day_job(15, 20, 28.days.ago)
+day_job(15, 30, 29.days.ago)
+day_job(15, 40, 30.days.ago)
 
 
 # scheduler.cron("0 13 * * *") do
