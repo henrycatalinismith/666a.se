@@ -1,6 +1,7 @@
 name: Test
 on:
   push:
+
 jobs:
   test:
     name: Test
@@ -14,7 +15,7 @@ jobs:
           ruby-version: 3.0.4
           bundler-cache: true
 
-     - name: Run Tests
+      - name: Run Tests
         env:
           RAILS_ENV: test
         run: bundle exec rails test
