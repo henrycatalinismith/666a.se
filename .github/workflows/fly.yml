@@ -20,7 +20,9 @@ jobs:
       - name: Run Tests
         env:
           RAILS_ENV: test
-        run: bundle exec rails test
+        run: |
+          bundle exec rails test
+          bundle exec rspec
 
       - uses: superfly/flyctl-actions/setup-flyctl@master
 
