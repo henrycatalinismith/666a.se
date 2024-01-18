@@ -13,4 +13,6 @@ ActiveSupport.on_load(:active_record_sqlite3adapter) do
   ActiveRecord::ConnectionAdapters::SQLite3Adapter.prepend(UlidExtension)
 end
 
-ActiveRecord::Base.logger = Logger.new(STDOUT)
+if !Rails.env.test?
+  ActiveRecord::Base.logger = Logger.new(STDOUT)
+end
