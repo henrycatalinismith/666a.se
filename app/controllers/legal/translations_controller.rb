@@ -69,6 +69,9 @@ class Legal::TranslationsController < ApplicationController
     elsif @document.document_code == "1982:80" then
       h3_match = @element.translations.first.translation_text.match(/\ASection ([0-9a-z\.]+)/)
       @page_title = "Section #{h3_match[1]} of the Swedish Employment Protection Act"
+    elsif @document.document_code == "1982:673" then
+      h3_match = @element.translations.first.translation_text.match(/\ASection ([0-9a-z\.]+)/)
+      @page_title = "Section #{h3_match[1]} of the Swedish Working Hours Act"
     end
 
     left = elements.map { |e| e.translate(params[:left_locale]) }
