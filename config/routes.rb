@@ -44,7 +44,7 @@ Rails.application.routes.draw do
   get "/:year/:month/:day/:slug",
     to: "posts#show", 
     :year => /(19|20)\d{2}/,
-    :month => /([1-9]|1[0-2])/,
+    :month => /(0[0-9]|1[0-2])/,
     :day => /(0[0-9]|1[0-9]|2[0-9]|3[0-1])/,
     :slug => /[a-z0-9-]+/
 
