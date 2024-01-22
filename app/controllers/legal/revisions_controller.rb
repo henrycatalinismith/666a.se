@@ -29,6 +29,8 @@ class Legal::RevisionsController < ApplicationController
       @page_title = "The Swedish Co-Determination Act"
     elsif @document.document_code == "1982:80" then
       @page_title = "The Swedish Employment Protection Act"
+    elsif @document.document_code == "1982:673" then
+      @page_title = "The Swedish Working Hours Act"
     end
 
     left = @revision.elements.map { |e| e.translate("sv") }
