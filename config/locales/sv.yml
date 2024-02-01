@@ -73,6 +73,19 @@ sv:
     change_password: "Ändra lösenord"
     logout: "Logga ut"
 
+  follow:
+    title: "Följ företag"
+    company_code_text: |
+      Du behöver organisationsnummeret för det företag du vill följa.
+      Bolagsverket har en <a class="text-blue-700 underline" href="https://foretagsinfo.bolagsverket.se/sok-foretagsinformation-web/foretag">företagssökningstjänst</a> som du kan använda för att hitta det om du inte redan har det.
+      Ett giltigt organisationsnummer är tio siffror med ett bindestreck mellan den sjätte och sjunde, som <tt>123456-7890</tt>.
+    workplace_code_text: |
+      Du kan också prenumerera på en CFAR-nummer om du föredrar det.
+      För stora arbetsgivare med hundratals arbetsplatser, som t.eex. kommuner, kan CFAR-prenumerationer vara bättre.
+      Statistikmyndigheten tillhandahåller en <a class="text-blue-700 underline" href="https://cfarnrsok.scb.se/">CFAR sökverktyg</a> som du kan använda för att hitta en CFAR om du inte redan vet det.
+      Ett giltigt CFAR är åtta siffror, som <tt>12345678</tt>.
+    submit: "Spara"
+
   notification_email:
     subject: "⛧ Dokumentmeddelande"
     title: >
@@ -113,6 +126,8 @@ sv:
         name: "Namn"
         locale: "Språk"
         company_code: "Organisationsnummer"
+      work_environment/subscription:
+        company_code: "Organisationsnummer / CFAR"
 
     errors:
       messages:
