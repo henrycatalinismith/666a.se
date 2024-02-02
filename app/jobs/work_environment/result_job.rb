@@ -11,20 +11,15 @@ class WorkEnvironment::ResultJob < ApplicationJob
   end
 
   def perform(document_code = nil, options = {})
-    puts "ResultJob: begin"
-
-    if document_code.nil? then
+    if document_code.nil?
       @result = WorkEnvironment::Result.metadata_pending.first
     else
       @result = WorkEnvironment::Result.find_by(document_code:)
     end
 
-    if @result.nil? then
-      return
-    end
+    return if @result.nil?
 
     @result.metadata_fetching!
-    puts @result.url
     uri = URI(@result.url)
     response = Net::HTTP.get_response(uri)
     document = Nokogiri::HTML.parse(response.body)
@@ -34,10 +29,11 @@ class WorkEnvironment::ResultJob < ApplicationJob
     @result.update(metadata:)
     @result.metadata_ready!
 
-    puts "ResultJob: end"
-
-    if options[:cascade] then
-      WorkEnvironment::DocumentJob.set(wait: 1.seconds).perform_later(@result.document_code, options)
+    if options[:cascade]
+      WorkEnvironment::DocumentJob.set(wait: 1.seconds).perform_later(
+        @result.document_code,
+        options
+      )
     end
   end
 end
