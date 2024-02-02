@@ -11,29 +11,30 @@ class WorkEnvironment::DocumentJob < ApplicationJob
   end
 
   def perform(document_code = nil, options = {})
-    puts "DocumentJob: begin"
-
-    if document_code.nil? then
+    if document_code.nil?
       @result = WorkEnvironment::Result.metadata_ready.document_pending.first
     else
       @result = WorkEnvironment::Result.find_by(document_code:)
     end
-    if @result.nil? then
-      return
-    end
+    return if @result.nil?
 
     @result.document_active!
-    document = WorkEnvironment::Document.find_by(document_code: @result.document_code)
-    if !document.nil? then
+    document =
+      WorkEnvironment::Document.find_by(document_code: @result.document_code)
+    if !document.nil?
       @result.document_ready!
       return
     end
 
     document = @result.to_document
 
-    if !document.company_code.nil? then
-      subscription_count = WorkEnvironment::Subscription.where(company_code: document.company_code).count
-      document.notification_status = subscription_count > 0 ? :notification_pending : :notification_needless
+    if !document.company_code.nil?
+      subscription_count =
+        WorkEnvironment::Subscription.where(
+          company_code: document.company_code
+        ).count
+      document.notification_status =
+        subscription_count > 0 ? :notification_pending : :notification_needless
     else
       document.notification_status = :notification_needless
     end
@@ -41,10 +42,11 @@ class WorkEnvironment::DocumentJob < ApplicationJob
     document.save
     @result.document_ready!
 
-    puts "DocumentJob: end"
-    
-    if options[:notify] and document.notification_pending? then
-      WorkEnvironment::NotificationJob.set(wait: 1.seconds).perform_later(document_code, options)
+    if options[:notify] and document.notification_pending?
+      WorkEnvironment::NotificationJob.set(wait: 1.seconds).perform_later(
+        document_code,
+        options
+      )
     end
   end
 end
