@@ -8,21 +8,18 @@ class WorkEnvironment::EmailJob < ApplicationJob
   end
 
   def perform(notification_id = nil, options = {})
-    puts "EmailJob: begin"
-
-    if notification_id.nil? then
+    if notification_id.nil?
       @notification = WorkEnvironment::Notification.email_pending.first
     else
       @notification = WorkEnvironment::Notification.find(notification_id)
     end
-    if @notification.nil? then
-      return
-    end
+    return if @notification.nil?
 
-    NotificationMailer.with(notification: @notification).notification_email.deliver_now
+    NotificationMailer
+      .with(notification: @notification)
+      .notification_email
+      .deliver_now
 
     @notification.email_success!
-
-    puts "EmailJob: end"
   end
 end
