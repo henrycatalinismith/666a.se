@@ -13,6 +13,7 @@ group :development, :test do
   gem "debug", platforms: %i[mri mingw x64_mingw]
   gem "rspec-rails", "~> 6.1.0"
   gem "webmock"
+  gem "timecop", "~> 0.9.8"
 end
 
 gem "litestack", "~> 0.3.0"
