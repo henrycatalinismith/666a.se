@@ -36,7 +36,20 @@ describe WorkEnvironment::SearchJob do
 
     context "results" do
       it "records the document code" do
-        expect(results.first.document_code).to eq("2023/018014-1")
+        expect(results.map(&:document_code).sort).to eq(
+          %w[
+            2023/016154-5
+            2023/018014-1
+            2023/025193-1
+            2023/035166-3
+            2023/035515-2
+            2023/036093-1
+            2023/042874-1
+            2023/044443-6
+            2023/045809-3
+            2023/051960-1
+          ]
+        )
       end
     end
   end
