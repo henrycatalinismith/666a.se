@@ -5,3 +5,11 @@ halloween:
   date: "2023-10-31"
   ingestion_status: "ingestion_complete"
   week_id: "01hktf76y70wpzr7fm7dtch7ky"
+
+"2023-11-06":
+  id: "01hktf76y70wpzr7fm7dtch7kz"
+  created_at: "2023-10-31 00:00:00"
+  updated_at: "2023-10-31 00:00:00"
+  date: "2023-11-06"
+  ingestion_status: "ingestion_complete"
+  week_id: "01hktf76y70wpzr7fm7dtch7kz"

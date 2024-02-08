@@ -1,7 +1,7 @@
 require "rails_helper"
 
 describe WorkEnvironment::SearchJob do
-  let(:day) { time_period_day(:halloween) }
+  let(:day) { time_period_day(:"2023-11-06") }
 
   let(:response) do
     File.read("spec/fixtures/work_environment/search/2023-10-31-p1.html")
@@ -13,7 +13,7 @@ describe WorkEnvironment::SearchJob do
 
       stub_request(
         :get,
-        "https://www.av.se/om-oss/sok-i-arbetsmiljoverkets-diarium/?FromDate=2023-10-31&ToDate=2023-10-31&page=1&sortDirection=asc&sortOrder=Dokumentdatum"
+        "https://www.av.se/om-oss/sok-i-arbetsmiljoverkets-diarium/?FromDate=2023-11-06&ToDate=2023-11-06&page=1&sortDirection=asc&sortOrder=Dokumentdatum"
       ).to_return(status: 200, body: response)
 
       WorkEnvironment::SearchJob.perform_now(day.date)
