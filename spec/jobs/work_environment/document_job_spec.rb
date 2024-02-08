@@ -5,27 +5,7 @@ describe WorkEnvironment::DocumentJob do
 
   subject(:job) { described_class }
 
-  let(:metadata) { <<-TEXT }
-{"Diarienummer":"2023/034601","Handlingsnummer":"2023/034601-24","Ärendemening":"Skyddsombuds begäran om ingripande enligt 6 kap 6a § arbetsmiljölagen - ventilation","Handlingstyp":"Underrättelse om föreläggande/förbud","Inkommande/Utgående":"Utgående","Organisation":"SVENSKA RÖDA KORSETS CENTRALSTYRELSE (802002-8711)","Arbetsställenummer (CFAR)":"11290723","Arbetsställe":"SVENSKA RÖDA KORSETS CENTRALSTYRELSE","Län":"STOCKHOLMS LÄN (01)","Kommun":"Stockholm (0180)","Datum":"2023-11-08","Pågående/Avslutat":"Pågående"}
-TEXT
-
   let(:day) { time_period_day(:halloween) }
-
-  let(:search) do
-    WorkEnvironment::Search.new(
-      day: day,
-      result_status: :result_pending,
-      page_number: 1
-    )
-  end
-
-  let(:result) do
-    WorkEnvironment::Result.new(
-      search: search,
-      document_code: "2023/034601-24",
-      metadata: metadata
-    )
-  end
 
   let(:hunter2) { user(:hunter2) }
 
@@ -39,7 +19,6 @@ TEXT
   end
 
   it "creates the document" do
-    result.save
     perform_enqueued_jobs(only: job) { job.perform_now("2023/034601-24") }
     document =
       WorkEnvironment::Document.find_by(document_code: "2023/034601-24")
@@ -52,7 +31,6 @@ TEXT
   end
 
   it "sets needless notification status when subscriptions exist" do
-    result.save
     perform_enqueued_jobs(only: job) { job.perform_now("2023/034601-24") }
     document =
       WorkEnvironment::Document.find_by(document_code: "2023/034601-24")
@@ -60,7 +38,6 @@ TEXT
   end
 
   it "sets pending notification status when subscriptions exist" do
-    result.save
     subscription.save
     perform_enqueued_jobs(only: job) { job.perform_now("2023/034601-24") }
     document =
@@ -69,7 +46,6 @@ TEXT
   end
 
   it "queues notification job when subscriptions exist" do
-    result.save
     subscription.save
     perform_enqueued_jobs(only: job) do
       job.perform_now("2023/034601-24", notify: true)
