@@ -2,15 +2,9 @@ require "rails_helper"
 
 RSpec.describe NotificationMailer, type: :mailer do
   describe "notify" do
-    let(:user) {
-      User.new(
-        name: "Example User",
-        email: "user@example.org",
-        locale: "en",
-      )
-    }
+    let(:hunter2) { user(:hunter2) }
 
-    let(:document) {
+    let(:document) do
       WorkEnvironment::Document.new(
         document_code: "2023/073482-1",
         document_date: "2023-12-01",
@@ -27,27 +21,32 @@ RSpec.describe NotificationMailer, type: :mailer do
         county_name: "DALARNAS LÄN",
         municipality_code: "2080",
         municipality_name: "Falun",
-        notification_status: :notification_pending,
+        notification_status: :notification_pending
       )
-    }
+    end
 
-    let(:subscription) {
+    let(:subscription) do
       WorkEnvironment::Subscription.new(
         id: "abcdef",
         subscription_type: :company_subscription,
         company_code: "556595-9995",
-        user: user,
+        user: hunter2
       )
-    }
+    end
 
-    let(:notification) {
+    let(:notification) do
       WorkEnvironment::Notification.new(
         document: document,
-        subscription: subscription,
+        subscription: subscription
       )
-    }
+    end
 
-    let(:mail) { described_class.with(notification: notification).notification_email().deliver_now }
+    let(:mail) do
+      described_class
+        .with(notification: notification)
+        .notification_email()
+        .deliver_now
+    end
 
     it "renders the headers" do
       expect(mail.subject).to eq("⛧ Document Alert")
@@ -60,11 +59,15 @@ RSpec.describe NotificationMailer, type: :mailer do
     end
 
     it "mentions the company name for context" do
-      expect(mail.body.encoded).to match("You're subscribed to email updates for Work Environment Authority filings about HUSKOMPONENTER LINGHED AB.")
+      expect(mail.body.encoded).to match(
+        "You're subscribed to email updates for Work Environment Authority filings about HUSKOMPONENTER LINGHED AB."
+      )
     end
 
     it "translates the document type to english" do
-      expect(mail.body.encoded).to match("2023/073482-1: Notification of accident")
+      expect(mail.body.encoded).to match(
+        "2023/073482-1: Notification of accident"
+      )
     end
 
     it "includes the unsubscribe url" do

@@ -27,23 +27,14 @@ TEXT
     )
   end
 
-  let(:user) do
-    User.new(
-      id: "01hmf3mpq73axkw2h1ap55j52r",
-      name: "Example User",
-      company_code: "123456-1234",
-      password: "hunter2",
-      password_confirmation: "hunter2",
-      email: "user@example.org"
-    )
-  end
+  let(:hunter2) { user(:hunter2) }
 
   let(:subscription) do
     WorkEnvironment::Subscription.new(
       id: "abcdef",
       subscription_type: :company_subscription,
       company_code: "802002-8711",
-      user: user
+      user: hunter2
     )
   end
 
@@ -70,7 +61,6 @@ TEXT
 
   it "sets pending notification status when subscriptions exist" do
     result.save
-    user.save
     subscription.save
     perform_enqueued_jobs(only: job) { job.perform_now("2023/034601-24") }
     document =
@@ -80,7 +70,6 @@ TEXT
 
   it "queues notification job when subscriptions exist" do
     result.save
-    user.save
     subscription.save
     perform_enqueued_jobs(only: job) do
       job.perform_now("2023/034601-24", notify: true)
