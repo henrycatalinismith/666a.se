@@ -1,15 +1,7 @@
 require "rails_helper"
 
 describe WorkEnvironment::ResultJob do
-  let(:week) { TimePeriod::Week.new(week_code: "2023-W44") }
-
-  let(:day) do
-    TimePeriod::Day.new(
-      week:,
-      date: "2023-10-31",
-      ingestion_status: :ingestion_pending
-    )
-  end
+  let(:day) { time_period_day(:halloween) }
 
   let(:search) do
     WorkEnvironment::Search.new(

@@ -9,15 +9,7 @@ describe WorkEnvironment::DocumentJob do
 {"Diarienummer":"2023/034601","Handlingsnummer":"2023/034601-24","Ärendemening":"Skyddsombuds begäran om ingripande enligt 6 kap 6a § arbetsmiljölagen - ventilation","Handlingstyp":"Underrättelse om föreläggande/förbud","Inkommande/Utgående":"Utgående","Organisation":"SVENSKA RÖDA KORSETS CENTRALSTYRELSE (802002-8711)","Arbetsställenummer (CFAR)":"11290723","Arbetsställe":"SVENSKA RÖDA KORSETS CENTRALSTYRELSE","Län":"STOCKHOLMS LÄN (01)","Kommun":"Stockholm (0180)","Datum":"2023-11-08","Pågående/Avslutat":"Pågående"}
 TEXT
 
-  let(:week) { TimePeriod::Week.new(week_code: "2023-W44") }
-
-  let(:day) do
-    TimePeriod::Day.new(
-      week:,
-      date: "2023-10-31",
-      ingestion_status: :ingestion_pending
-    )
-  end
+  let(:day) { time_period_day(:halloween) }
 
   let(:search) do
     WorkEnvironment::Search.new(
