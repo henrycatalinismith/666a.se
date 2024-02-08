@@ -6,20 +6,20 @@ describe WorkEnvironment::MorningJob do
   subject(:job) { described_class }
 
   it "creates the week" do
-    perform_enqueued_jobs { job.perform_now("2023-10-31", cascade: false) }
-    expect(TimePeriod::Week.count).to eq(1)
-    expect(TimePeriod::Week.first.week_code).to eq("2023-W44")
+    perform_enqueued_jobs { job.perform_now("2023-11-07", cascade: false) }
+    expect(TimePeriod::Week.count).to eq(2)
+    expect(TimePeriod::Week.last.week_code).to eq("2023-W45")
   end
 
   it "creates the day" do
-    perform_enqueued_jobs { job.perform_now("2023-10-31", cascade: false) }
-    expect(TimePeriod::Day.count).to eq(1)
-    expect(TimePeriod::Day.first.ymd).to eq("2023-10-31")
+    perform_enqueued_jobs { job.perform_now("2023-11-07", cascade: false) }
+    expect(TimePeriod::Day.count).to eq(2)
+    expect(TimePeriod::Day.last.ymd).to eq("2023-11-07")
   end
 
   it "queues the day job" do
     perform_enqueued_jobs(only: job) do
-      job.perform_now("2023-10-31", cascade: true)
+      job.perform_now("2023-11-07", cascade: true)
     end
     expect(
       ActiveJob::Base.queue_adapter.enqueued_jobs.first["job_class"]
@@ -28,7 +28,7 @@ describe WorkEnvironment::MorningJob do
       ActiveJob::Base.queue_adapter.enqueued_jobs.first["arguments"].first[
         "value"
       ]
-    ).to eq("2023-10-31")
+    ).to eq("2023-11-07")
   end
 
   after do
