@@ -3,20 +3,12 @@ require "rails_helper"
 describe WorkEnvironment::DayJob do
   include ActiveJob::TestHelper
 
+  fixtures :all
   subject(:job) { described_class }
 
-  let(:week) { TimePeriod::Week.new(week_code: "2023-W44") }
-
-  let(:day) do
-    TimePeriod::Day.new(
-      week:,
-      date: "2023-10-31",
-      ingestion_status: :ingestion_pending
-    )
-  end
+  let(:day) { time_period_day(:halloween) }
 
   it "stops if the day looks dormant" do
-    day.save
     day.searches << WorkEnvironment::Search.new(
       result_status: :result_ready,
       page_number: 1
@@ -29,14 +21,12 @@ describe WorkEnvironment::DayJob do
   end
 
   it "stops at night" do
-    day.save
     Timecop.travel("2023-10-31 22:01")
     perform_enqueued_jobs(only: job) { job.perform_now("2023-10-31") }
     Timecop.return
   end
 
   it "runs itself every 30 seconds" do
-    day.save
     allow(job).to receive(:set).and_return(job)
     allow(job).to receive(:perform_later).and_return(job)
     perform_enqueued_jobs(only: job) { job.perform_now("2023-10-31") }
@@ -48,7 +38,6 @@ describe WorkEnvironment::DayJob do
   end
 
   it "runs the search job" do
-    day.save
     allow(job).to receive(:set).and_return(job)
     allow(job).to receive(:perform_later).and_return(job)
     perform_enqueued_jobs(only: job) do
