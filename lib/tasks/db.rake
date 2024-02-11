@@ -1,5 +1,4 @@
 namespace :db do
-
   desc "Download production database"
   task download: :environment do
     sh "fly sftp get /data/production/data.sqlite3"
@@ -8,6 +7,11 @@ namespace :db do
     sh "mv data.sqlite3 db/development/data.sqlite3"
     sh "mv data.sqlite3-shm db/development/data.sqlite3-shm"
     sh "mv data.sqlite3-wal db/development/data.sqlite3-wal"
+  end
+
+  task zip: :environment do
+    timestamp = Time.now.strftime("%Y-%m-%d.%H:%M:%S")
+    sh "zip -r 'backups/db.#{timestamp}.zip' db/development/data.sqlite3 db/development/data.sqlite3-shm db/development/data.sqlite3-wal"
   end
 
   desc "Upload development database"
