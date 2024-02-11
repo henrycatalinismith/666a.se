@@ -10,7 +10,7 @@ namespace :db do
   end
 
   task zip: :environment do
-    timestamp = Time.now.strftime("%Y-%m-%d.%H:%M:%S")
+    timestamp = Time.now.strftime("%Y%m%d.%H%M%S")
     sh "zip -r 'backups/db.#{timestamp}.zip' db/development/data.sqlite3 db/development/data.sqlite3-shm db/development/data.sqlite3-wal"
   end
 
