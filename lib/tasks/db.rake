@@ -14,12 +14,20 @@ namespace :db do
     sh "zip -r 'backups/db.#{timestamp}.zip' db/development/data.sqlite3 db/development/data.sqlite3-shm db/development/data.sqlite3-wal"
   end
 
-  desc "Upload development database"
-  task upload: :environment do
-    # IO.popen("fly sftp shell", "r+") do |io|
-    #   puts io.gets
-    #   io.puts("ls")
-    #   puts io.gets
-    # end
+  task backup: :environment do
+    zip_files = Dir.glob("backups/*.zip")
+    zip_files.each do |zip_file|
+      FileUtils.mv(zip_file, "/Volumes/Samsung/666a")
+    end
   end
+
+  task rotate: :environment do
+    files = Dir.glob("/Volumes/Samsung/666a/*")
+    if files.length > 4
+      oldest_file = files.min_by { |file| File.mtime(file) }
+      File.delete(oldest_file)
+    end
+  end
+
+  task cron: %i[download zip backup rotate]
 end
