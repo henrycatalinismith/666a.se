@@ -37,6 +37,7 @@ class Admin::StatisticsController < AdminController
 
   def email_metrics
     @days = TimePeriod::Day.chronological.last_two_weeks.map(&:date) + [Date.today]
+    @weeks = TimePeriod::Week.chronological.since_launch
   end
 
   def kitchen_sink
