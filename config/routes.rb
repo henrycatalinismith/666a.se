@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get "/terms", to: "policies#terms"
   get "/forgot", to: "users#forgot"
   get "/sitemap.xml", to: "sitemaps#show", format: "xml", as: "sitemap"
+  get "/feed.xml", to: "posts#index"
 
   scope module: :legal do
     get "/:document_code/:revision_code",

@@ -3,4 +3,6 @@ class Post < ApplicationRecord
   validates :slug, presence: true
   validates :date, presence: true
   validates :body_en, presence: true
+  scope :chronological, -> { order(date: :asc) }
+  scope :reverse_chronological, -> { order(date: :desc) }
 end
