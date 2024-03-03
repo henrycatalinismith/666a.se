@@ -2,8 +2,13 @@ require "redcarpet"
 
 class PostsController < ApplicationController
   def show
+    @posts = Post.reverse_chronological
     post(params[:year], params[:month], params[:day], params[:slug])
     render template: "posts/show", layout: "internal"
+  end
+
+  def index
+    @posts = Post.chronological
   end
 
   private
