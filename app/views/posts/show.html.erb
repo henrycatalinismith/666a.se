@@ -17,20 +17,12 @@
 
     <ol class="flex flex-col gap-4">
 
-      <%= render partial: "posts/link", locals: {
-        href: "/2023/12/03/incident-report",
-        text: "Incident Report",
-      } %>
-
-      <%= render partial: "posts/link", locals: {
-        href: "/2023/11/14/english-translations-of-swedish-laws",
-        text: "English translations of Swedish laws",
-      } %>
-
-      <%= render partial: "posts/link", locals: {
-        href: "/2023/10/31/launch-announcement",
-        text: "Announcing 666:a",
-      } %>
+      <% @posts.each do |post| %>
+        <%= render partial: "posts/link", locals: {
+          href: "/#{post.date.strftime('%Y/%m/%d')}/#{post.slug}",
+          text: post.title,
+        } %>
+      <% end %>
 
     </ol>
 
