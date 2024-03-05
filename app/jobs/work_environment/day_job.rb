@@ -19,7 +19,7 @@ class WorkEnvironment::DayJob < ApplicationJob
       self
         .class
         .set(wait: 30.seconds)
-        .perform_later(date, { **options, force: false })
+        .perform_later(date, { **options, force: false, purge: false })
     end
 
     if options[:cascade]
