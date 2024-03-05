@@ -17,6 +17,7 @@ class WorkEnvironment::SearchJob < ApplicationJob
         page_number: day.next_page_number
       )
 
+    day.increment!(:request_count)
     @search.result_fetching!
     # puts @search.url
     uri = URI(@search.url)
