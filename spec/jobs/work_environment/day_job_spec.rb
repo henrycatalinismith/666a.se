@@ -33,7 +33,7 @@ describe WorkEnvironment::DayJob do
     expect(job).to have_received(:set).with(wait: 30.seconds)
     expect(job).to have_received(:perform_later).with(
       "2023-10-31",
-      { force: false }
+      { force: false, purge: false }
     )
   end
 
