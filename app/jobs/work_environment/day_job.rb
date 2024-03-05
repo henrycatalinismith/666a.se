@@ -13,6 +13,8 @@ class WorkEnvironment::DayJob < ApplicationJob
       return
     end
 
+    day.searches.destroy_all if options[:purge]
+
     if Time.now < Time.parse("23:00")
       self
         .class
