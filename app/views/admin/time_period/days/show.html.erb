@@ -44,7 +44,7 @@
     <dd><%= @day.documents.count %></dd>
 
     <dt>Latest hit count</dt>
-    <dd><%= @day.searches.last.hit_count %></dd>
+    <dd><% if @day.searches.count > 0 %><%= @day.searches.last.hit_count %><% end %></dd>
 
   </dl>
 
