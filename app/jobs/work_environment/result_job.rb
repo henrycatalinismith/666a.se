@@ -19,6 +19,7 @@ class WorkEnvironment::ResultJob < ApplicationJob
 
     return if @result.nil?
 
+    @result.search.day.increment!(:request_count)
     @result.metadata_fetching!
     uri = URI(@result.url)
     response = Net::HTTP.get_response(uri)

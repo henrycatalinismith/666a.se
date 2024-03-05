@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_12_210046) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_05_193322) do
   create_table "legal_documents", id: :string, default: -> { "ULID()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -90,6 +90,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_12_210046) do
     t.date "date"
     t.integer "ingestion_status"
     t.string "week_id"
+    t.decimal "request_count"
     t.index ["date"], name: "index_time_period_days_on_date", unique: true
     t.index ["week_id"], name: "index_time_period_days_on_week_id"
   end
