@@ -18,4 +18,5 @@ jobs:
         username: ${{ secrets.SSH_USERNAME }}
         key: ${{ secrets.SSH_KEY }}
         port: ${{ secrets.SSH_PORT }}
-        script: sh /Users/henrycatalinismith/666a.se/launch-agents/deploy.sh
+        script: |
+          sh /Users/henrycatalinismith/666a.se/launch-agents/deploy.sh
