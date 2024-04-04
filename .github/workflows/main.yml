@@ -19,6 +19,6 @@ jobs:
         key: ${{ secrets.SSH_KEY }}
         port: ${{ secrets.SSH_PORT }}
         script: |
-          cd ${{ secrets.SSH_DIRECTORY }}
+          cd /Users/henrycatalinismith/666a.se/launch-agents
           git pull origin main
           git reset --hard origin/main
