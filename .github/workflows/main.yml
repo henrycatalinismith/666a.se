@@ -18,7 +18,4 @@ jobs:
         username: ${{ secrets.SSH_USERNAME }}
         key: ${{ secrets.SSH_KEY }}
         port: ${{ secrets.SSH_PORT }}
-        script: |
-          cd /Users/henrycatalinismith/666a.se/launch-agents
-          git pull origin main
-          git reset --hard origin/main
+        script: sh /Users/henrycatalinismith/666a.se/launch-agents/deploy.sh
