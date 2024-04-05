@@ -7,24 +7,23 @@
     <string>se.666a.backup</string>
 
     <key>WorkingDirectory</key>
-    <string>/Users/henrycatalinismith/666a.se/sixa</string>
+    <string>/Users/henrycatalinismith/666a.se/launch-agents</string>
 
     <key>ProgramArguments</key>
     <array>
-      <string>/Users/henrycatalinismith/.rbenv/shims/rake</string>
-      <string>backup</string>
+      <string>sh</string>
+      <string>-c</string>
+      <string>/Users/henrycatalinismith/666a.se/launch-agents/backup.sh</string>
     </array>
-
-    <key>UserName</key>
-    <string>henrycatalinismith</string>
 
     <key>EnvironmentVariables</key>
     <dict>
-      <key>RBENV_VERSION</key>
-      <string>3.2.2</string>
-       <key>PATH</key>
-       <string>/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+      <key>PATH</key>
+      <string>/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
     </dict>
+
+    <key>UserName</key>
+    <string>henrycatalinismith</string>
 
     <key>StandardErrorPath</key>
     <string>/Users/henrycatalinismith/666a.se/launch-agents/se.666a.backup.error.log</string>
