@@ -6,18 +6,38 @@
     <key>Label</key>
     <string>se.666a.backup</string>
 
+    <key>WorkingDirectory</key>
+    <string>/Users/henrycatalinismith/666a.se/sixa</string>
+
     <key>ProgramArguments</key>
     <array>
-      <string>sh</string>
-      <string>-c</string>
-      <string>/Users/henrycatalinismith/666a.se/sixa/bin/backup.sh</string>
+      <string>/Users/henrycatalinismith/.rbenv/shims/rake</string>
+      <string>backup</string>
     </array>
+
+    <key>UserName</key>
+    <string>henrycatalinismith</string>
+
+    <key>EnvironmentVariables</key>
+    <dict>
+      <key>RBENV_VERSION</key>
+      <string>3.2.2</string>
+       <key>PATH</key>
+       <string>/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+    </dict>
+
+    <key>StandardErrorPath</key>
+    <string>/Users/henrycatalinismith/666a.se/launch-agents/se.666a.backup.error.log</string>
+    <key>StandardOutPath</key>
+    <string>/Users/henrycatalinismith/666a.se/launch-agents/se.666a.backup.output.log</string>
 
     <key>StartCalendarInterval</key>
     <array>
       <dict>
         <key>Hour</key>
-        <integer>21</integer>
+        <integer>13</integer>
+        <key>Minute</key>
+        <integer>0</integer>
       </dict>
     </array>
 
