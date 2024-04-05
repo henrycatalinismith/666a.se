@@ -1,9 +1,5 @@
 #!/bin/sh
 
-# cd /Users/henrycatalinismith/666a.se/launch-agents
-# git pull origin main
-# git reset --hard origin/main
-
 # Copy the launch agent to the LaunchDaemons directory
 cp se.666a.backup.plist ~/Library/LaunchAgents/se.666a.backup.plist
 
