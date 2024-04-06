@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+
+    <key>Label</key>
+    <string>se.666a.backup</string>
+
+    <key>WorkingDirectory</key>
+    <string>/Users/henrycatalinismith/666a.se/launch-agents</string>
+
+    <key>ProgramArguments</key>
+    <array>
+      <string>sh</string>
+      <string>-c</string>
+      <string>/Users/henrycatalinismith/666a.se/launch-agents/backup.sh</string>
+    </array>
+
+    <key>EnvironmentVariables</key>
+    <dict>
+      <key>PATH</key>
+      <string>/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+    </dict>
+
+    <key>UserName</key>
+    <string>henrycatalinismith</string>
+
+    <key>StandardErrorPath</key>
+    <string>/Users/henrycatalinismith/666a.se/launch-agents/se.666a.backup.error.log</string>
+    <key>StandardOutPath</key>
+    <string>/Users/henrycatalinismith/666a.se/launch-agents/se.666a.backup.output.log</string>
+
+    <key>StartCalendarInterval</key>
+    <array>
+      <dict>
+        <key>Hour</key>
+        <integer>13</integer>
+        <key>Minute</key>
+        <integer>0</integer>
+      </dict>
+    </array>
+
+  </dict>
+</plist>
