@@ -6,13 +6,13 @@ class UsersController < ApplicationController
   end
 
   def dashboard
-    @page_title = "6:6:6a – dashboard"
+    @page_title = "666:a – dashboard"
     @user = current_user
     @subscriptions = @user.subscriptions
   end
 
   def download
-    @page_title = "6:6:6a – download"
+    @page_title = "666:a – download"
     @user = current_user
     if request.post? then
       send_data(
@@ -26,7 +26,7 @@ class UsersController < ApplicationController
   end
 
   def delete
-    @page_title = "6:6:6a – delete account"
+    @page_title = "666:a – delete account"
     session[:referer] = :delete
     if request.post? and !current_user.nil? and current_user.destroy then
       redirect_to "/", :notice => "BALEETED"
@@ -35,7 +35,7 @@ class UsersController < ApplicationController
   end
 
   def email
-    @page_title = "6:6:6a – email"
+    @page_title = "666:a – email"
     if request.patch?
       if current_user.update(params[:user].permit(:email)) then
         redirect_to "/dashboard"
@@ -45,7 +45,7 @@ class UsersController < ApplicationController
   end
 
   def language
-    @page_title = "6:6:6a – language"
+    @page_title = "666:a – language"
     if request.patch?
       if current_user.update(params[:user].permit(:locale)) then
         redirect_to "/dashboard"
@@ -55,7 +55,7 @@ class UsersController < ApplicationController
   end
 
   def name
-    @page_title = "6:6:6a – name"
+    @page_title = "666:a – name"
     if request.patch?
       if current_user.update(params[:user].permit(:name)) then
         redirect_to "/dashboard"
