@@ -2,7 +2,7 @@
 <html>
 
   <head>
-    <title><%= @page_title || "6:6:6a" %></title>
+    <title><%= @page_title || "666:a" %></title>
     <% if content_for?(:canonical) %><%= yield :canonical %><% end %>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
@@ -11,7 +11,7 @@
     <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "application" %>
     <%= javascript_importmap_tags %>
-    <%= auto_discovery_link_tag(:rss, "/feed.xml", title: "6:6:6a") %>
+    <%= auto_discovery_link_tag(:rss, "/feed.xml", title: "666:a") %>
   </head>
 
   <body dir="<%= I18n.locale == :ar ? "rtl" : "ltr" %>">
