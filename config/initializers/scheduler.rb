@@ -1,10 +1,5 @@
 require "rufus-scheduler"
 
-if !defined?(FLY_APP_NAME)
-  puts "Scheduler not started: FLY_APP_NAME not defined"
-  return
-end
-
 # do not schedule when Rails is run from its console, for a test/spec, or from a
 # Rake task
 if defined?(Rails::Console) || Rails.env.test? ||
