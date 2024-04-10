@@ -48,3 +48,18 @@ git clone git@github.com:henrycatalinismith/666a.se.git
 
 </dl>
 
+
+## Community
+
+<dl>
+
+  <dt>
+    <a href="https://github.com/henrycatalinismith/666a.se/blob/main/code-of-conduct.md">
+      Code of Conduct
+    </a>
+  </dt>
+  <dd>
+    Adapted from version 2.1 of the Contributor Covenant.
+  </dd>
+
+</dl>
