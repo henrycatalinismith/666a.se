@@ -43,7 +43,7 @@ git clone git@github.com:henrycatalinismith/666a.se.git
     </a>
   </dt>
   <dd>
-    A guide to the relationships between the work environment jobs.
+    Diagram and explanation of the relationships between the work environment jobs.
   </dd>
 
 </dl>
