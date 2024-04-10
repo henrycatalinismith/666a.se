@@ -18,6 +18,15 @@ git clone git@github.com:henrycatalinismith/666a.se.git
   <dd>
     Some of the key system dependencies and known compatible version numbers.
   </dd>
+  
+  <dt>
+    <a href="https://github.com/henrycatalinismith/666a.se/blob/main/docs/environment-variables.md">
+      Environment Variables
+    </a>
+  </dt>
+  <dd>
+    A guide to the environment variables necessary to run a 666a server. Written from a disaster recovery perspective, i.e. “what if the original secret values of these have all been lost?".
+  </dd>
 
   <dt>
     <a href="https://github.com/henrycatalinismith/666a.se/blob/main/docs/service-architecture-diagram.md">
@@ -39,10 +48,3 @@ git clone git@github.com:henrycatalinismith/666a.se.git
 
 </dl>
 
-## Environment
-
-| Name               | Purpose                                        |
-| ------------------ | ---------------------------------------------- |
-| `RAILS_MASTER_KEY` | Encrypting and decrypting the credentials file |
-| `SENDGRID_API_KEY` | Sending email alerts                           |
-| `SENTRY_DSN`       | Error logging                                  |
