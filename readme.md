@@ -6,7 +6,7 @@
 git clone git@github.com:henrycatalinismith/666a.se.git
 ```
 
-## Docs
+## Documentation
 
 <dl>
 
