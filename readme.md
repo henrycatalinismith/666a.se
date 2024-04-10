@@ -54,7 +54,7 @@ git clone git@github.com:henrycatalinismith/666a.se.git
 <dl>
 
   <dt>
-    <a href="https://github.com/henrycatalinismith/666a.se/blob/main/code-of-conduct.md">
+    <a href="https://github.com/henrycatalinismith/666a.se/blob/main/code_of_conduct.md">
       Code of Conduct
     </a>
   </dt>
