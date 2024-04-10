@@ -6,6 +6,14 @@
 git clone git@github.com:henrycatalinismith/666a.git
 ```
 
+
+## Docs
+
+<dl>
+  <dt><a href="https://github.com/henrycatalinismith/666a.se/blob/main/docs/work-environment-jobs.md">Work Environment Jobs</a></dt>
+  <dd>A guide to the relationships between the work environment jobs.</dd>
+</dl>
+
 ## Services
 
 ```mermaid
