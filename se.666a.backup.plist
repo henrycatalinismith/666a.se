@@ -7,13 +7,13 @@
     <string>se.666a.backup</string>
 
     <key>WorkingDirectory</key>
-    <string>/Users/henrycatalinismith/666a.se/launch-agents</string>
+    <string>/Users/henrycatalinismith/666a.se</string>
 
     <key>ProgramArguments</key>
     <array>
       <string>sh</string>
       <string>-c</string>
-      <string>/Users/henrycatalinismith/666a.se/launch-agents/backup.sh</string>
+      <string>/Users/henrycatalinismith/666a.se/bin/backup.sh</string>
     </array>
 
     <key>EnvironmentVariables</key>
@@ -26,9 +26,9 @@
     <string>henrycatalinismith</string>
 
     <key>StandardErrorPath</key>
-    <string>/Users/henrycatalinismith/666a.se/launch-agents/se.666a.backup.error.log</string>
+    <string>/Users/henrycatalinismith/666a.se/log/se.666a.backup.error.log</string>
     <key>StandardOutPath</key>
-    <string>/Users/henrycatalinismith/666a.se/launch-agents/se.666a.backup.output.log</string>
+    <string>/Users/henrycatalinismith/666a.se/log/se.666a.backup.output.log</string>
 
     <key>StartCalendarInterval</key>
     <array>
