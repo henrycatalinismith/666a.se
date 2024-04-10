@@ -1,8 +1,8 @@
 #!/bin/bash
 
-fly -a sixa sftp get /data/production/data.sqlite3
-fly -a sixa sftp get /data/production/data.sqlite3-shm
-fly -a sixa sftp get /data/production/data.sqlite3-wal
+fly -a 666a sftp get /data/production/data.sqlite3
+fly -a 666a sftp get /data/production/data.sqlite3-shm
+fly -a 666a sftp get /data/production/data.sqlite3-wal
 
 timestamp=$(date +"%Y%m%d.%H%M%S")
 zip -r "db.${timestamp}.zip" data.sqlite3 data.sqlite3-shm data.sqlite3-wal
