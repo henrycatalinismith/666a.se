@@ -1,14 +1,23 @@
-# 666:a
+# 666a.se
 
 ## Setup
 
 ```bash
-git clone git@github.com:henrycatalinismith/666a.git
+git clone git@github.com:henrycatalinismith/666a.se.git
 ```
 
 ## Docs
 
 <dl>
+
+  <dt>
+    <a href="https://github.com/henrycatalinismith/666a.se/blob/main/docs/dependency-version-numbers.md">
+      Dependency Version Numbers
+    </a>
+  </dt>
+  <dd>
+    Some of the key system dependencies and known compatible version numbers.
+  </dd>
 
   <dt>
     <a href="https://github.com/henrycatalinismith/666a.se/blob/main/docs/service-architecture-diagram.md">
@@ -29,14 +38,6 @@ git clone git@github.com:henrycatalinismith/666a.git
   </dd>
 
 </dl>
-
-## Dependencies
-
-| Name   | Version  |
-| ------ | -------- |
-| Ruby   | 3.2.2    |
-| Docker | 20.10.21 |
-| SQLite | 3.39.5   |
 
 ## Environment
 
