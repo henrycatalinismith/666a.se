@@ -1,6 +1,11 @@
+---
+title: Work Environment Jobs
+layout: tech
+---
+
 # Work Environment Jobs
 
-```mermaid
+<pre class="mermaid">
 flowchart TD
     A[WorkEnvironment::MorningJob] -->  B
     B[WorkEnvironment::DayJob] --> B
@@ -10,4 +15,4 @@ flowchart TD
     E[WorkEnvironment::DocumentJob] --> F
     F[WorkEnvironment::NotificationJob] --> G
     G[WorkEnvironment::EmailJob]
-```
+</pre>
