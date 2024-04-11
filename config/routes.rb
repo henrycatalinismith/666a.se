@@ -2,8 +2,8 @@
 Rails.application.routes.draw do
   root "home#index"
 
-  get "/accessibility", to: "policies#accessibility"
-  get "/privacy", to: "policies#privacy"
+  get "/accessibility", to: "pages#show"
+  get "/privacy", to: "pages#show"
   get "/terms", to: "policies#terms"
   get "/forgot", to: "users#forgot"
   get "/sitemap.xml", to: "sitemaps#show", format: "xml", as: "sitemap"

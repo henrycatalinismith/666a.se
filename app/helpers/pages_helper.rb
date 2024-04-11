@@ -1,12 +1,12 @@
-module PoliciesHelper
-  def render_policy(text)
-    renderer = PolicyRender.new()
+module PagesHelper
+  def render_page(markdown)
+    renderer = PageRender.new()
     redcarpet = Redcarpet::Markdown.new(renderer, :tables => true)
-    redcarpet.render(text)
+    redcarpet.render(markdown)
   end
 end
 
-class PolicyRender < Redcarpet::Render::HTML
+class PageRender < Redcarpet::Render::HTML
   def header(text, header_level)
     case header_level
     when 1

@@ -120,6 +120,7 @@ GEM
       tzinfo
     event_emitter (0.2.6)
     ffi (1.16.3)
+    front_matter_parser (1.0.1)
     fugit (1.10.1)
       et-orbi (~> 1, >= 1.2.7)
       raabro (~> 1.4)
@@ -329,6 +330,7 @@ DEPENDENCIES
   discordrb
   dockerfile-rails (>= 1.5)
   dotenv-rails
+  front_matter_parser
   importmap-rails (~> 1.2)
   litestack (~> 0.3.0)
   puma (~> 5.0)
