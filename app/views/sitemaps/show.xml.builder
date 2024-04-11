@@ -14,7 +14,7 @@ xml.urlset xmlns: "http://www.sitemaps.org/schemas/sitemap/0.9" do
       xml.lastmod r.updated_at.strftime("%Y-%m-%dT%H:%M:%S+00:00")
     end
 
-    r.elements.where('element_type != ?', :md).each do |e|
+    r.elements.where('element_type == ?', :h3).each do |e|
 
       xml.url do
         xml.loc "https://666a.se/#{d.document_code}/#{r.revision_code}/#{e.element_code}/sv:en"
