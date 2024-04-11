@@ -8,6 +8,7 @@
   <div class="flex flex-col gap-4 flex-1">
     <%= render_page(@content).html_safe %>
   </div>
+
   <% if @data["layout"] == "policy" %>
     <div class="flex flex-col gap-4 h-min md:p-4 md:w-80 md:border md:border-gray-200 md:rounded-lg md:shadow">
       <h2 class="text-xl font-bold">
@@ -34,6 +35,43 @@
         </li>
       </ol>
     </div>
+  <% elsif @data["layout"] == "tech" %>
+    <div class="flex flex-col gap-4 h-min md:p-4 md:w-80 md:border md:border-gray-200 md:rounded-lg md:shadow">
+      <h2 class="text-xl font-bold">
+        Tech
+      </h2>
+      <ol class="flex flex-col gap-4">
+
+        <li>
+          <a href="/dependency-version-numbers" class="text-blue-700 flex flex-row gap-2 items-center underline">
+            Dependency Version Numbers
+          </a>
+        </li>
+
+        <li>
+          <a href="/environment-variables" class="text-blue-700 flex flex-row gap-2 items-center underline">
+            Environment Variables
+          </a>
+        </li>
+
+        <li>
+          <a href="/service-architecture-diagram" class="text-blue-700 flex flex-row gap-2 items-center underline">
+            Service Architecture Diagram
+          </a>
+        </li>
+
+        <li>
+          <a href="/work-environment-jobs" class="text-blue-700 flex flex-row gap-2 items-center underline">
+            Work Environment Jobs
+          </a>
+        </li>
+
+      </ol>
+    </div>
   <% end %>
 
 </div>
+
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+</script>

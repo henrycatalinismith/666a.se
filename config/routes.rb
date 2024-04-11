@@ -3,8 +3,13 @@ Rails.application.routes.draw do
   root "home#index"
 
   get "/accessibility", to: "pages#show"
+  get "/dependency-version-numbers", to: "pages#show"
+  get "/environment-variables", to: "pages#show"
   get "/privacy", to: "pages#show"
+  get "/service-architecture-diagram", to: "pages#show"
   get "/terms", to: "pages#show"
+  get "/work-environment-jobs", to: "pages#show"
+
   get "/forgot", to: "users#forgot"
   get "/sitemap.xml", to: "sitemaps#show", format: "xml", as: "sitemap"
   get "/feed.xml", to: "posts#index"

@@ -1,3 +1,8 @@
+---
+title: Dependency Version Numbers
+layout: tech
+---
+
 # Dependency Version Numbers
 
 | Name   | Version  |
