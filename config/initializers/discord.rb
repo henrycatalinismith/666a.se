@@ -11,7 +11,10 @@ if !ENV["DISCORD_BOT_AUTH_TOKEN"].nil? and !ENV["DISCORD_BOT_LOG_CHANNEL_ID"].ni
   #end
 
   ActiveSupport::Notifications.subscribe("perform.active_job") do |event|
-    if event.payload[:job].class == WorkEnvironment::SearchJob then
+    if event.payload[:job].class == WorkEnvironment::MorningJob or 
+      event.payload[:job].class == WorkEnvironment::DayJob or
+      event.payload[:job].class == WorkEnvironment::SearchJob or
+      event.payload[:job].class == WorkEnvironment::ResultJob then
       bot.send_message(ENV["DISCORD_BOT_LOG_CHANNEL_ID"], "`#{event.payload[:job].class} #{event.payload[:job].arguments.first}`")
     end
   end
