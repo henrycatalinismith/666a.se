@@ -11,7 +11,7 @@ git clone git@github.com:henrycatalinismith/666a.se.git
 <dl>
 
   <dt>
-    <a href="https://github.com/henrycatalinismith/666a.se/blob/main/docs/dependency-version-numbers.md">
+    <a href="https://666a.se/dependency-version-numbers">
       Dependency Version Numbers
     </a>
   </dt>
@@ -20,7 +20,7 @@ git clone git@github.com:henrycatalinismith/666a.se.git
   </dd>
   
   <dt>
-    <a href="https://github.com/henrycatalinismith/666a.se/blob/main/docs/environment-variables.md">
+    <a href="https://666a.se/environment-variables">
       Environment Variables
     </a>
   </dt>
@@ -29,7 +29,7 @@ git clone git@github.com:henrycatalinismith/666a.se.git
   </dd>
 
   <dt>
-    <a href="https://github.com/henrycatalinismith/666a.se/blob/main/docs/service-architecture-diagram.md">
+    <a href="https://666a.se/service-architecture-diagram">
       Service Architecture Diagram
     </a>
   </dt>
@@ -38,7 +38,7 @@ git clone git@github.com:henrycatalinismith/666a.se.git
   </dd>
 
   <dt>
-    <a href="https://github.com/henrycatalinismith/666a.se/blob/main/docs/work-environment-jobs.md">
+    <a href="https://666a.se/work-environment-jobs">
       Work Environment Jobs
     </a>
   </dt>
@@ -54,7 +54,7 @@ git clone git@github.com:henrycatalinismith/666a.se.git
 <dl>
 
   <dt>
-    <a href="https://github.com/henrycatalinismith/666a.se/blob/main/code_of_conduct.md">
+    <a href="https://666a.se/conduct">
       Code of Conduct
     </a>
   </dt>

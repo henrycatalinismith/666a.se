@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root "home#index"
 
   get "/accessibility", to: "pages#show"
+  get "/conduct", to: "pages#show"
   get "/dependency-version-numbers", to: "pages#show"
   get "/environment-variables", to: "pages#show"
   get "/privacy", to: "pages#show"
