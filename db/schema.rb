@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_05_193322) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_11_190642) do
   create_table "legal_documents", id: :string, default: -> { "ULID()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -51,16 +51,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_05_193322) do
     t.string "translation_text"
     t.index ["element_id"], name: "index_legal_translations_on_element_id"
     t.index ["translation_locale"], name: "index_legal_translations_on_translation_locale"
-  end
-
-  create_table "policies", id: :string, default: -> { "ULID()" }, force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "name"
-    t.string "icon"
-    t.text "slug"
-    t.string "body"
-    t.index ["slug"], name: "index_policies_on_slug", unique: true
   end
 
   create_table "posts", id: :string, default: -> { "ULID()" }, force: :cascade do |t|

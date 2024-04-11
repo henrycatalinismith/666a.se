@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   get "/accessibility", to: "pages#show"
   get "/privacy", to: "pages#show"
-  get "/terms", to: "policies#terms"
+  get "/terms", to: "pages#show"
   get "/forgot", to: "users#forgot"
   get "/sitemap.xml", to: "sitemaps#show", format: "xml", as: "sitemap"
   get "/feed.xml", to: "posts#index"

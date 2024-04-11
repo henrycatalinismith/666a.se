@@ -3,9 +3,8 @@
     <nav class="-mb-6 columns-2 sm:flex sm:justify-center sm:space-x-12" aria-label="Footer">
       <% @policies.each do |policy| %>
         <%= render partial: "home/footer-link", locals: {
-          href: "/#{policy.slug}",
-          icon: policy.icon,
-          text: t("home.#{policy.slug}"),
+          href: "/#{policy[:slug]}",
+          text: t("home.#{policy[:slug]}"),
         } %>
       <% end %>
     </nav>
