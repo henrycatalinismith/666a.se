@@ -1,5 +1,9 @@
 require "discordrb"
 
+if !defined?(ENV["DISCORD_BOT_AUTH_TOKEN"]) then
+  return
+end
+
 bot = Discordrb::Bot.new token: ENV["DISCORD_BOT_AUTH_TOKEN"]
 
 bot.send_message(ENV["DISCORD_BOT_LOG_CHANNEL_ID"], "`rails server starting`")
