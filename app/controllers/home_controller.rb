@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
   def index
-    @page_title = "666:a"
+    @page_title = "666a"
     @policies = [
       { name: "Accessibility", slug: "accessibility" },
       { name: "Privacy Policy", slug: "privacy" },
