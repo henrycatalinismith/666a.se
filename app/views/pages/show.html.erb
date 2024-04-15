@@ -6,7 +6,7 @@
 
 <div class="container p-8 flex flex-col gap-8 md:flex-row">
   <div class="flex flex-col gap-4 flex-1">
-    <%= render_page(@content).html_safe %>
+    <%= render_page(@content, @data).html_safe %>
   </div>
 
   <% if @data["layout"] == "policy" %>
@@ -33,6 +33,39 @@
             <span class="underline">Terms of Service</span>
           </a>
         </li>
+      </ol>
+    </div>
+  <% elsif @data["layout"] == "post" %>
+    <div class="flex flex-col gap-4 h-min md:p-4 md:w-80 md:border md:border-gray-200 md:rounded-lg md:shadow">
+      <h2 class="text-xl font-bold">
+        Archive
+      </h2>
+      <ol class="flex flex-col gap-4">
+
+        <li>
+          <a href="/night-work-tech-and-swedish-labour-law" class="text-blue-700 flex flex-row gap-2 items-center underline">
+            Night Work, Tech, And Swedish Labour Law
+          </a>
+        </li>
+
+        <li>
+          <a href="/incident-report" class="text-blue-700 flex flex-row gap-2 items-center underline">
+            Incident Report
+          </a>
+        </li>
+
+        <li>
+          <a href="/english-translations-of-swedish-laws" class="text-blue-700 flex flex-row gap-2 items-center underline">
+            English translations of Swedish laws
+          </a>
+        </li>
+
+        <li>
+          <a href="/launch-announcement" class="text-blue-700 flex flex-row gap-2 items-center underline">
+            Announcing 666a
+          </a>
+        </li>
+
       </ol>
     </div>
   <% elsif @data["layout"] == "tech" %>
