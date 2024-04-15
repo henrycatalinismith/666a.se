@@ -1,16 +1,48 @@
 module PagesHelper
-  def render_page(markdown)
-    renderer = PageRender.new()
+  def render_page(markdown, data = {})
+    @data = data
+    renderer = PageRender.new(@data)
     redcarpet = Redcarpet::Markdown.new(renderer, :tables => true)
     redcarpet.render(markdown)
   end
 end
 
 class PageRender < Redcarpet::Render::HTML
+  def initialize(data)
+    super
+    @data = data
+  end
+
   def header(text, header_level)
     case header_level
     when 1
-      %(<h1 class="text-3xl font-bold">#{text}</h1>)
+      if @data["date"] then
+        %(
+          <div class="flex flex-col gap-2">
+            <h1 class="text-3xl font-bold">#{text}</h1>
+  
+            <div class="flex items-center divide-x-2 divide-gray-300">
+              <time class="pr-4 text-gray-500" datetime="#{@data["date"].strftime("%Y-%m-%d")}">
+                #{@data["date"].strftime("%Y-%m-%d")}
+              </time>
+  
+              <div class="pl-4 flex flex-row gap-2 items-center">
+                <img
+                  class="w-6 h-6 rounded-full"
+                  src="/henry-32.jpeg"
+                  alt="Photo of Henry"
+                />
+                <span class="pr-3 font-medium text-gray-500 ">
+                  Henry
+                </span>
+              </div>
+            </div>
+  
+          </div>
+        )
+      else 
+        %(<h1 class="text-3xl font-bold">#{text}</h1>)
+      end
     else
       %(<h#{header_level} class="text-xl font-bold">#{text}</h#{header_level}>)
     end

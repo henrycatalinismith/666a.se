@@ -5,11 +5,20 @@ Rails.application.routes.draw do
   get "/accessibility", to: "pages#show"
   get "/conduct", to: "pages#show"
   get "/dependency-version-numbers", to: "pages#show"
+  get "/english-translations-of-swedish-laws", to: "pages#show"
   get "/environment-variables", to: "pages#show"
+  get "/incident-report", to: "pages#show"
+  get "/launch-announcement", to: "pages#show"
+  get "/night-work-tech-and-swedish-labour-law", to: "pages#show"
   get "/privacy", to: "pages#show"
   get "/service-architecture-diagram", to: "pages#show"
   get "/terms", to: "pages#show"
   get "/work-environment-jobs", to: "pages#show"
+
+  get "/2024/01/22/night-work-tech-and-swedish-labour-law", to: redirect("/night-work-tech-and-swedish-labour-law")
+  get "/2023/12/03/incident-report", to: redirect("/incident-report")
+  get "/2023/11/14/english-translations-of-swedish-laws", to: redirect("/english-translations-of-swedish-laws")
+  get "/2023/10/31/launch-announcement", to: redirect("/launch-announcement")
 
   get "/forgot", to: "users#forgot"
   get "/sitemap.xml", to: "sitemaps#show", format: "xml", as: "sitemap"
