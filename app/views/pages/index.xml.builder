@@ -9,11 +9,11 @@ xml.rss version: "2.0" do
 
     @posts.each do |post|
       xml.item do
-        xml.title post.title
-        xml.description markdown.render(post.body_en)
-        xml.pubDate post.date.rfc822
-        xml.link "https://666a.se/#{post.date.strftime("%Y/%m/%d")}/#{post.slug}"
-        xml.guid "https://666a.se/#{post.date.strftime("%Y/%m/%d")}/#{post.slug}"
+        xml.title post[:title]
+        xml.description markdown.render(post[:body])
+        xml.pubDate post[:date].rfc822
+        xml.link "https://666a.se/#{post[:date].strftime("%Y/%m/%d")}/#{post[:slug]}"
+        xml.guid "https://666a.se/#{post[:date].strftime("%Y/%m/%d")}/#{post[:slug]}"
       end
     end
   end
