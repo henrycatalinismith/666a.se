@@ -22,7 +22,7 @@ Rails.application.routes.draw do
 
   get "/forgot", to: "users#forgot"
   get "/sitemap.xml", to: "sitemaps#show", format: "xml", as: "sitemap"
-  get "/feed.xml", to: "posts#index"
+  get "/feed.xml", to: "pages#index"
 
   scope module: :legal do
     get "/:document_code/:revision_code",
@@ -56,13 +56,6 @@ Rails.application.routes.draw do
 
   get "/delete", to: "users#delete"
   get "/download", to: "users#download"
-
-  get "/:year/:month/:day/:slug",
-      to: "posts#show",
-      year: /(19|20)\d{2}/,
-      month: /(0[0-9]|1[0-2])/,
-      day: /(0[0-9]|1[0-9]|2[0-9]|3[0-1])/,
-      slug: /[a-z0-9-]+/
 
   scope module: :work_environment do
     get "/follow", to: "subscriptions#new"
@@ -103,10 +96,6 @@ Rails.application.routes.draw do
       get "/policies", to: "policies#index"
       match "/policies/new", to: "policies#new", via: %i[get post]
       match "/policies/:slug", to: "policies#edit", via: %i[get patch]
-
-      get "/posts", to: "posts#index"
-      match "/posts/new", to: "posts#new", via: %i[get post]
-      match "/posts/:slug", to: "posts#edit", via: %i[get patch]
 
       get "/statistics", to: "statistics#index"
       get "/statistics/december_comparison",
