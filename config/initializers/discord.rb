@@ -1,7 +1,7 @@
 require "discordrb"
 
 if !ENV["DISCORD_BOT_AUTH_TOKEN"].nil? and
-     !ENV["DISCORD_BOT_LOG_CHANNEL_ID"].nil?
+     !ENV["DISCORD_BOT_LOG_CHANNEL_ID"].nil? and Rails.env.production?
   bot = Discordrb::Bot.new token: ENV["DISCORD_BOT_AUTH_TOKEN"]
 
   #bot.send_message(ENV["DISCORD_BOT_LOG_CHANNEL_ID"], "`rails server starting`")
