@@ -5,7 +5,6 @@ class WorkEnvironment::DayJob < ApplicationJob
 
   def perform(date, options = {})
     day = TimePeriod::Day.find_by(date:)
-    page = options[:page] || 1
 
     return if day.nil?
 
@@ -20,7 +19,7 @@ class WorkEnvironment::DayJob < ApplicationJob
       self
         .class
         .set(wait: 30.seconds)
-        .perform_later(date, { **options, force: false, purge: false, page: page + 1 })
+        .perform_later(date, { **options, force: false, purge: false })
     end
 
     if options[:cascade]
