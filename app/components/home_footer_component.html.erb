@@ -2,10 +2,11 @@
   <div class="mx-auto max-w-7xl overflow-hidden px-6 py-20 sm:py-24 lg:px-8">
     <nav class="-mb-6 columns-2 sm:flex sm:justify-center sm:space-x-12" aria-label="Footer">
       <% @policies.each do |policy| %>
-        <%= render partial: "home/footer-link", locals: {
-          href: "/#{policy[:slug]}",
-          text: t("home.#{policy[:slug]}"),
-        } %>
+        <div class="pb-6">
+          <a href="<%= policy[:href] %>" class="text-sm leading-6 text-gray-600 hover:text-gray-900">
+            <%= t(policy[:text]) %>
+          </a>
+        </div>
       <% end %>
     </nav>
 
