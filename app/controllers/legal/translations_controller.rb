@@ -14,17 +14,18 @@ class Legal::TranslationsController < ApplicationController
   layout "internal"
 
   def show
+
     @document = Legal::Document.find_by(document_code: params[:document_code])
     if @document.nil? then
-      raise ActionController::RoutingError.new('Not Found')
+      raise ActionController::RoutingError.new("Not Found lmao #{params[:document_code]}")
     end
     @revision = @document.revisions.find_by(revision_code: params[:revision_code])
     if @revision.nil? then
-      raise ActionController::RoutingError.new('Not Found')
+      raise ActionController::RoutingError.new('Not Found lol')
     end
     @element = @revision.elements.find_by(element_code: params[:element_code])
     if @element.nil? or @element.element_type == "md" or @element.element_code.match(/\AK.\Z/) then
-      raise ActionController::RoutingError.new('Not Found')
+    raise ActionController::RoutingError.new("Not Found oh no #{params[:element_code]}")
     end
 
     elements = []
@@ -59,23 +60,23 @@ class Legal::TranslationsController < ApplicationController
       elements.unshift h1
     end
 
-    if @document.document_code == "1977:1160" then
+    if @document.document_code == "aml" then
       h2_match = prev_h2.translations.first.translation_text.match(/\AChapter (\d+)/)
       h3_match = @element.translations.first.translation_text.match(/\ASection ([0-9a-z\.]+)/)
       @page_title = "Chapter #{h2_match[1]} Section #{h3_match[1]} of the Swedish Work Environment Act"
-    elsif @document.document_code == "1976:580" then
+    elsif @document.document_code == "mbl" then
       h3_match = @element.translations.first.translation_text.match(/\ASection ([0-9a-z\.]+)/)
       @page_title = "Section #{h3_match[1]} of the Swedish Co-Determination Act"
-    elsif @document.document_code == "1982:80" then
+    elsif @document.document_code == "las" then
       h3_match = @element.translations.first.translation_text.match(/\ASection ([0-9a-z\.]+)/)
       @page_title = "Section #{h3_match[1]} of the Swedish Employment Protection Act"
-    elsif @document.document_code == "1982:673" then
+    elsif @document.document_code == "atl" then
       h3_match = @element.translations.first.translation_text.match(/\ASection ([0-9a-z\.]+)/)
       @page_title = "Section #{h3_match[1]} of the Swedish Working Hours Act"
     end
 
-    left = elements.map { |e| e.translate(params[:left_locale]) }
-    right = elements.map { |e| e.translate(params[:right_locale]) }
+    left = elements.map { |e| e.translate("sv") }
+    right = elements.map { |e| e.translate("en") }
     @elements = left.zip(right)
 
     renderer = LegalRender.new()

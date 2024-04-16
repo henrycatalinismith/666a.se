@@ -20,6 +20,42 @@ Rails.application.routes.draw do
   get "/2023/11/14/english-translations-of-swedish-laws", to: redirect("/english-translations-of-swedish-laws")
   get "/2023/10/31/launch-announcement", to: redirect("/launch-announcement")
 
+  get "/1977:1160/2014:659", to: redirect("/aml-v2014:659-in-english")
+  get "/1976:580/2021:1114", to: redirect("/mbl-v2021:1114-in-english")
+  get "/1982:80/2022:836", to: redirect("/las-v2022:836-in-english")
+  get "/1982:673/2013:611", to: redirect("/atl-v2013:611-in-english")
+
+   get "/:element_code-of-:document_code-v:revision_code-in-english",
+     to: "legal/translations#show"
+
+  get "/:document_code-v:revision_code-in-english",
+    to: "legal/revisions#show"
+    # document_code: /[a-z]{3}/,
+    # revision_code: /[0-9]{4}:[0-9]{3,4}/
+
+  get "/1977:1160/2014:659/:element_code/sv:en", to: redirect{
+    |params| "/chapter-#{params[:element_code].match(/K(\d)/)[1]}-section-#{params[:element_code].match(/P(\d[a-z]?)/)[1]}-of-aml-v2014:659-in-english"
+  }, chapter: /\d/
+
+  get "/1976:580/2021:1114/P:section/sv:en", to: redirect{
+    |params| "/section-#{params[:section]}-of-mbl-v2021:1114-in-english"
+  }
+
+  get "/1982:80/2022:836/P:section/sv:en", to: redirect{
+    |params| "/section-#{params[:section]}-of-las-v2022:836-in-english"
+  }
+
+  get "/1982:673/2013:611/P:section/sv:en", to: redirect{
+    |params| "/section-#{params[:section]}-of-atl-v2013:611-in-english"
+  }
+  
+  # get "/:element_code-of-las-v2022:836-in-english",
+  #   to: "legal/translations#new_show",
+  #   defaults: {
+  #     document_code: "las",
+  #     revision_code: "2022:836",
+  #   }
+
   get "/forgot", to: "users#forgot"
   get "/sitemap.xml", to: "sitemaps#show", format: "xml", as: "sitemap"
   get "/feed.xml", to: "pages#index"
@@ -29,12 +65,18 @@ Rails.application.routes.draw do
         to: "revisions#show",
         document_code: /\d{4}:\d+/,
         revision_code: /\d{4}:\d+/
+
     get "/:document_code/:revision_code/:element_code/:left_locale\::right_locale",
         to: "translations#show",
         document_code: /\d{4}:\d+/,
         revision_code: /\d{4}:\d+/,
         left_locale: /[a-z]{2}/,
         right_locale: /[a-z]{2}/
+
+    get "/las-version-:version-section-:section-in-english",
+        to: "translations#new_show",
+        version: /\d{4}:\d+/,
+        section: /\d+[a-z]?/
   end
 
   devise_for :users,
