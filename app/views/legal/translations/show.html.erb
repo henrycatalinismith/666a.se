@@ -16,23 +16,17 @@
   <% end %>
 
   <p>
-    <% if @document.document_code == "1977:1160" then %>
-      <a href="/1977:1160/2014:659" class="text-blue-700 underline">
+    <a href="/<%= @document.document_code %>-v<%= @revision.revision_code %>-in-english" class="text-blue-700 underline">
+      <% if @document.document_code == "aml" then %>
         Overview of the entire Work Environment Act
-      </a>
-    <% elsif @document.document_code == "1976:580" then %>
-      <a href="/1976:580/2021:1114" class="text-blue-700 underline">
+      <% elsif @document.document_code == "mbl" then %>
         Overview of the entire Co-Determination Act
-      </a>
-    <% elsif @document.document_code == "1982:80" then %>
-      <a href="/1982:80/2022:836" class="text-blue-700 underline">
+      <% elsif @document.document_code == "las" then %>
         Overview of the entire Employment Protection Act
-      </a>
-    <% elsif @document.document_code == "1982:673" then %>
-      <a href="/1982:673/2013:611" class="text-blue-700 underline">
+      <% elsif @document.document_code == "atl" then %>
         Overview of the entire Working Hours Act
-      </a>
-    <% end %>
+      <% end %>
+    </a>
   </p>
 
   <%= render partial: "legal/outdated" %>

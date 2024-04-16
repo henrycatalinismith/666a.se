@@ -16,20 +16,20 @@ class Legal::RevisionsController < ApplicationController
   def show
     @document = Legal::Document.find_by(document_code: params[:document_code])
     if @document.nil? then
-      raise ActionController::RoutingError.new('Not Found')
+      raise ActionController::RoutingError.new('Not Found doc')
     end
     @revision = @document.revisions.find_by(revision_code: params[:revision_code])
     if @revision.nil? then
-      raise ActionController::RoutingError.new('Not Found')
+      raise ActionController::RoutingError.new('Not Found revs ' + params[:revision_code])
     end
 
-    if @document.document_code == "1977:1160" then
+    if @document.document_code == "aml" then
       @page_title = "The Swedish Work Environment Act"
-    elsif @document.document_code == "1976:580" then
+    elsif @document.document_code == "mbl" then
       @page_title = "The Swedish Co-Determination Act"
-    elsif @document.document_code == "1982:80" then
+    elsif @document.document_code == "las" then
       @page_title = "The Swedish Employment Protection Act"
-    elsif @document.document_code == "1982:673" then
+    elsif @document.document_code == "atl" then
       @page_title = "The Swedish Working Hours Act"
     end
 

@@ -4,24 +4,24 @@
 <div class="container flex flex-col gap-8 w-full p-4 py-8">
 
   <%= h1 do %>
-    <% if @document.document_code == "1977:1160" then %>
+    <% if @document.document_code == "aml" then %>
       The Swedish Work Environment Act
-    <% elsif @document.document_code == "1976:580" then %>
+    <% elsif @document.document_code == "mbl" then %>
       The Swedish Co-Determination Act
-    <% elsif @document.document_code == "1982:80" then %>
+    <% elsif @document.document_code == "las" then %>
       The Swedish Employment Protection Act
-    <% elsif @document.document_code == "1982:673" then %>
+    <% elsif @document.document_code == "atl" then %>
       The Swedish Working Hours Act
     <% end %>
     <br />
     <span class="text-lg leading-1 align-top text-slate-500">
-      <% if @document.document_code == "1977:1160" then %>
+      <% if @document.document_code == "aml" then %>
         Version 2014:659, English translation
-      <% elsif @document.document_code == "1976:580" then %>
+      <% elsif @document.document_code == "mbl" then %>
         Version 2021:1114, English translation
-    <% elsif @document.document_code == "1982:80" then %>
+    <% elsif @document.document_code == "las" then %>
         Version 2022:836, English translation
-    <% elsif @document.document_code == "1982:80" then %>
+    <% elsif @document.document_code == "atl" then %>
         Version 2013:611, English translation
       <% end %>
     </span>
@@ -54,12 +54,12 @@
             </td>
           <% elsif left.element_type == "h3" %>
             <td class="text-base lg:text-xl font-bold pt-4 align-top <%= both_sides %> <%= left_classes %>">
-              <a class="text-blue-700 underline" href="/<%= @document.document_code %>/<%= @revision.revision_code %>/<%= left.element_code %>/sv:en">
+              <a class="text-blue-700 underline" href="/<%= left.element_code %>-of-<%= @document.document_code %>-v<%= @revision.revision_code %>-in-english">
                 <%= left.element_text %>
               </a>
             </td>
             <td class="text-base lg:text-xl font-bold pt-4 align-top <%= both_sides %> <%= right_classes %>">
-              <a class="text-blue-700 underline" href="/<%= @document.document_code %>/<%= @revision.revision_code %>/<%= left.element_code %>/sv:en">
+              <a class="text-blue-700 underline" href="/<%= left.element_code %>-of-<%= @document.document_code %>-v<%= @revision.revision_code %>-in-english">
                 <%= right.element_text %>
               </a>
             </td>
