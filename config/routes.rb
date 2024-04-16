@@ -15,9 +15,11 @@ Rails.application.routes.draw do
   get "/terms", to: "pages#show"
   get "/work-environment-jobs", to: "pages#show"
 
-  get "/2024/01/22/night-work-tech-and-swedish-labour-law", to: redirect("/night-work-tech-and-swedish-labour-law")
+  get "/2024/01/22/night-work-tech-and-swedish-labour-law",
+      to: redirect("/night-work-tech-and-swedish-labour-law")
   get "/2023/12/03/incident-report", to: redirect("/incident-report")
-  get "/2023/11/14/english-translations-of-swedish-laws", to: redirect("/english-translations-of-swedish-laws")
+  get "/2023/11/14/english-translations-of-swedish-laws",
+      to: redirect("/english-translations-of-swedish-laws")
   get "/2023/10/31/launch-announcement", to: redirect("/launch-announcement")
 
   get "/1977:1160/2014:659", to: redirect("/aml-v2014:659-in-english")
@@ -25,30 +27,38 @@ Rails.application.routes.draw do
   get "/1982:80/2022:836", to: redirect("/las-v2022:836-in-english")
   get "/1982:673/2013:611", to: redirect("/atl-v2013:611-in-english")
 
-   get "/:element_code-of-:document_code-v:revision_code-in-english",
-     to: "legal/translations#show"
+  get "/:element_code-of-:document_code-v:revision_code-in-english",
+      to: "legal/translations#show"
 
-  get "/:document_code-v:revision_code-in-english",
-    to: "legal/revisions#show"
-    # document_code: /[a-z]{3}/,
-    # revision_code: /[0-9]{4}:[0-9]{3,4}/
+  get "/:document_code-v:revision_code-in-english", to: "legal/revisions#show"
+  # document_code: /[a-z]{3}/,
+  # revision_code: /[0-9]{4}:[0-9]{3,4}/
 
-  get "/1977:1160/2014:659/:element_code/sv:en", to: redirect{
-    |params| "/chapter-#{params[:element_code].match(/K(\d)/)[1]}-section-#{params[:element_code].match(/P(\d[a-z]?)/)[1]}-of-aml-v2014:659-in-english"
-  }, chapter: /\d/
+  get "/1977:1160/2014:659/:element_code/sv:en",
+      to:
+        redirect { |params|
+          "/chapter-#{params[:element_code].match(/K(\d)/)[1]}-section-#{params[:element_code].match(/P(\d[a-z]?)/)[1]}-of-aml-v2014:659-in-english"
+        },
+      chapter: /\d/
 
-  get "/1976:580/2021:1114/P:section/sv:en", to: redirect{
-    |params| "/section-#{params[:section]}-of-mbl-v2021:1114-in-english"
-  }
+  get "/1976:580/2021:1114/P:section/sv:en",
+      to:
+        redirect { |params|
+          "/section-#{params[:section]}-of-mbl-v2021:1114-in-english"
+        }
 
-  get "/1982:80/2022:836/P:section/sv:en", to: redirect{
-    |params| "/section-#{params[:section]}-of-las-v2022:836-in-english"
-  }
+  get "/1982:80/2022:836/P:section/sv:en",
+      to:
+        redirect { |params|
+          "/section-#{params[:section]}-of-las-v2022:836-in-english"
+        }
 
-  get "/1982:673/2013:611/P:section/sv:en", to: redirect{
-    |params| "/section-#{params[:section]}-of-atl-v2013:611-in-english"
-  }
-  
+  get "/1982:673/2013:611/P:section/sv:en",
+      to:
+        redirect { |params|
+          "/section-#{params[:section]}-of-atl-v2013:611-in-english"
+        }
+
   # get "/:element_code-of-las-v2022:836-in-english",
   #   to: "legal/translations#new_show",
   #   defaults: {
@@ -162,4 +172,6 @@ Rails.application.routes.draw do
     match "/email", to: "users#email", via: %i[get patch]
     match "/language", to: "users#language", via: %i[get patch]
   end
+
+  mount Lookbook::Engine, at: "/lookbook"
 end
