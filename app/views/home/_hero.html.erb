@@ -1,16 +1,17 @@
-<div class="bg-white">
-  <header class="absolute inset-x-0 top-0 z-50">
-    <nav class="flex items-center justify-between p-6 lg:px-8" aria-label="Global">
-      <div class="flex lg:flex-1">
-        <a href="#" class="-m-1.5 p-1.5">
-          <span class="sr-only">666a</span>
-          <img class="h-8 w-auto" src="/logo-128.png" alt="">
-        </a>
-      </div>
-    </nav>
-  
+<% content_for :header do -%>
+  <nav class="flex justify-center border-b border-gray-200 h-12 items-center">
+
+    <div class="mx-auto max-w-5xl w-full px-4 lg:px-0">
+      <a href="/" class="flex flex-row items-center gap-2">
+        <img src="/logo-128.png" class="max-w-[18px]" alt="" />
+        <img src="/666a.svg" class="max-h-[20px]" alt="666a" />
+      </a>
     </div>
-  </header>
+
+  </nav>
+<% end -%>
+
+<div class="bg-white">
 
   <div class="relative isolate pt-14">
     <svg class="absolute inset-0 -z-10 h-full w-full stroke-gray-200 [mask-image:radial-gradient(100%_100%_at_top_right,white,transparent)]" aria-hidden="true">

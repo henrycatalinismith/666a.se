@@ -1,7 +1,8 @@
 <% content_for(:opengraph) do %>
   <link rel="canonical" href="https://666a.se/<%= @document.document_code %>/<%= @revision.revision_code %>/" />
 <% end %>
-<div class="container flex flex-col gap-8 w-full p-4 py-8">
+
+<div class="flex flex-col gap-10 w-full p-2 sm:px-4 lg:px-0 pt-8 max-w-5xl">
 
   <%= h1 do %>
     <% if @document.document_code == "aml" then %>
