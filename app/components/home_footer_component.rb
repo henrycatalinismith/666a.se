@@ -3,9 +3,9 @@
 class HomeFooterComponent < ViewComponent::Base
   def initialize
     @policies = [
-      { text: "accessibility", href: "/accessibility" },
-      { text: "privacy", href: "/privacy" },
-      { text: "terms", href: "/terms" }
+      { name: "Accessibility", slug: "accessibility" },
+      { name: "Privacy Policy", slug: "privacy" },
+      { name: "Terms of Service", slug: "terms" }
     ]
   end
 end
