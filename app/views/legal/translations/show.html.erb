@@ -5,12 +5,14 @@
   <meta property="og:title" content="<%= @title %>" />
 <% end %>
 
-<div class="flex flex-col gap-10 w-full p-2 sm:px-4 lg:px-0 pt-8 max-w-5xl">
+<div class="flex flex-col w-full p-2 sm:px-4 lg:px-0 pt-8 max-w-5xl">
 
   <%= h1 do %>
-    <%= @page_title %>
+    <span class="font-extralight">
+      <%= @page_title %>
+    </span>
     <br />
-    <span class="text-lg leading-1 align-top text-slate-500">
+    <span class="text-lg leading-1 align-top text-slate-500 font-light">
       Version <%= @revision.revision_code %>, English translation
     </span>
   <% end %>
@@ -31,7 +33,7 @@
 
   <%= render partial: "legal/outdated" %>
 
-  <table class="">
+  <table class="mt-8">
     <thead>
       <th width="50%"></th>
       <th width="50%"></th>
@@ -41,31 +43,31 @@
       <% @elements.each do |left, right| %>
         <tr>
           <% if left.element_type == "h1" %>
-            <td class="text-base lg:text-2xl font-bold align-top <%= both_sides %> <%= left_classes %>" lang="sv">
+            <td class="prose text-base lg:text-2xl font-normal align-top <%= both_sides %> <%= left_classes %>" lang="sv">
               <%= left.element_text %>
             </td>
-            <td class="text-base lg:text-2xl font-bold align-top <%= both_sides %> <%= right_classes %>" lang="en">
+            <td class="prose text-base lg:text-2xl font-normal align-top <%= both_sides %> <%= right_classes %>" lang="en">
               <%= right.element_text %>
             </td>
           <% elsif left.element_type == "h2" %>
-            <td class="text-base lg:text-xl font-bold py-4 align-top text-ellipsis <%= both_sides %> <%= left_classes %>" lang="sv">
+            <td class="prose text-base lg:text-xl font-bold py-4 align-top text-ellipsis <%= both_sides %> <%= left_classes %>" lang="sv">
               <%= left.element_text %>
             </td>
-            <td class="text-base lg:text-xl font-bold py-4 align-top <%= both_sides %> <%= right_classes %>" lang="en">
+            <td class="prose text-base lg:text-xl font-bold py-4 align-top <%= both_sides %> <%= right_classes %>" lang="en">
               <%= right.element_text %>
             </td>
           <% elsif left.element_type == "h3" %>
-            <td class="text-base lg:text-lg font-bold pt-4 align-top <%= both_sides %> <%= left_classes %>" lang="sv">
+            <td class="prose text-base lg:text-lg font-bold pt-4 align-top <%= both_sides %> <%= left_classes %>" lang="sv">
               <%= left.element_text %>
             </td>
-            <td class="text-base lg:text-lg font-bold pt-4 align-top <%= both_sides %> <%= right_classes %>" lang="en">
+            <td class="prose text-base lg:text-lg font-bold pt-4 align-top <%= both_sides %> <%= right_classes %>" lang="en">
               <%= right.element_text %>
             </td>
           <% else %>
-            <td class="text-xs md:text-base lg:text-lg py-4 align-top <%= both_sides %> <%= left_classes %>" lang="sv">
+            <td class="prose text-xs md:text-base lg:text-lg py-4 align-top <%= both_sides %> <%= left_classes %>" lang="sv">
               <%= @redcarpet.render(left.element_text).html_safe %>
             </td>
-            <td class="text-xs md:text-base lg:text-lg py-4 align-top <<%= both_sides %> <%= right_classes %>" lang="en">
+            <td class="prose text-xs md:text-base lg:text-lg py-4 align-top <<%= both_sides %> <%= right_classes %>" lang="en">
               <%= @redcarpet.render(right.element_text).html_safe  %>
             </td>
           <% end %>
