@@ -6,6 +6,8 @@ Rails.application.routes.draw do
     get "/#{File.basename(file, ".md")}", to: "pages#show"
   end
 
+  get "/news", to: redirect("/night-work-tech-and-swedish-labour-law"), permanent: false
+
   get "/2024/01/22/night-work-tech-and-swedish-labour-law",
       to: redirect("/night-work-tech-and-swedish-labour-law")
   get "/2023/12/03/incident-report", to: redirect("/incident-report")
