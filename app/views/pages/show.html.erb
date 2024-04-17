@@ -10,7 +10,7 @@
   </div>
 
   <% if @data["layout"] == "policy" %>
-    <div class="flex flex-col gap-4 h-min md:w-80 w-80">
+    <div class="flex flex-col gap-4 h-min min-w-64 md:w-80 w-80">
       <h2 class="text-xl font-bold">
         Policies
       </h2>
@@ -36,7 +36,7 @@
       </ol>
     </div>
   <% elsif @data["layout"] == "post" %>
-    <div class="flex flex-col gap-4 h-min md:w-full">
+    <div class="flex flex-col gap-4 h-min min-w-64 md:w-full">
       <h2 class="text-xl font-bold">
         Archive
       </h2>
