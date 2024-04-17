@@ -173,5 +173,5 @@ Rails.application.routes.draw do
     match "/language", to: "users#language", via: %i[get patch]
   end
 
-  mount Lookbook::Engine, at: "/lookbook"
+  mount Lookbook::Engine, at: "/components"
 end
