@@ -33,6 +33,7 @@ class PagesController < ApplicationController
     @data = parsed.front_matter
     puts @data.inspect
     @content = parsed.content
+    @page_title = @data["title"]
     render template: "pages/show", layout: "internal"
   end
 end
