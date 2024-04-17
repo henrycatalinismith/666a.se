@@ -1,5 +1,5 @@
 class HomeHeroComponentPreview < ViewComponent::Preview
-  def home_hero
-    render(HomeHeroComponent.new())
+  def default
+    render "home/hero"
   end
 end
