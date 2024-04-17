@@ -5,7 +5,7 @@
 <% end %>
 
 <div class="flex flex-col gap-10 w-full px-4 lg:px-0 pt-8 max-w-5xl md:flex-row">
-  <div class="flex flex-col gap-4 flex-1">
+  <div class="prose">
     <%= render_page(@content, @data).html_safe %>
   </div>
 
@@ -36,7 +36,7 @@
       </ol>
     </div>
   <% elsif @data["layout"] == "post" %>
-    <div class="flex flex-col gap-4 h-min md:p-4 md:w-80 md:border md:border-gray-200 md:rounded-lg md:shadow">
+    <div class="flex flex-col gap-4 h-min md:p-4 md:w-80 md:border md:border-gray-200 md:rounded-lg md:shadow min-w-64">
       <h2 class="text-xl font-bold">
         Archive
       </h2>
@@ -101,6 +101,12 @@
 
       </ol>
     </div>
+  <% elsif @data["layout"] == "about" %>
+
+
+    </div>
+  </div>
+
   <% end %>
 
 </div>

@@ -18,8 +18,10 @@ class PageRender < Redcarpet::Render::HTML
     when 1
       if @data["date"] then
         %(
-          <div class="flex flex-col gap-2">
-            <h1 class="text-3xl font-bold">#{text}</h1>
+          <div class="flex flex-col gap-2 pb-8 border-b border-gray-300 not-prose">
+            <h1 class="text-3xl font-bold font-extralight">
+              #{text}
+            </h1>
   
             <div class="flex items-center divide-x-2 divide-gray-300">
               <time class="pr-4 text-gray-500" datetime="#{@data["date"].strftime("%Y-%m-%d")}">
@@ -41,10 +43,10 @@ class PageRender < Redcarpet::Render::HTML
           </div>
         )
       else 
-        %(<h1 class="text-3xl font-bold">#{text}</h1>)
+        %(<h1 class="text-3xl font-bold font-extralight mb-8 pb-8 border-b border-gray-300">#{text}</h1>)
       end
     else
-      %(<h#{header_level} class="text-xl font-bold">#{text}</h#{header_level}>)
+      %(<h#{header_level} class="text-2xl font-bold font-bold mt-8 mb-6">#{text}</h#{header_level}>)
     end
   end
 
@@ -53,7 +55,7 @@ class PageRender < Redcarpet::Render::HTML
   end
 
   def table(header, body)
-    %(<table><thead>#{header}</thead><tbody>#{body}</tbody></table>)
+    %(<table class="mb-8"><thead>#{header}</thead><tbody>#{body}</tbody></table>)
   end
 
   def table_row(content)

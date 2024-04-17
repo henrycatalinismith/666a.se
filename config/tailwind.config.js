@@ -1,4 +1,4 @@
-// const defaultTheme = require('tailwindcss/defaultTheme')
+const defaultTheme = require('tailwindcss/defaultTheme')
 
 module.exports = {
   content: [
@@ -23,14 +23,14 @@ module.exports = {
     extend: {
 
       fontFamily: {
-        // sans: ['Inter var', ...defaultTheme.fontFamily.sans],
+        sans: ['Nunito', ...defaultTheme.fontFamily.sans],
       },
     },
   },
   plugins: [
     // require('@tailwindcss/forms'),
     // require('@tailwindcss/aspect-ratio'),
-    // require('@tailwindcss/typography'),
+    require('@tailwindcss/typography'),
     // require('@tailwindcss/container-queries'),
     // require('flowbite/plugin'),
   ]
