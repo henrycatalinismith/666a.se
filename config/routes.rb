@@ -2,18 +2,9 @@
 Rails.application.routes.draw do
   root "home#index"
 
-  get "/accessibility", to: "pages#show"
-  get "/conduct", to: "pages#show"
-  get "/dependency-version-numbers", to: "pages#show"
-  get "/english-translations-of-swedish-laws", to: "pages#show"
-  get "/environment-variables", to: "pages#show"
-  get "/incident-report", to: "pages#show"
-  get "/launch-announcement", to: "pages#show"
-  get "/night-work-tech-and-swedish-labour-law", to: "pages#show"
-  get "/privacy", to: "pages#show"
-  get "/service-architecture-diagram", to: "pages#show"
-  get "/terms", to: "pages#show"
-  get "/work-environment-jobs", to: "pages#show"
+  Dir.glob(Rails.root.join("app", "pages", "*.md")).each do |file|
+    get "/#{File.basename(file, ".md")}", to: "pages#show"
+  end
 
   get "/2024/01/22/night-work-tech-and-swedish-labour-law",
       to: redirect("/night-work-tech-and-swedish-labour-law")
