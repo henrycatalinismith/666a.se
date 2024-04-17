@@ -1,3 +1,4 @@
+
 module PagesHelper
   def render_page(markdown, data = {})
     @data = data
@@ -5,6 +6,27 @@ module PagesHelper
     redcarpet = Redcarpet::Markdown.new(renderer, :tables => true)
     redcarpet.render(markdown)
   end
+
+  def is_active_path?(path)
+    if path == request.path then
+      return true
+    end
+    sections = {
+      "/about" => [
+        "/accessibility",
+        "/privacy",
+        "/terms",
+      ],
+      "/news" => [
+        "/night-work-tech-and-swedish-labour-law",
+        "/incident-report",
+        "/english-translations-of-swedish-laws",
+        "/launch-announcement",
+      ],
+      "/dashboard" => [],
+    }
+    return sections[path].include?(request.path)
+  end 
 end
 
 class PageRender < Redcarpet::Render::HTML
