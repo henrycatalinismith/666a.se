@@ -4,10 +4,7 @@ Rails.application.routes.draw do
 
   Dir
     .glob(Rails.root.join("app", "pages", "*.en.md"))
-    .each do |file|
-      puts File.basename(file, ".en.md")
-      get "/#{File.basename(file, ".en.md")}", to: "pages#show"
-    end
+    .each { |file| get "/#{File.basename(file, ".en.md")}", to: "pages#show" }
 
   get "/news",
       to: redirect("/night-work-tech-and-swedish-labour-law"),

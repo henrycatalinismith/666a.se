@@ -5,8 +5,6 @@ class WorkEnvironment::DocumentJob < ApplicationJob
   queue_as :default
 
   rescue_from(StandardError) do |exception|
-    puts exception.message
-    puts exception.backtrace
     @result.document_error! unless @result.nil?
   end
 

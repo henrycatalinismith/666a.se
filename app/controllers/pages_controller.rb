@@ -3,35 +3,40 @@ require "redcarpet"
 
 class PagesController < ApplicationController
   def index
-    slugs = [
-      "launch-announcement",
-      "english-translations-of-swedish-laws",
-      "incident-report",
-      "night-work-tech-and-swedish-labour-law",
+    slugs = %w[
+      launch-announcement
+      english-translations-of-swedish-laws
+      incident-report
+      night-work-tech-and-swedish-labour-law
     ]
 
-    @posts = slugs.map do |slug|
-      file = Rails.root.join("app/pages/#{slug}.en.md")
-      text = File.read(file)
-      unsafe_loader = ->(string) { Psych.safe_load(string, permitted_classes: [Date, Time]) }
-      parsed = FrontMatterParser::Parser.parse_file(file, loader: unsafe_loader)
+    @posts =
+      slugs.map do |slug|
+        file = Rails.root.join("app/pages/#{slug}.en.md")
+        text = File.read(file)
+        unsafe_loader = ->(string) do
+          Psych.safe_load(string, permitted_classes: [Date, Time])
+        end
+        parsed =
+          FrontMatterParser::Parser.parse_file(file, loader: unsafe_loader)
 
-      {
-        title: parsed.front_matter["title"],
-        date: parsed.front_matter["date"],
-        body: parsed.content,
-      }
-    end
+        {
+          title: parsed.front_matter["title"],
+          date: parsed.front_matter["date"],
+          body: parsed.content
+        }
+      end
   end
 
   def show
     file = Rails.root.join("app/pages#{request.path}.en.md")
     render plain: "Not Found", status: 404 and return unless File.exist?(file)
     text = File.read(file)
-    unsafe_loader = ->(string) { Psych.safe_load(string, permitted_classes: [Date, Time]) }
+    unsafe_loader = ->(string) do
+      Psych.safe_load(string, permitted_classes: [Date, Time])
+    end
     parsed = FrontMatterParser::Parser.parse_file(file, loader: unsafe_loader)
     @data = parsed.front_matter
-    puts @data.inspect
     @content = parsed.content
     @page_title = @data["title"]
     render template: "pages/show", layout: "internal"

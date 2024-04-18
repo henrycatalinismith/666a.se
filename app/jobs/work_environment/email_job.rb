@@ -2,8 +2,6 @@ class WorkEnvironment::EmailJob < ApplicationJob
   queue_as :default
 
   rescue_from(StandardError) do |exception|
-    puts exception.message
-    puts exception.backtrace
     @notification.email_error! unless @notification.nil?
   end
 
