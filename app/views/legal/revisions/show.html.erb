@@ -19,41 +19,11 @@
 
     <tbody>
       <% @elements.each do |left, right| %>
-        <tr>
-          <% if left.element_type == "h1" %>
-            <td class="prose text-base lg:text-2xl font-normal align-top <%= both_sides %> <%= left_classes %>">
-              <%= left.element_text %>
-            </td>
-            <td class="prose text-base lg:text-2xl font-normal align-top <%= both_sides %> <%= right_classes %>">
-              <%= right.element_text %>
-            </td>
-          <% elsif left.element_type == "h2" %>
-            <td class="prose text-base lg:text-xl font-bold py-4 align-top text-ellipsis <%= both_sides %> <%= left_classes %>">
-              <%= left.element_text %>
-            </td>
-            <td class="prose text-base lg:text-xl font-bold py-4 align-top <%= both_sides %> <%= right_classes %>">
-              <%= right.element_text %>
-            </td>
-          <% elsif left.element_type == "h3" %>
-            <td class="prose text-base lg:text-xl font-bold pt-4 align-top <%= both_sides %> <%= left_classes %>">
-              <a class="text-blue-700 underline" href="/<%= left.element_code %>-of-<%= @document.document_code %>-v<%= @revision.revision_code %>-in-english">
-                <%= left.element_text %>
-              </a>
-            </td>
-            <td class="prose text-base lg:text-xl font-bold pt-4 align-top <%= both_sides %> <%= right_classes %>">
-              <a class="text-blue-700 underline" href="/<%= left.element_code %>-of-<%= @document.document_code %>-v<%= @revision.revision_code %>-in-english">
-                <%= right.element_text %>
-              </a>
-            </td>
-          <% else %>
-            <td class="prose text-xs md:text-base lg:text-lg py-4 align-top <%= both_sides %> <%= left_classes %>">
-              <%= @redcarpet.render(left.element_text).html_safe %>
-            </td>
-            <td class="prose text-xs md:text-base lg:text-lg py-4 align-top <<%= both_sides %> <%= right_classes %>">
-              <%= @redcarpet.render(right.element_text).html_safe %>
-            </td>
-          <% end %>
-        </tr>
+        <%= render partial: "legal/translations/row", locals: {
+          left: left,
+          right: right,
+          links: true,
+        } %>
       <% end %>
 
       <%= render partial: "legal/sources" %>
