@@ -33,5 +33,3 @@ gem "discordrb"
 gem "front_matter_parser"
 gem "view_component"
 gem "lookbook"
-
-gem "jsbundling-rails", "~> 1.3"
