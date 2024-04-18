@@ -11,7 +11,7 @@ class PagesController < ApplicationController
     ]
 
     @posts = slugs.map do |slug|
-      file = Rails.root.join("app/pages/#{slug}.md")
+      file = Rails.root.join("app/pages/#{slug}.en.md")
       text = File.read(file)
       unsafe_loader = ->(string) { Psych.safe_load(string, permitted_classes: [Date, Time]) }
       parsed = FrontMatterParser::Parser.parse_file(file, loader: unsafe_loader)
@@ -25,7 +25,7 @@ class PagesController < ApplicationController
   end
 
   def show
-    file = Rails.root.join("app/pages#{request.path}.md")
+    file = Rails.root.join("app/pages#{request.path}.en.md")
     render plain: "Not Found", status: 404 and return unless File.exist?(file)
     text = File.read(file)
     unsafe_loader = ->(string) { Psych.safe_load(string, permitted_classes: [Date, Time]) }

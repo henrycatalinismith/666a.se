@@ -10,4 +10,13 @@ module ApplicationHelper
       { name: "Terms of Service", slug: "terms" }
     ]
   end
+
+  def posts
+    [
+      { text: "Night Work, Tech, And Swedish Labour Law", href: "/night-work-tech-and-swedish-labour-law" },
+      { text: "Incident Report", href: "/incident-report" },
+      { text: "English translations of Swedish laws", href: "/english-translations-of-swedish-laws" },
+      { text: "Announcing 666a", href: "/launch-announcement" }
+    ]
+  end
 end
