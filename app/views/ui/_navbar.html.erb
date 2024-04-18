@@ -9,8 +9,8 @@
   end
 %>
 
-<header class="flex justify-center border-b border-gray-200 h-12 items-center w-full">
-  <div class="mx-auto max-w-5xl w-full px-4 lg:px-0 flex flex-row h-full justify-between  ">
+<header class="grid grid-rows-1 grid-cols-2 place-items-center justify-center border-b border-gray-200 h-12 items-center w-full px-4 lg:px-0 ">
+  <div class="max-w-5xl w-full flex flex-row h-full justify-between  ">
     <a href="/" class="flex flex-row items-center gap-2">
       <img src="/logo-128.png" class="max-w-[18px]" alt="" />
       <img src="/666a.svg" class="max-h-[20px]" alt="666a" />
@@ -32,7 +32,8 @@
   </div>
 
 
-  <div class="-mr-2 flex items-center md:hidden px-4">
+  <%# <div class="-mr-2 flex items-center md:hidden px-4"> %>
+  <div class="md:hidden justify-self-end	">
     <!-- Mobile menu button -->
     <button type="button" class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500" aria-controls="mobile-menu" aria-expanded="false">
       <span class="absolute -inset-0.5"></span>
