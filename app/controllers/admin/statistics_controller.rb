@@ -27,8 +27,6 @@ class Admin::StatisticsController < AdminController
       @avg[day.ymd] = avg
       @max[day.ymd] = max
     end
-
-    puts @lag.inspect
   end
 
   def diarium
