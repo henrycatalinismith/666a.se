@@ -13,10 +13,31 @@ module ApplicationHelper
 
   def posts
     [
-      { text: "Night Work, Tech, And Swedish Labour Law", href: "/night-work-tech-and-swedish-labour-law" },
+      {
+        text: "Night Work, Tech, And Swedish Labour Law",
+        href: "/night-work-tech-and-swedish-labour-law"
+      },
       { text: "Incident Report", href: "/incident-report" },
-      { text: "English translations of Swedish laws", href: "/english-translations-of-swedish-laws" },
+      {
+        text: "English translations of Swedish laws",
+        href: "/english-translations-of-swedish-laws"
+      },
       { text: "Announcing 666a", href: "/launch-announcement" }
+    ]
+  end
+
+  def docs
+    [
+      {
+        text: "Dependency Version Numbers",
+        href: "/dependency-version-numbers"
+      },
+      { text: "Environment Variables", href: "/environment-variables" },
+      {
+        text: "Service Architecture Diagram",
+        href: "/service-architecture-diagram"
+      },
+      { text: "Work Environment Jobs", href: "/work-environment-jobs" }
     ]
   end
 end

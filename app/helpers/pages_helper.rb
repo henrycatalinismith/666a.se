@@ -28,6 +28,7 @@ module PagesHelper
         /launch-announcement
       ],
       "/dashboard" => [],
+      "/tech" => docs.map { |doc| doc[:href] },
       "/english-translations-of-swedish-laws" => []
     }
     return sections[path].include?(request.path)
