@@ -7,15 +7,10 @@
 
 <div class="flex flex-col w-full p-2 sm:px-4 lg:px-0 pt-8 max-w-5xl">
 
-  <%= h1 do %>
-    <span class="font-extralight">
-      <%= @page_title %>
-    </span>
-    <br />
-    <span class="text-lg leading-1 align-top text-slate-500 font-light">
-      Version <%= @revision.revision_code %>, English translation
-    </span>
-  <% end %>
+  <%= render partial: "legal/h1", locals: {
+    title: @page_title,
+    subtitle: "Version #{@revision.revision_code}, English translation",
+  } %>
 
   <p>
     <a href="/<%= @document.document_code %>-v<%= @revision.revision_code %>-in-english" class="text-blue-700 underline">

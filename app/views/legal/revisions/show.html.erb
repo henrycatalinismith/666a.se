@@ -4,31 +4,10 @@
 
 <div class="flex flex-col gap-10 w-full p-2 sm:px-4 lg:px-0 pt-8 max-w-5xl">
 
-  <%= h1 do %>
-    <span class="font-extralight">
-      <% if @document.document_code == "aml" then %>
-        The Swedish Work Environment Act
-      <% elsif @document.document_code == "mbl" then %>
-        The Swedish Co-Determination Act
-      <% elsif @document.document_code == "las" then %>
-        The Swedish Employment Protection Act
-      <% elsif @document.document_code == "atl" then %>
-        The Swedish Working Hours Act
-      <% end %>
-    </span>
-    <br />
-    <span class="text-lg leading-1 align-top text-slate-500 font-light">
-      <% if @document.document_code == "aml" then %>
-        Version 2014:659, English translation
-      <% elsif @document.document_code == "mbl" then %>
-        Version 2021:1114, English translation
-    <% elsif @document.document_code == "las" then %>
-        Version 2022:836, English translation
-    <% elsif @document.document_code == "atl" then %>
-        Version 2013:611, English translation
-      <% end %>
-    </span>
-  <% end %>
+  <%= render partial: "legal/h1", locals: {
+    title: legal_document_title(@document),
+    subtitle: legal_document_subtitle(@document),
+  } %>
 
   <%= render partial: "legal/outdated" %>
 
