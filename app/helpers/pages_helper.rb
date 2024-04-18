@@ -1,32 +1,37 @@
-
 module PagesHelper
   def render_page(markdown, data = {})
     @data = data
     renderer = PageRender.new(@data)
-    redcarpet = Redcarpet::Markdown.new(renderer, :tables => true)
+    redcarpet = Redcarpet::Markdown.new(renderer, tables: true)
     redcarpet.render(markdown)
   end
 
   def is_active_path?(path)
-    if path == request.path then
-      return true
+    if path == "/swedish-labour-laws-in-english"
+      if controller_name == "documents" && action_name == "index"
+        return true
+      elsif controller_name == "revisions" && action_name == "show"
+        return true
+      elsif controller_name == "translations" && action_name == "show"
+        return true
+      else
+        return false
+      end
     end
+    return true if path == request.path
     sections = {
-      "/about" => [
-        "/accessibility",
-        "/privacy",
-        "/terms",
-      ],
-      "/news" => [
-        "/night-work-tech-and-swedish-labour-law",
-        "/incident-report",
-        "/english-translations-of-swedish-laws",
-        "/launch-announcement",
+      "/about" => %w[/accessibility /privacy /terms],
+      "/news" => %w[
+        /night-work-tech-and-swedish-labour-law
+        /incident-report
+        /english-translations-of-swedish-laws
+        /launch-announcement
       ],
       "/dashboard" => [],
+      "/english-translations-of-swedish-laws" => []
     }
     return sections[path].include?(request.path)
-  end 
+  end
 end
 
 class PageRender < Redcarpet::Render::HTML
@@ -38,7 +43,7 @@ class PageRender < Redcarpet::Render::HTML
   def header(text, header_level)
     case header_level
     when 1
-      if @data["date"] then
+      if @data["date"]
         %(
           <div class="flex flex-col gap-2 pb-8 border-b border-gray-300 not-prose">
             <h1 class="text-3xl font-bold font-extralight">
@@ -64,7 +69,7 @@ class PageRender < Redcarpet::Render::HTML
   
           </div>
         )
-      else 
+      else
         %(<h1 class="text-3xl font-bold font-extralight mb-8 pb-8 border-b border-gray-300">#{text}</h1>)
       end
     else
@@ -85,7 +90,7 @@ class PageRender < Redcarpet::Render::HTML
   end
 
   def table_cell(content, alignment, header)
-    if header then
+    if header
       %(<th class="text-left">#{content}</th>)
     else
       %(<td class="align-top py-4 first:pr-4">#{content}</td>)

@@ -2,12 +2,16 @@
 Rails.application.routes.draw do
   root "home#index"
 
-  Dir.glob(Rails.root.join("app", "pages", "*.en.md")).each do |file|
-    puts File.basename(file, ".en.md")
-    get "/#{File.basename(file, ".en.md")}", to: "pages#show"
-  end
+  Dir
+    .glob(Rails.root.join("app", "pages", "*.en.md"))
+    .each do |file|
+      puts File.basename(file, ".en.md")
+      get "/#{File.basename(file, ".en.md")}", to: "pages#show"
+    end
 
-  get "/news", to: redirect("/night-work-tech-and-swedish-labour-law"), permanent: false
+  get "/news",
+      to: redirect("/night-work-tech-and-swedish-labour-law"),
+      permanent: false
 
   get "/2024/01/22/night-work-tech-and-swedish-labour-law",
       to: redirect("/night-work-tech-and-swedish-labour-law")
@@ -24,6 +28,7 @@ Rails.application.routes.draw do
   get "/:element_code-of-:document_code-v:revision_code-in-english",
       to: "legal/translations#show"
 
+  get "/swedish-labour-laws-in-english", to: "legal/documents#index"
   get "/:document_code-v:revision_code-in-english", to: "legal/revisions#show"
   # document_code: /[a-z]{3}/,
   # revision_code: /[0-9]{4}:[0-9]{3,4}/

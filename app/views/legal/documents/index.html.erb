@@ -1,24 +1,26 @@
-<div class="bg-white py-24 sm:py-32 min-h-screen">
-  <div class="mx-auto max-w-7xl px-6 lg:px-8">
-    <div class="mx-auto max-w-2xl lg:text-center">
-      <h2 class="text-base font-semibold leading-7 text-indigo-600">
-        Knowledge is power
-      </h2>
-      <p
-        class="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl"
-      >
-        Laws you can actually read
-      </p>
-      <p class="mt-6 text-lg leading-8 text-gray-600">
-        You can't exercise your rights if you don't know what they are.
-        666a provides access to Swedish laws translated into English.
-        And not PDFs, but proper web pages that you can send your colleagues links to.  
-      </p>
-    </div>
+<% content_for(:opengraph) do %>
+  <meta property="og:description" content="" />
+  <meta property="og:title" content="" />
+  <meta property="og:type" content="website" />
+<% end %>
 
-    <div class="mx-auto mt-16 sm:mt-20 lg:mt-24 max-w-5xl">
+<div class="flex flex-col px-4 lg:px-0 pt-8 max-w-5xl w-full">
+
+    <h1 class="text-3xl font-extralight mb-8 pb-8 border-b border-gray-300 w-full">
+      English Translations of Swedish Labour Law
+    </h1>
+
+    <p class="prose max-w-none">
+      The Swedish government provides some limited <a href="https://www.government.se/government-policy/labour-law-and-work-environment/">information in English about Swedish labour law</a>.
+      This includes a series of unofficial translations of the laws themselves.
+      These translations are provided in PDF format, which limits their usefulness for searching and linking.
+      They're also out of date, as the laws have been updated since the translations were made, and they're not clearly marked as such.
+      666a has converted some of these translations into web pages, making them easier to read and share.
+    </p>
+
+    <div class="mx-auto sm:mt-20 lg:mt-24 max-w-5xl">
       <dl
-        class="grid max-w-xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-2 lg:gap-y-16 mb-8"
+        class="grid max-w-xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none lg:gap-y-16 mb-8"
       >
         <div class="relative pl-16">
           <dt class="text-base font-semibold leading-7 text-gray-900">
@@ -91,5 +93,5 @@
 
       </dl>
     </div>
-  </div>
+        
 </div>
