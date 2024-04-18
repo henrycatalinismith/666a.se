@@ -44,5 +44,3 @@ production.sqlite3
 yarn.lock
 
 /backups/*.zip
-
-/node_modules
