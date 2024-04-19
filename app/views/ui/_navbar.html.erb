@@ -9,6 +9,7 @@
     links.unshift({ name: 'Dashboard', path: '/dashboard' })
 
     if current_user.admin?
+      links.unshift({ name: 'Admin', path: '/admin' })
       links.push({ name: 'Tech', path: '/tech' })
     end
   end

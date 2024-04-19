@@ -27,6 +27,7 @@ module PagesHelper
         /english-translations-of-swedish-laws
         /launch-announcement
       ],
+      "/admin" => [],
       "/dashboard" => [],
       "/tech" => docs.map { |doc| doc[:href] },
       "/english-translations-of-swedish-laws" => []
