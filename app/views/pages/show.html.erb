@@ -14,18 +14,22 @@
   <% elsif @data["layout"] == "post" %>
     <%= render "pages/sidebar", title: "Archive", links: posts %>
   <% elsif @data["layout"] == "tech" %>
-    <div class="flex flex-col gap-8">
-      <%= render "pages/sidebar", title: "Tech Docs", links: docs %>
-
+    <div class="flex flex-col gap-4 h-min min-w-64 w-[400px]">
       <%= render "pages/sidebar", title: "Development", links: [
         { href: "/development", text: "Overview" },
         { href: "/local-setup", text: "Setup" },
+        { href: "/contributing", text: "Contributing" },
       ] %>
 
       <%= render "pages/sidebar", title: "Operations", links: [
         { href: "/operations", text: "Overview" },
         { href: "/monitoring", text: "Monitoring" },
         { href: "/backups", text: "Backups" },
+      ] %>
+
+      <%= render "pages/sidebar", title: "Architecture", links: [
+        { href: "/architecture", text: "Overview" },
+        { href: "/architecture-decisions", text: "Decisions" },
       ] %>
 
     </div>
