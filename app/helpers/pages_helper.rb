@@ -98,4 +98,8 @@ class PageRender < Redcarpet::Render::HTML
       %(<td class="align-top py-4 first:pr-4">#{content}</td>)
     end
   end
+
+  def block_code(code, language)
+    %(<pre class="bg-gray-100 p-4 rounded-md"><code class="language-#{language}">#{code}</code></pre>)
+  end
 end
