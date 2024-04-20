@@ -2,7 +2,8 @@ module PagesHelper
   def render_page(markdown, data = {})
     @data = data
     renderer = PageRender.new(@data)
-    redcarpet = Redcarpet::Markdown.new(renderer, tables: true)
+    redcarpet =
+      Redcarpet::Markdown.new(renderer, tables: true, fenced_code_blocks: true)
     redcarpet.render(markdown)
   end
 
@@ -74,8 +75,12 @@ class PageRender < Redcarpet::Render::HTML
       else
         %(<h1 class="text-3xl font-bold font-extralight mb-8 pb-8 border-b border-gray-300">#{text}</h1>)
       end
-    else
+    when 2
       %(<h#{header_level} class="text-2xl font-bold font-bold mt-8 mb-6">#{text}</h#{header_level}>)
+    when 3
+      %(<h#{header_level} class="text-xl font-bold font-bold mt-8 mb-6">#{text}</h#{header_level}>)
+    else
+      %(<h#{header_level} class="text-lg font-bold font-bold mt-8 mb-6">#{text}</h#{header_level}>)
     end
   end
 
@@ -100,6 +105,6 @@ class PageRender < Redcarpet::Render::HTML
   end
 
   def block_code(code, language)
-    %(<pre class="bg-gray-100 p-4 rounded-md"><code class="language-#{language}">#{code}</code></pre>)
+    %(<pre class="bg-black-100 p-4 rounded-md"><code class="language-#{language}">#{code}</code></pre>)
   end
 end
