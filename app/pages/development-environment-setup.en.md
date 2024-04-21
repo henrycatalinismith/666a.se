@@ -7,7 +7,7 @@ layout: tech
 
 ## Prerequisites
 
-Ruby, Node
+Ruby 3.2.2, Node 20.11.1
 
 ## Quick Start
 
