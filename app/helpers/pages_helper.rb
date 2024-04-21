@@ -46,7 +46,28 @@ class PageRender < Redcarpet::Render::HTML
   def header(text, header_level)
     case header_level
     when 1
-      if @data["date"]
+      if @data["layout"] == "decision"
+        %(
+          <div class="flex flex-col gap-2 pb-8 border-b border-gray-300 not-prose">
+            <h1 class="text-3xl font-bold font-extralight">
+              #{text}
+            </h1>
+  
+            <div class="flex items-center divide-x-2 divide-gray-300">
+              <div class="pr-4 flex flex-row gap-2 items-center">
+                <a href="/architecture-decisions" class="font-medium text-blue-700 underline">
+                  Architecture Decision
+                </a>
+              </div>
+
+              <time class="pl-4 text-gray-500" datetime="#{@data["date"].strftime("%Y-%m-%d")}">
+                #{@data["date"].strftime("%Y-%m-%d")}
+              </time>
+            </div>
+  
+          </div>
+        )
+      elsif @data["date"]
         %(
           <div class="flex flex-col gap-2 pb-8 border-b border-gray-300 not-prose">
             <h1 class="text-3xl font-bold font-extralight">
