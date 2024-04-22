@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_22_191534) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_22_192108) do
   create_table "legal_documents", id: :string, default: -> { "ULID()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -99,12 +99,35 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_22_191534) do
     t.index ["reset_password_token"], name: "index_user_accounts_on_reset_password_token", unique: true
   end
 
+  create_table "user_notifications", id: :string, default: -> { "ULID()" }, force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "document_id", null: false
+    t.string "subscription_id", null: false
+    t.integer "email_status"
+    t.index ["document_id", "subscription_id"], name: "index_user_notifications_on_document_id_and_subscription_id", unique: true
+    t.index ["document_id"], name: "index_user_notifications_on_document_id"
+    t.index ["subscription_id"], name: "index_user_notifications_on_subscription_id"
+  end
+
   create_table "user_roles", id: :string, default: -> { "ULID()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "account_id", null: false
     t.integer "name"
     t.index ["account_id"], name: "index_user_roles_on_account_id"
+  end
+
+  create_table "user_subscriptions", id: :string, default: -> { "ULID()" }, force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "account_id", null: false
+    t.string "company_code"
+    t.integer "subscription_status", default: 1
+    t.integer "subscription_type"
+    t.string "workplace_code"
+    t.index ["account_id"], name: "index_user_subscriptions_on_account_id"
+    t.index ["subscription_status"], name: "index_user_subscriptions_on_subscription_status"
   end
 
   create_table "work_environment_documents", id: :string, default: -> { "ULID()" }, force: :cascade do |t|
@@ -129,17 +152,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_22_191534) do
     t.date "case_date"
     t.index ["document_code"], name: "index_work_environment_documents_on_document_code", unique: true
     t.index ["notification_status"], name: "index_work_environment_documents_on_notification_status"
-  end
-
-  create_table "work_environment_notifications", id: :string, default: -> { "ULID()" }, force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "document_id", null: false
-    t.string "subscription_id", null: false
-    t.integer "email_status"
-    t.index ["document_id", "subscription_id"], name: "idx_on_document_id_subscription_id_0026b0deb2", unique: true
-    t.index ["document_id"], name: "index_work_environment_notifications_on_document_id"
-    t.index ["subscription_id"], name: "index_work_environment_notifications_on_subscription_id"
   end
 
   create_table "work_environment_results", id: :string, default: -> { "ULID()" }, force: :cascade do |t|
@@ -169,26 +181,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_22_191534) do
     t.index ["day_id"], name: "index_work_environment_searches_on_day_id"
   end
 
-  create_table "work_environment_subscriptions", id: :string, default: -> { "ULID()" }, force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "user_id", null: false
-    t.string "company_code"
-    t.integer "subscription_status", default: 1
-    t.integer "subscription_type"
-    t.string "workplace_code"
-    t.index ["subscription_status"], name: "index_work_environment_subscriptions_on_subscription_status"
-    t.index ["user_id"], name: "index_work_environment_subscriptions_on_user_id"
-  end
-
   add_foreign_key "legal_elements", "legal_revisions", column: "revision_id"
   add_foreign_key "legal_revisions", "legal_documents", column: "document_id"
   add_foreign_key "legal_translations", "legal_elements", column: "element_id"
   add_foreign_key "time_period_days", "time_period_weeks", column: "week_id"
+  add_foreign_key "user_notifications", "user_subscriptions", column: "subscription_id"
+  add_foreign_key "user_notifications", "work_environment_documents", column: "document_id"
   add_foreign_key "user_roles", "user_accounts", column: "account_id"
-  add_foreign_key "work_environment_notifications", "work_environment_documents", column: "document_id"
-  add_foreign_key "work_environment_notifications", "work_environment_subscriptions", column: "subscription_id"
+  add_foreign_key "user_subscriptions", "user_accounts", column: "account_id"
   add_foreign_key "work_environment_results", "work_environment_searches", column: "search_id"
   add_foreign_key "work_environment_searches", "time_period_days", column: "day_id"
-  add_foreign_key "work_environment_subscriptions", "user_accounts", column: "user_id"
 end

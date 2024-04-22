@@ -17,7 +17,7 @@
       {
         icon: "fa-solid fa-bell",
         top: { text: "Work Environment Notifications", href: "/admin/work_environment/notifications"  },
-        bottom: { text: number_with_delimiter(WorkEnvironment::Notification.count) },
+        bottom: { text: number_with_delimiter(User::Notification.count) },
       },
 
       {
@@ -41,7 +41,7 @@
       {
         icon: "fa-solid fa-chart-line",
         top: { text: "Statistics", href: "/admin/statistics/"  },
-        bottom: { text: "#{WorkEnvironment::Notification.last.created_at.strftime("%Y-%m-%d")}" },
+        bottom: { text: "#{User::Notification.last.created_at.strftime("%Y-%m-%d")}" },
       },
 
       {

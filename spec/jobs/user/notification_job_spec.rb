@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe WorkEnvironment::NotificationJob do
+describe User::NotificationJob do
   include ActiveJob::TestHelper
 
   subject(:job) { described_class }
@@ -15,14 +15,14 @@ describe WorkEnvironment::NotificationJob do
     )
   end
 
-  let(:hunter2) { user(:hunter2) }
+  let(:hunter2) { user_account(:hunter2) }
 
   let(:subscription) do
-    WorkEnvironment::Subscription.new(
+    User::Subscription.new(
       id: "abcdef",
       subscription_type: :company_subscription,
       company_code: "802002-8711",
-      user: hunter2
+      account: hunter2
     )
   end
 
@@ -44,7 +44,7 @@ describe WorkEnvironment::NotificationJob do
     expect { document.reload }.to change(document, :notification_status).to(
       "notification_success"
     )
-    notification = WorkEnvironment::Notification.first
+    notification = User::Notification.first
     expect(notification.email_status).to eq("email_pending")
   end
 
@@ -52,7 +52,7 @@ describe WorkEnvironment::NotificationJob do
     subscription.save
     document.save
     perform_enqueued_jobs(only: job) { job.perform_now("2023/034601-24") }
-    notification = WorkEnvironment::Notification.first
+    notification = User::Notification.first
     expect(notification.email_status).to eq("email_pending")
   end
 
@@ -62,10 +62,10 @@ describe WorkEnvironment::NotificationJob do
     perform_enqueued_jobs(only: job) do
       job.perform_now("2023/034601-24", cascade: true)
     end
-    notification = WorkEnvironment::Notification.first
+    notification = User::Notification.first
     expect(
       ActiveJob::Base.queue_adapter.enqueued_jobs.first["job_class"]
-    ).to eq("WorkEnvironment::EmailJob")
+    ).to eq("User::EmailJob")
     expect(
       ActiveJob::Base.queue_adapter.enqueued_jobs.first["arguments"].first
     ).to eq(notification.id)

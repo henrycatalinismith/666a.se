@@ -7,14 +7,14 @@ describe WorkEnvironment::DocumentJob do
 
   let(:day) { time_period_day(:halloween) }
 
-  let(:hunter2) { user(:hunter2) }
+  let(:hunter2) { user_account(:hunter2) }
 
   let(:subscription) do
-    WorkEnvironment::Subscription.new(
+    User::Subscription.new(
       id: "abcdef",
       subscription_type: :company_subscription,
       company_code: "802002-8711",
-      user: hunter2
+      account: hunter2
     )
   end
 
@@ -52,7 +52,7 @@ describe WorkEnvironment::DocumentJob do
     end
     expect(
       ActiveJob::Base.queue_adapter.enqueued_jobs.first["job_class"]
-    ).to eq("WorkEnvironment::NotificationJob")
+    ).to eq("User::NotificationJob")
     expect(
       ActiveJob::Base.queue_adapter.enqueued_jobs.first["arguments"].first
     ).to eq("2023/034601-24")

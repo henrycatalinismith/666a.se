@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe NotificationMailer, type: :mailer do
   describe "notify" do
-    let(:hunter2) { user(:hunter2) }
+    let(:hunter2) { user_account(:hunter2) }
 
     let(:document) do
       WorkEnvironment::Document.new(
@@ -26,16 +26,16 @@ RSpec.describe NotificationMailer, type: :mailer do
     end
 
     let(:subscription) do
-      WorkEnvironment::Subscription.new(
+      User::Subscription.new(
         id: "abcdef",
         subscription_type: :company_subscription,
         company_code: "556595-9995",
-        user: hunter2
+        account: hunter2
       )
     end
 
     let(:notification) do
-      WorkEnvironment::Notification.new(
+      User::Notification.new(
         document: document,
         subscription: subscription
       )

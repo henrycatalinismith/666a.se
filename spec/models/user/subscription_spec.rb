@@ -1,34 +1,34 @@
 require "rails_helper"
 
-describe WorkEnvironment::Subscription, type: :model do
-  let(:hunter2) { user(:hunter2) }
+describe User::Subscription, type: :model do
+  let(:hunter2) { user_account(:hunter2) }
 
   it "is invalid with invalid company_code" do
     expect(
-      WorkEnvironment::Subscription.new(company_code: "lol", user: hunter2)
+      User::Subscription.new(company_code: "lol", account: hunter2)
     ).to be_invalid
   end
 
   it "is valid with valid company_code" do
     expect(
-      WorkEnvironment::Subscription.new(
+      User::Subscription.new(
         company_code: "123456-1234",
-        user: hunter2
+        account: hunter2
       )
     ).to be_valid
   end
 
   it "is invalid with invalid workplace_code" do
     expect(
-      WorkEnvironment::Subscription.new(workplace_code: "lol", user: hunter2)
+      User::Subscription.new(workplace_code: "lol", account: hunter2)
     ).to be_invalid
   end
 
   it "is valid with valid workplace_code" do
     expect(
-      WorkEnvironment::Subscription.new(
+      User::Subscription.new(
         workplace_code: "12345678",
-        user: hunter2
+        account: hunter2
       )
     ).to be_valid
   end
@@ -54,9 +54,9 @@ describe WorkEnvironment::Subscription, type: :model do
           municipality_name: "Falun",
           notification_status: :notification_pending
         )
-      subscription = WorkEnvironment::Subscription.create!(user: hunter2)
+      subscription = User::Subscription.create!(account: hunter2)
       notification =
-        WorkEnvironment::Notification.create!(
+        User::Notification.create!(
           document_id: document.id,
           subscription_id: subscription.id,
           email_status: "email_pending"
@@ -84,9 +84,9 @@ describe WorkEnvironment::Subscription, type: :model do
           municipality_name: "Falun",
           notification_status: :notification_pending
         )
-      subscription = WorkEnvironment::Subscription.create!(user: hunter2)
+      subscription = User::Subscription.create!(account: hunter2)
       notification =
-        WorkEnvironment::Notification.create!(
+        User::Notification.create!(
           document_id: document.id,
           subscription_id: subscription.id,
           email_status: "email_pending"

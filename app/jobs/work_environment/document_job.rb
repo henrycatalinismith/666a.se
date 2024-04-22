@@ -28,7 +28,7 @@ class WorkEnvironment::DocumentJob < ApplicationJob
 
     if !document.company_code.nil?
       subscription_count =
-        WorkEnvironment::Subscription.where(
+        User::Subscription.where(
           company_code: document.company_code
         ).count
       document.notification_status =
@@ -41,7 +41,7 @@ class WorkEnvironment::DocumentJob < ApplicationJob
     @result.document_ready!
 
     if options[:notify] and document.notification_pending?
-      WorkEnvironment::NotificationJob.set(wait: 1.seconds).perform_later(
+      User::NotificationJob.set(wait: 1.seconds).perform_later(
         document_code,
         options
       )
