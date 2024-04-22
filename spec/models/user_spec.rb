@@ -7,7 +7,7 @@ describe User, type: :model do
     end
 
     it "returns true when the user has an admin role" do
-      user(:hunter2).roles << Role.new(name: :admin)
+      user(:hunter2).roles << User::Role.new(name: :admin)
       expect(user(:hunter2).admin?).to be true
     end
   end

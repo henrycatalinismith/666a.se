@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_16_182925) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_22_191534) do
   create_table "legal_documents", id: :string, default: -> { "ULID()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -66,14 +66,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_16_182925) do
     t.index ["slug"], name: "index_posts_on_slug", unique: true
   end
 
-  create_table "roles", id: :string, default: -> { "ULID()" }, force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "user_id", null: false
-    t.integer "name"
-    t.index ["user_id"], name: "index_roles_on_user_id"
-  end
-
   create_table "time_period_days", id: :string, default: -> { "ULID()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -92,7 +84,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_16_182925) do
     t.index ["week_code"], name: "index_time_period_weeks_on_week_code"
   end
 
-  create_table "users", id: :string, default: -> { "ULID()" }, force: :cascade do |t|
+  create_table "user_accounts", id: :string, default: -> { "ULID()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "email", default: "", null: false
@@ -103,8 +95,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_16_182925) do
     t.string "name"
     t.string "company_code"
     t.string "locale", default: "en"
-    t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["email"], name: "index_user_accounts_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_user_accounts_on_reset_password_token", unique: true
+  end
+
+  create_table "user_roles", id: :string, default: -> { "ULID()" }, force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "account_id", null: false
+    t.integer "name"
+    t.index ["account_id"], name: "index_user_roles_on_account_id"
   end
 
   create_table "work_environment_documents", id: :string, default: -> { "ULID()" }, force: :cascade do |t|
@@ -184,11 +184,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_16_182925) do
   add_foreign_key "legal_elements", "legal_revisions", column: "revision_id"
   add_foreign_key "legal_revisions", "legal_documents", column: "document_id"
   add_foreign_key "legal_translations", "legal_elements", column: "element_id"
-  add_foreign_key "roles", "users"
   add_foreign_key "time_period_days", "time_period_weeks", column: "week_id"
+  add_foreign_key "user_roles", "user_accounts", column: "account_id"
   add_foreign_key "work_environment_notifications", "work_environment_documents", column: "document_id"
   add_foreign_key "work_environment_notifications", "work_environment_subscriptions", column: "subscription_id"
   add_foreign_key "work_environment_results", "work_environment_searches", column: "search_id"
   add_foreign_key "work_environment_searches", "time_period_days", column: "day_id"
-  add_foreign_key "work_environment_subscriptions", "users"
+  add_foreign_key "work_environment_subscriptions", "user_accounts", column: "user_id"
 end

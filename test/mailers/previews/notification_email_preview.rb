@@ -11,7 +11,7 @@ class NotificationEmailPreview < ActionMailer::Preview
       id: "abcdef12345",
       subscription_type: :company_subscription,
      )
-    @notification.subscription.user = User.new(name: "Example User")
+    @notification.subscription.user = User::Account.new(name: "Example User")
     NotificationMailer.with(notification: @notification).notification_email
   end
 
@@ -27,7 +27,7 @@ class NotificationEmailPreview < ActionMailer::Preview
       id: "abcdef12345",
       subscription_type: :workplace_subscription,
     )
-    @notification.subscription.user = User.new(name: "Example User")
+    @notification.subscription.user = User::Account.new(name: "Example User")
     NotificationMailer.with(notification: @notification).notification_email
   end
 end
