@@ -1,4 +1,4 @@
-class WorkEnvironment::EmailJob < ApplicationJob
+class User::EmailJob < ApplicationJob
   queue_as :default
 
   rescue_from(StandardError) do |exception|
@@ -7,9 +7,9 @@ class WorkEnvironment::EmailJob < ApplicationJob
 
   def perform(notification_id = nil, options = {})
     if notification_id.nil?
-      @notification = WorkEnvironment::Notification.email_pending.first
+      @notification = User::Notification.email_pending.first
     else
-      @notification = WorkEnvironment::Notification.find(notification_id)
+      @notification = User::Notification.find(notification_id)
     end
     return if @notification.nil?
 

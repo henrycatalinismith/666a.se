@@ -1,13 +1,13 @@
 require "rails_helper"
 
-describe WorkEnvironment::EmailJob do
-  let(:hunter2) { user(:hunter2) }
+describe User::EmailJob do
+  let(:hunter2) { user_account(:hunter2) }
 
   it "sends a notification email" do
     subscription =
-      WorkEnvironment::Subscription.create!(
+      User::Subscription.create!(
         id: "01hkpq6dn83pd1nmckxdr0wvhm",
-        user_id: hunter2.id
+        account_id: hunter2.id
       )
     document =
       WorkEnvironment::Document.create!(
@@ -29,7 +29,7 @@ describe WorkEnvironment::EmailJob do
         notification_status: :notification_pending
       )
     notification =
-      WorkEnvironment::Notification.create!(
+      User::Notification.create!(
         document_id: document.id,
         subscription_id: subscription.id,
         email_status: "email_pending"
@@ -41,7 +41,7 @@ describe WorkEnvironment::EmailJob do
     expect(mailer).to receive(:notification_email).and_return(mail)
     expect(mail).to receive(:deliver_now)
 
-    WorkEnvironment::EmailJob.perform_now(notification.id)
+    User::EmailJob.perform_now(notification.id)
 
     expect { notification.reload }.to change(notification, :email_status).from(
       "email_pending"

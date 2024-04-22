@@ -8,7 +8,7 @@ class RegistrationsController < Devise::RegistrationsController
     super
     if !current_user.nil? then
       subscription_props = {}
-      subscription_props[:user_id] = current_user.id
+      subscription_props[:account_id] = current_user.id
       if current_user.company_code.match(/\A\d{8}\z/) then
         subscription_props[:subscription_type] = :workplace_subscription
         subscription_props[:workplace_code] = current_user.company_code

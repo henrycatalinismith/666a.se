@@ -17,13 +17,13 @@ class WorkEnvironment::SubscriptionsController < ApplicationController
         redirect_to "/dashboard", :notice => "Subscription created"
       end
     else
-      @subscription = WorkEnvironment::Subscription.new
+      @subscription = User::Subscription.new
     end
   end
 
   def destroy
-    @subscription = WorkEnvironment::Subscription.find_by_id(params[:id])
-    if @subscription.user_id != current_user.id then
+    @subscription = User::Subscription.find_by_id(params[:id])
+    if @subscription.account_id != current_user.id then
       return
     end
     @subscription.destroy
@@ -31,7 +31,7 @@ class WorkEnvironment::SubscriptionsController < ApplicationController
   end
 
   def unsubscribe
-    @subscription = WorkEnvironment::Subscription.find_by_id(params[:id])
+    @subscription = User::Subscription.find_by_id(params[:id])
     if @subscription.nil? then
       raise ActionController::RoutingError.new('Not Found')
     end

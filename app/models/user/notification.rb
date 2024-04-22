@@ -1,5 +1,5 @@
-class WorkEnvironment::Notification < ApplicationRecord
-  belongs_to :document
+class User::Notification < ApplicationRecord
+  belongs_to :document, class_name: "WorkEnvironment::Document"
   belongs_to :subscription
   scope :chronological, -> { order(created_at: :asc) }
   scope :reverse_chronological, -> { order(created_at: :desc) }

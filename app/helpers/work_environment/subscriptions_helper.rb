@@ -1,2 +1,0 @@
-module WorkEnvironment::SubscriptionsHelper
-end

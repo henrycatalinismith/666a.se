@@ -1,7 +1,7 @@
 require "uri"
 require "net/http"
 
-class WorkEnvironment::NotificationJob < ApplicationJob
+class User::NotificationJob < ApplicationJob
   queue_as :default
 
   rescue_from(StandardError) do |exception|
@@ -15,11 +15,11 @@ class WorkEnvironment::NotificationJob < ApplicationJob
     return if @document.nil?
 
     subscriptions =
-      WorkEnvironment::Subscription.where(company_code: @document.company_code)
+      User::Subscription.where(company_code: @document.company_code)
     notifications = []
     subscriptions.each do |subscription|
       if !subscription.has_notification?(@document.id)
-        notifications << WorkEnvironment::Notification.create(
+        notifications << User::Notification.create(
           email_status: :email_pending,
           subscription_id: subscription.id,
           document_id: @document.id
@@ -31,7 +31,7 @@ class WorkEnvironment::NotificationJob < ApplicationJob
 
     if options[:cascade]
       notifications.each_with_index do |notification, index|
-        WorkEnvironment::EmailJob.set(wait: index.seconds).perform_later(
+        User::EmailJob.set(wait: index.seconds).perform_later(
           notification.id,
           options
         )

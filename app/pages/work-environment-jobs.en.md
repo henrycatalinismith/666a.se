@@ -14,7 +14,7 @@ layout: tech
       C[WorkEnvironment::SearchJob] --> D
       D[WorkEnvironment::ResultJob] --> E
       E[WorkEnvironment::DocumentJob] --> F
-      F[WorkEnvironment::NotificationJob] --> G
-      G[WorkEnvironment::EmailJob]
+      F[User::NotificationJob] --> G
+      G[User::EmailJob]
   </pre>
 </div>

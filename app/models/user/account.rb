@@ -1,6 +1,6 @@
 class User::Account < ApplicationRecord
-  has_many :subscriptions, dependent: :destroy, class_name: "WorkEnvironment::Subscription", foreign_key: "user_id"
-  has_many :notifications, through: :subscriptions, class_name: "WorkEnvironment::Notification"
+  has_many :subscriptions, dependent: :destroy
+  has_many :notifications, through: :subscriptions 
   has_many :roles, dependent: :destroy
 
   scope :chronological, -> { order(created_at: :asc) }
