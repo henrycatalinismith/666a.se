@@ -84,7 +84,7 @@
     items: @document.notifications.map do |notification|
       {
         icon: "fa-solid #{notification.icon}",
-        top: { text: notification.subscription.user.email, href: "/admin/work_environment/notifications/#{notification.id}"  },
+        top: { text: notification.subscription.account.email, href: "/admin/work_environment/notifications/#{notification.id}"  },
         bottom: { text: notification.created_at },
       }
     end
