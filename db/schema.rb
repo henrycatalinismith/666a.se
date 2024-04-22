@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_22_192108) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_22_195148) do
   create_table "legal_documents", id: :string, default: -> { "ULID()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -148,10 +148,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_22_192108) do
     t.string "county_name"
     t.string "municipality_code"
     t.string "municipality_name"
-    t.integer "notification_status"
     t.date "case_date"
     t.index ["document_code"], name: "index_work_environment_documents_on_document_code", unique: true
-    t.index ["notification_status"], name: "index_work_environment_documents_on_notification_status"
   end
 
   create_table "work_environment_results", id: :string, default: -> { "ULID()" }, force: :cascade do |t|

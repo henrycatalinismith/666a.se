@@ -30,21 +30,6 @@ describe WorkEnvironment::DocumentJob do
     )
   end
 
-  it "sets needless notification status when subscriptions exist" do
-    perform_enqueued_jobs(only: job) { job.perform_now("2023/034601-24") }
-    document =
-      WorkEnvironment::Document.find_by(document_code: "2023/034601-24")
-    expect(document.notification_status).to eq("notification_needless")
-  end
-
-  it "sets pending notification status when subscriptions exist" do
-    subscription.save
-    perform_enqueued_jobs(only: job) { job.perform_now("2023/034601-24") }
-    document =
-      WorkEnvironment::Document.find_by(document_code: "2023/034601-24")
-    expect(document.notification_status).to eq("notification_pending")
-  end
-
   it "queues notification job when subscriptions exist" do
     subscription.save
     perform_enqueued_jobs(only: job) do

@@ -33,19 +33,7 @@ describe User::NotificationJob do
       company_name: "SVENSKA RÖDA KORSETS CENTRALSTYRELSE",
       workplace_code: "11290723",
       workplace_name: "SVENSKA RÖDA KORSETS CENTRALSTYRELSE",
-      notification_status: :notification_pending
     )
-  end
-
-  it "sets document notification_status to notification_success" do
-    subscription.save
-    document.save
-    perform_enqueued_jobs(only: job) { job.perform_now("2023/034601-24") }
-    expect { document.reload }.to change(document, :notification_status).to(
-      "notification_success"
-    )
-    notification = User::Notification.first
-    expect(notification.email_status).to eq("email_pending")
   end
 
   it "creates a notification with email_pending as the email_status" do
