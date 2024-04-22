@@ -121,11 +121,21 @@ GEM
     et-orbi (1.2.11)
       tzinfo
     event_emitter (0.2.6)
+    faraday (2.9.0)
+      faraday-net_http (>= 2.0, < 3.2)
+    faraday-mashify (0.1.1)
+      faraday (~> 2.0)
+      hashie
+    faraday-multipart (1.0.4)
+      multipart-post (~> 2)
+    faraday-net_http (3.1.0)
+      net-http
     ffi (1.16.3)
     front_matter_parser (1.0.1)
     fugit (1.10.1)
       et-orbi (~> 1, >= 1.2.7)
       raabro (~> 1.4)
+    gli (2.21.1)
     globalid (1.2.1)
       activesupport (>= 6.1)
     hanami-router (2.1.0)
@@ -134,6 +144,7 @@ GEM
       rack (~> 2.0)
     hansi (0.2.1)
     hashdiff (1.1.0)
+    hashie (5.0.0)
     htmlbeautifier (1.4.3)
     htmlentities (4.3.4)
     http-accept (1.7.0)
@@ -183,12 +194,15 @@ GEM
     mime-types-data (3.2024.0305)
     mini_mime (1.1.5)
     minitest (5.22.3)
+    multipart-post (2.4.0)
     mustermann (3.0.0)
       ruby2_keywords (~> 0.0.1)
     mustermann-contrib (3.0.0)
       hansi (~> 0.2.0)
       mustermann (= 3.0.0)
     mutex_m (0.2.0)
+    net-http (0.4.1)
+      uri
     net-imap (0.4.10)
       date
       net-protocol
@@ -295,6 +309,12 @@ GEM
     sentry-ruby (5.17.3)
       bigdecimal
       concurrent-ruby (~> 1.0, >= 1.0.2)
+    slack-ruby-client (2.3.0)
+      faraday (>= 2.0)
+      faraday-mashify
+      faraday-multipart
+      gli
+      hashie
     sprockets (4.2.1)
       concurrent-ruby (~> 1.0)
       rack (>= 2.2.4, < 4)
@@ -319,6 +339,7 @@ GEM
     timeout (0.4.1)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
+    uri (0.13.0)
     view_component (3.12.0)
       activesupport (>= 5.2.0, < 8.0)
       concurrent-ruby (~> 1.0)
@@ -364,6 +385,7 @@ DEPENDENCIES
   rufus-scheduler (~> 3.9)
   sentry-rails (~> 5.11)
   sentry-ruby (~> 5.11)
+  slack-ruby-client
   sprockets-rails
   sqlite-ulid (~> 0.2.1)
   sqlite3 (~> 1.4)
