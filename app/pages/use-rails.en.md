@@ -6,10 +6,6 @@ date: 2023-09-25
 
 # Use Rails
 
-## Status
-
-Accepted
-
 ## Context
 
 666a needs a technical foundation. It's an application with a relatively simply UI, where most of the complexity lies in the back end and operational aspects. As an unfunded personal side project there's very little funding available for hosting services. The core functionality includes internationalization, job scheduling, and email sending. The data model is unclear and requires exploratory iterative development to determine.

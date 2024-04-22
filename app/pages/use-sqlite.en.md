@@ -6,10 +6,6 @@ date: 2023-09-25
 
 # Use SQLite
 
-## Status
-
-Accepted
-
 ## Context
 
 666a needs a database. The application averages less than 10000 writes per day and even fewer reads. The target audience is geographically concentrated within Sweden. Almost all the writes are internally scheduled by the application itself rather than triggered on demand by users. Due to the nature of the functionality, if the service acquired 1000 or even 10000 users, these read/write numbers would change by less than an order of magnitude. It's likely to take many years until the size of the database exceeds 1GB.
