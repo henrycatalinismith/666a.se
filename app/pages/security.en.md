@@ -1,4 +1,4 @@
 ---
-title: Code of Conduct
+title: Security
 layout: policy
 ---

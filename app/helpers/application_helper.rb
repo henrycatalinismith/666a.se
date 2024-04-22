@@ -7,7 +7,8 @@ module ApplicationHelper
     [
       { name: "Accessibility", slug: "accessibility" },
       { name: "Privacy Policy", slug: "privacy" },
-      { name: "Terms of Service", slug: "terms" }
+      { name: "Security Policy", slug: "security" },
+      { name: "Terms of Service", slug: "terms" },
     ]
   end
 
