@@ -1,5 +1,5 @@
 class WorkEnvironment::Subscription < ApplicationRecord
-  belongs_to :user
+  belongs_to :user, class_name: 'User::Account', foreign_key: 'user_id'
   has_many :notifications, dependent: :destroy
 
   enum :subscription_status, {

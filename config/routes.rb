@@ -85,7 +85,7 @@ Rails.application.routes.draw do
         section: /\d+[a-z]?/
   end
 
-  devise_for :users,
+  devise_for :users, class_name: 'User::Account',
              controllers: {
                registrations: "registrations",
                sessions: "sessions"

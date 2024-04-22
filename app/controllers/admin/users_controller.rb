@@ -2,10 +2,10 @@ class Admin::UsersController < AdminController
   layout "internal"
 
   def index
-    @users = User.reverse_chronological.all
+    @users = User::Account.reverse_chronological.all
   end
 
   def show
-    @user = User.find(params[:id])
+    @user = User::Account.find(params[:id])
   end
 end
