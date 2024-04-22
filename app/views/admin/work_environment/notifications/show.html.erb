@@ -31,8 +31,8 @@
 
       {
         icon: "fa-solid fa-user",
-        top: { text: @notification.subscription.user.name, href: "/admin/users/#{@notification.subscription.user.id}" },
-        bottom: { text: "#{@notification.subscription.user.email}", },
+        top: { text: @notification.subscription.account.name, href: "/admin/users/#{@notification.subscription.account.id}" },
+        bottom: { text: "#{@notification.subscription.account.email}", },
       },
 
       {
