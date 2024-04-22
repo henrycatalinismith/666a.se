@@ -4,12 +4,6 @@ require "net/http"
 class User::NotificationJob < ApplicationJob
   queue_as :default
 
-  rescue_from(StandardError) do |exception|
-    puts exception.message
-    puts exception.backtrace
-    @document.notification_error! unless @document.nil?
-  end
-
   def perform(document_code, options = {})
     @document = WorkEnvironment::Document.find_by(document_code:)
     return if @document.nil?
