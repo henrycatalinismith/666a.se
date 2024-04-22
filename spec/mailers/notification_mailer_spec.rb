@@ -21,7 +21,6 @@ RSpec.describe NotificationMailer, type: :mailer do
         county_name: "DALARNAS LÄN",
         municipality_code: "2080",
         municipality_name: "Falun",
-        notification_status: :notification_pending
       )
     end
 

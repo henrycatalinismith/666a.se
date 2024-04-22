@@ -31,16 +31,15 @@ class WorkEnvironment::DocumentJob < ApplicationJob
         User::Subscription.where(
           company_code: document.company_code
         ).count
-      document.notification_status =
-        subscription_count > 0 ? :notification_pending : :notification_needless
+      notification_status = subscription_count > 0 ? :notification_pending : :notification_needless
     else
-      document.notification_status = :notification_needless
+      notification_status = :notification_needless
     end
 
     document.save
     @result.document_ready!
 
-    if options[:notify] and document.notification_pending?
+    if options[:notify] and notification_status == :notification_pending
       User::NotificationJob.set(wait: 1.seconds).perform_later(
         document_code,
         options

@@ -52,7 +52,6 @@ describe User::Subscription, type: :model do
           county_name: "DALARNAS LÄN",
           municipality_code: "2080",
           municipality_name: "Falun",
-          notification_status: :notification_pending
         )
       subscription = User::Subscription.create!(account: hunter2)
       notification =
@@ -82,7 +81,6 @@ describe User::Subscription, type: :model do
           county_name: "DALARNAS LÄN",
           municipality_code: "2080",
           municipality_name: "Falun",
-          notification_status: :notification_pending
         )
       subscription = User::Subscription.create!(account: hunter2)
       notification =
