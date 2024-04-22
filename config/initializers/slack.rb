@@ -1,7 +1,6 @@
 require "slack-ruby-client"
 
-if !ENV["SLACK_API_TOKEN"].nil? and
-     !ENV["SLACK_CHANNEL_ID"].nil? and Rails.env.production?
+if !ENV["SLACK_API_TOKEN"].nil? and !ENV["SLACK_CHANNEL_ID"].nil? and Rails.env.production?
 
   Slack.configure do |config|
     config.token = ENV["SLACK_API_TOKEN"]
@@ -14,7 +13,7 @@ if !ENV["SLACK_API_TOKEN"].nil? and
     if event.payload[:job].class == WorkEnvironment::DayJob
       client.chat_postMessage(
         channel: ENV["SLACK_CHANNEL_ID"],
-        text: "`#{event.payload[:job].class} #{event.payload[:job].arguments.first}`"
+        text: "`#{event.payload[:job].class} #{event.payload[:job].arguments.first}`",
         as_user: true
       )
     end
