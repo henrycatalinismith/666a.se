@@ -37,7 +37,17 @@ class PagesController < ApplicationController
     end
     parsed = FrontMatterParser::Parser.parse_file(file, loader: unsafe_loader)
     @data = parsed.front_matter
-    @content = parsed.content
+
+    if request.path == "/conduct"
+      @content = File.read(Rails.root.join("code_of_conduct.md"))
+    elsif request.path == "/license"
+      @content = File.read(Rails.root.join("license.md"))
+    elsif request.path == "/security"
+      @content = File.read(Rails.root.join("security.md"))
+    else
+      @content = parsed.content
+    end
+
     @page_title = @data["title"]
     render template: "pages/show", layout: "internal"
   end
