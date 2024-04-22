@@ -21,8 +21,6 @@ class User::NotificationJob < ApplicationJob
       end
     end
 
-    @document.notification_success!
-
     if options[:cascade]
       notifications.each_with_index do |notification, index|
         User::EmailJob.set(wait: index.seconds).perform_later(
