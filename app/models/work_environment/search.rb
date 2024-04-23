@@ -26,7 +26,7 @@ class WorkEnvironment::Search < ApplicationRecord
   end
 
   def url
-    query = { id: document_code }.to_query
+    query = parameters.to_query
     url = "#{ENV["WORK_ENVIRONMENT_URL"]}?#{query}"
   end
 

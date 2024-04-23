@@ -23,9 +23,10 @@ describe WorkEnvironment::ResultJob do
     search.save
     result.save
 
+    ENV["WORK_ENVIRONMENT_URL"] = "https://example.org/search/"
     stub_request(
       :get,
-      "https://www.av.se/om-oss/sok-i-arbetsmiljoverkets-diarium/?id=2023%2F018014-1"
+      "https://example.org/search/?id=2023%2F018014-1"
     ).to_return(status: 200, body: response)
 
     WorkEnvironment::ResultJob.perform_now(result.document_code)
