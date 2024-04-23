@@ -40,6 +40,8 @@ class PagesController < ApplicationController
 
     if request.path == "/conduct"
       @content = File.read(Rails.root.join("code_of_conduct.md"))
+    elsif request.path == "/contributing"
+      @content = File.read(Rails.root.join("contributing.md"))
     elsif request.path == "/license"
       @content = File.read(Rails.root.join("license.md"))
     elsif request.path == "/security"

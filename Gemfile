@@ -14,7 +14,6 @@ group :development, :test do
   gem "rspec-rails", "~> 6.1.1"
   gem "webmock"
   gem "timecop", "~> 0.9.8"
-  gem "rails-mermaid_erd"
 end
 
 gem "litestack", "~> 0.3.0"
