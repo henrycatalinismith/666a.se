@@ -3,7 +3,7 @@
 ## Setup
 
 ```bash
-git clone git@github.com:henrycatalinismith/666a.se.git
+git clone git@github.com:666ase/666a.git
 ```
 
 ## Documentation

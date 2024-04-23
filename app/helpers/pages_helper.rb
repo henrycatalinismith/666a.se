@@ -3,7 +3,12 @@ module PagesHelper
     @data = data
     renderer = PageRender.new(@data)
     redcarpet =
-      Redcarpet::Markdown.new(renderer, tables: true, fenced_code_blocks: true)
+      Redcarpet::Markdown.new(
+        renderer,
+        tables: true,
+        fenced_code_blocks: true,
+        autolink: true
+      )
     redcarpet.render(markdown)
   end
 
