@@ -1,0 +1,144 @@
+<% if @documents.any? %>
+  <div id="handling-results" class="result">
+    <div class="hit-count">
+      <%= @documents.count %> träffar
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>
+            Handlingsnummer
+          </th>
+          <th>
+            Ärendemening
+          </th>
+          <th>
+            Handlingstyp
+          </th>
+          <th>
+            Datum
+          </th>
+          <th>
+            Organisation
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <% @documents.each do |document| %>
+
+          <tr>
+            <td><%= document.document_code %></td>
+            <td><%= document.case_name %></td>
+            <td><%= document.document_type %></td>
+            <td><%= document.document_date.strftime('%Y-%m-%d') %></td>
+            <td><%= document.company_name %><br /><%= document.company_code %><br /></td>
+          </tr>
+
+        <% end %>
+
+      </tbody>
+
+    </table>
+
+    <div class="pager clearfix">
+      <div class="pagination-container">
+        <ul class="pagination">
+          <li class="disabled PagedList-skipToFirst"><a>Första</a></li>
+          <li class="active"><a>1</a></li>
+          <li><a class="ajaxlink" href="/om-oss/sok-i-arbetsmiljoverkets-diarium/?page=2&amp;sortDirection=Desc&amp;sortOrder=Dokumentdatum&amp;OnlyActive=False&amp;FromDate=2024-04-20&amp;ToDate=2024-04-20&amp;ShowToolbar=True">2</a></li>
+          <li class="PagedList-skipToNext"><a class="ajaxlink" href="/om-oss/sok-i-arbetsmiljoverkets-diarium/?page=2&amp;sortDirection=Desc&amp;sortOrder=Dokumentdatum&amp;OnlyActive=False&amp;FromDate=2024-04-20&amp;ToDate=2024-04-20&amp;ShowToolbar=True" rel="next">Nästa</a></li>
+          <li class="PagedList-skipToLast"><a class="ajaxlink" href="/om-oss/sok-i-arbetsmiljoverkets-diarium/?page=2&amp;sortDirection=Desc&amp;sortOrder=Dokumentdatum&amp;OnlyActive=False&amp;FromDate=2024-04-20&amp;ToDate=2024-04-20&amp;ShowToolbar=True">Sista</a></li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+<% elsif !@document.nil? %>
+
+  <div id="handling-search-details">
+
+    <h1>
+      Aktuell handling
+    </h1>
+
+    <dl>
+      <dt>Diarienummer</dt>
+      <dd><%= @document.case_code %></dd>
+
+      <dt>Handlingsnummer</dt>
+      <dd><%= @document.document_code %></dd>
+
+      <dt>Ärendemening</dt>
+      <dd><%= @document.case_name %></dd>
+
+      <dt>Handlingstyp</dt>
+      <dd><%= @document.document_type %></dd>
+
+      <dt>Inkommande/Utgående</dt>
+      <dd><%= @document.document_incoming? ? 'Inkommande' : 'Utgående' %></dd>
+
+      <dt>Organisation</dt>
+      <dd>
+        <% if @document.company_name.present? %>
+          <%= @document.company_name %> (<%= @document.company_code %>)</dd>
+        <% else %>
+          Saknas
+        <% end %>
+      </dd>
+
+      <dt>Arbetsställenummer (CFAR)</dt>
+      <dd>
+        <% if @document.workplace_code.present? %>
+          <%= @document.workplace_code %>
+        <% else %>
+          Saknas
+        <% end %>
+      </dd>
+
+      <dt>Arbetsställe</dt>
+      <dd>
+        <% if @document.workplace_name.present? %>
+          <%= @document.workplace_name %>
+        <% else %>
+          Saknas
+        <% end %>
+      </dd>
+
+      <dt>Län</dt>
+      <dd>
+        <% if @document.county_name.present? %>
+          <%= @document.county_name %> (<%= @document.county_code %>)
+        <% else %>
+          Saknas
+        <% end %>
+      </dd>
+
+      <dt>Kommun</dt>
+      <dd>
+        <% if @document.municipality_name.present? %>
+          <%= @document.municipality_name %> (<%= @document.municipality_code %>)
+        <% else %>
+          Saknas
+        <% end %>
+      </dd>
+
+      <dt>Datum</dt>
+      <dd><%= @document.document_date.strftime('%Y-%m-%d') %></dd>
+
+      <dt>Pågående/Avslutat</dt>
+      <dd>
+        <% if @document.case_ongoing? %>
+          Pågående
+        <% else %>
+          Avslutat
+        <% end %>
+      </dd>
+
+    </dl>
+
+  </div>
+
+<% end %>
