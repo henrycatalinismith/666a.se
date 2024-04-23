@@ -21,6 +21,7 @@ class WorkEnvironment::ResultJob < ApplicationJob
 
     @result.search.day.increment!(:request_count)
     @result.metadata_fetching!
+    puts @result.url
     uri = URI(@result.url)
     response = Net::HTTP.get_response(uri)
     document = Nokogiri::HTML.parse(response.body)
