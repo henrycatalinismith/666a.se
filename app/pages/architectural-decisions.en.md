@@ -1,9 +1,9 @@
 ---
-title: Architecture Decisions
+title: Architectural Decisions
 layout: tech
 ---
 
-# Architecture Decisions
+# Architectural Decisions
 
 666a applies the [architecture decision record](https://adr.github.io/) convention for recording information about architecturally significant decisions.
 
