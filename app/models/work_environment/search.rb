@@ -26,10 +26,8 @@ class WorkEnvironment::Search < ApplicationRecord
   end
 
   def url
-    host = "www.av.se"
-    path = "/om-oss/sok-i-arbetsmiljoverkets-diarium/"
-    query = parameters.to_query
-    "https://#{host}#{path}?#{query}"
+    query = { id: document_code }.to_query
+    url = "#{ENV["WORK_ENVIRONMENT_URL"]}?#{query}"
   end
 
   def result_count
