@@ -11,9 +11,10 @@ describe WorkEnvironment::SearchJob do
     before do
       day.save
 
+      ENV["WORK_ENVIRONMENT_URL"] = "https://example.org/search/"
       stub_request(
         :get,
-        "https://www.av.se/om-oss/sok-i-arbetsmiljoverkets-diarium/?FromDate=2023-11-06&ToDate=2023-11-06&page=1&sortDirection=asc&sortOrder=Dokumentdatum"
+        "https://example.org/search/?FromDate=2023-11-06&ToDate=2023-11-06&page=1&sortDirection=asc&sortOrder=Dokumentdatum"
       ).to_return(status: 200, body: response)
 
       WorkEnvironment::SearchJob.perform_now(day.date)
