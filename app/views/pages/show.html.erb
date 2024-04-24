@@ -9,34 +9,20 @@
     <%= render_page(@content, @data).html_safe %>
   </div>
 
-  <% if @data["layout"] == "policy" %>
-    <%= render "pages/sidebar", title: "Policies", links: policies.map { |policy| { href: "/#{policy[:slug]}", text: t("home.#{policy[:slug]}") } } %>
+  <% if @data["layout"].in?(["policy", "tech", "architecture"]) %>
+    <div class="flex flex-col gap-4 h-min min-w-64 w-[400px]">
+      <% if Flipper.enabled? :open_source, current_user %>
+        <%= render "pages/sidebar", title: "Tech", links: [
+          { href: "/development", text: "Development" },
+          { href: "/operations", text: "Operations" },
+          { href: "/architecture", text: "Architecture" },
+        ] %>
+      <% end %>
+
+      <%= render "pages/sidebar", title: "Policies", links: policies.map { |policy| { href: "/#{policy[:slug]}", text: t("home.#{policy[:slug]}") } } %>
+    </div>
   <% elsif @data["layout"] == "post" %>
     <%= render "pages/sidebar", title: "Archive", links: posts %>
-  <% elsif @data["layout"] == "tech" or @data["layout"] == "decision" or @data["layout"] == "architecture" %>
-    <div class="flex flex-col gap-4 h-min min-w-64 w-[400px]">
-      <%= render "pages/sidebar", title: "Development", links: [
-        { href: "/development-environment-setup", text: "Setup" },
-        { href: "/contributing", text: "Contributing" },
-      ] %>
-
-      <%= render "pages/sidebar", title: "Operations", links: [
-        { href: "/operations", text: "Overview" },
-        { href: "/backups", text: "Backups" },
-      ] %>
-
-      <%= render "pages/sidebar", title: "Architecture", links: [
-        { href: "/architectural-principles", text: "Principles" },
-        { href: "/architectural-decisions", text: "Decisions" },
-        { href: "/architectural-modules", text: "Modules" },
-      ] %>
-
-    </div>
-  <% elsif @data["layout"] == "about" %>
-
-    </div>
-  </div>
-
   <% end %>
 
 </div>
