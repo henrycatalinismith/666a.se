@@ -175,4 +175,8 @@ Rails.application.routes.draw do
   scope module: :work_environment do
     get "/diarium", to: "documents#index"
   end
+
+  constraints CanAccessFlipperUI do
+    mount Flipper::UI.app(Flipper) => '/flipper'
+  end
 end

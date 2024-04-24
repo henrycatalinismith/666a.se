@@ -5,13 +5,18 @@
     { name: 'News', path: '/news' },
   ]
 
+
+
   if !current_user.nil?
     links.unshift({ name: 'Dashboard', path: '/dashboard' })
 
     if current_user.admin?
       links.unshift({ name: 'Admin', path: '/admin' })
-      links.push({ name: 'Tech', path: '/tech' })
     end
+  end
+
+  if Flipper.enabled? :open_source
+    links.push({ name: 'Tech', path: '/tech' })
   end
 %>
 
@@ -19,7 +24,10 @@
   <div class="max-w-5xl w-full flex flex-row h-full justify-between  ">
     <a href="/" class="flex flex-row items-center gap-2">
       <img src="/logo-128.png" class="max-w-[18px]" alt="" />
-      <span class="text-md font-bold">666a</span>
+      <span class="text-md font-bold">
+        666a
+        <%= Flipper.enabled?(:open_source, current_user) ? ' (Open Source)' : '' %>
+      </span>
     </a>
 
     <div class="hidden sm:ml-6 sm:flex sm:space-x-8 h-full">

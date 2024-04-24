@@ -35,3 +35,7 @@ gem "view_component"
 gem "lookbook"
 gem "slack-ruby-client"
 gem "dry-schema"
+gem "flipper"
+gem "flipper-active_record", "~> 1.3"
+
+gem "flipper-ui", "~> 1.3"
