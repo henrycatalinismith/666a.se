@@ -1,65 +1,93 @@
-# 666a.se
+# About 666a
 
-## Setup
+## Technical Documentation
 
-```bash
-git clone git@github.com:666ase/666a.git
-```
-
-## Documentation
-
-<dl>
+<dl class="flex flex-col">
 
   <dt>
-    <a href="https://666a.se/dependency-version-numbers">
-      Dependency Version Numbers
+    <a href="https://666a.se/development" class="text-blue-700">
+      Development
     </a>
   </dt>
   <dd>
-    Some of the key system dependencies and known compatible version numbers.
-  </dd>
-  
-  <dt>
-    <a href="https://666a.se/environment-variables">
-      Environment Variables
-    </a>
-  </dt>
-  <dd>
-    A guide to the environment variables necessary to run a 666a server. Written from a disaster recovery perspective, i.e. “what if the original secret values of these have all been lost?".
+    How to get started developing 666a on your own computer.
   </dd>
 
-  <dt>
-    <a href="https://666a.se/service-architecture-diagram">
-      Service Architecture Diagram
+  <dt class="mt-4">
+    <a href="https://666a.se/operations" class="text-blue-700">
+      Operations
     </a>
   </dt>
   <dd>
-    Visual map of the various components that deliver the 666a service.
+    Information about running 666a in production.
   </dd>
 
-  <dt>
-    <a href="https://666a.se/work-environment-jobs">
-      Work Environment Jobs
+  <dt class="mt-4">
+    <a href="https://666a.se/architecture" class="text-blue-700">
+      Architecture
     </a>
   </dt>
   <dd>
-    Diagram and explanation of the relationships between the work environment jobs.
+    Some of the thinking behind why 666a is built the way it is.
   </dd>
 
 </dl>
 
+## Policies
 
-## Community
-
-<dl>
+<dl class="flex flex-col">
 
   <dt>
-    <a href="https://666a.se/conduct">
+    <a href="https://666a.se/accessibility" class="text-blue-700">
+      Accessibility Statement
+    </a>
+  </dt>
+  <dd>
+    Learn about our commitment to ensuring 666a works for everyone.
+  </dd>
+
+  <dt class="mt-4">
+    <a href="https://666a.se/conduct" class="text-blue-700">
       Code of Conduct
     </a>
   </dt>
   <dd>
-    Adapted from version 2.1 of the Contributor Covenant.
+    Community standards and enforcement.
+  </dd>
+
+  <dt class="mt-4">
+    <a href="https://666a.se/license" class="text-blue-700">
+      License
+    </a>
+  </dt>
+  <dd>
+    The terms under which 666a is distributed.
+  </dd>
+
+  <dt class="mt-4">
+    <a href="https://666a.se/privacy" class="text-blue-700">
+      Privacy Policy
+    </a>
+  </dt>
+  <dd>
+    Practices regarding the collection, usage, and protection of personal information.
+  </dd>
+
+  <dt class="mt-4">
+    <a href="https://666a.se/security" class="text-blue-700">
+      Security Policy
+    </a>
+  </dt>
+  <dd>
+    What to do if you find a security vulnerability.
+  </dd>
+
+  <dt class="mt-4">
+    <a href="https://666a.se/terms" class="text-blue-700">
+      Terms of Service
+    </a>
+  </dt>
+  <dd>
   </dd>
 
 </dl>
