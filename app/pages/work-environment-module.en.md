@@ -1,6 +1,5 @@
 ---
 title: Work Environment Module
-layout: architecture
 ---
 
 # Work Environment Module

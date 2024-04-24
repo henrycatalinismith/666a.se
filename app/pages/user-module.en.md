@@ -1,6 +1,5 @@
 ---
 title: User Module
-layout: architecture
 ---
 
 # User Module

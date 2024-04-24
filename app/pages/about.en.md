@@ -1,6 +1,5 @@
 ---
 title: About 666a
-layout: policy
 ---
 
 # About 666a
