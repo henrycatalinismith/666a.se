@@ -6,4 +6,4 @@
 
 ## Reporting a Vulnerability
 
-Please email henry@666a.se with details of any security vulnerabilities. Expect a prompt reply. 
+Please email [henry@666a.se](mailto:henry@666a.se) with details of any security vulnerabilities. Expect a prompt reply. 

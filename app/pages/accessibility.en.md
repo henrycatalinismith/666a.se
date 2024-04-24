@@ -13,4 +13,4 @@ The [Web Content Accessibility Guidelines (WCAG)](https://www.w3.org/WAI/standar
 
 ## Feedback
 
-Email henry@666a.se if you run into any barriers.
+Email [henry@666a.se](mailto:henry@666a.se) if you run into any barriers.
