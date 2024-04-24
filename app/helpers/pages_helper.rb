@@ -60,8 +60,8 @@ class PageRender < Redcarpet::Render::HTML
   
             <div class="flex items-center divide-x-2 divide-gray-300">
               <div class="pr-4 flex flex-row gap-2 items-center">
-                <a href="/architecture-decisions" class="font-medium text-blue-700 underline">
-                  Architecture Decision
+                <a href="/architecture" class="font-medium text-blue-700 underline">
+                  Architectural Decision
                 </a>
               </div>
 

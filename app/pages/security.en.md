@@ -1,4 +1,3 @@
 ---
 title: Security
-layout: policy
 ---

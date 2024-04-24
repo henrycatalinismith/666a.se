@@ -1,6 +1,5 @@
 ---
 title: Accessibility Statement
-layout: policy
 ---
 
 # Accessibility Statement

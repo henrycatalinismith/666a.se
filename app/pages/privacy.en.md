@@ -1,6 +1,5 @@
 ---
 title: Privacy Policy
-layout: policy
 ---
 
 # Privacy Policy

@@ -1,6 +1,5 @@
 ---
 title: Operations
-layout: tech
 ---
 
 # Operations

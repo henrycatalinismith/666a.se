@@ -1,6 +1,5 @@
 ---
 title: Development
-layout: tech
 ---
 
 # Development

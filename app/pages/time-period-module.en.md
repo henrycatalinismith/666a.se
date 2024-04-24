@@ -1,6 +1,5 @@
 ---
 title: Time Period Module
-layout: architecture
 ---
 
 # Time Period Module

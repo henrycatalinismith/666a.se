@@ -1,6 +1,5 @@
 ---
 title: Legal Module
-layout: architecture
 ---
 
 # Legal Module

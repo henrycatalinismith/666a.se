@@ -1,6 +1,5 @@
 ---
 title: Terms of Service
-layout: policy
 ---
 
 # Terms of Service
