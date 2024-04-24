@@ -5,18 +5,11 @@
     { name: 'News', path: '/news' },
   ]
 
-
-
   if !current_user.nil?
     links.unshift({ name: 'Dashboard', path: '/dashboard' })
-
     if current_user.admin?
       links.unshift({ name: 'Admin', path: '/admin' })
     end
-  end
-
-  if Flipper.enabled? :open_source, current_user
-    links.push({ name: 'Tech', path: '/tech' })
   end
 %>
 
