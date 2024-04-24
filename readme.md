@@ -88,6 +88,7 @@
     </a>
   </dt>
   <dd>
+    The rules users must agree to in order to use the 666a service.
   </dd>
 
 </dl>
