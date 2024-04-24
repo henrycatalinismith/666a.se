@@ -15,7 +15,7 @@
     end
   end
 
-  if Flipper.enabled? :open_source
+  if Flipper.enabled? :open_source, current_user
     links.push({ name: 'Tech', path: '/tech' })
   end
 %>
@@ -26,7 +26,6 @@
       <img src="/logo-128.png" class="max-w-[18px]" alt="" />
       <span class="text-md font-bold">
         666a
-        <%= Flipper.enabled?(:open_source, current_user) ? ' (Open Source)' : '' %>
       </span>
     </a>
 
