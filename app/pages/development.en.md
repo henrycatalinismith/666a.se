@@ -1,9 +1,9 @@
 ---
-title: Development Environment Setup
+title: Development
 layout: tech
 ---
 
-# Development Environment Setup
+# Development
 
 ## Prerequisites
 
