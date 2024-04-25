@@ -36,3 +36,8 @@ Layout/TrailingEmptyLines:
 
 Layout/SpaceInsideParens:
   Enabled: true
+
+Layout/SpaceInsideHashLiteralBraces:
+  Enabled: true
+  EnforcedStyle: space
+  EnforcedStyleForEmptyBraces: no_space
