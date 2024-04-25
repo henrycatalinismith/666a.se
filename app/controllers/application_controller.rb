@@ -25,7 +25,7 @@ class ApplicationController < ActionController::Base
 
   private
   def extract_locale_from_accept_language_header
-    accept_language = request.env['HTTP_ACCEPT_LANGUAGE']
+    accept_language = request.env["HTTP_ACCEPT_LANGUAGE"]
     if accept_language.nil?
       return "en"
     end

@@ -70,7 +70,7 @@ class Admin::Legal::ElementsController < AdminController
   def create
     @revision = Legal::Revision.find_by(revision_code: params[:element][:revision_code])
     if @revision.nil?
-      raise ActionController::RoutingError.new('Not Found')
+      raise ActionController::RoutingError.new("Not Found")
     end
     @element = @revision.elements.new(params[:element].permit(:element_type, :element_index, :element_code, :element_text))
     pmatch = @element.element_code.match(/P(\d+)\Z/)

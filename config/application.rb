@@ -18,7 +18,7 @@ require "action_view/railtie"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-if ['development', 'test'].include? ENV['RAILS_ENV']
+if ["development", "test"].include? ENV["RAILS_ENV"]
   Dotenv::Railtie.load
 end
 
