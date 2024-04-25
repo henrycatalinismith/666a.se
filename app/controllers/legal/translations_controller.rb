@@ -14,7 +14,6 @@ class Legal::TranslationsController < ApplicationController
   layout "internal"
 
   def show
-
     @document = Legal::Document.find_by(document_code: params[:document_code])
     if @document.nil? then
       raise ActionController::RoutingError.new("Not Found lmao #{params[:document_code]}")

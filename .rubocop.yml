@@ -79,3 +79,14 @@ Layout/IndentationStyle:
 Layout/IndentationConsistency:
   Enabled: false
   EnforcedStyle: indented_internal_methods
+
+Layout/EndAlignment:
+  Enabled: true
+  EnforcedStyleAlignWith: variable
+  AutoCorrect: true
+
+Layout/EmptyLinesAroundModuleBody:
+  Enabled: true
+
+Layout/EmptyLinesAroundMethodBody:
+  Enabled: true
