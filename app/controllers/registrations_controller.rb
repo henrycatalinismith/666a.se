@@ -22,9 +22,9 @@ class RegistrationsController < Devise::RegistrationsController
 
   protected
 
-  def configure_sign_up_params
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :company_code, :locale])
-  end
+    def configure_sign_up_params
+      devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :company_code, :locale])
+    end
 
   # The path used after sign up.
   # def after_sign_up_path_for(resource)
