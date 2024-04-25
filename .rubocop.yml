@@ -72,3 +72,10 @@ Layout/SpaceAroundKeyword:
 
 Layout/IndentationWidth:
   Enabled: true
+
+Layout/IndentationStyle:
+  Enabled: true
+
+Layout/IndentationConsistency:
+  Enabled: false
+  EnforcedStyle: indented_internal_methods

@@ -7,9 +7,9 @@ class ApplicationController < ActionController::Base
 
   protected
 
-  def after_sign_in_path_for(resource)
-    "/dashboard"
-  end
+    def after_sign_in_path_for(resource)
+      "/dashboard"
+    end
 
   around_action :switch_locale
 
@@ -24,16 +24,16 @@ class ApplicationController < ActionController::Base
   end
 
   private
-  def extract_locale_from_accept_language_header
-    accept_language = request.env["HTTP_ACCEPT_LANGUAGE"]
-    if accept_language.nil?
-      return "en"
+    def extract_locale_from_accept_language_header
+      accept_language = request.env["HTTP_ACCEPT_LANGUAGE"]
+      if accept_language.nil?
+        return "en"
+      end
+      locale = accept_language.scan(/^[a-z]{2}/).first
+      if !["en", "sv", "ar"].include?(locale) then
+        locale = "en"
+      end
+      return locale
     end
-    locale = accept_language.scan(/^[a-z]{2}/).first
-    if !["en", "sv", "ar"].include?(locale) then
-      locale = "en"
-    end
-    return locale
-  end
 
 end
