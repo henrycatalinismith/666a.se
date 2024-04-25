@@ -14,7 +14,7 @@ class WorkEnvironment::SubscriptionsController < ApplicationController
       end
       @subscription = current_user.subscriptions.create(subscription_props)
       if @subscription.valid?
-        redirect_to "/dashboard", :notice => "Subscription created"
+        redirect_to "/dashboard", notice: "Subscription created"
       end
     else
       @subscription = User::Subscription.new
@@ -27,7 +27,7 @@ class WorkEnvironment::SubscriptionsController < ApplicationController
       return
     end
     @subscription.destroy
-    redirect_to "/dashboard", :notice => "Subscription deleted"
+    redirect_to "/dashboard", notice: "Subscription deleted"
   end
 
   def unsubscribe

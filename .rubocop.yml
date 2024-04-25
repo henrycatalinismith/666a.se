@@ -20,3 +20,7 @@ AllCops:
 Style/StringLiterals:
   Enabled: true
   EnforcedStyle: double_quotes
+
+Style/HashSyntax:
+  Enabled: true
+  EnforcedShorthandSyntax: either

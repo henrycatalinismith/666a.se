@@ -15,9 +15,9 @@ class WorkEnvironment::PeriodScanJob < ApplicationJob
 
     while day.date <= Date.parse(finish) do 
       WorkEnvironment::SearchJob.set(wait: 1.seconds).perform_later(day.date, {
-        :cascade => false,
-        :notify => false,
-        :force => false,
+        cascade: false,
+        notify: false,
+        force: false,
       })
       sleep 2.seconds
     end
