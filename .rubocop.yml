@@ -69,3 +69,6 @@ Layout/SpaceAroundEqualsInParameterDefault:
 
 Layout/SpaceAroundKeyword:
   Enabled: true
+
+Layout/IndentationWidth:
+  Enabled: true
