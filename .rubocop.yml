@@ -93,3 +93,15 @@ Layout/EmptyLinesAroundMethodBody:
 
 Layout/EmptyLinesAroundClassBody:
   Enabled: true
+
+Layout/CommentIndentation:
+  Enabled: true
+
+Layout/ElseAlignment:
+  Enabled: true
+
+Layout/EmptyLineAfterMagicComment:
+  Enabled: true
+
+Layout/EmptyLinesAroundBlockBody:
+  Enabled: true
