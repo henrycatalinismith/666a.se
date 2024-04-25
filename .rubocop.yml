@@ -24,3 +24,6 @@ Style/StringLiterals:
 Style/HashSyntax:
   Enabled: true
   EnforcedShorthandSyntax: either
+
+Lint/RequireParentheses:
+  Enabled: true
