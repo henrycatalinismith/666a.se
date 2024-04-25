@@ -16,11 +16,11 @@ class Legal::RevisionsController < ApplicationController
   def show
     @document = Legal::Document.find_by(document_code: params[:document_code])
     if @document.nil? then
-      raise ActionController::RoutingError.new('Not Found doc')
+      raise ActionController::RoutingError.new("Not Found doc")
     end
     @revision = @document.revisions.find_by(revision_code: params[:revision_code])
     if @revision.nil? then
-      raise ActionController::RoutingError.new('Not Found revs ' + params[:revision_code])
+      raise ActionController::RoutingError.new("Not Found revs " + params[:revision_code])
     end
 
     if @document.document_code == "aml" then

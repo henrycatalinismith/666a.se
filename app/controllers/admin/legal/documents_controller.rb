@@ -8,7 +8,7 @@ class Admin::Legal::DocumentsController < AdminController
   def update
     @document = Legal::Document.find_by(document_code: params[:id])
     if @document.nil?
-      raise ActionController::RoutingError.new('Not Found')
+      raise ActionController::RoutingError.new("Not Found")
     end
     if @document.update(params[:document].permit(:document_name, :document_code)) then
       redirect_to "/admin/legal/documents/#{@document.document_code}"
@@ -19,7 +19,7 @@ class Admin::Legal::DocumentsController < AdminController
   def show
     @document = Legal::Document.find_by(document_code: params[:id])
     if @document.nil?
-      raise ActionController::RoutingError.new('Not Found')
+      raise ActionController::RoutingError.new("Not Found")
     end
   end
 

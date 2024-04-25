@@ -1,4 +1,4 @@
-require 'flipper/adapters/active_record'
+require "flipper/adapters/active_record"
 
 class CanAccessFlipperUI
   def self.matches?(request)

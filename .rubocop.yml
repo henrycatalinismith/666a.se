@@ -1,0 +1,22 @@
+require:
+  - rubocop-rails
+  - rubocop-rspec
+  - rubocop-rspec_rails
+
+inherit_mode:
+  merge:
+    - Exclude
+
+AllCops:
+  NewCops: disable
+  SuggestExtensions: false
+  DisabledByDefault: true
+  Exclude:
+    - db/seeds.rb
+    - db/schema.rb
+    - db/migrate/*.rb
+    - node_modules/**/*
+
+Style/StringLiterals:
+  Enabled: true
+  EnforcedStyle: double_quotes

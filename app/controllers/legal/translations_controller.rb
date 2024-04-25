@@ -21,7 +21,7 @@ class Legal::TranslationsController < ApplicationController
     end
     @revision = @document.revisions.find_by(revision_code: params[:revision_code])
     if @revision.nil? then
-      raise ActionController::RoutingError.new('Not Found lol')
+      raise ActionController::RoutingError.new("Not Found lol")
     end
     @element = @revision.elements.find_by(element_code: params[:element_code])
     if @element.nil? or @element.element_type == "md" or @element.element_code.match(/\AK.\Z/) then
