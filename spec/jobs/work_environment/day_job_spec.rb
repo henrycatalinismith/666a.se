@@ -20,11 +20,11 @@ describe WorkEnvironment::DayJob do
     perform_enqueued_jobs(only: job) { job.perform_now("2023-10-31") }
   end
 
-  #it "stops at night" do
-  #Timecop.travel("2023-10-31 23:01")
-  #perform_enqueued_jobs(only: job) { job.perform_now("2023-10-31") }
-  #Timecop.return
-  #end
+  # it "stops at night" do
+  # Timecop.travel("2023-10-31 23:01")
+  # perform_enqueued_jobs(only: job) { job.perform_now("2023-10-31") }
+  # Timecop.return
+  # end
 
   it "runs itself every 30 seconds" do
     allow(job).to receive(:set).and_return(job)
