@@ -30,3 +30,6 @@ Lint/RequireParentheses:
 
 Layout/TrailingWhitespace:
   Enabled: true
+
+Layout/TrailingEmptyLines:
+  Enabled: true
