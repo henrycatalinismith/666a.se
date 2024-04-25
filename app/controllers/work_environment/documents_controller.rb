@@ -1,4 +1,4 @@
-show_schema = Dry::Schema.Params {}
+show_schema = Dry::Schema.Params { }
 
 class WorkEnvironment::DocumentsController < ApplicationController
   def index

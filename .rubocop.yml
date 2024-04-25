@@ -41,3 +41,7 @@ Layout/SpaceInsideHashLiteralBraces:
   Enabled: true
   EnforcedStyle: space
   EnforcedStyleForEmptyBraces: no_space
+
+Layout/SpaceInsideBlockBraces:
+  Enabled: true
+  EnforcedStyleForEmptyBraces: space
