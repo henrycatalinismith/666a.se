@@ -105,3 +105,7 @@ Layout/EmptyLineAfterMagicComment:
 
 Layout/EmptyLinesAroundBlockBody:
   Enabled: true
+
+Layout/CaseIndentation:
+  Enabled: true
+  EnforcedStyle: end
