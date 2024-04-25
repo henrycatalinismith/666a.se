@@ -1,7 +1,6 @@
 require "test_helper"
 
 class WorkEnvironment::ResultTest < ActiveSupport::TestCase
-
   test "document_code" do
     result = WorkEnvironment::Result.new(document_code: "abc")
     assert result.document_code == "abc"

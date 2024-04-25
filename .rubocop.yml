@@ -90,3 +90,6 @@ Layout/EmptyLinesAroundModuleBody:
 
 Layout/EmptyLinesAroundMethodBody:
   Enabled: true
+
+Layout/EmptyLinesAroundClassBody:
+  Enabled: true
