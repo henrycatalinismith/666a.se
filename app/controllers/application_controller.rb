@@ -35,5 +35,4 @@ class ApplicationController < ActionController::Base
       end
       return locale
     end
-
 end
