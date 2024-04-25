@@ -80,6 +80,6 @@ class Legal::TranslationsController < ApplicationController
     @elements = left.zip(right)
 
     renderer = LegalRender.new()
-    @redcarpet = Redcarpet::Markdown.new(renderer, :tables => true)
+    @redcarpet = Redcarpet::Markdown.new(renderer, tables: true)
   end
 end

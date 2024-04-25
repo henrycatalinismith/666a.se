@@ -29,7 +29,7 @@ class UsersController < ApplicationController
     @page_title = "666a – delete account"
     session[:referer] = :delete
     if request.post? and !current_user.nil? and current_user.destroy then
-      redirect_to "/", :notice => "BALEETED"
+      redirect_to "/", notice: "BALEETED"
     end
     @user = current_user
   end
