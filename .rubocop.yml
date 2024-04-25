@@ -33,3 +33,6 @@ Layout/TrailingWhitespace:
 
 Layout/TrailingEmptyLines:
   Enabled: true
+
+Layout/SpaceInsideParens:
+  Enabled: true
