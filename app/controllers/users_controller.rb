@@ -19,7 +19,7 @@ class UsersController < ApplicationController
         JSON.pretty_generate(@user.to_gdpr_json),
         filename: "666a-export.json",
         type: "application/json",
-        #disposition: "attachment"
+        # disposition: "attachment"
         disposition: "inline"
       )
     end
