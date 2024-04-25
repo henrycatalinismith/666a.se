@@ -27,3 +27,6 @@ Style/HashSyntax:
 
 Lint/RequireParentheses:
   Enabled: true
+
+Layout/TrailingWhitespace:
+  Enabled: true

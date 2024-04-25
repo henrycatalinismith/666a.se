@@ -57,7 +57,7 @@ class PageRender < Redcarpet::Render::HTML
             <h1 class="text-3xl font-bold font-extralight">
               #{text}
             </h1>
-  
+
             <div class="flex items-center divide-x-2 divide-gray-300">
               <div class="pr-4 flex flex-row gap-2 items-center">
                 <a href="/architecture" class="font-medium text-blue-700 underline">
@@ -69,7 +69,7 @@ class PageRender < Redcarpet::Render::HTML
                 #{@data["date"].strftime("%Y-%m-%d")}
               </time>
             </div>
-  
+
           </div>
         )
       elsif @data["date"]
@@ -78,12 +78,12 @@ class PageRender < Redcarpet::Render::HTML
             <h1 class="text-3xl font-bold font-extralight">
               #{text}
             </h1>
-  
+
             <div class="flex items-center divide-x-2 divide-gray-300">
               <time class="pr-4 text-gray-500" datetime="#{@data["date"].strftime("%Y-%m-%d")}">
                 #{@data["date"].strftime("%Y-%m-%d")}
               </time>
-  
+
               <div class="pl-4 flex flex-row gap-2 items-center">
                 <img
                   class="w-6 h-6 rounded-full"
@@ -95,7 +95,7 @@ class PageRender < Redcarpet::Render::HTML
                 </span>
               </div>
             </div>
-  
+
           </div>
         )
       else
