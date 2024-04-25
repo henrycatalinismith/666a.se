@@ -13,7 +13,7 @@ class User::Subscription < ApplicationRecord
   }
 
   normalizes :company_code, with: -> company_code { company_code.strip }
-  validates :company_code, format: { with: /\A\d{6}-\d{4}\z/, allow_blank: true } 
+  validates :company_code, format: { with: /\A\d{6}-\d{4}\z/, allow_blank: true }
 
   normalizes :workplace_code, with: -> workplace_code { workplace_code.strip }
   validates :workplace_code, format: { with: /\A\d{8}\z/, allow_blank: true }
