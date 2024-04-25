@@ -1,6 +1,12 @@
 # About 666a
 
-666a's mission is to provide 21st century tools for Sweden's labour movement. It's a mission inspired by first-hand experience of union organising. To build collective power in the digital era requires a modern approach.
+666a's mission is to provide 21st century tools for Sweden's labour movement. It's a mission inspired by first-hand experience of union organising. To build collective power in the digital era requires a modern approach. So far, that means
+
+1. **Work environment email alerts.**<br />
+   Sweden's Work Environment Authority publishes its correspondence with employers as per the Swedish principle of public access to information (<span lang="sv">offentlighetsprincipen</span>). The ability to subscribe to email alerts about new filings about particular companies facilitates a variety of labour movement roles and activities.
+  
+2. **English translations of Swedish labour laws.**<br />
+   Sweden's government occasionally publishes unofficial English translations of Swedish laws as downloadable PDFs. The ability to access these translations as web content where each section is linkable increases immigrant engagement with Sweden's distinctive legal system.
 
 666a is named after [chapter 6, section 6a of the Work Environment Act](/chapter-6-section-6a-of-aml-v2014:659-in-english). The first paragraph of that section empowers safety representatives to compel employers to engage with them on important work environment issues. A request made under that law is known colloquially within the Swedish labour movement as a "6:6a" – pronounced <em lang="sv">sex-sexa</em> in Swedish.
 
