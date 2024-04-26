@@ -11,11 +11,12 @@
 
   <% if (request.path != "/about" || !open_source?) and (@data["layout"].in?(["policy", "tech", "architecture"]) or @data["layout"].nil?) %>
     <div class="flex flex-col gap-5 h-min min-w-64 w-[400px]">
-      <h2 class="text-xl font-bold">
-        <a href="/about" class="text-blue-700 underline">About 666a</a>
-      </h2>
       <% if open_source? %>
-        <%= render "pages/sidebar", title: "Tech", links: [
+        <%= render "pages/sidebar", title: "About 666a", links: [
+          { href: "/about", text: "Overview" },
+          { href: "/contributing", text: "Contributing" },
+        ] %>
+        <%= render "pages/sidebar", title: "Technical Documentation", links: [
           { href: "/development", text: "Development" },
           { href: "/operations", text: "Operations" },
           { href: "/architecture", text: "Architecture" },

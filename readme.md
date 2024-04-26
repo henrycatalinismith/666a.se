@@ -1,14 +1,32 @@
 # About 666a
 
-666a's mission is to provide 21st century tools for Sweden's labour movement. It's a mission inspired by first-hand experience of union organising. To build collective power in the digital era requires a modern approach. So far, that means
+666a is a set of digital tools for Sweden's labour movement.
 
 1. **Work environment email alerts.**<br />
-   Sweden's Work Environment Authority publishes its correspondence with employers as per the Swedish principle of public access to information (<span lang="sv">offentlighetsprincipen</span>). The ability to subscribe to email alerts about new filings about particular companies facilitates a variety of labour movement roles and activities.
+   Sweden's Work Environment Authority publishes its correspondence with employers as per the Swedish principle of public access to information (<span lang="sv">offentlighetsprincipen</span>). 666a provides the ability to subscribe to email alerts about these public filings.
   
 2. **English translations of Swedish labour laws.**<br />
-   Sweden's government occasionally publishes unofficial English translations of Swedish laws as downloadable PDFs. The ability to access these translations as web content where each section is linkable increases immigrant engagement with Sweden's distinctive legal system.
+   Sweden's government occasionally publishes unofficial English translations of Swedish laws as downloadable PDFs. 666a provides to access these translations as web content, where each section is linkable.
 
+<!--
 666a is named after [chapter 6, section 6a of the Work Environment Act](/chapter-6-section-6a-of-aml-v2014:659-in-english). The first paragraph of that section empowers safety representatives to compel employers to engage with them on important work environment issues. A request made under that law is known colloquially within the Swedish labour movement as a "6:6a" – pronounced <em lang="sv">sex-sexa</em> in Swedish.
+-->
+
+## More Information
+
+<dl class="flex flex-col">
+
+  <dt>
+    <a href="https://666a.se/contributing" class="text-blue-700">
+      Contributing
+    </a>
+  </dt>
+  <dd>
+    Next steps for people who want to get involved.
+  </dd>
+
+</dl>
+
 
 ## Technical Documentation
 
