@@ -41,6 +41,7 @@ class PagesController < ApplicationController
     if request.path == "/about" && Flipper.enabled?(:open_source, current_user)
       @content = File.read(Rails.root.join("readme.md"))
     elsif request.path == "/conduct"
+      @content = File.read(Rails.root.join("code_of_conduct.md"))
     elsif request.path == "/contributing"
       @content = File.read(Rails.root.join("contributing.md"))
     elsif request.path == "/license"

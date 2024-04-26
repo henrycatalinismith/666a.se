@@ -24,7 +24,7 @@ module ApplicationHelper
   end
 
   def posts
-    [
+    posts= [
       {
         text: "Night Work, Tech, And Swedish Labour Law",
         href: "/night-work-tech-and-swedish-labour-law"
@@ -36,6 +36,9 @@ module ApplicationHelper
       },
       { text: "Announcing 666a", href: "/launch-announcement" }
     ]
+    if open_source?
+      posts.insert(0, { text: "Going Open Source", href: "/going-open-source" })
+    end
   end
 
   def docs
