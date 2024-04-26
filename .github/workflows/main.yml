@@ -28,8 +28,7 @@ jobs:
           bundle exec rails test
           bundle exec rspec
 
-      - uses: superfly/flyctl-actions/setup-flyctl@master
-
-      - run: flyctl deploy --remote-only
-        env:
-          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+      - uses: dentarg/fly@v1
+        with:
+          fly-token: ${{ secrets.FLY_API_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
