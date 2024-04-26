@@ -6,11 +6,7 @@
    Sweden's Work Environment Authority publishes its correspondence with employers as per the Swedish principle of public access to information (<span lang="sv">offentlighetsprincipen</span>). 666a provides the ability to subscribe to email alerts about these public filings.
   
 2. **English translations of Swedish labour laws.**<br />
-   Sweden's government occasionally publishes unofficial English translations of Swedish laws as downloadable PDFs. 666a provides to access these translations as web content, where each section is linkable.
-
-<!--
-666a is named after [chapter 6, section 6a of the Work Environment Act](/chapter-6-section-6a-of-aml-v2014:659-in-english). The first paragraph of that section empowers safety representatives to compel employers to engage with them on important work environment issues. A request made under that law is known colloquially within the Swedish labour movement as a "6:6a" – pronounced <em lang="sv">sex-sexa</em> in Swedish.
--->
+   Sweden's government occasionally publishes unofficial English translations of Swedish laws as downloadable PDFs. 666a provides to access these translations as web content to make them more accessible and shareable.
 
 ## More Information
 
