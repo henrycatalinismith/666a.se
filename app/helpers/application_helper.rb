@@ -38,7 +38,9 @@ module ApplicationHelper
     ]
     if open_source?
       posts.insert(0, { text: "Going Open Source", href: "/going-open-source" })
+      return posts
     end
+    return posts
   end
 
   def docs
