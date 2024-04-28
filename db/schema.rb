@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_28_180016) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_28_181109) do
   create_table "flipper_features", force: :cascade do |t|
     t.string "key", null: false
     t.datetime "created_at", null: false
@@ -53,6 +53,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_28_180016) do
     t.string "document_id", null: false
     t.string "revision_name"
     t.string "revision_code"
+    t.integer "revision_status"
     t.index "\"element_index\"", name: "index_legal_revisions_on_element_index"
     t.index "\"element_locale\"", name: "index_legal_revisions_on_element_locale"
     t.index ["document_id"], name: "index_labour_law_revisions_on_document_id"
