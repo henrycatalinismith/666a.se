@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_24_175338) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_28_180016) do
   create_table "flipper_features", force: :cascade do |t|
     t.string "key", null: false
     t.datetime "created_at", null: false
@@ -27,15 +27,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_24_175338) do
     t.index ["feature_key", "key", "value"], name: "index_flipper_gates_on_feature_key_and_key_and_value", unique: true
   end
 
-  create_table "legal_documents", id: :string, default: -> { "ULID()" }, force: :cascade do |t|
+  create_table "labour_law_documents", id: :string, default: -> { "ULID()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "document_name"
     t.string "document_code"
-    t.index ["document_code"], name: "index_legal_documents_on_document_code", unique: true
+    t.index ["document_code"], name: "index_labour_law_documents_on_document_code", unique: true
   end
 
-  create_table "legal_elements", id: :string, default: -> { "ULID()" }, force: :cascade do |t|
+  create_table "labour_law_elements", id: :string, default: -> { "ULID()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "revision_id", null: false
@@ -43,11 +43,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_24_175338) do
     t.string "element_code"
     t.string "element_text"
     t.decimal "element_index"
-    t.index ["element_code"], name: "index_legal_elements_on_element_code"
-    t.index ["revision_id"], name: "index_legal_elements_on_revision_id"
+    t.index ["element_code"], name: "index_labour_law_elements_on_element_code"
+    t.index ["revision_id"], name: "index_labour_law_elements_on_revision_id"
   end
 
-  create_table "legal_revisions", id: :string, default: -> { "ULID()" }, force: :cascade do |t|
+  create_table "labour_law_revisions", id: :string, default: -> { "ULID()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "document_id", null: false
@@ -55,18 +55,18 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_24_175338) do
     t.string "revision_code"
     t.index "\"element_index\"", name: "index_legal_revisions_on_element_index"
     t.index "\"element_locale\"", name: "index_legal_revisions_on_element_locale"
-    t.index ["document_id"], name: "index_legal_revisions_on_document_id"
-    t.index ["revision_code"], name: "index_legal_revisions_on_revision_code"
+    t.index ["document_id"], name: "index_labour_law_revisions_on_document_id"
+    t.index ["revision_code"], name: "index_labour_law_revisions_on_revision_code"
   end
 
-  create_table "legal_translations", id: :string, default: -> { "ULID()" }, force: :cascade do |t|
+  create_table "labour_law_translations", id: :string, default: -> { "ULID()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "element_id", null: false
     t.string "translation_locale"
     t.string "translation_text"
-    t.index ["element_id"], name: "index_legal_translations_on_element_id"
-    t.index ["translation_locale"], name: "index_legal_translations_on_translation_locale"
+    t.index ["element_id"], name: "index_labour_law_translations_on_element_id"
+    t.index ["translation_locale"], name: "index_labour_law_translations_on_translation_locale"
   end
 
   create_table "posts", id: :string, default: -> { "ULID()" }, force: :cascade do |t|
@@ -195,9 +195,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_24_175338) do
     t.index ["day_id"], name: "index_work_environment_searches_on_day_id"
   end
 
-  add_foreign_key "legal_elements", "legal_revisions", column: "revision_id"
-  add_foreign_key "legal_revisions", "legal_documents", column: "document_id"
-  add_foreign_key "legal_translations", "legal_elements", column: "element_id"
+  add_foreign_key "labour_law_elements", "labour_law_revisions", column: "revision_id"
+  add_foreign_key "labour_law_revisions", "labour_law_documents", column: "document_id"
+  add_foreign_key "labour_law_translations", "labour_law_elements", column: "element_id"
   add_foreign_key "time_period_days", "time_period_weeks", column: "week_id"
   add_foreign_key "user_notifications", "user_subscriptions", column: "subscription_id"
   add_foreign_key "user_notifications", "work_environment_documents", column: "document_id"

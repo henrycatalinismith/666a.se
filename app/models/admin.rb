@@ -1,5 +1,5 @@
 module Admin
-  module Legal
+  module LabourLaw
   end
   module WorkEnvironment
   end

@@ -23,10 +23,11 @@ Rails.application.routes.draw do
   get "/1982:673/2013:611", to: redirect("/atl-v2013:611-in-english")
 
   get "/:element_code-of-:document_code-v:revision_code-in-english",
-      to: "legal/translations#show"
+      to: "labour_law/translations#show"
 
-  get "/swedish-labour-laws-in-english", to: "legal/documents#index"
-  get "/:document_code-v:revision_code-in-english", to: "legal/revisions#show"
+  get "/labour-law", to: "labour_law/documents#index"
+  get "/swedish-labour-laws-in-english", to: redirect("/labour-law")
+  get "/:document_code-v:revision_code-in-english", to: "labour_law/revisions#show"
   # document_code: /[a-z]{3}/,
   # revision_code: /[0-9]{4}:[0-9]{3,4}/
 
@@ -56,7 +57,7 @@ Rails.application.routes.draw do
         }
 
   # get "/:element_code-of-las-v2022:836-in-english",
-  #   to: "legal/translations#new_show",
+  #   to: "labour_law/translations#new_show",
   #   defaults: {
   #     document_code: "las",
   #     revision_code: "2022:836",
@@ -66,7 +67,7 @@ Rails.application.routes.draw do
   get "/sitemap.xml", to: "sitemaps#show", format: "xml", as: "sitemap"
   get "/feed.xml", to: "pages#index"
 
-  scope module: :legal do
+  scope module: :labour_law do
     get "/:document_code/:revision_code",
         to: "revisions#show",
         document_code: /\d{4}:\d+/,
@@ -128,7 +129,7 @@ Rails.application.routes.draw do
         post "/weeks/:id/job", to: "weeks#job"
       end
 
-      namespace :legal do
+      namespace :labour_law do
         resources :documents
         resources :revisions
         resources :elements

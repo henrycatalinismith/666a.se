@@ -1,0 +1,61 @@
+<div class="container flex flex-col gap-8 w-full p-8">
+  <%= render layout: "shared/h1" do %>
+    Edit Legal Document
+  <% end %>
+
+  <%= form_for(
+    @document,
+    as: "document",
+    url: "/admin/labour_law/documents/#{@document.document_code}",
+    builder: TailwindBuilder,
+    :html => {class: "flex flex-col gap-8" }) do |f| %>
+
+
+    <% if @document.errors.any? %>
+      <div class="error error-success note-shadow">
+        <% @document.errors.full_messages.each do |msg| %>
+          <p><%= msg %></p>
+        <% end %>
+      </div>
+    <% end %>
+
+    <%= render layout: "shared/field" do %>
+      <%= f.label :document_name %>
+      <%= f.text_field :document_name %>
+    <% end %>
+
+    <%= render layout: "shared/field" do %>
+      <%= f.label :document_code %>
+      <%= f.text_field :document_code %>
+    <% end %>
+
+    <div class="actions">
+      <%= f.submit "Save" %>
+    </div>
+
+  <% end %>
+
+  <section class="w-full flex flex-col gap-10 flex-1 md:p-6 bg-white md:border md:border-gray-200 md:rounded-lg md:shadow">
+    <h2 class="text-2xl">
+      Revisions
+    </h2>
+
+    <%= link_to(
+      "New",
+      "/admin/labour_law/revisions/new?document_code=#{@document.document_code}",
+      class: "w-max bg-slate-400 text-blue-700 text-white py-2 px-4 whitespace-nowrap rounded h-min"
+    ) %>
+
+    <ol class="flex flex-col gap-4">
+      <% @document.revisions.each do |revision| %>
+        <li>
+          <a class="text-blue-700 underline" href="/admin/labour_law/revisions/<%= revision.revision_code %>">
+            <%= revision.revision_name %>
+          </a>
+        </li>
+      <% end %>
+    </ol>
+
+  </section>
+
+</div>

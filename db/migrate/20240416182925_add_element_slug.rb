@@ -1,6 +1,6 @@
 class AddElementSlug < ActiveRecord::Migration[7.1]
   def change
-    elements = Legal::Element.all
+    elements = LabourLaw::Element.all
     elements.each do |element|
       chapter = element.element_code.match(/\AK([0-9])\Z/)
       chapter_paragraph = element.element_code.match(/\AK([0-9])P([0-9]+[a-z]?)\Z/)

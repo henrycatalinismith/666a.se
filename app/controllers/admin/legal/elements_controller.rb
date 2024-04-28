@@ -1,8 +1,8 @@
-class Admin::Legal::ElementsController < AdminController
+class Admin::LabourLaw::ElementsController < AdminController
   layout "internal"
 
   def edit
-    @document = Legal::Document.find_by(document_code: params[:document_code])
+    @document = LabourLaw::Document.find_by(document_code: params[:document_code])
     @revision = @document.revisions.find_by(revision_code: params[:revision_code])
     @element = @revision.elements.find_by(element_code: params[:element_code])
     if request.patch? then
@@ -13,15 +13,15 @@ class Admin::Legal::ElementsController < AdminController
   end
 
   def update
-    @element = Legal::Element.find(params[:id])
+    @element = LabourLaw::Element.find(params[:id])
     if @element.update(params[:element].permit(:element_type, :element_index, :element_code, :element_text))
       flash[:notice] = "element updated"
-      redirect_to "/admin/legal/elements/#{@element.id}"
+      redirect_to "/admin/labour_law/elements/#{@element.id}"
     end
   end
 
   def new
-    @revision = Legal::Revision.find_by(revision_code: params[:revision_code])
+    @revision = LabourLaw::Revision.find_by(revision_code: params[:revision_code])
     @document = @revision.document
     @element = @revision.elements.new
     @index = @revision.elements.count
@@ -68,7 +68,7 @@ class Admin::Legal::ElementsController < AdminController
   end
 
   def create
-    @revision = Legal::Revision.find_by(revision_code: params[:element][:revision_code])
+    @revision = LabourLaw::Revision.find_by(revision_code: params[:element][:revision_code])
     if @revision.nil?
       raise ActionController::RoutingError.new("Not Found")
     end
@@ -90,13 +90,13 @@ class Admin::Legal::ElementsController < AdminController
         @element.translations.first.update(translation_text: english)
       end
 
-      redirect_to "/admin/legal/elements/#{@element.id}"
+      redirect_to "/admin/labour_law/elements/#{@element.id}"
       flash[:notice] = "element created"
     end
   end
 
   def show
-    @element = Legal::Element.find(params[:id])
+    @element = LabourLaw::Element.find(params[:id])
     @revision = @element.revision
     @document = @revision.document
   end

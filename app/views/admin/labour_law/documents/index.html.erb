@@ -1,0 +1,34 @@
+<div class="container flex flex-col gap-8 w-full p-8">
+
+  <%= render partial: "admin/icon-breadcrumbs", locals: {
+    items: [
+      {
+        icon: "fa-solid fa-lock",
+        href: "/admin",
+        text: "Admin",
+      },
+    ]
+  } %>
+
+  <%= render partial: "admin/icon-heading", locals: {
+    icon: "fa-solid fa-book",
+    text: "Labour Law",
+  } %>
+
+  <%= link_to(
+    "New",
+    "/admin/labour_law/documents/new",
+    class: "w-max bg-slate-400 text-blue-700 text-white py-2 px-4 whitespace-nowrap rounded h-min"
+  ) %>
+
+  <%= render partial: "admin/icon-list", locals: {
+    items: @documents.map do |document|
+      {
+        icon: "fa-solid fa-book",
+        top: { text: document.document_name, href: "/admin/labour_law/documents/#{document.document_code}"  },
+        bottom: { text: document.revisions.count },
+      }
+    end
+  } %>
+
+</div>
