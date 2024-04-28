@@ -1,43 +1,43 @@
-class Admin::Legal::RevisionsController < AdminController
+class Admin::LabourLaw::RevisionsController < AdminController
   layout "internal"
 
   def edit
-    @revision = Legal::Revision.find_by(revision_code: params[:revision_code])
+    @revision = LabourLaw::Revision.find_by(revision_code: params[:revision_code])
     @document = @revision.document
   end
 
   def update
-    @revision = Legal::Revision.find_by(revision_code: params[:id])
+    @revision = LabourLaw::Revision.find_by(revision_code: params[:id])
     if @revision.update(
          params[:revision].permit(:revision_name, :revision_code)
        )
-      redirect_to "/admin/legal/revisions/#{@revision.revision_code}"
+      redirect_to "/admin/labour_law/revisions/#{@revision.revision_code}"
       flash[:notice] = "revision updated"
     end
   end
 
   def new
-    @document = Legal::Document.find_by(document_code: params[:document_code])
+    @document = LabourLaw::Document.find_by(document_code: params[:document_code])
     raise ActionController::RoutingError.new("Not Found") if @document.nil?
-    @revision = Legal::Revision.new
+    @revision = LabourLaw::Revision.new
   end
 
   def create
     @document =
-      Legal::Document.find_by(document_code: params[:revision][:document_code])
+      LabourLaw::Document.find_by(document_code: params[:revision][:document_code])
     raise ActionController::RoutingError.new("Not Found") if @document.nil?
     @revision =
       @document.revisions.create(
         params[:revision].permit(:revision_name, :revision_code)
       )
     if @revision.valid?
-      redirect_to "/admin/legal/revisions/#{@revision.revision_code}"
+      redirect_to "/admin/labour_law/revisions/#{@revision.revision_code}"
       flash[:notice] = "revision created"
     end
   end
 
   def show
-    @revision = Legal::Revision.find_by(revision_code: params[:id])
+    @revision = LabourLaw::Revision.find_by(revision_code: params[:id])
     @document = @revision.document
   end
 end

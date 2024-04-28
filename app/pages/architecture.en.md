@@ -59,7 +59,7 @@ Examples of tasks that should be as automatic as possible include testing and de
 ## Modules
 
 * [Work Environment Module](/work-environment-module)
-* [Legal Module](/legal-module)
+* [Labour Law Module](/labour-law-module)
 * [User Module](/user-module)
 * [Time Period Module](/time-period-module)<br />
 

@@ -1,0 +1,2 @@
+module LabourLaw::TranslationsHelper
+end

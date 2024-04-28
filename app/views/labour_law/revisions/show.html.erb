@@ -1,0 +1,34 @@
+<% content_for(:opengraph) do %>
+  <link rel="canonical" href="https://666a.se/<%= @document.document_code %>/<%= @revision.revision_code %>/" />
+<% end %>
+
+<div class="flex flex-col gap-10 w-full p-2 sm:px-4 lg:px-0 pt-8 max-w-5xl">
+
+  <%= render partial: "labour_law/h1", locals: {
+    title: legal_document_title(@document),
+    subtitle: legal_document_subtitle(@document),
+  } %>
+
+  <%= render partial: "labour_law/outdated" %>
+
+  <table>
+    <thead>
+      <th width="50%"></th>
+      <th width="50%"></th>
+    </thead>
+
+    <tbody>
+      <% @elements.each do |left, right| %>
+        <%= render partial: "labour_law/translations/row", locals: {
+          left: left,
+          right: right,
+          links: true,
+        } %>
+      <% end %>
+
+      <%= render partial: "labour_law/sources" %>
+
+    </tbody>
+  </table>
+
+</div>
