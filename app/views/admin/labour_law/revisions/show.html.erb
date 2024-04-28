@@ -28,6 +28,14 @@
       <%= f.text_field :revision_code %>
     <% end %>
 
+    <%= render layout: "shared/field" do %>
+      <%= f.label :revision_status %>
+      <%= f.select :revision_status, [
+        ["Draft", "draft"],
+        ["Published", "published"],
+      ] %>
+    <% end %>
+
     <div class="actions">
       <%= f.submit "Update" %>
     </div>
