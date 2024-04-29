@@ -8,7 +8,7 @@ If you're interested in getting more involved in making 666a happen, then that's
 
 ### Discord
 
-There's a [666a Discord](https://discord.gg/Xgb6a5wQAj), and you can be on it. Joining the Discord counts as contributing.
+There's a [666a Discord](https://discord.gg/Xgb6a5wQAj), and you can be on it. Joining the Discord counts as contributing!
 
 ### Email
 
