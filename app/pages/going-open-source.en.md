@@ -6,7 +6,7 @@ layout: post
 
 # Going Open Source
 
-Today's the six month anniversary of the launch of 666a. Wasn't completely sure anyone except me wanted it when I made it. Now that the demand is clear and I've had time to stabilise the service and prepare some documentation, it's time to upgrade it to an open source project just in time for May 1st tomorrow!
+Today's the six month anniversary of the launch of 666a. On launch day, I wasn't sure if anyone would even use it. Six months and several thousand sent emails later, the demand's proven, and it's feeling like too long since I took a scary leap of faith like that. So just in time for May 1st tomorrow, here's another gamble: 666a is now an open source project!
 
 The repo's over at [github.com/666ase/666a](https://github.com/666ase/666a). Go chuck it a star if you have a GitHub account! You're also invited to [join the Discord community](https://discord.com/invite/Xgb6a5wQAj).
 
@@ -16,4 +16,4 @@ I've also begun documenting the work ahead as [GitHub issues](https://github.com
 
 So whether you're a designer, or a developer, or maybe you speak a bunch of languages and can help with translating, or whatever else, don't be a stranger. I'm available at [henry@666a.se](mailto:henry@666a.se) in addition to the various tools and platforms listed above. Even just [joining the Discord](https://discord.com/invite/Xgb6a5wQAj) to hang out is a great start.
 
-In the meantime, do us both a favour and share this somewhere! You starring [the repo on GitHub](https://github.com/666ase/666a), for example, might even be the start of a butterfly effect that leads to another new union campaign somewhere! Let's see what happens!
+In the meantime, do us both a favour and share this somewhere!
