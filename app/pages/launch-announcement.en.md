@@ -6,7 +6,7 @@ layout: post
 
 # Announcing 666a
 
-Public filings at the Swedish Work Environment Authority are essential for understanding organizations and the current work environment of companies. Keeping up to date is a prerequisite for driving sustainable development in the Swedish labour market. 666a is a modernization of Sweden's principle of openness, making information automatic, customized, and multilingual, rather than merely available.
+Public filings at the Swedish Work Environment Authority are essential for understanding organizations and the current work environment of companies. Keeping up to date is a prerequisite for driving sustainable development in the Swedish labour market. 666a is a modernization of Sweden's principle of public access to information, making information automatic, customized, and multilingual, rather than merely available.
 
 ## Origin
 
