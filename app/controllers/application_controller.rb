@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   protected
 
     def after_sign_in_path_for(resource)
-      "/dashboard"
+      "/work-environment"
     end
 
   around_action :switch_locale

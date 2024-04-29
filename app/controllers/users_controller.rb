@@ -6,9 +6,9 @@ class UsersController < ApplicationController
   end
 
   def dashboard
-    @page_title = "666a – dashboard"
+    @page_title = "666a – Work Environment"
     @user = current_user
-    @subscriptions = @user.subscriptions
+    @subscriptions = @user.nil? ? [] : @user.subscriptions
   end
 
   def download
@@ -38,7 +38,7 @@ class UsersController < ApplicationController
     @page_title = "666a – email"
     if request.patch?
       if current_user.update(params[:user].permit(:email)) then
-        redirect_to "/dashboard"
+        redirect_to "/work-environment"
         flash[:notice] = "email updated"
       end
     end
@@ -48,7 +48,7 @@ class UsersController < ApplicationController
     @page_title = "666a – language"
     if request.patch?
       if current_user.update(params[:user].permit(:locale)) then
-        redirect_to "/dashboard"
+        redirect_to "/work-environment"
         flash[:notice] = "language updated"
       end
     end
@@ -58,7 +58,7 @@ class UsersController < ApplicationController
     @page_title = "666a – name"
     if request.patch?
       if current_user.update(params[:user].permit(:name)) then
-        redirect_to "/dashboard"
+        redirect_to "/work-environment"
         flash[:notice] = "name updated"
       end
     end

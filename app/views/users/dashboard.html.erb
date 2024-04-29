@@ -1,120 +1,144 @@
-<div class="flex flex-col gap-10 w-full p-8 lg:px-0 max-w-5xl">
+<div class="flex flex-col px-4 lg:px-0 pt-8 max-w-5xl w-full">
 
-  <%= render layout: "shared/h1" do %>
-    <%= t("dashboard.title") %>
-  <% end %>
+  <h1 class="text-3xl font-extralight mb-8 pb-8 border-b border-gray-300 w-full">
+    Work Environment
+  </h1>
 
-  <div class="flex flex-col gap-14 md:gap-8 md:flex-row">
+  <div class="prose">
+    <p>
+      Sweden's Work Environment Authority publishes its correspondence with
+      employers as per the Swedish principle of public access to information
+      (<span lang="sv">offentlighetsprincipen</span>). 666a provides the ability
+      to subscribe to email alerts about these public filings.
+    </p>
 
-    <section class="w-full flex flex-col gap-10 flex-1 md:p-6 md:pr-2 bg-white md:border md:border-gray-200 md:rounded-lg md:shadow">
+    <p>
+    </p>
 
-      <div class="flex flex-row justify-between h-8">
-        <h2 class="text-2xl font-bold">
-          <%= t("dashboard.alerts") %>
-        </h2>
+    <% if current_user.nil? %>
+      <p>
+        In order to subscribe to alerts, you must first
+        <%= link_to "log in", new_user_session_path, class: "text-blue-700 underline" %>
+        or <%= link_to "sign up", new_user_registration_path, class: "text-blue-700 underline"  %>.
+      </p>
+    <% end %>
 
-        <%= link_to(
-          t("dashboard.follow"),
-          "/follow",
-          class: "min-width-max-content hover:bg-slate-400 text-blue-700 hover:text-white py-2 px-4 whitespace-nowrap rounded h-min"
-        ) %>
-      </div>
-    
-      <div class="flex flex-col gap-8">
-        <% if @subscriptions.empty? then %>
-            <a href="/follow" class="font-bold border-dashed border-2 border-indigo-100 rounded-md w-full flex-1 block p-8 text-center">
-              Follow a company ➡
-            </a>
-          <% else %>
-            <% @subscriptions.each do |subscription| %>
+  </div>
 
-              <div class="flex flex-row justify-between items-center">
-                <div class="flex flex-col max-w-full overflow-hidden">
-                  <div class="font-mono">
-                    <% if subscription.company_subscription? %>
-                      <%= subscription.company_code %>
-                    <% else %>
-                      <%= subscription.workplace_code %>
-                    <% end %>
+  <% if !current_user.nil? %>
+    <div class="flex flex-col gap-14 mt-8 max-w-[624px]">
+
+      <section class="w-full flex flex-col gap-10 flex-1">
+
+        <div class="flex flex-row justify-between h-8">
+          <h2 class="text-2xl font-bold">
+            <%= t("dashboard.alerts") %>
+          </h2>
+
+          <%= link_to(
+            t("dashboard.follow"),
+            "/follow",
+            class: "min-width-max-content hover:bg-slate-400 text-blue-700 hover:text-white py-2 px-4 whitespace-nowrap rounded h-min"
+          ) %>
+        </div>
+      
+        <div class="flex flex-col gap-8">
+          <% if @subscriptions.empty? then %>
+              <a href="/follow" class="font-bold border-dashed border-2 border-indigo-100 rounded-md w-full flex-1 block p-8 text-center">
+                Follow a company ➡
+              </a>
+            <% else %>
+              <% @subscriptions.each do |subscription| %>
+
+                <div class="flex flex-row justify-between items-center">
+                  <div class="flex flex-col max-w-full overflow-hidden">
+                    <div class="font-mono">
+                      <% if subscription.company_subscription? %>
+                        <%= subscription.company_code %>
+                      <% else %>
+                        <%= subscription.workplace_code %>
+                      <% end %>
+                    </div>
+                    <div class="truncate text-slate-500">
+                      <% if subscription.company_subscription? %>
+                        <i class="fa-solid fa-people-group text-xs"></i>
+                        <span class="text-xs">
+                          <%= t("dashboard.company") %>
+                        </span>
+                      <% else %>
+                        <i class="fa-solid fa-building text-xs"></i>
+                        <span class="text-xs">
+                          <%= t("dashboard.workplace") %>
+                        </span>
+                      <% end %>
+                    </div>
                   </div>
-                  <div class="truncate text-slate-500">
-                    <% if subscription.company_subscription? %>
-                      <i class="fa-solid fa-people-group text-xs"></i>
-                      <span class="text-xs">
-                        <%= t("dashboard.company") %>
-                      </span>
-                    <% else %>
-                      <i class="fa-solid fa-building text-xs"></i>
-                      <span class="text-xs">
-                        <%= t("dashboard.workplace") %>
-                      </span>
-                    <% end %>
-                  </div>
+
+                  <%= button_to(
+                    t("dashboard.unfollow"),
+                    "/subscriptions/#{subscription.id}",
+                    method: :delete,
+                    class: "min-w-max-content text-red-700 hover:bg-red-700 hover:text-white py-2 px-4 rounded"
+                  ) %>
+
                 </div>
 
-                <%= button_to(
-                  t("dashboard.unfollow"),
-                  "/subscriptions/#{subscription.id}",
-                  method: :delete,
-                  class: "min-w-max-content text-red-700 hover:bg-red-700 hover:text-white py-2 px-4 rounded"
-                ) %>
-
-              </div>
-
+              <% end %>
             <% end %>
-          <% end %>
-      </div>
-    </section>
-
-    <section class="w-full flex flex-col gap-10 flex-1 md:p-6 md:pr-2 bg-white md:border md:border-gray-200 md:rounded-lg md:shadow">
-
-      <div class="flex flex-row justify-between items-center h-8">
-
-        <h2 class="text-2xl font-bold">
-          <%= t("dashboard.account") %>
-        </h2>
-
-        <%= button_to(
-          t("dashboard.logout"),
-          destroy_user_session_path,
-          method: :delete,
-          class: "text-red-700 hover:bg-red-500 hover:text-white py-2 px-4 rounded"
-        ) %>
-
-      </div>
-
-      <div class="flex flex-col gap-8">
-
-        <%= render partial: "dashboard-account-property", :locals => {
-          name: t("dashboard.name"),
-          value: @user.name,
-          href: "name",
-          text: t("dashboard.change_name"),
-        } %>
-
-        <%= render partial: "dashboard-account-property", :locals => {
-          name: t("dashboard.email"),
-          value: @user.email,
-          href: "email",
-          text: t("dashboard.change_email"),
-        } %>
-
-        <%= render partial: "dashboard-account-property", :locals => {
-          name: t("dashboard.language"),
-          value: t("locales.#{locale}"),
-          href: "language",
-          text: t("dashboard.change_language"),
-        } %>
-
-        <%= render partial: "dashboard-account-property", :locals => {
-          name: t("dashboard.password"),
-          value: "***********",
-          href: "password",
-          text: t("dashboard.change_password"),
-        } %>
+        </div>
       </section>
+
+      <section class="w-full flex flex-col gap-10 flex-1">
+
+        <div class="flex flex-row justify-between items-center h-8">
+
+          <h2 class="text-2xl font-bold">
+            <%= t("dashboard.account") %>
+          </h2>
+
+          <%= button_to(
+            t("dashboard.logout"),
+            destroy_user_session_path,
+            method: :delete,
+            class: "text-red-700 hover:bg-red-500 hover:text-white py-2 px-4 rounded"
+          ) %>
+
+        </div>
+
+        <div class="flex flex-col gap-8">
+
+          <%= render partial: "dashboard-account-property", :locals => {
+            name: t("dashboard.name"),
+            value: @user.name,
+            href: "name",
+            text: t("dashboard.change_name"),
+          } %>
+
+          <%= render partial: "dashboard-account-property", :locals => {
+            name: t("dashboard.email"),
+            value: @user.email,
+            href: "email",
+            text: t("dashboard.change_email"),
+          } %>
+
+          <%= render partial: "dashboard-account-property", :locals => {
+            name: t("dashboard.language"),
+            value: t("locales.#{locale}"),
+            href: "language",
+            text: t("dashboard.change_language"),
+          } %>
+
+          <%= render partial: "dashboard-account-property", :locals => {
+            name: t("dashboard.password"),
+            value: "***********",
+            href: "password",
+            text: t("dashboard.change_password"),
+          } %>
+        </section>
+
+      </div>
 
     </div>
 
-  </div>
+  <% end %>
 </div>

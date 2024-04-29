@@ -1,15 +1,13 @@
 <%
   links = [
-    { name: 'Labour Law', path: '/swedish-labour-laws-in-english', },
+    { name: 'Work Environment', path: '/work-environment', },
+    { name: 'Labour Law', path: '/labour-law', },
     { name: 'About', path: '/about' },
     { name: 'News', path: '/news' },
   ]
 
-  if !current_user.nil?
-    links.unshift({ name: 'Dashboard', path: '/dashboard' })
-    if current_user.admin?
-      links.unshift({ name: 'Admin', path: '/admin' })
-    end
+  if !current_user.nil? and current_user.admin?
+    links.unshift({ name: 'Admin', path: '/admin' })
   end
 %>
 
