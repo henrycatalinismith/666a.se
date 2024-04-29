@@ -27,6 +27,7 @@ title: Labour Law Module
           string document_id  
           string revision_name  
           string revision_code  
+          integer revision_status  
       }
 
       "LabourLaw::Revision" ||--o{ "LabourLaw::Element" : ""
