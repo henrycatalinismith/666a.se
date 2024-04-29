@@ -2,10 +2,10 @@
 
 666a is a set of digital tools for Sweden's labour movement.
 
-1. **Work environment email alerts.**<br />
+1. **[Work environment email alerts.](https://666a.se/work-environment)**<br />
    Sweden's Work Environment Authority publishes its correspondence with employers as per the Swedish principle of public access to information (<span lang="sv">offentlighetsprincipen</span>). 666a provides the ability to subscribe to email alerts about these public filings.
   
-2. **English translations of Swedish labour laws.**<br />
+2. **[English translations of Swedish labour laws.](https://666a.se/labour-law)**<br />
    Sweden's government occasionally publishes unofficial English translations of Swedish laws as downloadable PDFs. 666a provides to access these translations as web content to make them more accessible and shareable.
 
 ## More Information

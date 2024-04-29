@@ -34,9 +34,9 @@ module PagesHelper
         /launch-announcement
       ],
       "/admin" => [],
-      "/dashboard" => [],
       "/tech" => docs.map { |doc| doc[:href] },
-      "/english-translations-of-swedish-laws" => []
+      "/work-environment" => [],
+      "/labour-law" => [],
     }
     return sections[path].include?(request.path)
   end

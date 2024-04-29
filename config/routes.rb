@@ -1,7 +1,8 @@
 # https://guides.rubyonrails.org/routing.html
 Rails.application.routes.draw do
   root "home#index"
-
+  get "/work-environment", to: "users#dashboard"
+  get "/dashboard", to: redirect("/work-environment")
   Dir
     .glob(Rails.root.join("app", "pages", "*.en.md"))
     .each { |file| get "/#{File.basename(file, ".en.md")}", to: "pages#show" }
@@ -161,7 +162,6 @@ Rails.application.routes.draw do
 
   authenticated :user do
     get "/account", to: "users#account"
-    get "/dashboard", to: "users#dashboard"
 
     post "/delete", to: "users#delete"
     post "/download", to: "users#download"
