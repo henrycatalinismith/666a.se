@@ -38,7 +38,7 @@ class PagesController < ApplicationController
     parsed = FrontMatterParser::Parser.parse_file(file, loader: unsafe_loader)
     @data = parsed.front_matter
 
-    if request.path == "/about" && Flipper.enabled?(:open_source, current_user)
+    if request.path == "/about"
       @content = File.read(Rails.root.join("readme.md"))
     elsif request.path == "/conduct"
       @content = File.read(Rails.root.join("code_of_conduct.md"))
