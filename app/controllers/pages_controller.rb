@@ -8,6 +8,7 @@ class PagesController < ApplicationController
       english-translations-of-swedish-laws
       incident-report
       night-work-tech-and-swedish-labour-law
+      going-open-source
     ]
 
     @posts =
