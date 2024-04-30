@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     .each { |file| get "/#{File.basename(file, ".en.md")}", to: "pages#show" }
 
   get "/news",
-      to: redirect("/night-work-tech-and-swedish-labour-law"),
+      to: redirect("/going-open-source"),
       permanent: false
 
   get "/2024/01/22/night-work-tech-and-swedish-labour-law",

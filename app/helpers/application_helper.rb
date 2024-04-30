@@ -1,30 +1,25 @@
 module ApplicationHelper
-  def open_source?
-    Flipper.enabled?(:open_source, current_user)
-  end
-
   def h1(&block)
     "<h1 class=\"text-lg md:text-3xl font-bold\">#{capture(&block)}</h1>".html_safe
   end
 
   def policies
-    policies = [
+    [
       { name: "Accessibility", slug: "accessibility" },
+      { name: "Code of Conduct", slug: "conduct" },
+      { name: "License", slug: "license" },
       { name: "Privacy Policy", slug: "privacy" },
       { name: "Security Policy", slug: "security" },
       { name: "Terms of Service", slug: "terms" },
     ]
-
-    if open_source?
-      policies.insert(1, { name: "License", slug: "license" })
-      policies.insert(1, { name: "Code of Conduct", slug: "conduct" })
-    end
-
-    return policies
   end
 
   def posts
-    posts= [
+    [
+      {
+        text: "Going Open Source",
+        href: "/going-open-source"
+      },
       {
         text: "Night Work, Tech, And Swedish Labour Law",
         href: "/night-work-tech-and-swedish-labour-law"
@@ -36,11 +31,6 @@ module ApplicationHelper
       },
       { text: "Announcing 666a", href: "/launch-announcement" }
     ]
-    if open_source?
-      posts.insert(0, { text: "Going Open Source", href: "/going-open-source" })
-      return posts
-    end
-    return posts
   end
 
   def docs
