@@ -43,7 +43,26 @@ class Admin::LabourLaw::RevisionsController < AdminController
 
   def copy
     @revision = LabourLaw::Revision.find_by(revision_code: params[:revision_code])
-    flash[:notice] = "lol"
-    redirect_to "/admin/labour_law/revisions/#{@revision.revision_code}"
+
+    copy = @revision.dup
+    copy.revision_code += "-copy"
+    copy.save
+
+    @revision.elements.each do |element|
+      element_copy = copy.elements.create(
+        element_code: element.element_code,
+        element_index: element.element_index,
+        element_text: element.element_text,
+        element_type: element.element_type,
+      )
+      element.translations.each do |translation|
+        element_copy.translations.create(
+          translation_locale: translation.translation_locale,
+          translation_text: translation.translation_text,
+        )
+      end
+    end
+
+    redirect_to "/admin/labour_law/revisions/#{copy.revision_code}"
   end
 end
