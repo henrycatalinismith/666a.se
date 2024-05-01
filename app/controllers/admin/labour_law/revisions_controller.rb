@@ -40,4 +40,10 @@ class Admin::LabourLaw::RevisionsController < AdminController
     @revision = LabourLaw::Revision.find_by(revision_code: params[:id])
     @document = @revision.document
   end
+
+  def copy
+    @revision = LabourLaw::Revision.find_by(revision_code: params[:revision_code])
+    flash[:notice] = "lol"
+    redirect_to "/admin/labour_law/revisions/#{@revision.revision_code}"
+  end
 end

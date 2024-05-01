@@ -135,6 +135,8 @@ Rails.application.routes.draw do
         resources :revisions
         resources :elements
         resources :translations
+
+        post "/revisions/:revision_code/copy", to: "revisions#copy"
       end
 
       namespace :work_environment do
