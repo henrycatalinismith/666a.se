@@ -6,7 +6,11 @@ xml.urlset xmlns: "http://www.sitemaps.org/schemas/sitemap/0.9" do
   end
 
   @legal_documents.each do |d|
-    r = d.revisions.last
+    r = d.revisions.published.last
+
+    if r.nil?
+      next
+    end
 
     xml.url do
       xml.loc "https://666a.se/#{d.document_code}-v#{r.revision_code}-in-english"
