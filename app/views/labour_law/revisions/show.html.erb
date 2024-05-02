@@ -9,11 +9,7 @@
     subtitle: legal_document_subtitle(@document, @revision),
   } %>
 
-  <% if @revision.revision_notice.present? %>
-    <div class="bg-rose-100 p-4 rounded">
-      <%= revision_notice_markdown(@revision.revision_notice).html_safe %>
-    </div>
-  <% end %>
+  <%= render partial: "labour_law/revisions/notice" %>
 
   <table>
     <thead>
