@@ -18,7 +18,7 @@
     </thead>
 
     <tbody>
-      <% @elements.index_order.each do |left, right| %>
+      <% @elements.each do |left, right| %>
         <%= render partial: "labour_law/translations/row", locals: {
           left: left,
           right: right,
