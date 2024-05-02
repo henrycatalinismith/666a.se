@@ -6,7 +6,7 @@
 
   <%= render partial: "labour_law/h1", locals: {
     title: legal_document_title(@document),
-    subtitle: legal_document_subtitle(@document),
+    subtitle: legal_document_subtitle(@document, @revision),
   } %>
 
   <%= render partial: "labour_law/outdated" %>

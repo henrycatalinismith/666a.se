@@ -13,9 +13,9 @@ module LabourLaw::DocumentsHelper
     end
   end
 
-  def legal_document_subtitle(document)
+  def legal_document_subtitle(document, revision)
     if document.document_code == "aml"
-      "Version 2014:659, English translation"
+      "Version #{revision.revision_code}, English translation"
     elsif document.document_code == "mbl"
       "Version 2021:1114, English translation"
     elsif document.document_code == "las"
