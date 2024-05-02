@@ -33,8 +33,10 @@ class LabourLaw::RevisionsController < ApplicationController
       @page_title = "The Swedish Working Hours Act"
     end
 
-    left = @revision.elements.map { |e| e.translate("sv") }
-    right = @revision.elements.map { |e| e.translate("en") }
+    elements = @revision.elements.index_order
+
+    left = elements.map { |e| e.translate("sv") }
+    right = elements.map { |e| e.translate("en") }
     @elements = left.zip(right)
 
     renderer = LabourLawRender.new()

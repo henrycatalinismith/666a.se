@@ -22,9 +22,18 @@ class Admin::LabourLaw::ElementsController < AdminController
 
   def new
     @revision = LabourLaw::Revision.find_by(revision_code: params[:revision_code])
+    @position = params[:position] || "end"
     @document = @revision.document
     @element = @revision.elements.new
-    @index = @revision.elements.count
+
+    case @position
+    when "end"
+      @index = @revision.elements.count
+
+    when "after"
+      @index = LabourLaw::Element.find(params[:element_id]).element_index + 1
+    end
+
     @prev = @revision.elements.order(element_index: :desc).first
 
     type = params[:type]
@@ -79,6 +88,18 @@ class Admin::LabourLaw::ElementsController < AdminController
     end
     @element.save
     if @element.valid? then
+      matching_index = LabourLaw::Element.where(
+        revision_id: @element.revision_id,
+        element_index: @element.element_index
+      ).where.not(id: @element.id).first
+      if !matching_index.nil?
+        LabourLaw::Element
+          .where(revision_id: @element.revision_id)
+          .where("element_index >= ?", @element.element_index)
+          .where("id != ?", @element.id)
+          .update_all("element_index = element_index + 1")
+      end
+
       @element.translations.create(
         translation_locale: "en",
         translation_text: "",

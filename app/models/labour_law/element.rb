@@ -6,6 +6,8 @@ class LabourLaw::Element < ApplicationRecord
   validates :element_text, presence: true
   validates :element_type, presence: true
 
+  scope :index_order, -> { order(:element_index) }
+
   def translate(locale)
     if locale == "en" then
       return LabourLaw::Element.new(

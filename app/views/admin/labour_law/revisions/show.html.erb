@@ -66,7 +66,7 @@
     ) %>
 
     <%= render partial: "admin/icon-list", locals: {
-      items: @revision.elements.map do |element|
+      items: @revision.elements.index_order.map do |element|
         {
           icon: "fa-solid fa-calendar-days",
           top: {
