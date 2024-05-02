@@ -69,7 +69,7 @@
       <% @revision.elements.each do |element| %>
         <li>
           <a class="text-blue-700 underline" href="/admin/labour_law/elements/<%= element.id %>">
-            <%= element.element_code.empty? ? element.element_text : element.element_code %>
+            <%= element.element_code.nil? ? element.element_text : element.element_code %>
           </a>
         </li>
       <% end %>
