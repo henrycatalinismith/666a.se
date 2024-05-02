@@ -9,7 +9,7 @@ class Admin::LabourLaw::RevisionsController < AdminController
   def update
     @revision = LabourLaw::Revision.find_by(revision_code: params[:id])
     if @revision.update(
-         params[:revision].permit(:revision_name, :revision_code, :revision_status)
+         params[:revision].permit(:revision_name, :revision_code, :revision_status, :revision_notice)
        )
       redirect_to "/admin/labour_law/revisions/#{@revision.revision_code}"
       flash[:notice] = "revision updated"

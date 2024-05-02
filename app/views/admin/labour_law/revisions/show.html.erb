@@ -36,6 +36,11 @@
       ] %>
     <% end %>
 
+      <div class="w-128 flex flex-col">
+        <%= f.label :revision_notice %>
+        <%= f.text_area :revision_notice, size: "128x8", html: { class: "font-mono" } %>
+      </div>
+
     <div class="actions">
       <%= f.submit "Update" %>
     </div>
