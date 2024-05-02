@@ -65,15 +65,20 @@
       class: "w-max bg-slate-400 text-blue-700 text-white py-2 px-4 whitespace-nowrap rounded h-min"
     ) %>
 
-    <ol class="flex flex-col gap-4">
-      <% @revision.elements.each do |element| %>
-        <li>
-          <a class="text-blue-700 underline" href="/admin/labour_law/elements/<%= element.id %>">
-            <%= element.element_code.nil? ? element.element_text : element.element_code %>
-          </a>
-        </li>
-      <% end %>
-    </ol>
+    <%= render partial: "admin/icon-list", locals: {
+      items: @revision.elements.map do |element|
+        {
+          icon: "fa-solid fa-calendar-days",
+          top: {
+            text: "#{element.element_code.nil? ? element.element_text : element.element_code }",
+            href: "/admin/labour_law/elements/#{element.id}",
+          },
+          bottom: {
+            text: "#{element.element_index}",
+          },
+        }
+      end
+    } %>
 
   </section>
 
