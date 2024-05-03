@@ -27,6 +27,7 @@ title: Labour Law Module
           string document_id  
           string revision_name  
           string revision_code  
+          string revision_notice  
           integer revision_status  
       }
 
