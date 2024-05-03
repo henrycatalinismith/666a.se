@@ -1,18 +1,4 @@
 module LabourLaw::DocumentsHelper
-  def legal_document_title(document)
-    if document.document_code == "aml"
-      "The Swedish Work Environment Act"
-    elsif document.document_code == "mbl"
-      "The Swedish Co-Determination Act"
-    elsif document.document_code == "las"
-      "The Swedish Employment Protection Act"
-    elsif document.document_code == "atl"
-      "The Swedish Working Hours Act"
-    else
-      ""
-    end
-  end
-
   def legal_document_subtitle(document, revision)
     if document.document_code == "aml"
       "Version #{revision.revision_code}, English translation"
