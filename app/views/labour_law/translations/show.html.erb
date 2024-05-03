@@ -48,4 +48,18 @@
     </tbody>
   </table>
 
+  <% if current_user.admin? %>
+    <hr class="my-8">
+    <p>
+      <a href="/admin/labour_law/documents/<%= @document.document_code %>" class="text-blue-700 underline">
+        Document</a>
+      |
+      <a href="/admin/labour_law/revisions/<%= @revision.revision_code %>" class="text-blue-700 underline">
+        Revision</a>
+      |
+      <a href="/admin/labour_law/elements/<%= @element.id %>" class="text-blue-700 underline">
+        Element</a>
+    </p>
+  <% end %>
+
 </div>
