@@ -12,7 +12,6 @@ class Admin::LabourLaw::ElementsController < AdminController
     if @element.update(params[:element].permit(
       :element_type,
       :element_index,
-      :element_code,
       :element_text,
       :element_chapter,
       :element_section,
@@ -56,16 +55,12 @@ class Admin::LabourLaw::ElementsController < AdminController
     @element = @revision.elements.new(params[:element].permit(
       :element_type,
       :element_index,
-      :element_code,
       :element_text,
       :element_chapter,
       :element_section,
       :element_paragraph,
     ))
-    pmatch = @element.element_code.match(/P(\d+)\Z/)
-    if pmatch and @element.element_text.empty? then
-      @element.element_text = "#{pmatch[1]} §"
-    end
+
     @element.save
     if @element.valid? then
       matching_index = LabourLaw::Element.where(

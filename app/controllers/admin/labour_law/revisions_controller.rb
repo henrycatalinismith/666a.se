@@ -50,7 +50,6 @@ class Admin::LabourLaw::RevisionsController < AdminController
 
     @revision.elements.each do |element|
       element_copy = copy.elements.create(
-        element_code: element.element_code,
         element_index: element.element_index,
         element_text: element.element_text,
         element_type: element.element_type,

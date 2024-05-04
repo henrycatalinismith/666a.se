@@ -9,7 +9,7 @@
     Revision: <%= @revision.revision_name %>
     <% if !@prev.nil? then %>
       <br />
-      Previous element: <%= @prev.element_code %>
+      Previous element: <%= @prev.id %>
     <% end %>
   </p>
 
@@ -38,11 +38,6 @@
     <%= render layout: "shared/field" do %>
       <%= f.label :element_type %>
       <%= f.text_field :element_type %>
-    <% end %>
-
-    <%= render layout: "shared/field" do %>
-      <%= f.label :element_code %>
-      <%= f.text_field :element_code %>
     <% end %>
 
     <%= render layout: "shared/field" do %>

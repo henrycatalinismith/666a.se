@@ -29,8 +29,8 @@ class LabourLaw::TranslationsController < ApplicationController
       element_section: params[:element_section]
     )
 
-    if @element.nil? or @element.element_type == "md" or @element.element_code.match(/\AK.\Z/) then
-      raise ActionController::RoutingError.new("Not Found oh no #{params[:element_code]}")
+    if @element.nil? or @element.element_type == "md" then
+      raise ActionController::RoutingError.new("Not Found")
     end
 
     elements = []
