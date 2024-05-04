@@ -45,6 +45,21 @@
       <%= f.text_field :element_code %>
     <% end %>
 
+    <%= render layout: "shared/field" do %>
+      <%= f.label :element_chapter %>
+      <%= f.text_field :element_chapter %>
+    <% end %>
+
+    <%= render layout: "shared/field" do %>
+      <%= f.label :element_section %>
+      <%= f.text_field :element_section %>
+    <% end %>
+
+    <%= render layout: "shared/field" do %>
+      <%= f.label :element_paragraph %>
+      <%= f.text_field :element_paragraph %>
+    <% end %>
+
     <div class="w-128 flex flex-col">
       <%= f.label :element_text %>
       <%= f.text_area :element_text, size: "128x8", html: { class: "font-mono" } %>
