@@ -7,8 +7,9 @@
     <%= @document.document_name %>
     <br />
     <%= @revision.revision_name %>
-    <br />
-    <%= @element.element_code %>
+    <br />Chapter :<%= @element.element_chapter %>
+    <br />Section :<%= @element.element_section %>
+    <br />Paragraph :<%= @element.element_paragraph %>
   </p>
 
   <%= form_for(
@@ -34,11 +35,6 @@
     <%= render layout: "shared/field" do %>
       <%= f.label :element_type %>
       <%= f.text_field :element_type %>
-    <% end %>
-
-    <%= render layout: "shared/field" do %>
-      <%= f.label :element_code %>
-      <%= f.text_field :element_code %>
     <% end %>
 
     <%= render layout: "shared/field" do %>
