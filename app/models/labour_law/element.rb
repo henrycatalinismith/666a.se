@@ -6,6 +6,14 @@ class LabourLaw::Element < ApplicationRecord
   validates :element_text, presence: true
   validates :element_type, presence: true
 
+  enum element_type2: {
+    paragraph_text: 0,
+    section_heading: 1,
+    chapter_heading: 2,
+    group_heading: 3,
+    document_heading: 4,
+  }
+
   scope :index_order, -> { order(:element_index) }
 
   def translate(locale)
