@@ -22,7 +22,13 @@ class LabourLaw::TranslationsController < ApplicationController
     if @revision.nil? then
       raise ActionController::RoutingError.new("Not Found lol")
     end
-    @element = @revision.elements.find_by(element_code: params[:element_code])
+    puts params.inspect
+
+    @element = @revision.elements.find_by(
+      element_chapter: params[:element_chapter],
+      element_section: params[:element_section]
+    )
+
     if @element.nil? or @element.element_type == "md" or @element.element_code.match(/\AK.\Z/) then
       raise ActionController::RoutingError.new("Not Found oh no #{params[:element_code]}")
     end

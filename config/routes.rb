@@ -23,8 +23,8 @@ Rails.application.routes.draw do
   get "/1982:80/2022:836", to: redirect("/las-v2022:836-in-english")
   get "/1982:673/2013:611", to: redirect("/atl-v2013:611-in-english")
 
-  get "/:element_code-of-:document_code-v:revision_code-in-english",
-      to: "labour_law/translations#show"
+  get "/section-:element_section-of-:document_code-v:revision_code-in-english", to: "labour_law/translations#show"
+  get "/chapter-:element_chapter-section-:element_section-of-:document_code-v:revision_code-in-english", to: "labour_law/translations#show"
 
   get "/labour-law", to: "labour_law/documents#index"
   get "/swedish-labour-laws-in-english", to: redirect("/labour-law")
