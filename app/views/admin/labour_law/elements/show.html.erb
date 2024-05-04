@@ -37,6 +37,19 @@
       <%= f.text_field :element_type %>
     <% end %>
 
+
+    <%# paragraph_text: 0,
+    section_heading: 1,
+    chapter_heading: 2,
+    group_heading: 3,
+    document_heading: 4, %>
+
+
+    <%= render layout: "shared/field" do %>
+      <%= f.label :element_type %>
+      <%= f.select(:element_type, options_for_select(LabourLaw::Element.element_types, @element.element_type_before_type_cast)) %>
+    <% end %>
+
     <%= render layout: "shared/field" do %>
       <%= f.label :element_chapter %>
       <%= f.text_field :element_chapter %>

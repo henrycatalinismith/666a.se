@@ -1,19 +1,19 @@
 <tr>
-  <% if left.element_type == "h1" %>
+  <% if left.document_heading? %>
     <td class="prose text-base lg:text-2xl font-normal align-top <%= both_sides %> <%= left_classes %>">
       <%= left.element_text %>
     </td>
     <td class="prose text-base lg:text-2xl font-normal align-top <%= both_sides %> <%= right_classes %>">
       <%= right.element_text %>
     </td>
-  <% elsif left.element_type == "h2" %>
+  <% elsif left.chapter_heading? or left.group_heading? %>
     <td class="prose text-base lg:text-xl font-bold py-4 align-top text-ellipsis <%= both_sides %> <%= left_classes %>">
       <%= left.element_text %>
     </td>
     <td class="prose text-base lg:text-xl font-bold py-4 align-top <%= both_sides %> <%= right_classes %>">
       <%= right.element_text %>
     </td>
-  <% elsif left.element_type == "h3" %>
+  <% elsif left.section_heading? %>
     <td class="prose text-base lg:text-xl font-bold pt-4 align-top <%= both_sides %> <%= left_classes %>">
       <% if links %>
         <a class="text-blue-700 underline" href="<%= translation_url(left) %>">
