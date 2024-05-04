@@ -6,7 +6,7 @@ class LabourLaw::Element < ApplicationRecord
   validates :element_text, presence: true
   validates :element_type, presence: true
 
-  enum element_type2: {
+  enum element_type: {
     paragraph_text: 0,
     section_heading: 1,
     chapter_heading: 2,

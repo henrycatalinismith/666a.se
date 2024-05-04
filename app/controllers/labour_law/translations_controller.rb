@@ -35,10 +35,10 @@ class LabourLaw::TranslationsController < ApplicationController
 
     elements = []
 
-    if @element.element_type == "h3" or @element.element_type == "h2" then
+    if @element.section_heading? then
       next_section = @revision.elements
         .where("element_index > ?", @element.element_index)
-        .where("element_type = ?", @element.element_type)
+        .where("element_type = ?", 1)
         .order(:element_index)
         .first
       elements = @revision.elements
@@ -48,11 +48,11 @@ class LabourLaw::TranslationsController < ApplicationController
         .to_a
     end
 
-    if @element.element_type == "h3" then
+    if @element.section_heading? then
       prev_h2 = @revision
         .elements
         .where("element_index < ?", @element.element_index)
-        .where("element_type = ?", "h2")
+        .where(element_type: [2, 3])
         .order(:element_index)
         .last
       if !prev_h2.nil? then
