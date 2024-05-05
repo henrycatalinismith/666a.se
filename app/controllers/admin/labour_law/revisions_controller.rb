@@ -27,14 +27,14 @@ class Admin::LabourLaw::RevisionsController < AdminController
   end
 
   def new
-    @document = LabourLaw::Document.find_by(document_code: params[:document_code])
+    @document = LabourLaw::Document.find(params[:document_id])
     raise ActionController::RoutingError.new("Not Found") if @document.nil?
     @revision = LabourLaw::Revision.new
   end
 
   def create
     @document =
-      LabourLaw::Document.find_by(document_code: params[:revision][:document_code])
+      LabourLaw::Document.find(params[:revision][:document_id])
     raise ActionController::RoutingError.new("Not Found") if @document.nil?
     @revision =
       @document.revisions.create(
@@ -67,6 +67,13 @@ class Admin::LabourLaw::RevisionsController < AdminController
       end
     end
 
-    redirect_to "/admin/labour_law/revisions/#{copy.revision_code}"
+    redirect_to "/admin/labour_law/revisions/#{copy.id}"
+  end
+
+  def destroy
+    @revision = LabourLaw::Revision.find(params[:id])
+    @revision.destroy
+    redirect_to admin_labour_law_revisions_path(document_id: @revision.document.id)
+    flash[:notice] = "revision deleted"
   end
 end

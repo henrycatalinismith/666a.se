@@ -1,6 +1,6 @@
 class LabourLaw::Revision < ApplicationRecord
   belongs_to :document
-  has_many :elements
+  has_many :elements, dependent: :destroy
 
   enum revision_status: {
     draft: 0,

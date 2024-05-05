@@ -68,9 +68,7 @@
 
     <%= render layout: "shared/field" do %>
       <%= f.label :element_type %>
-      <%= @element.element_type %>
       <%= f.select :element_type, LabourLaw::Element.element_types.keys.map{ |key| [key.humanize, key] }, selected: @element.element_type %>
-</div>
     <% end %>
 
     <%= render layout: "shared/field" do %>

@@ -36,7 +36,7 @@
   } %>
 
   <%= render partial: "admin/icon-list", locals: {
-    items: @elements.index_order.map do |element|
+    items: (@elements.index_order.map do |element|
       {
         icon: "fa-solid fa-calendar-days",
         top: {
@@ -48,7 +48,15 @@
           extra: "#{element.element_text}",
         },
       }
-    end
+    end).concat([
+      {
+        icon: "fa-solid fa-calendar-days",
+        top: {
+          text: "New",
+          href: new_admin_labour_law_element_path(revision_id: @revision.id),
+        },
+      }
+    ])
   } %>
 
 </div>

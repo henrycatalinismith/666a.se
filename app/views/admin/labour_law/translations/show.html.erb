@@ -62,6 +62,23 @@
         top: { text: "Translation Text" },
         bottom: { text: @translation.translation_text },
       },
+      {
+        icon: "fa-solid fa-book",
+        top: { text: "Edit", href: edit_admin_labour_law_translation_path(@translation) },
+      },
+      {
+        icon: "fa-solid fa-book",
+        top: {
+          html: button_to(
+            "Delete",
+            admin_labour_law_translation_path(@translation),
+            {
+              method: :delete,
+              class: "text-red-700"
+            }
+          )
+        },
+      }
     ]
   } %>
 

@@ -1,6 +1,6 @@
 class LabourLaw::Element < ApplicationRecord
   belongs_to :revision
-  has_many :translations
+  has_many :translations, dependent: :destroy
   # validates :element_code, presence: true
   validates :element_index, presence: true
   validates :element_text, presence: true
