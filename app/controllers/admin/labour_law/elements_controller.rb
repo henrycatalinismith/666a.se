@@ -1,7 +1,19 @@
 class Admin::LabourLaw::ElementsController < AdminController
   layout "internal"
 
+  def index
+    @revision = LabourLaw::Revision.find(params[:revision_id])
+    @document = @revision.document
+    @elements = @revision.elements
+  end
+
   def show
+    @element = LabourLaw::Element.find(params[:id])
+    @revision = @element.revision
+    @document = @revision.document
+  end
+
+  def edit
     @element = LabourLaw::Element.find(params[:id])
     @revision = @element.revision
     @document = @revision.document

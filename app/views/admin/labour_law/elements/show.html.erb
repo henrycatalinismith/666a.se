@@ -1,82 +1,88 @@
 <div class="container flex flex-col gap-8 w-full p-8">
-  <%= render layout: "shared/h1" do %>
-    Edit Legal Element
-  <% end %>
 
-  <p>
-    <%= @document.document_name %>
-    <br />
-    <%= @revision.revision_name %>
-    <br />Chapter :<%= @element.element_chapter %>
-    <br />Section :<%= @element.element_section %>
-    <br />Paragraph :<%= @element.element_paragraph %>
-  </p>
+  <%= render partial: "admin/icon-breadcrumbs", locals: {
+    items: [
+      {
+        icon: "fa-solid fa-lock",
+        href: "/admin",
+        text: "Admin",
+      },
+      {
+        icon: "fa-solid fa-book",
+        href: admin_labour_law_documents_path,
+        text: "Labour Law",
+      },
+      {
+        icon: "fa-solid fa-book",
+        href: admin_labour_law_document_path(@document),
+        text: @document.document_name,
+      },
+      {
+        icon: "fa-solid fa-book",
+        href: admin_labour_law_revisions_path(document_id: @document.id),
+        text: "Revisions",
+      },
+      {
+        icon: "fa-solid fa-book",
+        href: admin_labour_law_revision_path(@revision),
+        text: @revision.revision_code,
+      },
+      {
+        icon: "fa-solid fa-book",
+        href: admin_labour_law_elements_path(revision_id: @revision.id),
+        text: "Elements",
+      },
+    ]
+  } %>
 
-  <%= form_for(
-    @element,
-    as: "element",
-    url: "/admin/labour_law/elements/#{@element.id}",
-    builder: TailwindBuilder,
-    :html => {class: "flex flex-col gap-8" }) do |f| %>
+  <%= render partial: "admin/icon-heading", locals: {
+    icon: "fa-solid fa-lock",
+    text: @element.id,
+  } %>
 
-    <% if @element.errors.any? %>
-      <div class="error error-success note-shadow">
-        <% @element.errors.full_messages.each do |msg| %>
-          <p><%= msg %></p>
-        <% end %>
-      </div>
-    <% end %>
+  <%= render partial: "admin/icon-list", locals: {
+    items: [
+      {
+        icon: "fa-solid fa-book",
+        top: { text: "Element Type" },
+        bottom: { text: @element.element_type },
+      },
+      {
+        icon: "fa-solid fa-book",
+        top: { text: "Element Index" },
+        bottom: { text: @element.element_index },
+      },
+      {
+        icon: "fa-solid fa-book",
+        top: { text: "Element Chapter" },
+        bottom: { text: @element.element_chapter },
+      },
+      {
+        icon: "fa-solid fa-book",
+        top: { text: "Element Section" },
+        bottom: { text: @element.element_section },
+      },
+      {
+        icon: "fa-solid fa-book",
+        top: { text: "Element Paragraph" },
+        bottom: { text: @element.element_paragraph },
+      },
+      {
+        icon: "fa-solid fa-book",
+        top: { text: "Edit", href: edit_admin_labour_law_element_path(@element) },
+        bottom: { text: "Change something" },
+      },
+      {
+        icon: "fa-solid fa-book",
+        top: { text: "Translations", href: admin_labour_law_translations_path(element_id: @element.id)},
+        bottom: { text: "#{@element.translations.count}" },
+      }
+    ]
+  } %> 
 
-    <%= render layout: "shared/field" do %>
-      <%= f.label :element_index %>
-      <%= f.text_field :element_index %>
-    <% end %>
+</div>
 
-    <%= render layout: "shared/field" do %>
-      <%= f.label :element_type %>
-      <%= f.text_field :element_type %>
-    <% end %>
-
-
-    <%# paragraph_text: 0,
-    section_heading: 1,
-    chapter_heading: 2,
-    group_heading: 3,
-    document_heading: 4, %>
-
-
-    <%= render layout: "shared/field" do %>
-      <%= f.label :element_type %>
-      <%= f.select(:element_type, options_for_select(LabourLaw::Element.element_types, @element.element_type_before_type_cast)) %>
-    <% end %>
-
-    <%= render layout: "shared/field" do %>
-      <%= f.label :element_chapter %>
-      <%= f.text_field :element_chapter %>
-    <% end %>
-
-    <%= render layout: "shared/field" do %>
-      <%= f.label :element_section %>
-      <%= f.text_field :element_section %>
-    <% end %>
-
-    <%= render layout: "shared/field" do %>
-      <%= f.label :element_paragraph %>
-      <%= f.text_field :element_paragraph %>
-    <% end %>
-
-    <div class="w-128 flex flex-col">
-      <%= f.label :element_text %>
-      <%= f.text_area :element_text, size: "128x8", html: { class: "font-mono" } %>
-    </div>
-
-    <div class="actions">
-      <%= f.submit "Update" %>
-    </div>
-
-  <% end %>
-
-  <div class="flex flex-row gap-4">
+<div class="container flex flex-col gap-8 w-full p-8">
 
     <%= link_to(
       "New",

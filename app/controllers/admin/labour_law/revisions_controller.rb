@@ -1,17 +1,27 @@
 class Admin::LabourLaw::RevisionsController < AdminController
   layout "internal"
 
+  def index
+    @document = LabourLaw::Document.find(params[:document_id])
+    @revisions = @document.revisions
+  end
+
+  def show
+    @revision = LabourLaw::Revision.find(params[:id])
+    @document = @revision.document
+  end
+
   def edit
-    @revision = LabourLaw::Revision.find_by(revision_code: params[:revision_code])
+    @revision = LabourLaw::Revision.find(params[:id])
     @document = @revision.document
   end
 
   def update
-    @revision = LabourLaw::Revision.find_by(revision_code: params[:id])
+    @revision = LabourLaw::Revision.find(params[:id])
     if @revision.update(
          params[:revision].permit(:revision_name, :revision_code, :revision_status, :revision_notice)
        )
-      redirect_to "/admin/labour_law/revisions/#{@revision.revision_code}"
+      redirect_to admin_labour_law_revision_path(@revision)
       flash[:notice] = "revision updated"
     end
   end
@@ -31,18 +41,13 @@ class Admin::LabourLaw::RevisionsController < AdminController
         params[:revision].permit(:revision_name, :revision_code)
       )
     if @revision.valid?
-      redirect_to "/admin/labour_law/revisions/#{@revision.revision_code}"
+      redirect_to admin_labour_law_revision_path(@revision)
       flash[:notice] = "revision created"
     end
   end
 
-  def show
-    @revision = LabourLaw::Revision.find_by(revision_code: params[:id])
-    @document = @revision.document
-  end
-
   def copy
-    @revision = LabourLaw::Revision.find_by(revision_code: params[:revision_code])
+    @revision = LabourLaw::Revision.find(params[:id])
 
     copy = @revision.dup
     copy.revision_code += "-copy"

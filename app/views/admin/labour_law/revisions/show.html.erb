@@ -1,51 +1,66 @@
 <div class="container flex flex-col gap-8 w-full p-8">
-  <%= render layout: "shared/h1" do %>
-    Edit Legal Revision
-  <% end %>
 
-  <%= form_for(
-    @revision,
-    as: "revision",
-    url: "/admin/labour_law/revisions/#{@revision.revision_code}",
-    builder: TailwindBuilder,
-    :html => {class: "flex flex-col gap-8" }) do |f| %>
+  <%= render partial: "admin/icon-breadcrumbs", locals: {
+    items: [
+      {
+        icon: "fa-solid fa-lock",
+        href: "/admin",
+        text: "Admin",
+      },
+      {
+        icon: "fa-solid fa-book",
+        href: admin_labour_law_documents_path,
+        text: "Labour Law",
+      },
+      {
+        icon: "fa-solid fa-book",
+        href: admin_labour_law_document_path(@document),
+        text: @document.document_name,
+      },
+      {
+        icon: "fa-solid fa-book",
+        href: admin_labour_law_revisions_path(document_id: @document.id),
+        text: "Revisions",
+      },
+    ]
+  } %>
 
-    <% if @revision.errors.any? %>
-      <div class="error error-success note-shadow">
-        <% @revision.errors.full_messages.each do |msg| %>
-          <p><%= msg %></p>
-        <% end %>
-      </div>
-    <% end %>
+  <%= render partial: "admin/icon-heading", locals: {
+    icon: "fa-solid fa-lock",
+    text: @revision.revision_code,
+  } %>
 
-    <%= render layout: "shared/field" do %>
-      <%= f.label :revision_name %>
-      <%= f.text_field :revision_name %>
-    <% end %>
+  <%= render partial: "admin/icon-list", locals: {
+    items: [
+      {
+        icon: "fa-solid fa-book",
+        top: { text: "Revision Name" },
+        bottom: { text: @revision.revision_name },
+      },
+      {
+        icon: "fa-solid fa-book",
+        top: { text: "Revision Code" },
+        bottom: { text: @revision.revision_code },
+      },
+      {
+        icon: "fa-solid fa-book",
+        top: { text: "Revision Status" },
+        bottom: { text: @revision.revision_status },
+      },
+      {
+        icon: "fa-solid fa-book",
+        top: { text: "Edit", href: edit_admin_labour_law_revision_path(@revision) },
+        bottom: { text: "Change something" },
+      },
 
-    <%= render layout: "shared/field" do %>
-      <%= f.label :revision_code %>
-      <%= f.text_field :revision_code %>
-    <% end %>
+      {
+        icon: "fa-solid fa-book",
+        top: { text: "Elements", href: admin_labour_law_elements_path(revision_id: @revision.id) },
+        bottom: { text: "#{@revision.elements.count}" },
+      },
 
-    <%= render layout: "shared/field" do %>
-      <%= f.label :revision_status %>
-      <%= f.select :revision_status, [
-        ["Draft", "draft"],
-        ["Published", "published"],
-      ] %>
-    <% end %>
-
-      <div class="w-128 flex flex-col">
-        <%= f.label :revision_notice %>
-        <%= f.text_area :revision_notice, size: "128x8", html: { class: "font-mono" } %>
-      </div>
-
-    <div class="actions">
-      <%= f.submit "Update" %>
-    </div>
-
-  <% end %>
+    ]
+  } %> 
 
   <%= form_for(
     @revision,
@@ -58,34 +73,5 @@
       <%= f.submit "Copy" %>
     </div>
   <% end %>
-
-  <section class="w-full flex flex-col gap-10 flex-1">
-    <h2 class="text-2xl">
-      Elements
-    </h2>
-
-    <%= link_to(
-      "New",
-      "/admin/labour_law/elements/new?revision_code=#{@revision.revision_code}",
-      class: "w-max bg-slate-400 text-blue-700 text-white py-2 px-4 whitespace-nowrap rounded h-min"
-    ) %>
-
-    <%= render partial: "admin/icon-list", locals: {
-      items: @revision.elements.index_order.map do |element|
-        {
-          icon: "fa-solid fa-calendar-days",
-          top: {
-            text: "#{element.element_chapter ? "Chapter #{element.element_chapter} " : ""}#{element.element_section ? "Section #{element.element_section} " : ""}#{element.element_paragraph ? "Paragraph #{element.element_paragraph} " : ""} --",
-            href: "/admin/labour_law/elements/#{element.id}",
-          },
-          bottom: {
-            text: "#{element.element_type} #{element.element_index}",
-            extra: "#{element.element_text}",
-          },
-        }
-      end
-    } %>
-
-  </section>
 
 </div>
