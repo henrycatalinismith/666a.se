@@ -49,29 +49,46 @@
       },
       {
         icon: "fa-solid fa-book",
-        top: { text: "Edit", href: edit_admin_labour_law_revision_path(@revision) },
-        bottom: { text: "Change something" },
-      },
-
-      {
-        icon: "fa-solid fa-book",
-        top: { text: "Elements", href: admin_labour_law_elements_path(revision_id: @revision.id) },
+        top: {
+          text: "Elements",
+          href: admin_labour_law_elements_path(revision_id: @revision.id),
+        },
         bottom: { text: "#{@revision.elements.count}" },
       },
-
+      {
+        icon: "fa-solid fa-book",
+        top: {
+          text: "Edit",
+          href: edit_admin_labour_law_revision_path(@revision),
+        },
+      },
+      {
+        icon: "fa-solid fa-book",
+        top: {
+          html: button_to(
+            "Copy",
+            "/admin/labour_law/revisions/#{@revision.id}/copy",
+            {
+              method: :post,
+              class: "text-blue-700"
+            }
+          )
+        },
+      },
+      {
+        icon: "fa-solid fa-book",
+        top: {
+          html: button_to(
+            "Delete",
+            admin_labour_law_revision_path(@revision),
+            {
+              method: :delete,
+              class: "text-red-700"
+            }
+          )
+        },
+      }
     ]
   } %> 
-
-  <%= form_for(
-    @revision,
-    as: "revision",
-    url: "/admin/labour_law/revisions/#{@revision.revision_code}/copy",
-    builder: TailwindBuilder,
-    method: :post,
-    :html => {class: "flex flex-col gap-8" }) do |f| %>
-    <div class="actions">
-      <%= f.submit "Copy" %>
-    </div>
-  <% end %>
 
 </div>

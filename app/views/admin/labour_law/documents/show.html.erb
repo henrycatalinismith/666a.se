@@ -24,6 +24,21 @@
     items: [
       {
         icon: "fa-solid fa-book",
+        top: { text: "ID" },
+        bottom: { text: @document.id },
+      },
+      {
+        icon: "fa-solid fa-book",
+        top: { text: "Created" },
+        bottom: { text: @document.created_at },
+      },
+      {
+        icon: "fa-solid fa-book",
+        top: { text: "Updated" },
+        bottom: { text: @document.updated_at },
+      },
+      {
+        icon: "fa-solid fa-book",
         top: { text: "Document Name" },
         bottom: { text: @document.document_name },
       },
@@ -32,46 +47,37 @@
         top: { text: "Document Code" },
         bottom: { text: @document.document_code },
       },
-
       {
         icon: "fa-solid fa-book",
-        top: { text: "Edit", href: edit_admin_labour_law_document_path(@document) },
-        bottom: { text: "Change something" },
+        top: {
+          text: "Revisions",
+          href: admin_labour_law_revisions_path(document_id: @document.id),
+        },
+        bottom: {
+          text: "#{@document.revisions.count}",
+        },
       },
-
       {
         icon: "fa-solid fa-book",
-        top: { text: "Revisions", href: admin_labour_law_revisions_path(document_id: @document.id)},
-        bottom: { text: "#{@document.revisions.count}" },
+        top: {
+          text: "Edit",
+          href: edit_admin_labour_law_document_path(@document),
+        },
       },
+      {
+        icon: "fa-solid fa-book",
+        top: {
+          html: button_to(
+            "Delete",
+            admin_labour_law_document_path(@document),
+            {
+              method: :delete,
+              class: "text-red-700"
+            }
+          )
+        },
+      }
     ]
   } %> 
-
-  <h2 class="text-2xl">
-    Revisions
-  </h2>
-
-
-   <%= render partial: "admin/icon-list", locals: {
-    items: (@document.revisions.map do |revision|
-      {
-        icon: "fa-solid fa-book",
-        top: {
-          text: revision.revision_name,
-          href: admin_labour_law_revision_path(revision),
-        },
-        bottom: { text: revision.revision_code },
-      }
-    end).concat([
-      {
-        icon: "fa-solid fa-book",
-        top: {
-          text: "New",
-          href: "/"
-        },
-        bottom: { text: "" },
-      }])
-          
-  } %>
 
 </div>

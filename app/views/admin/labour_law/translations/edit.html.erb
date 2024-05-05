@@ -36,7 +36,17 @@
         icon: "fa-solid fa-book",
         href: admin_labour_law_element_path(@element),
         text: @element.id,
-      }
+      },
+      {
+        icon: "fa-solid fa-book",
+        href: admin_labour_law_translations_path(element_id: @element.id),  
+        text: "Translations",
+      },
+      {
+        icon: "fa-solid fa-book",
+        href: admin_labour_law_translation_path(@translation),
+        text: @translation.id,
+      },
     ]
   } %>
 
@@ -47,48 +57,32 @@
 
 
   <%= form_for(
-    @element,
-    as: "element",
-    url: admin_labour_law_element_path(@element),
+    @translation,
+    as: "translation",
+    url: admin_labour_law_translation_path(@translation),
     builder: TailwindBuilder,
     :html => {class: "flex flex-col gap-8" }) do |f| %>
 
-    <% if @element.errors.any? %>
-      <div class="error error-success note-shadow">
-        <% @element.errors.full_messages.each do |msg| %>
-          <p><%= msg %></p>
-        <% end %>
+    <%= render layout: "shared/field" do %>
+      <div class="text-sm font-medium leading-6 text-gray-900">
+        Source text
+      </div>
+      <div class="text-sm font-medium leading-6 text-gray-900">
+        <%= @element.element_text %>
       </div>
     <% end %>
 
     <%= render layout: "shared/field" do %>
-      <%= f.label :element_index %>
-      <%= f.text_field :element_index %>
+      <%= f.label :translation_locale %>
+      <%= f.select(:translation_locale, options_for_select([
+        ["en"]
+      ]), :selected => @translation.translation_locale) %>
     <% end %>
 
-    <%= render layout: "shared/field" do %>
-      <%= f.label :element_type %>
-      <%= f.select :element_type, LabourLaw::Element.element_types.keys.map{ |key| [key.humanize, key] }, selected: @element.element_type %>
-    <% end %>
-
-    <%= render layout: "shared/field" do %>
-      <%= f.label :element_chapter %>
-      <%= f.text_field :element_chapter %>
-    <% end %>
-
-    <%= render layout: "shared/field" do %>
-      <%= f.label :element_section %>
-      <%= f.text_field :element_section %>
-    <% end %>
-
-    <%= render layout: "shared/field" do %>
-      <%= f.label :element_paragraph %>
-      <%= f.text_field :element_paragraph %>
-    <% end %>
 
     <div class="w-128 flex flex-col">
-      <%= f.label :element_text %>
-      <%= f.text_area :element_text, size: "128x8", html: { class: "font-mono" } %>
+      <%= f.label :translation_text %>
+      <%= f.text_area :translation_text, size: "128x8", html: { class: "font-mono" } %>
     </div>
 
     <div class="actions">

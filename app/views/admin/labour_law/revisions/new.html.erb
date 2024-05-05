@@ -18,7 +18,7 @@
       </div>
     <% end %>
 
-   <%= hidden_field(:revision, :document_code, :value => @document.document_code) %>
+   <%= hidden_field(:revision, :document_id, :value => @document.id) %>
 
     <%= render layout: "shared/field" do %>
       <%= f.label :revision_name %>

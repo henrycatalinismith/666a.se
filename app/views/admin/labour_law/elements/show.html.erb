@@ -69,63 +69,59 @@
       },
       {
         icon: "fa-solid fa-book",
-        top: { text: "Edit", href: edit_admin_labour_law_element_path(@element) },
-        bottom: { text: "Change something" },
+        top: { text: "Translations", href: admin_labour_law_translations_path(element_id: @element.id)},
+        bottom: { text: "#{@element.translations.count}" },
       },
       {
         icon: "fa-solid fa-book",
-        top: { text: "Translations", href: admin_labour_law_translations_path(element_id: @element.id)},
-        bottom: { text: "#{@element.translations.count}" },
+        top: {
+          text: "New",
+          href: new_admin_labour_law_element_path(revision_code: @revision.revision_code),
+        },
+      },
+      {
+        icon: "fa-solid fa-book",
+        top: {
+          text: "New paragraph",
+          href: new_admin_labour_law_element_path(
+            revision_code: @revision.revision_code,
+            type: "new_paragraph"
+          ),
+        },
+      },
+      {
+        icon: "fa-solid fa-book",
+        top: {
+          text: "Insert after",
+          href: new_admin_labour_law_element_path(
+            revision_code: @revision.revision_code,
+            type: "new_paragraph",
+            position: "after",
+            element_id: @element.id
+          ),
+        },
+      },
+      {
+        icon: "fa-solid fa-book",
+        top: {
+          text: "Edit",
+          href: edit_admin_labour_law_element_path(@element),
+        },
+      },
+      {
+        icon: "fa-solid fa-book",
+        top: {
+          html: button_to(
+            "Delete",
+            admin_labour_law_element_path(@element),
+            {
+              method: :delete,
+              class: "text-red-700"
+            }
+          )
+        },
       }
     ]
   } %> 
-
-</div>
-
-<div class="container flex flex-col gap-8 w-full p-8">
-
-    <%= link_to(
-      "New",
-      "/admin/labour_law/elements/new?revision_code=#{@revision.revision_code}",
-      class: "w-max bg-slate-400 text-blue-700 text-white py-2 px-4 whitespace-nowrap rounded h-min"
-    ) %>
-
-    <%= link_to(
-      "New paragraph",
-      "/admin/labour_law/elements/new?revision_code=#{@revision.revision_code}&type=new_paragraph",
-      class: "w-max bg-slate-400 text-blue-700 text-white py-2 px-4 whitespace-nowrap rounded h-min"
-    ) %>
-
-    <%= link_to(
-      "Insert after",
-      "/admin/labour_law/elements/new?revision_code=#{@revision.revision_code}&type=new_paragraph&position=after&element_id=#{@element.id}",
-      class: "w-max bg-slate-400 text-blue-700 text-white py-2 px-4 whitespace-nowrap rounded h-min"
-    ) %>
-
-  </div>
-
-  <% @element.translations.each do |translation| %>
-    <h2 class="text-2xl bold">
-      <%= translation.translation_locale %>
-    </h2>
-
-    <%= form_for(
-      translation,
-      as: "translation",
-      url: "/admin/labour_law/translations/#{translation.id}",
-      builder: TailwindBuilder,
-      :html => {class: "flex flex-col gap-8" }) do |f| %>
-
-      <div class="w-128 flex flex-col">
-        <%= f.label :translation_text %>
-        <%= f.text_area :translation_text, size: "128x8", html: { class: "font-mono" } %>
-      </div>
-
-      <div class="actions">
-        <%= f.submit "Update" %>
-      </div>
-
-  <% end %>
-<% end %>
 
 </div>

@@ -41,4 +41,12 @@ class Admin::LabourLaw::DocumentsController < AdminController
       flash[:notice] = "document created"
     end
   end
+
+  def destroy
+    @document = LabourLaw::Document.find(params[:id])
+    if @document.destroy then
+      redirect_to admin_labour_law_documents_path
+      flash[:notice] = "document deleted"
+    end
+  end
 end

@@ -35,7 +35,7 @@ class Admin::LabourLaw::ElementsController < AdminController
   end
 
   def new
-    @revision = LabourLaw::Revision.find_by(revision_code: params[:revision_code])
+    @revision = LabourLaw::Revision.find(params[:revision_id])
     @position = params[:position] || "end"
     @document = @revision.document
     @element = @revision.elements.new
@@ -95,5 +95,13 @@ class Admin::LabourLaw::ElementsController < AdminController
       redirect_to "/admin/labour_law/elements/#{@element.id}"
       flash[:notice] = "element created"
     end
+  end
+
+  def destroy
+    @element = LabourLaw::Element.find(params[:id])
+    @revision = @element.revision
+    @element.destroy
+    flash[:notice] = "element deleted"
+    redirect_to admin_labour_law_elements_path(revision_id: @revision.id)
   end
 end
