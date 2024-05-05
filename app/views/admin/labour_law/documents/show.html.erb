@@ -38,6 +38,12 @@
         top: { text: "Edit", href: edit_admin_labour_law_document_path(@document) },
         bottom: { text: "Change something" },
       },
+
+      {
+        icon: "fa-solid fa-book",
+        top: { text: "Revisions", href: admin_labour_law_revisions_path(document_id: @document.id)},
+        bottom: { text: "#{@document.revisions.count}" },
+      },
     ]
   } %> 
 
@@ -52,7 +58,8 @@
         icon: "fa-solid fa-book",
         top: {
           text: revision.revision_name,
-          href: "/admin/labour_law/revisions/#{revision.revision_code}"  },
+          href: admin_labour_law_revision_path(revision),
+        },
         bottom: { text: revision.revision_code },
       }
     end).concat([
