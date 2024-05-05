@@ -1,39 +1,45 @@
 <div class="container flex flex-col gap-8 w-full p-8">
-  <%= render layout: "shared/h1" do %>
-    Edit Legal Document
-  <% end %>
 
-  <%= form_for(
-    @document,
-    as: "document",
-    url: "/admin/labour_law/documents/#{@document.document_code}",
-    builder: TailwindBuilder,
-    :html => {class: "flex flex-col gap-8" }) do |f| %>
+  <%= render partial: "admin/icon-breadcrumbs", locals: {
+    items: [
+      {
+        icon: "fa-solid fa-lock",
+        href: "/admin",
+        text: "Admin",
+      },
+      {
+        icon: "fa-solid fa-book",
+        href: admin_labour_law_documents_path,
+        text: "Labour Law",
+      },
+    ]
+  } %>
 
+  <%= render partial: "admin/icon-heading", locals: {
+    icon: "fa-solid fa-lock",
+    text: @document.document_name,
+  } %>
 
-    <% if @document.errors.any? %>
-      <div class="error error-success note-shadow">
-        <% @document.errors.full_messages.each do |msg| %>
-          <p><%= msg %></p>
-        <% end %>
-      </div>
-    <% end %>
+   <%= render partial: "admin/icon-list", locals: {
+    items: [
+      {
+        icon: "fa-solid fa-book",
+        top: { text: "Document Name" },
+        bottom: { text: @document.document_name },
+      },
+      {
+        icon: "fa-solid fa-book",
+        top: { text: "Document Code" },
+        bottom: { text: @document.document_code },
+      },
 
-    <%= render layout: "shared/field" do %>
-      <%= f.label :document_name %>
-      <%= f.text_field :document_name %>
-    <% end %>
-
-    <%= render layout: "shared/field" do %>
-      <%= f.label :document_code %>
-      <%= f.text_field :document_code %>
-    <% end %>
-
-    <div class="actions">
-      <%= f.submit "Save" %>
-    </div>
-
-  <% end %>
+      {
+        icon: "fa-solid fa-book",
+        top: { text: "Edit", href: edit_admin_labour_law_document_path(@document) },
+        bottom: { text: "Change something" },
+      },
+    ]
+  } %> 
 
   <h2 class="text-2xl">
     Revisions
