@@ -40,8 +40,29 @@
     text: @element.id,
   } %>
 
+
   <%= render partial: "admin/icon-list", locals: {
     items: [
+       {
+        icon: "fa-solid fa-book",
+        top: { text: "ID" },
+        bottom: { text: @element.id },
+      },
+      {
+        icon: "fa-solid fa-book",
+        top: { text: "Created" },
+        bottom: { text: @element.created_at },
+      },
+      {
+        icon: "fa-solid fa-book",
+        top: { text: "Updated" },
+        bottom: { text: @element.updated_at },
+      },
+      {
+        icon: "fa-solid fa-book",
+        top: { text: "Element Text" },
+        bottom: { text: @element.element_text },
+      },
       {
         icon: "fa-solid fa-book",
         top: { text: "Element Type" },
