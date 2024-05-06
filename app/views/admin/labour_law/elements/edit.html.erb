@@ -67,6 +67,11 @@
     <% end %>
 
     <%= render layout: "shared/field" do %>
+      <%= f.label :element_slug %>
+      <%= f.text_field :element_slug %>
+    <% end %>
+
+    <%= render layout: "shared/field" do %>
       <%= f.label :element_type %>
       <%= f.select :element_type, LabourLaw::Element.element_types.keys.map{ |key| [key.humanize, key] }, selected: @element.element_type %>
     <% end %>

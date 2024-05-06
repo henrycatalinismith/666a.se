@@ -27,14 +27,35 @@ Rails.application.routes.draw do
   get "/las-v2022:836-in-english", to: redirect("/labour-law/employment-protection-act/2022:836")
   get "/atl-v2013:611-in-english", to: redirect("/labour-law/working-hours-act/2013:611")
 
-  get "/labour-law/:document_slug/:revision_code", to: "labour_law/revisions#show", as: "labour_law_revision"
+  get "/labour-law/:document_slug/:revision_code",
+    to: "labour_law/revisions#show",
+    as: "labour_law_revision"
+  get "/labour-law/:document_slug/:revision_code/:element_slug",
+    to: "labour_law/elements#show",
+    as: "labour_law_element"
 
-  get "/section-:element_section-of-:document_code-v:revision_code-in-english", to: "labour_law/translations#show"
-  get "/chapter-:element_chapter-section-:element_section-of-:document_code-v:revision_code-in-english", to: "labour_law/translations#show"
+  get "/chapter-:c-section-:s-of-aml-v2014:659-in-english",
+    to: redirect { |params|
+      "/labour-law/work-environment-act/2014:659/chapter-#{params[:c]}-section-#{params[:s]}"
+    }
+
+  get "/section-:s-of-mbl-v2021:1114-in-english",
+    to: redirect { |params|
+      "/labour-law/codetermination-act/2021:1114/section-#{params[:s]}"
+    }
+
+  get "/section-:s-of-las-v2022:836-in-english",
+    to: redirect { |params|
+      "/labour-law/employment-protection-act/2022:836/section-#{params[:s]}"
+    }
+
+  get "/section-:s-of-atl-v2013:611-in-english",
+    to: redirect { |params|
+      "/labour-law/working-hours-act/2013:611/section-#{params[:s]}"
+    }
 
   get "/labour-law", to: "labour_law/documents#index"
   get "/swedish-labour-laws-in-english", to: redirect("/labour-law")
-  get "/:document_code-v:revision_code-in-english", to: "labour_law/revisions#show"
 
   get "/1977:1160/2014:659/:element_code/sv:en",
       to:

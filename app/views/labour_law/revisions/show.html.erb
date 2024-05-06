@@ -22,7 +22,7 @@
 
     <tbody>
       <% @elements.each do |left, right| %>
-        <%= render partial: "labour_law/translations/row", locals: {
+        <%= render partial: "labour_law/elements/row", locals: {
           left: left,
           right: right,
           links: true,
