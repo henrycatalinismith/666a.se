@@ -16,6 +16,7 @@ title: Labour Law Module
           datetime updated_at
           string document_name
           string document_code
+          string document_slug
       }
 
       "LabourLaw::Document" ||--o{ "LabourLaw::Revision" : ""
