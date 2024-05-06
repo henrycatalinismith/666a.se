@@ -14,7 +14,7 @@ class LabourLaw::RevisionsController < ApplicationController
   layout "internal"
 
   def show
-    @document = LabourLaw::Document.find_by(document_code: params[:document_code])
+    @document = LabourLaw::Document.find_by(document_slug: params[:document_slug])
     if @document.nil? then
       raise ActionController::RoutingError.new("Not Found doc")
     end
