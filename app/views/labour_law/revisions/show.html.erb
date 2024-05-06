@@ -1,5 +1,5 @@
 <% content_for(:opengraph) do %>
-  <link rel="canonical" href="https://666a.se/<%= @document.document_code %>-v<%= @revision.revision_code %>-in-english" />
+  <link rel="canonical" href="https://666a.se<%= labour_law_revision_path(@document.document_slug, @revision.revision_code) %>" />
   <% if @revision.draft? %>
     <meta name="robots" content="noindex" />
   <% end %>
