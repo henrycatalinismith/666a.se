@@ -1,7 +1,24 @@
 <div class="container flex flex-col gap-8 w-full p-8">
-  <%= render layout: "shared/h1" do %>
-    New Legal Document
-  <% end %>
+
+  <%= render partial: "admin/icon-breadcrumbs", locals: {
+    items: [
+      {
+        icon: "fa-solid fa-lock",
+        href: "/admin",
+        text: "Admin",
+      },
+      {
+        icon: "fa-solid fa-book",
+        href: admin_labour_law_documents_path,
+        text: "Labour Law",
+      },
+    ]
+  } %>
+
+  <%= render partial: "admin/icon-heading", locals: {
+    icon: "fa-solid fa-lock",
+    text: "New Legal Document",
+  } %>
 
   <%= form_for(
     @document,
