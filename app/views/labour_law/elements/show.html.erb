@@ -1,0 +1,72 @@
+<% content_for(:opengraph) do %>
+  <link rel="canonical" href="https://666a.se<%= labour_law_element_path(@document.document_slug, @revision.revision_code, @element.element_slug) %>" />
+  <% if @revision.draft? %>
+    <meta name="robots" content="noindex" />
+  <% end %>
+  <meta
+    property="og:description"
+    content="<%= @elements.map { |l,r| r }.filter {  |e| e.element_type === "md" }.map(&:element_text).join("\n") %>">
+  <meta property="og:title" content="<%= @title %>" />
+  <% if @revision.draft? %>
+    <meta name="robots" content="noindex" />
+  <% end %>
+<% end %>
+
+<div class="flex flex-col w-full p-2 sm:px-4 lg:px-0 pt-8 max-w-5xl">
+
+  <%= render partial: "labour_law/h1", locals: {
+    title: @page_title,
+    subtitle: "Version #{@revision.revision_code}, English translation",
+  } %>
+
+  <p class="mb-8">
+    <a href="/<%= @document.document_code %>-v<%= @revision.revision_code %>-in-english" class="text-blue-700 underline">
+      <% if @document.document_code == "aml" then %>
+        Overview of the entire Work Environment Act
+      <% elsif @document.document_code == "mbl" then %>
+        Overview of the entire Co-Determination Act
+      <% elsif @document.document_code == "las" then %>
+        Overview of the entire Employment Protection Act
+      <% elsif @document.document_code == "atl" then %>
+        Overview of the entire Working Hours Act
+      <% end %>
+    </a>
+  </p>
+
+  <%= render partial: "labour_law/revisions/notice" %>
+
+  <table class="mt-8">
+    <thead>
+      <th width="50%"></th>
+      <th width="50%"></th>
+    </thead>
+
+    <tbody>
+      <% @elements.each do |left, right| %>
+        <%= render partial: "labour_law/elements/row", locals: {
+          left: left,
+          right: right,
+          links: false,
+        } %>
+      <% end %>
+
+      <%= render partial: "labour_law/sources" %>
+
+    </tbody>
+  </table>
+
+  <% if !current_user.nil? and current_user.admin? %>
+    <hr class="my-8">
+    <p>
+      <a href="/admin/labour_law/documents/<%= @document.document_code %>" class="text-blue-700 underline">
+        Document</a>
+      |
+      <a href="/admin/labour_law/revisions/<%= @revision.revision_code %>" class="text-blue-700 underline">
+        Revision</a>
+      |
+      <a href="/admin/labour_law/elements/<%= @element.id %>" class="text-blue-700 underline">
+        Element</a>
+    </p>
+  <% end %>
+
+</div>

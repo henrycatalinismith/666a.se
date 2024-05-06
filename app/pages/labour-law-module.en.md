@@ -40,7 +40,7 @@ title: Labour Law Module
           datetime updated_at
           string revision_id
           string element_type
-          string element_code
+          string element_slug
           string element_text
           string element_chapter 
           string element_section 

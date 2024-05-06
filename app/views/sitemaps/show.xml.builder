@@ -13,13 +13,13 @@ xml.urlset xmlns: "http://www.sitemaps.org/schemas/sitemap/0.9" do
     end
 
     xml.url do
-      xml.loc "https://666a.se/#{labour_law_revision_path(d.document_slug, r.revision_code)}"
+      xml.loc "https://666a.se#{labour_law_revision_path(d.document_slug, r.revision_code)}"
       xml.lastmod r.updated_at.strftime("%Y-%m-%dT%H:%M:%S+00:00")
     end
 
-    r.elements.where("element_type == ?", :h3).each do |e|
+    r.elements.section_heading.each do |e|
       xml.url do
-        xml.loc "https://666a.se/#{translation_url(e)}"
+        xml.loc "https://666a.se#{labour_law_element_path(d.document_slug, r.revision_code, e.element_slug)}"
         xml.lastmod e.updated_at.strftime("%Y-%m-%dT%H:%M:%S+00:00")
       end
     end

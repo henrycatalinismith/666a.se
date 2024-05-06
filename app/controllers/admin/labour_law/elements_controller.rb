@@ -28,6 +28,7 @@ class Admin::LabourLaw::ElementsController < AdminController
       :element_chapter,
       :element_section,
       :element_paragraph,
+      :element_slug,
       ))
       flash[:notice] = "element updated"
       redirect_to "/admin/labour_law/elements/#{@element.id}"
@@ -71,6 +72,7 @@ class Admin::LabourLaw::ElementsController < AdminController
       :element_chapter,
       :element_section,
       :element_paragraph,
+      :element_slug,
     ))
 
     @element.save

@@ -16,7 +16,7 @@
   <% elsif left.section_heading? %>
     <td class="prose text-base lg:text-xl font-bold pt-4 align-top <%= both_sides %> <%= left_classes %>">
       <% if links %>
-        <a class="text-blue-700 underline" href="<%= translation_url(left) %>">
+        <a class="text-blue-700 underline" href="<%= labour_law_element_path(@document.document_slug, @revision.revision_code, left.element_slug) %>">
           <%= left.element_text %>
         </a>
       <% else %>
@@ -25,7 +25,7 @@
     </td>
     <td class="prose text-base lg:text-xl font-bold pt-4 align-top <%= both_sides %> <%= right_classes %>">
       <% if links %>
-        <a class="text-blue-700 underline" href="<%= translation_url(left) %>">
+        <a class="text-blue-700 underline" href="<%= labour_law_element_path(@document.document_slug, @revision.revision_code, left.element_slug) %>">
           <%= right.element_text %>
         </a>
       <% else %>
