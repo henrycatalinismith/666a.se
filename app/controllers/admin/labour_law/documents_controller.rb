@@ -21,7 +21,11 @@ class Admin::LabourLaw::DocumentsController < AdminController
     if @document.nil?
       raise ActionController::RoutingError.new("Not Found")
     end
-    if @document.update(params[:document].permit(:document_name, :document_code)) then
+    if @document.update(params[:document].permit(
+      :document_name,
+      :document_code,
+      :document_slug,
+      )) then
       redirect_to admin_labour_law_document_path(@document)
       flash[:notice] = "document updated"
     end
@@ -35,6 +39,7 @@ class Admin::LabourLaw::DocumentsController < AdminController
     @document = LabourLaw::Document.create(params[:document].permit(
       :document_name,
       :document_code,
+      :document_slug,
     ))
     if @document.valid? then
       redirect_to "/admin/labour_law/documents/#{@document.id}"

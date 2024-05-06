@@ -51,6 +51,11 @@
       <%= f.text_field :document_code %>
     <% end %>
 
+    <%= render layout: "shared/field" do %>
+      <%= f.label :document_slug %>
+      <%= f.text_field :document_slug %>
+    <% end %>
+
     <div class="actions">
       <%= f.submit "Save" %>
     </div>

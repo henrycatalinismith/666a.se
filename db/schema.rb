@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_04_210321) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_06_191043) do
   create_table "flipper_features", force: :cascade do |t|
     t.string "key", null: false
     t.datetime "created_at", null: false
@@ -32,7 +32,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_04_210321) do
     t.datetime "updated_at", null: false
     t.string "document_name"
     t.string "document_code"
+    t.string "document_slug"
     t.index ["document_code"], name: "index_labour_law_documents_on_document_code", unique: true
+    t.index ["document_slug"], name: "index_labour_law_documents_on_document_slug", unique: true
   end
 
   create_table "labour_law_elements", id: :string, default: -> { "ULID()" }, force: :cascade do |t|
