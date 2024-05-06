@@ -18,10 +18,16 @@ Rails.application.routes.draw do
       to: redirect("/english-translations-of-swedish-laws")
   get "/2023/10/31/launch-announcement", to: redirect("/launch-announcement")
 
-  get "/1977:1160/2014:659", to: redirect("/aml-v2014:659-in-english")
-  get "/1976:580/2021:1114", to: redirect("/mbl-v2021:1114-in-english")
-  get "/1982:80/2022:836", to: redirect("/las-v2022:836-in-english")
-  get "/1982:673/2013:611", to: redirect("/atl-v2013:611-in-english")
+  get "/1977:1160/2014:659", to: redirect("/labour-law/work-environment-act/2014:659")
+  get "/1976:580/2021:1114", to: redirect("/labour-law/codetermination-act/2021:1114")
+  get "/1982:80/2022:836", to: redirect("/labour-law/employment-protection-act/2022:836")
+  get "/1982:673/2013:611", to: redirect("/labour-law/working-hours-act/2013:611")
+  get "/aml-v2014:659-in-english", to: redirect("/labour-law/work-environment-act/2014:659")
+  get "/mbl-v2021:1114-in-english", to: redirect("/labour-law/codetermination-act/2021:1114")
+  get "/las-v2022:836-in-english", to: redirect("/labour-law/employment-protection-act/2022:836")
+  get "/atl-v2013:611-in-english", to: redirect("/labour-law/working-hours-act/2013:611")
+
+  get "/labour-law/:document_slug/:revision_code", to: "labour_law/revisions#show", as: "labour_law_revision"
 
   get "/section-:element_section-of-:document_code-v:revision_code-in-english", to: "labour_law/translations#show"
   get "/chapter-:element_chapter-section-:element_section-of-:document_code-v:revision_code-in-english", to: "labour_law/translations#show"
