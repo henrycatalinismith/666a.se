@@ -41,6 +41,22 @@ module PagesHelper
     }
     return sections[path].include?(request.path)
   end
+
+  def render_rss(markdown)
+    renderer = RssRender.new
+    redcarpet = Redcarpet::Markdown.new(renderer, tables: true)
+    redcarpet.render(markdown)
+  end
+end
+
+class RssRender < Redcarpet::Render::HTML
+  def header(text, header_level)
+    if header_level == 1
+      return ""
+    else
+      return "<h#{header_level}>#{text}</h#{header_level}>"
+    end
+  end
 end
 
 class PageRender < Redcarpet::Render::HTML

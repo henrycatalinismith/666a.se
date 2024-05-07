@@ -8,8 +8,8 @@ Rails.application.routes.draw do
     .each { |file| get "/#{File.basename(file, ".en.md")}", to: "pages#show" }
 
   get "/news",
-      to: redirect("/going-open-source"),
-      permanent: false
+    to: redirect("/news/going-open-source"),
+    permanent: false
 
   get "/news/:slug", to: "news#show", as: "news_post"
 

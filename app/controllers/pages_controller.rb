@@ -13,7 +13,7 @@ class PagesController < ApplicationController
 
     @posts =
       slugs.map do |slug|
-        file = Rails.root.join("app/pages/#{slug}.en.md")
+        file = Rails.root.join("app/pages/news/#{slug}.en.md")
         text = File.read(file)
         unsafe_loader = ->(string) do
           Psych.safe_load(string, permitted_classes: [Date, Time])
