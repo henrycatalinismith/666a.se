@@ -28,10 +28,11 @@ module PagesHelper
     sections = {
       "/about" => %w[/accessibility /privacy /terms],
       "/news" => %w[
-        /night-work-tech-and-swedish-labour-law
-        /incident-report
-        /english-translations-of-swedish-laws
-        /launch-announcement
+        /news/going-open-source
+        /news/night-work-tech-and-swedish-labour-law
+        /news/incident-report
+        /news/english-translations-of-swedish-laws
+        /news/launch-announcement
       ],
       "/admin" => [],
       "/tech" => docs.map { |doc| doc[:href] },
