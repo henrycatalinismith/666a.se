@@ -18,18 +18,18 @@ module ApplicationHelper
     [
       {
         text: "Going Open Source",
-        href: "/going-open-source"
+        href: "/news/going-open-source"
       },
       {
         text: "Night Work, Tech, And Swedish Labour Law",
-        href: "/night-work-tech-and-swedish-labour-law"
+        href: "/news/night-work-tech-and-swedish-labour-law"
       },
-      { text: "Incident Report", href: "/incident-report" },
+      { text: "Incident Report", href: "/news/incident-report" },
       {
         text: "English translations of Swedish laws",
-        href: "/english-translations-of-swedish-laws"
+        href: "/news/english-translations-of-swedish-laws"
       },
-      { text: "Announcing 666a", href: "/launch-announcement" }
+      { text: "Announcing 666a", href: "/news/launch-announcement" }
     ]
   end
 

@@ -11,12 +11,16 @@ Rails.application.routes.draw do
       to: redirect("/going-open-source"),
       permanent: false
 
-  get "/2024/01/22/night-work-tech-and-swedish-labour-law",
-      to: redirect("/night-work-tech-and-swedish-labour-law")
-  get "/2023/12/03/incident-report", to: redirect("/incident-report")
-  get "/2023/11/14/english-translations-of-swedish-laws",
-      to: redirect("/english-translations-of-swedish-laws")
-  get "/2023/10/31/launch-announcement", to: redirect("/launch-announcement")
+  get "/news/:slug", to: "news#show", as: "news_post"
+
+  get "/2024/01/22/night-work-tech-and-swedish-labour-law", to: redirect("/news/night-work-tech-and-swedish-labour-law")
+  get "/2023/12/03/incident-report", to: redirect("/news/incident-report")
+  get "/2023/11/14/english-translations-of-swedish-laws", to: redirect("/news/english-translations-of-swedish-laws")
+  get "/2023/10/31/launch-announcement", to: redirect("/news/launch-announcement")
+  get "/night-work-tech-and-swedish-labour-law", to: redirect("/news/night-work-tech-and-swedish-labour-law")
+  get "/incident-report", to: redirect("/news/incident-report")
+  get "/english-translations-of-swedish-laws", to: redirect("/news/english-translations-of-swedish-laws")
+  get "/launch-announcement", to: redirect("/news/launch-announcement")
 
   get "/1977:1160/2014:659", to: redirect("/labour-law/work-environment-act/2014:659")
   get "/1976:580/2021:1114", to: redirect("/labour-law/codetermination-act/2021:1114")
