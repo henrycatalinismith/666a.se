@@ -13,7 +13,7 @@
 <dl class="flex flex-col">
 
   <dt>
-    <a href="https://666a.se/contributing" class="text-blue-700">
+    <a href="https://666a.se/about/contributing" class="text-blue-700">
       Contributing
     </a>
   </dt>
@@ -29,7 +29,7 @@
 <dl class="flex flex-col">
 
   <dt>
-    <a href="https://666a.se/development" class="text-blue-700">
+    <a href="https://666a.se/about/development" class="text-blue-700">
       Development
     </a>
   </dt>
@@ -38,7 +38,7 @@
   </dd>
 
   <dt class="mt-4">
-    <a href="https://666a.se/operations" class="text-blue-700">
+    <a href="https://666a.se/about/operations" class="text-blue-700">
       Operations
     </a>
   </dt>
@@ -47,7 +47,7 @@
   </dd>
 
   <dt class="mt-4">
-    <a href="https://666a.se/architecture" class="text-blue-700">
+    <a href="https://666a.se/about/architecture" class="text-blue-700">
       Architecture
     </a>
   </dt>
@@ -62,7 +62,7 @@
 <dl class="flex flex-col">
 
   <dt>
-    <a href="https://666a.se/accessibility" class="text-blue-700">
+    <a href="https://666a.se/about/accessibility" class="text-blue-700">
       Accessibility Statement
     </a>
   </dt>
@@ -71,7 +71,7 @@
   </dd>
 
   <dt class="mt-4">
-    <a href="https://666a.se/conduct" class="text-blue-700">
+    <a href="https://666a.se/about/conduct" class="text-blue-700">
       Code of Conduct
     </a>
   </dt>
@@ -80,7 +80,7 @@
   </dd>
 
   <dt class="mt-4">
-    <a href="https://666a.se/license" class="text-blue-700">
+    <a href="https://666a.se/about/license" class="text-blue-700">
       License
     </a>
   </dt>
@@ -89,7 +89,7 @@
   </dd>
 
   <dt class="mt-4">
-    <a href="https://666a.se/privacy" class="text-blue-700">
+    <a href="https://666a.se/about/privacy" class="text-blue-700">
       Privacy Policy
     </a>
   </dt>
@@ -98,7 +98,7 @@
   </dd>
 
   <dt class="mt-4">
-    <a href="https://666a.se/security" class="text-blue-700">
+    <a href="https://666a.se/about/security" class="text-blue-700">
       Security Policy
     </a>
   </dt>
@@ -107,7 +107,7 @@
   </dd>
 
   <dt class="mt-4">
-    <a href="https://666a.se/terms" class="text-blue-700">
+    <a href="https://666a.se/about/terms" class="text-blue-700">
       Terms of Service
     </a>
   </dt>
