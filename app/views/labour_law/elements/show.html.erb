@@ -20,7 +20,7 @@
   } %>
 
   <p class="mb-8">
-    <a href="/<%= @document.document_code %>-v<%= @revision.revision_code %>-in-english" class="text-blue-700 underline">
+    <a href="<%= labour_law_revision_path(document_slug: @document.document_slug, revision_code: @revision.revision_code) %>" class="text-blue-700 underline">
       <% if @document.document_code == "aml" then %>
         Overview of the entire Work Environment Act
       <% elsif @document.document_code == "mbl" then %>
