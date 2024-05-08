@@ -30,7 +30,11 @@ class PagesController < ApplicationController
   end
 
   def show
-    file = Rails.root.join("app/pages#{request.path}.en.md")
+    if params[:slug].nil?
+      file = Rails.root.join("app/pages/about/about.en.md")
+    else
+      file = Rails.root.join("app/pages/about/#{params[:slug]}.en.md")
+    end
     render plain: "Not Found", status: 404 and return unless File.exist?(file)
     text = File.read(file)
     unsafe_loader = ->(string) do
@@ -39,15 +43,15 @@ class PagesController < ApplicationController
     parsed = FrontMatterParser::Parser.parse_file(file, loader: unsafe_loader)
     @data = parsed.front_matter
 
-    if request.path == "/about"
+    if params[:slug].nil?
       @content = File.read(Rails.root.join("readme.md"))
-    elsif request.path == "/conduct"
+    elsif params[:slug] == "conduct"
       @content = File.read(Rails.root.join("code_of_conduct.md"))
-    elsif request.path == "/contributing"
+    elsif params[:slug] == "contributing"
       @content = File.read(Rails.root.join("contributing.md"))
-    elsif request.path == "/license"
+    elsif params[:slug] == "license"
       @content = File.read(Rails.root.join("license.md"))
-    elsif request.path == "/security"
+    elsif params[:slug] == "security"
       @content = File.read(Rails.root.join("security.md"))
     else
       @content = parsed.content
