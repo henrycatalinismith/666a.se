@@ -99,6 +99,26 @@
         bottom: { text: "#{@element.translations.count}" },
       },
       {
+        icon: "fa-solid fa-arrow-left",
+        top: {
+          text: "Previous",
+          href: admin_labour_law_element_path(@element.prev),
+        },
+        bottom: {
+          text: "#{@element.prev.element_text}"
+        },
+      },
+      {
+        icon: "fa-solid fa-arrow-right",
+        top: {
+          text: "Next",
+          href: admin_labour_law_element_path(@element.next),
+        },
+        bottom: {
+          text: "#{@element.next.element_text}"
+        },
+      },
+      {
         icon: "fa-solid fa-book",
         top: {
           text: "New",
