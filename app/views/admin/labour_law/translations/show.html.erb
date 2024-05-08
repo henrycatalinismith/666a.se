@@ -54,8 +54,28 @@
     items: [
       {
         icon: "fa-solid fa-book",
+        top: { text: "ID" },
+        bottom: { text: @translation.id },
+      },
+      {
+        icon: "fa-solid fa-book",
+        top: { text: "Created" },
+        bottom: { text: @translation.created_at },
+      },
+      {
+        icon: "fa-solid fa-book",
+        top: { text: "Updated" },
+        bottom: { text: @translation.updated_at },
+      },
+      {
+        icon: "fa-solid fa-book",
         top: { text: "Translation Locale" },
         bottom: { text: @translation.translation_locale },
+      },
+      {
+        icon: "fa-solid fa-book",
+        top: { text: "Translation Status" },
+        bottom: { text: @translation.translation_status },
       },
       {
         icon: "fa-solid fa-book",
