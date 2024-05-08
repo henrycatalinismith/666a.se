@@ -25,4 +25,20 @@ class LabourLaw::Element < ApplicationRecord
     end
     return self
   end
+
+  def next
+    revision
+      .elements
+      .where("element_index > ?", element_index)
+      .order(:element_index)
+      .first
+  end
+
+  def prev
+    revision
+      .elements
+      .where("element_index < ?", element_index)
+      .order(:element_index)
+      .last
+  end
 end
