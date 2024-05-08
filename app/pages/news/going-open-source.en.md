@@ -10,7 +10,7 @@ Today's the six month anniversary of the launch of 666a. On launch day, I wasn't
 
 The repo's over at [github.com/666ase/666a](https://github.com/666ase/666a). Go chuck it a star if you have a GitHub account! You're also invited to [join the Discord community](https://discord.com/invite/Xgb6a5wQAj).
 
-If you're interested in taking a deeper look, there's info about [setting up a 666a development environment](/development), some devops things to help [avoid disasters and facilitate recovering](/operations) from them when they do happen, and even some [architectural notes](/architecture).
+If you're interested in taking a deeper look, there's info about [setting up a 666a development environment](/about/development), some devops things to help [avoid disasters and facilitate recovering](/about/operations) from them when they do happen, and even some [architectural notes](/about/architecture).
 
 I've also begun documenting the work ahead as [GitHub issues](https://github.com/666ase/666a/issues) and [projects](https://github.com/666ase/666a/projects). Some of it is marked as “[good first issue](https://github.com/666ase/666a/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22)” to facilitate getting a first commit for anyone who'd like to jump in right away. You'll notice I have big ideas for the labour law translations in particular. There's lots to do though, and I haven't been able to write it all down in time for today. The signup flow could probably use a bit of love, for example. I'd also really like to have as much of the site as possible available in English, Swedish and Arabic, and I don't have the time or linguistic ability to make that happen alone.
 
