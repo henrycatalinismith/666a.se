@@ -36,8 +36,16 @@
     <td class="prose text-xs md:text-base lg:text-lg py-4 align-top <%= both_sides %> <%= left_classes %>">
       <%= @redcarpet.render(left.element_text).html_safe %>
     </td>
-    <td class="prose text-xs md:text-base lg:text-lg py-4 align-top <<%= both_sides %> <%= right_classes %>">
-      <%= @redcarpet.render(right.element_text).html_safe %>
-    </td>
+    <% if left.translations.first.published? %>
+      <td class="prose text-xs md:text-base lg:text-lg py-4 align-top <<%= both_sides %> <%= right_classes %>">
+        <%= @redcarpet.render(right.element_text).html_safe %>
+      </td>
+    <% elsif left.translations.first.missing? %>
+      <td class="prose text-xs md:text-base lg:text-lg py-4 align-top <<%= both_sides %> <%= right_classes %>">
+        <a href="https://github.com/666ase/666a/issues/<%= right.element_text %>" class="text-blue-700 underline">
+          Help translate this paragraph to English.
+        </a>
+      </td>
+    <% end %>
   <% end %>
 </tr>
