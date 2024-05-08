@@ -13,16 +13,16 @@
     <div class="flex flex-col gap-5 h-min min-w-64 w-[400px]">
       <%= render "pages/sidebar", title: "About 666a", links: [
         { href: "/about", text: "Overview" },
-        { href: "/contributing", text: "Contributing" },
+        { href: "/about/contributing", text: "Contributing" },
       ] %>
       <%= render "pages/sidebar", title: "Technical Documentation", links: [
-        { href: "/development", text: "Development" },
-        { href: "/operations", text: "Operations" },
-        { href: "/architecture", text: "Architecture" },
+        { href: "/about/development", text: "Development" },
+        { href: "/about/operations", text: "Operations" },
+        { href: "/about/architecture", text: "Architecture" },
       ] %>
       <%= render "pages/sidebar", title: "Policies", links: policies.map {
         |policy| {
-          href: "/#{policy[:slug]}",
+          href: "/about/#{policy[:slug]}",
           text: t("home.#{policy[:slug]}"),
         }
       } %>

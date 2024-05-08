@@ -13,33 +13,23 @@ module PagesHelper
   end
 
   def is_active_path?(path)
-    if path == "/swedish-labour-laws-in-english"
-      if controller_name == "documents" && action_name == "index"
-        return true
-      elsif controller_name == "revisions" && action_name == "show"
-        return true
-      elsif controller_name == "translations" && action_name == "show"
-        return true
-      else
-        return false
-      end
-    end
     return true if path == request.path
-    sections = {
-      "/about" => %w[/accessibility /privacy /terms],
-      "/news" => %w[
-        /news/going-open-source
-        /news/night-work-tech-and-swedish-labour-law
-        /news/incident-report
-        /news/english-translations-of-swedish-laws
-        /news/launch-announcement
-      ],
-      "/admin" => [],
-      "/tech" => docs.map { |doc| doc[:href] },
-      "/work-environment" => [],
-      "/labour-law" => [],
-    }
-    return sections[path].include?(request.path)
+    if path == "/admin"
+      return request.path.start_with?("/news")
+    end
+    if path == "/admin"
+      return request.path.start_with?("/about")
+    end
+    if path == "/news"
+      return request.path.start_with?("/news")
+    end
+    if path == "/labour-law"
+      return request.path.start_with?("/labour-law")
+    end
+    if path == "/work-environment"
+      return request.path.start_with?("/work-environment")
+    end
+    return false
   end
 
   def render_rss(markdown)

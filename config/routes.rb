@@ -3,15 +3,33 @@ Rails.application.routes.draw do
   root "home#index"
   get "/work-environment", to: "users#dashboard"
   get "/dashboard", to: redirect("/work-environment")
-  Dir
-    .glob(Rails.root.join("app", "pages", "*.en.md"))
-    .each { |file| get "/#{File.basename(file, ".en.md")}", to: "pages#show" }
 
   get "/news",
     to: redirect("/news/going-open-source"),
     permanent: false
 
   get "/news/:slug", to: "news#show", as: "news_post"
+  get "/about", to: "pages#show", as: "about_index"
+  get "/about/:slug", to: "pages#show", as: "about_page"
+
+  get "/accessibility", to: redirect("/about/accessibility")
+  get "/architecture", to: redirect("/about/architecture")
+  get "/conduct", to: redirect("/about/conduct")
+  get "/contributing", to: redirect("/about/contributing")
+  get "/development", to: redirect("/about/development")
+  get "/labour-law-module", to: redirect("/about/labour-law-module")
+  get "/license", to: redirect("/about/license")
+  get "/operations", to: redirect("/about/operations")
+  get "/privacy", to: redirect("/about/privacy")
+  get "/security", to: redirect("/about/security")
+  get "/split-email-alerting-into-multiple-jobs", to: redirect("/about/split-email-alerting-into-multiple-jobs")
+  get "/terms", to: redirect("/about/terms")
+  get "/time-period-module", to: redirect("/about/time-period-module")
+  get "/use-rails", to: redirect("/about/use-rails")
+  get "/use-rufus-scheduler", to: redirect("/about/use-rufus-scheduler")
+  get "/use-sqlite", to: redirect("/about/use-sqlite")
+  get "/user-module", to: redirect("/about/user-module")
+  get "/work-environment-module", to: redirect("/about/work-environment-module")
 
   get "/2024/01/22/night-work-tech-and-swedish-labour-law", to: redirect("/news/night-work-tech-and-swedish-labour-law")
   get "/2023/12/03/incident-report", to: redirect("/news/incident-report")
