@@ -24,7 +24,7 @@ class Admin::LabourLaw::TranslationsController < AdminController
 
   def update
     @translation = LabourLaw::Translation.find(params[:id])
-    if @translation.update(params[:translation].permit(:translation_text))
+    if @translation.update(params[:translation].permit(:translation_status, :translation_text))
       flash[:notice] = "translation updated"
       redirect_to admin_labour_law_translation_path(@translation)
     end
@@ -52,6 +52,7 @@ class Admin::LabourLaw::TranslationsController < AdminController
     @document = @revision.document
     @translation = LabourLaw::Translation.new(params[:translation].permit(
       :translation_locale,
+      :translation_status,
       :translation_text,
     ).merge(element: @element))
     if @translation.save

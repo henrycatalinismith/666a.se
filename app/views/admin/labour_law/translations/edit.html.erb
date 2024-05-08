@@ -73,6 +73,11 @@
     <% end %>
 
     <%= render layout: "shared/field" do %>
+      <%= f.label :translation_status %>
+      <%= f.select :translation_status, LabourLaw::Translation.translation_statuses.keys.map{ |key| [key.humanize, key] }, selected: @translation.translation_status %>
+    <% end %>
+
+    <%= render layout: "shared/field" do %>
       <%= f.label :translation_locale %>
       <%= f.select(:translation_locale, options_for_select([
         ["en"]
