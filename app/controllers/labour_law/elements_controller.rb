@@ -15,15 +15,15 @@ class LabourLaw::ElementsController < ApplicationController
 
   def show
     @document = LabourLaw::Document.find_by(document_slug: params[:document_slug])
-    if @document.nil? then
+    if @document.nil?
       raise ActionController::RoutingError.new("Not Found lmao #{params[:document_slug]}")
     end
     @revision = @document.revisions.find_by(revision_code: params[:revision_code])
-    if @revision.nil? then
+    if @revision.nil?
       raise ActionController::RoutingError.new("Not Found lol")
     end
     @element = @revision.elements.find_by(element_slug: params[:element_slug])
-    if @element.nil? or @element.element_type == "md" then
+    if @element.nil?
       raise ActionController::RoutingError.new("Not Found")
     end
 
@@ -32,7 +32,7 @@ class LabourLaw::ElementsController < ApplicationController
     if @element.section_heading? then
       next_section = @revision.elements
         .where("element_index > ?", @element.element_index)
-        .where("element_type = ?", 1)
+        .where(element_type: [1, 2])
         .order(:element_index)
         .first
       elements = @revision.elements
