@@ -46,10 +46,9 @@ class Admin::LabourLaw::ElementsController < AdminController
       @index = @revision.elements.count
 
     when "after"
-      @index = LabourLaw::Element.find(params[:element_id]).element_index + 1
+      @prev = LabourLaw::Element.find(params[:element_id])
+      @index = @prev.element_index + 1
     end
-
-    @prev = @revision.elements.order(element_index: :desc).first
 
     type = params[:type]
     if @revision.elements.count == 0 then
