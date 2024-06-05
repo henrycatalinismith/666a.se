@@ -15,18 +15,18 @@ class WorkEnvironment::Search < ApplicationRecord
   scope :chronological, -> { order(date: :asc) }
   scope :reverse_chronological, -> { order(date: :desc) }
 
-  def parameters
+  def parameters(page = 1)
     {
       FromDate: day.date.strftime("%Y-%m-%d"),
       ToDate: day.date.strftime("%Y-%m-%d"),
       sortDirection: "asc",
       sortOrder: "Dokumentdatum",
-      page: page_number,
+      p: page,
     }
   end
 
-  def url
-    query = parameters.to_query
+  def url(page = 1)
+    query = parameters(page).to_query
     url = "#{ENV["WORK_ENVIRONMENT_URL"]}?#{query}"
   end
 

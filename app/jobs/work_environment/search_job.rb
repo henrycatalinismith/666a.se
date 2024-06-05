@@ -8,6 +8,7 @@ class WorkEnvironment::SearchJob < ApplicationJob
   end
 
   def perform(date, options = {})
+    page = options[:page] || 1
     day = TimePeriod::Day.find_by(date: date)
     return if day.nil?
 
@@ -19,34 +20,73 @@ class WorkEnvironment::SearchJob < ApplicationJob
 
     day.increment!(:request_count)
     @search.result_fetching!
-    puts @search.url
-    uri = URI(@search.url)
+    puts "--"
+    puts @search.url(page)
+    uri = URI(@search.url(page))
     response = Net::HTTP.get_response(uri)
     document = Nokogiri::HTML.parse(response.body)
 
-    hit_count = document.css("[data-dd-search-hits]").first["data-dd-search-hits"]
-    @search.hit_count = hit_count
-    @search.save
-
     results = document.css(".document-list__item")
+    puts results.count
 
     results.each do |li|
       h4 = li.css(".headline-4")
       span1 = h4.css("span").first
       span2 = h4.css("span").last
-      document_code = span1.text.strip
       document_type = span2.text.strip
-      company_code = nil
+
+      definitions = {}
+      definition_lists = li.css("dl")
+      definition_lists.each do |dl|
+        dl.css("dt").each do |dt|
+          dt_text = dt.text.strip
+          dd_text = dt.next_element.text.strip
+          definitions[dt_text] = dd_text
+        end
+      end
+      # {
+      #   'Handlingsnummer'=>'2023/062714-1',
+      #   'Handlingens datum'=>'2023-10-31',
+      #   'Ärende'=>'Olycksfall 20230926. Fysiskt våld',
+      #   'Ärendets status'=>'Avslutat',
+      #   'Företag/organisation'=>'STIFTELSEN ÅRSTA GÅRD',
+      #   'Organisationsnummer:'=>'8020177427',
+      #   'Handlingens ursprung'=>'Inkommande',
+      #   'Ämnesområde'=>'Bedriva inspektion',
+      #   'Arbetsställe'=>'STIFTELSEN ÅRSTA GÅRD',
+      #   'Arbetsställenummer (CFAR)'=>'31732407'
+      # }
+
+      document_code = definitions["Handlingsnummer"]
+      document_date = definitions["Handlingens datum"]
+      company_code = definitions["Organisationsnummer:"]
+      company_name = definitions["Företag/organisation"]
+      workplace_name = definitions["Arbetsställe"]
+      workplace_code = definitions["Arbetsställenummer (CFAR)"]
+
+      document_direction = definitions["Handlingens ursprung"]
+      if document_direction == "Inkommande" then
+        document_direction = :document_incoming
+      elsif document_direction == "Utgående" then
+        document_direction = :document_outgoing
+      else
+        document_direction = nil
+      end
 
       case_code = document_code.split("-").first
+      case_name = definitions["Ärende"]
+      case_status = definitions["Ärendets status"]
+      if case_status == "Pågående" then
+        case_status = :case_ongoing
+      elsif case_status == "Avslutat" then
+        case_status = :case_concluded
+      end
 
       document = WorkEnvironment::Document.find_by(document_code:)
       if document.nil?
         if !company_code.nil?
           subscription_count =
-            User::Subscription.where(
-              company_code: document.company_code
-            ).count
+            User::Subscription.where(company_code:).count
           notification_status = subscription_count > 0 ? :notification_pending : :notification_needless
         else
           notification_status = :notification_needless
@@ -54,8 +94,16 @@ class WorkEnvironment::SearchJob < ApplicationJob
 
         document = WorkEnvironment::Document.create(
           document_code:,
+          document_date:,
           document_type:,
+          document_direction:,
           case_code:,
+          case_name:,
+          case_status:,
+          workplace_code:,
+          workplace_name:,
+          company_code:,
+          company_name:,
         )
 
         if options[:notify] and notification_status == :notification_pending
@@ -63,8 +111,17 @@ class WorkEnvironment::SearchJob < ApplicationJob
             document_code,
             options
           )
+        else
+          puts "Notify #{document_code}"
         end
       end
+    end
+
+    if results.count > 0 and options[:cascade]
+      WorkEnvironment::SearchJob.set(wait: 10.seconds).perform_later(
+        date,
+        { **options, page: page + 1 }
+      )
     end
   end
 end
