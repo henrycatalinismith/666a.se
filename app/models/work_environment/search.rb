@@ -41,6 +41,10 @@ class WorkEnvironment::Search < ApplicationRecord
     if !matches.nil? then
       return matches[1].to_i
     end
+    matches = hit_count.match(/\A\d+\z/)
+    if !matches.nil? then
+      return matches.to_i
+    end
     return hit_count
   end
 end

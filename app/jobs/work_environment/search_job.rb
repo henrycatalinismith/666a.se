@@ -19,47 +19,48 @@ class WorkEnvironment::SearchJob < ApplicationJob
 
     day.increment!(:request_count)
     @search.result_fetching!
-    # puts @search.url
+    puts @search.url
     uri = URI(@search.url)
     response = Net::HTTP.get_response(uri)
     document = Nokogiri::HTML.parse(response.body)
 
-    hit_count = document.css(".hit-count").text.strip
-    headings =
-      document.css("#handling-results thead th").map { |e| e.text.strip }
-    rows =
-      document
-        .css("#handling-results tbody tr")
-        .map { |e| e.css("td").map { |e| e.text.strip } }
-        .map { |r| Hash[headings.zip(r)] }
-
+    hit_count = document.css("[data-dd-search-hits]").first["data-dd-search-hits"]
     @search.hit_count = hit_count
+    @search.save
 
-    rows.each do |row|
-      document_code = row["Handlingsnummer"]
+    results = document.css(".document-list__item")
+
+    results.each do |li|
+      h4 = li.css(".headline-4")
+      span1 = h4.css("span").first
+      span2 = h4.css("span").last
+      document_code = span1.text.strip
+      document_type = span2.text.strip
+      company_code = nil
+
+      case_code = document_code.split("-").first
+
       document = WorkEnvironment::Document.find_by(document_code:)
-      document_exists = !document.nil?
-      document_status = document_exists ? :document_ready : :document_pending
-      metadata_status = document_exists ? :metadata_aborted : :metadata_pending
-      @search.results.create(
-        metadata_status:,
-        document_status:,
-        document_code:,
-        case_name: row["Ärendemening"],
-        document_type: row["Handlingstyp"],
-        document_date: row["Datum"],
-        organisation_name: row["Organisation"],
-        metadata: ""
-      )
-    end
+      if document.nil?
+        if !company_code.nil?
+          subscription_count =
+            User::Subscription.where(
+              company_code: document.company_code
+            ).count
+          notification_status = subscription_count > 0 ? :notification_pending : :notification_needless
+        else
+          notification_status = :notification_needless
+        end
 
-    @search.result_ready!
+        document = WorkEnvironment::Document.create(
+          document_code:,
+          document_type:,
+          case_code:,
+        )
 
-    if options[:cascade]
-      @search.results.each_with_index do |result, index|
-        if result.metadata_pending?
-          WorkEnvironment::ResultJob.set(wait: index.seconds).perform_later(
-            result.document_code,
+        if options[:notify] and notification_status == :notification_pending
+          User::NotificationJob.set(wait: 1.seconds).perform_later(
+            document_code,
             options
           )
         end

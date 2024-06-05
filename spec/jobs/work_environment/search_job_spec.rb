@@ -16,33 +16,36 @@ describe WorkEnvironment::SearchJob do
         :get,
         "https://example.org/search/?FromDate=2023-11-06&ToDate=2023-11-06&page=1&sortDirection=asc&sortOrder=Dokumentdatum"
       ).to_return(status: 200, body: response)
-
-      WorkEnvironment::SearchJob.perform_now(day.date)
     end
 
     let(:search) { day.searches.first }
-    let(:results) { search.results }
 
     it "records the hit count" do
-      expect(search.hit_count).to eq("913 träffar")
+      WorkEnvironment::SearchJob.perform_now(day.date)
+      expect(search.hit_count).to eq("908")
     end
 
     context "results" do
       it "records the document code" do
-        expect(results.map(&:document_code).sort).to eq(
-          %w[
-            2023/016154-5
-            2023/018014-1
-            2023/025193-1
-            2023/035166-3
-            2023/035515-2
-            2023/036093-1
-            2023/042874-1
-            2023/044443-6
-            2023/045809-3
-            2023/051960-1
-          ]
-        )
+        WorkEnvironment::SearchJob.perform_now(day.date)
+        expect(WorkEnvironment::Document.first.as_json.except("id", "created_at", "updated_at")).to eq({
+          "case_code" => nil,
+          "case_date" => nil,
+          "case_name" => nil,
+          "case_status" => nil,
+          "company_code" => nil,
+          "company_name" => nil,
+          "county_code" => nil,
+          "county_name" => nil,
+          "document_code" => "2023/062312-5",
+          "document_date" => nil,
+          "document_direction" => nil,
+          "document_type" => "Beslut om slutligt omedelbart förbud",
+          "municipality_code" => nil,
+          "municipality_name" => nil,
+          "workplace_code" => nil,
+          "workplace_name" => nil,
+        })
       end
     end
   end
