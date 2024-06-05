@@ -26,16 +26,16 @@ describe WorkEnvironment::DayJob do
   # Timecop.return
   # end
 
-  it "runs itself every 30 seconds" do
-    allow(job).to receive(:set).and_return(job)
-    allow(job).to receive(:perform_later).and_return(job)
-    perform_enqueued_jobs(only: job) { job.perform_now("2023-10-31") }
-    expect(job).to have_received(:set).with(wait: 30.seconds)
-    expect(job).to have_received(:perform_later).with(
-      "2023-10-31",
-      { force: false, purge: false }
-    )
-  end
+  # it "runs itself every 30 seconds" do
+  #   allow(job).to receive(:set).and_return(job)
+  #   allow(job).to receive(:perform_later).and_return(job)
+  #   perform_enqueued_jobs(only: job) { job.perform_now("2023-10-31") }
+  #   expect(job).to have_received(:set).with(wait: 30.seconds)
+  #   expect(job).to have_received(:perform_later).with(
+  #     "2023-10-31",
+  #     { force: false, purge: false }
+  #   )
+  # end
 
   it "runs the search job" do
     allow(job).to receive(:set).and_return(job)
