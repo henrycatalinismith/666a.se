@@ -24,6 +24,8 @@ class WorkEnvironment::SearchJob < ApplicationJob
     puts @search.url(page)
     uri = URI(@search.url(page))
     response = Net::HTTP.get_response(uri)
+    puts response.code
+    puts response.body
     document = Nokogiri::HTML.parse(response.body)
 
     results = document.css(".document-list__item")
