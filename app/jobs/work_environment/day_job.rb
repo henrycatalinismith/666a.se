@@ -16,10 +16,10 @@ class WorkEnvironment::DayJob < ApplicationJob
     day.searches.destroy_all if options[:purge]
 
     if Time.now < Time.parse("23:00")
-      self
-        .class
-        .set(wait: 30.seconds)
-        .perform_later(date, { **options, force: false, purge: false })
+      # self
+      # .class
+      # .set(wait: 30.seconds)
+      # .perform_later(date, { **options, force: false, purge: false })
     end
 
     if options[:cascade]
