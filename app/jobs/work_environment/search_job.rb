@@ -61,6 +61,9 @@ class WorkEnvironment::SearchJob < ApplicationJob
       document_code = definitions["Handlingsnummer"]
       document_date = definitions["Handlingens datum"]
       company_code = definitions["Organisationsnummer:"]
+      if company_code.present? and company_code.length == 10 then
+        company_code = "#{company_code[0..5]}-#{company_code[6..9]}"
+      end
       company_name = definitions["Företag/organisation"]
       workplace_name = definitions["Arbetsställe"]
       workplace_code = definitions["Arbetsställenummer (CFAR)"]

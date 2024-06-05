@@ -33,7 +33,7 @@ describe WorkEnvironment::SearchJob do
           "case_date" => nil,
           "case_name" => "Inspektion 20231031 - omedelbart förbud att utföra byggnads- och anläggningsarbete där fallhöjden är två meter eller mer, Heinövägen 79, Öckerö",
           "case_status" => "case_ongoing",
-          "company_code" => "5564959665",
+          "company_code" => "556495-9665",
           "company_name" => "ÖCKERÖ FASTIGHETS AB",
           "county_code" => nil,
           "county_name" => nil,
