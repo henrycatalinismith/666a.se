@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_01_194049) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_06_144742) do
   create_table "flipper_features", force: :cascade do |t|
     t.string "key", null: false
     t.datetime "created_at", null: false
@@ -178,23 +178,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_01_194049) do
     t.index ["document_code"], name: "index_work_environment_documents_on_document_code", unique: true
   end
 
-  create_table "work_environment_results", id: :string, default: -> { "ULID()" }, force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "search_id", null: false
-    t.integer "metadata_status"
-    t.string "document_code"
-    t.string "case_name"
-    t.string "document_type"
-    t.string "document_date"
-    t.string "organisation_name"
-    t.string "metadata"
-    t.integer "document_status"
-    t.index ["document_status"], name: "index_work_environment_results_on_document_status"
-    t.index ["metadata_status"], name: "index_work_environment_results_on_metadata_status"
-    t.index ["search_id"], name: "index_work_environment_results_on_search_id"
-  end
-
   create_table "work_environment_searches", id: :string, default: -> { "ULID()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -213,6 +196,5 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_01_194049) do
   add_foreign_key "user_notifications", "work_environment_documents", column: "document_id"
   add_foreign_key "user_roles", "user_accounts", column: "account_id"
   add_foreign_key "user_subscriptions", "user_accounts", column: "account_id"
-  add_foreign_key "work_environment_results", "work_environment_searches", column: "search_id"
   add_foreign_key "work_environment_searches", "time_period_days", column: "day_id"
 end
