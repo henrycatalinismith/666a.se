@@ -8,11 +8,6 @@ class WorkEnvironment::DayJob < ApplicationJob
 
     return if day.nil?
 
-    if not options[:force] and day.looks_dormant?
-      day.ingestion_complete!
-      return
-    end
-
     day.searches.destroy_all if options[:purge]
 
     if Time.now < Time.parse("23:00")

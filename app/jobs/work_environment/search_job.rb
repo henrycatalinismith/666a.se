@@ -15,7 +15,7 @@ class WorkEnvironment::SearchJob < ApplicationJob
     @search =
       day.searches.create(
         result_status: :result_pending,
-        page_number: day.next_page_number
+        page_number: page
       )
 
     day.increment!(:request_count)
