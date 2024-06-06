@@ -96,11 +96,7 @@ sv:
       Du prenumererar på e-postaviseringar för allmänna handlingar hos
       arbetsmiljöverket avseende %{target}, och vi upptäckte en ny dokument idag.
     link_preamble: >
-      Mer information finns tillgänglig på arbetsmiljöverkets hemsida på länken
-      nedan.
-    email_instructions: >
-      Du kan mejla dem för en gratis kopia av dokumentet om det verkar som något
-      du behöver läsa.
+      Du kan beställa en gratis kopia av dokumentet från Arbetsmiljöverket om det verkar som något du behöver läsa.
     unsubscribe:
       Om du inte längre vill ha dessa aviseringar kan du <a href="%{url}">avsluta prenumerationen</a>.
 

@@ -96,13 +96,9 @@ en:
       Hey %{name},
     subscription: >
       You're subscribed to email updates for Work Environment Authority filings
-      about %{target}. A new document's been detected.
+      about %{target}. A new document has been detected.
     link_preamble: >
-      More information's available about it on the Work Environment Authority's
-      website at the link below.
-    email_instructions: >
-      You can ask the Work Environment Authority for a free copy of the document at <a href="mailto:arbetsmiljoverket@av.se">arbetsmiljoverket@av.se</a> if it sounds like
-      something you need to read.
+      You can order a free copy of the document from the Work Environment Authority if it sounds like something you need to read.
     unsubscribe:
       If you don't need these notifications any more, you can <a href="%{url}">unsubscribe</a>.
 
