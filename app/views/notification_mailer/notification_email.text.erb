@@ -13,8 +13,6 @@
 <%= @document.document_code %>: <%= I18n.locale == "sv" ? @document.document_type : t("document_type." + @document.document_type) %>
 
 <%= t("notification_email.link_preamble") %>
-https://www.av.se/om-oss/sok-i-arbetsmiljoverkets-diarium/?id=<%= @document.document_code %>
-
-<%= t("notification_email.email_instructions") %>
+https://www.av.se/om-oss/diarium-och-allmanna-handlingar/bestall-handlingar/Case/?id=<%= @document.case_code %>
 
 <%= t("notification_email.unsubscribe", url: @unsubscribe_url).html_safe %>
