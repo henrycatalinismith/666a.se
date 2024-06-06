@@ -9,6 +9,7 @@ class PagesController < ApplicationController
       incident-report
       night-work-tech-and-swedish-labour-law
       going-open-source
+      about-arbetsmiljoverkets-new-webdiarium
     ]
 
     @posts =

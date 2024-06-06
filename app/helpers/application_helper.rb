@@ -17,6 +17,10 @@ module ApplicationHelper
   def posts
     [
       {
+        text: "About Arbetsmiljöverket's New Webdiarium",
+        href: "/news/about-arbetsmiljoverkets-new-webdiarium"
+      },
+      {
         text: "Going Open Source",
         href: "/news/going-open-source"
       },
