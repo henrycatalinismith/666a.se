@@ -40,4 +40,10 @@ class Admin::WorkEnvironment::NotificationsController < AdminController
     redirect_to "/admin/work_environment/notifications/#{params[:id]}"
     flash[:notice] = "job queued"
   end
+
+  def retry_failed
+    User::RetryFailedEmailsJob.perform_later
+    redirect_to "/admin/work_environment/notifications"
+    flash[:notice] = "job queued"
+  end
 end

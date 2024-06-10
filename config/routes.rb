@@ -165,6 +165,7 @@ Rails.application.routes.draw do
         resources :notifications
         post "/documents/:id/notify", to: "documents#notify"
         post "/notifications/:id/send", to: "notifications#send_email"
+        post "/notifications/retry_failed", to: "notifications#retry_failed"
       end
 
       get "/policies", to: "policies#index"
