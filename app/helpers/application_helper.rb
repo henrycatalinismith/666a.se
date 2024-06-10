@@ -17,6 +17,10 @@ module ApplicationHelper
   def posts
     [
       {
+        text: "We Maxed Out SendGrid's Free Tier",
+        href: "/news/we-maxed-out-sendgrids-free-tier"
+      },
+      {
         text: "About Arbetsmiljöverket's New Webdiarium",
         href: "/news/about-arbetsmiljoverkets-new-webdiarium"
       },

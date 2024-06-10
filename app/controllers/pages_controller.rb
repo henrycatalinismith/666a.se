@@ -10,6 +10,7 @@ class PagesController < ApplicationController
       night-work-tech-and-swedish-labour-law
       going-open-source
       about-arbetsmiljoverkets-new-webdiarium
+      we-maxed-out-sendgrids-free-tier
     ]
 
     @posts =
