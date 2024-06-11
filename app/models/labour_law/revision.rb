@@ -7,5 +7,6 @@ class LabourLaw::Revision < ApplicationRecord
   enum revision_status: {
     draft: 0,
     published: 1,
+    replaced: 2,
   }
 end
