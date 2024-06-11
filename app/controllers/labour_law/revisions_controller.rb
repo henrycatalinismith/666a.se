@@ -23,6 +23,13 @@ class LabourLaw::RevisionsController < ApplicationController
       raise ActionController::RoutingError.new("Not Found revs " + params[:revision_code])
     end
 
+    if @revision.replaced?
+      @new_revision = @document.revisions.published.first
+      if @new_revision.present?
+        redirect_to labour_law_revision_path(@document.document_slug, @new_revision.revision_code)
+      end
+    end
+
     if @document.document_code == "aml" then
       @page_title = "The Swedish Work Environment Act"
     elsif @document.document_code == "mbl" then

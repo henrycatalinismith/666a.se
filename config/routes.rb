@@ -40,11 +40,11 @@ Rails.application.routes.draw do
   get "/english-translations-of-swedish-laws", to: redirect("/news/english-translations-of-swedish-laws")
   get "/launch-announcement", to: redirect("/news/launch-announcement")
 
-  get "/1977:1160/2014:659", to: redirect("/labour-law/work-environment-act/2014:659")
+  get "/1977:1160/2014:659", to: redirect("/labour-law/work-environment-act/2023:349")
   get "/1976:580/2021:1114", to: redirect("/labour-law/codetermination-act/2021:1114")
   get "/1982:80/2022:836", to: redirect("/labour-law/employment-protection-act/2022:836")
   get "/1982:673/2013:611", to: redirect("/labour-law/working-hours-act/2013:611")
-  get "/aml-v2014:659-in-english", to: redirect("/labour-law/work-environment-act/2014:659")
+  get "/aml-v2014:659-in-english", to: redirect("/labour-law/work-environment-act/2023:349")
   get "/mbl-v2021:1114-in-english", to: redirect("/labour-law/codetermination-act/2021:1114")
   get "/las-v2022:836-in-english", to: redirect("/labour-law/employment-protection-act/2022:836")
   get "/atl-v2013:611-in-english", to: redirect("/labour-law/working-hours-act/2013:611")
@@ -58,7 +58,7 @@ Rails.application.routes.draw do
 
   get "/chapter-:c-section-:s-of-aml-v2014:659-in-english",
     to: redirect { |params|
-      "/labour-law/work-environment-act/2014:659/chapter-#{params[:c]}-section-#{params[:s]}"
+      "/labour-law/work-environment-act/2023:349/chapter-#{params[:c]}-section-#{params[:s]}"
     }
 
   get "/section-:s-of-mbl-v2021:1114-in-english",
@@ -82,7 +82,7 @@ Rails.application.routes.draw do
   get "/1977:1160/2014:659/:element_code/sv:en",
       to:
         redirect { |params|
-          "/chapter-#{params[:element_code].match(/K(\d)/)[1]}-section-#{params[:element_code].match(/P(\d[a-z]?)/)[1]}-of-aml-v2014:659-in-english"
+          "/chapter-#{params[:element_code].match(/K(\d)/)[1]}-section-#{params[:element_code].match(/P(\d[a-z]?)/)[1]}-of-aml-v2023:349-in-english"
         },
       chapter: /\d/
 

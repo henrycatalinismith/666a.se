@@ -27,6 +27,16 @@ class LabourLaw::ElementsController < ApplicationController
       raise ActionController::RoutingError.new("Not Found")
     end
 
+    if @revision.replaced?
+      new_revision = @document.revisions.published.first
+      if new_revision.present?
+        new_element = new_revision.elements.find_by(element_slug: @element.element_slug)
+        if new_element.present?
+          redirect_to labour_law_element_path(@document.document_slug, new_revision.revision_code, new_element.element_slug)
+        end
+      end
+    end
+
     elements = []
 
     if @element.section_heading? then

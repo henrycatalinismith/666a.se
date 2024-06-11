@@ -22,7 +22,7 @@ This practice isn’t legal in Sweden unless certain checks and balances are in 
 
 ## Safety representative training
 
-[Chapter 6 Section 4 of the Swedish Work Environment Act](/labour-law/work-environment-act/2014:659/chapter-6-section-4) creates a joint responsibility, shared by both employers and their employees, that safety representatives must receive the training necessary to perform their  role.
+[Chapter 6 Section 4 of the Swedish Work Environment Act](/labour-law/work-environment-act/2023:349/chapter-6-section-4) creates a joint responsibility, shared by both employers and their employees, that safety representatives must receive the training necessary to perform their  role.
 
 Ensuring that employers’ personnel practices are compliant with [the Working Hours Act](/labour-law/working-hours-act/2013:611) is exactly the kind of thing safety reps are meant to do. The Swedish tech industry’s low engagement with the country’s labour movement has enabled years of non-compliance by many employers. Safety representatives without union support – who may well receive all their training from the employer despite the clear conflict of interest this entails – often won’t notice the violation, or are easily instructed to ignore it.
 
