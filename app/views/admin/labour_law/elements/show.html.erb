@@ -112,10 +112,10 @@
         icon: "fa-solid fa-arrow-right",
         top: {
           text: "Next",
-          href: admin_labour_law_element_path(@element.next),
+          href: @element.next.present? ? admin_labour_law_element_path(@element.next) : "",
         },
         bottom: {
-          text: "#{@element.next.element_text}"
+          text: @element.next.present? ? @element.next.element_text : "",
         },
       },
       {
