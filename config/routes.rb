@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   get "/dashboard", to: redirect("/work-environment")
 
   get "/news",
-    to: redirect("/news/we-maxed-out-sendgrids-free-tier"),
+    to: redirect("/news/lets-update-the-english-translation-of-the-work-environment-act"),
     permanent: false
 
   get "/news/:slug", to: "news#show", as: "news_post"
