@@ -12,6 +12,7 @@ Over the past several months I've looked very carefully through every paragraph 
 
 In cases where the wording of a section of the law has changed, I've updated the Swedish text to match the latest version and removed the English translation entirely. The missing English text is replaced with links to GitHub issues where contributors (like you reading this, maybe) are invited to collaborate in public on updating the translations. Those pages are
 
+* [Chapter 1 Section 2c](https://666a.se/labour-law/work-environment-act/2023:349/chapter-1-section-2c)
 * [Chapter 1 Section 4](https://666a.se/labour-law/work-environment-act/2023:349/chapter-1-section-4)
 * [Chapter 2 Section 8](https://666a.se/labour-law/work-environment-act/2023:349/chapter-2-section-8)
 * [Chapter 2 Section 10](https://666a.se/labour-law/work-environment-act/2023:349/chapter-2-section-10)
