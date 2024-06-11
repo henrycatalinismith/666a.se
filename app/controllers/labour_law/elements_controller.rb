@@ -32,7 +32,7 @@ class LabourLaw::ElementsController < ApplicationController
     if @element.section_heading? then
       next_section = @revision.elements
         .where("element_index > ?", @element.element_index)
-        .where(element_type: [1, 2])
+        .where(element_type: [1, 2, 3])
         .order(:element_index)
         .first
       elements = @revision.elements
