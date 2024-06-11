@@ -17,6 +17,10 @@ module ApplicationHelper
   def posts
     [
       {
+        text: "Let's update the English translation of the Work Environment Act",
+        href: "/news/lets-update-the-english-translation-of-the-work-environment-act"
+      },
+      {
         text: "We Maxed Out SendGrid's Free Tier",
         href: "/news/we-maxed-out-sendgrids-free-tier"
       },

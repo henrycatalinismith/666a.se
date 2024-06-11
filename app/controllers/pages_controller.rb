@@ -11,6 +11,7 @@ class PagesController < ApplicationController
       going-open-source
       about-arbetsmiljoverkets-new-webdiarium
       we-maxed-out-sendgrids-free-tier
+      lets-update-the-english-translation-of-the-work-environment-act
     ]
 
     @posts =
