@@ -17,6 +17,7 @@ In cases where the wording of a section of the law has changed, I've updated the
 * [Chapter 2 Section 10](https://666a.se/labour-law/work-environment-act/2023:349/chapter-2-section-10)
 * [Chapter 6 Section 17](https://666a.se/labour-law/work-environment-act/2023:349/chapter-6-section-17)
 * [Chapter 9 Section 2](https://666a.se/labour-law/work-environment-act/2023:349/chapter-9-section-2)
+* [Chapter 9 Section 5](https://666a.se/labour-law/work-environment-act/2023:349/chapter-9-section-5)
 
 
 And in cases where completely new sections have been added, I've done a similar thing. Those are
