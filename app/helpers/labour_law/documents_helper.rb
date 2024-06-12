@@ -7,7 +7,7 @@ module LabourLaw::DocumentsHelper
     elsif document.document_code == "las"
       "Version 2022:836, English translation"
     elsif document.document_code == "atl"
-      "Version 2013:611, English translation"
+      "Version #{revision.revision_code}, English translation"
     else
       ""
     end
