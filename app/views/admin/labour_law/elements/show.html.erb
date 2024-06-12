@@ -102,10 +102,10 @@
         icon: "fa-solid fa-arrow-left",
         top: {
           text: "Previous",
-          href: admin_labour_law_element_path(@element.prev),
+          href: @element.prev.present? ? admin_labour_law_element_path(@element.prev) : "",
         },
         bottom: {
-          text: "#{@element.prev.element_text}"
+          text: @element.prev.present? ? @element.prev.element_text : "",
         },
       },
       {

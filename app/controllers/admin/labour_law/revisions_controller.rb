@@ -58,11 +58,16 @@ class Admin::LabourLaw::RevisionsController < AdminController
         element_index: element.element_index,
         element_text: element.element_text,
         element_type: element.element_type,
+        element_chapter: element.element_chapter,
+        element_section: element.element_section,
+        element_paragraph: element.element_paragraph,
+        element_slug: element.element_slug,
       )
       element.translations.each do |translation|
         element_copy.translations.create(
           translation_locale: translation.translation_locale,
           translation_text: translation.translation_text,
+          translation_status: translation.translation_status,
         )
       end
     end
