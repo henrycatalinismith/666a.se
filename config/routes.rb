@@ -139,50 +139,6 @@ Rails.application.routes.draw do
     end
   end
 
-  scope module: :admin, path: "legacy_admin" do
-    authenticated :user do
-      get "/", to: "dashboard#index"
-
-      resources :users
-
-      namespace :time_period do
-        resources :days
-        resources :weeks
-        post "/days/:id/job", to: "days#job"
-        post "/weeks/:id/job", to: "weeks#job"
-      end
-
-      namespace :labour_law do
-        resources :documents
-        resources :revisions
-        resources :elements
-        resources :translations
-
-        post "/revisions/:id/copy", to: "revisions#copy"
-      end
-
-      namespace :work_environment do
-        resources :documents
-        resources :notifications
-        post "/documents/:id/notify", to: "documents#notify"
-      end
-
-      get "/policies", to: "policies#index"
-      match "/policies/new", to: "policies#new", via: %i[get post]
-      match "/policies/:slug", to: "policies#edit", via: %i[get patch]
-
-      get "/statistics", to: "statistics#index"
-      get "/statistics/december_comparison",
-          to: "statistics#december_comparison"
-      get "/statistics/diarium", to: "statistics#diarium"
-      get "/statistics/requests", to: "statistics#requests"
-      get "/statistics/document_lag", to: "statistics#document_lag"
-      get "/statistics/email_metrics", to: "statistics#email_metrics"
-      get "/statistics/kitchen_sink", to: "statistics#kitchen_sink"
-      get "/statistics/user_growth", to: "statistics#user_growth"
-    end
-  end
-
   authenticated :user do
     get "/account", to: "users#account"
 
