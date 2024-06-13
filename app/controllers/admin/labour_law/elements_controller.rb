@@ -31,7 +31,7 @@ class Admin::LabourLaw::ElementsController < AdminController
       :element_slug,
       ))
       flash[:notice] = "element updated"
-      redirect_to "/admin/labour_law/elements/#{@element.id}"
+      redirect_to "/legacy_admin/labour_law/elements/#{@element.id}"
     end
   end
 
@@ -93,7 +93,7 @@ class Admin::LabourLaw::ElementsController < AdminController
         translation_text: "",
       )
 
-      redirect_to "/admin/labour_law/elements/#{@element.id}"
+      redirect_to "/legacy_admin/labour_law/elements/#{@element.id}"
       flash[:notice] = "element created"
     end
   end

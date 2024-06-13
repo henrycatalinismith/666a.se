@@ -18,7 +18,7 @@ class Admin::TimePeriod::DaysController < AdminController
       notify: true,
       purge: true
     )
-    redirect_to "/admin/time_period/days/#{@day.id}"
+    redirect_to "/legacy_admin/time_period/days/#{@day.id}"
     flash[:notice] = "job queued"
   end
 end

@@ -9,7 +9,7 @@
       },
       {
         icon: "fa-solid fa-file-lines",
-        href: "/admin/work_environment/documents",
+        href: "/legacy_admin/work_environment/documents",
         text: "Work Environment Documents",
       },
     ]
@@ -23,7 +23,7 @@
 
   <%= button_to(
     "Update",
-    "/admin/work_environment/documents/#{@document.id}/notify",
+    "/legacy_admin/work_environment/documents/#{@document.id}/notify",
     method: :post,
     class: "min-w-max-content bg-cyan-300 hover:bg-cyan-200 text-black font-bold py-2 px-4 rounded"
   ) %>
@@ -84,7 +84,7 @@
     items: @document.notifications.map do |notification|
       {
         icon: "fa-solid #{notification.icon}",
-        top: { text: notification.subscription.account.email, href: "/admin/work_environment/notifications/#{notification.id}"  },
+        top: { text: notification.subscription.account.email, href: "/legacy_admin/work_environment/notifications/#{notification.id}"  },
         bottom: { text: notification.created_at },
       }
     end

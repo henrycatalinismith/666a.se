@@ -25,7 +25,7 @@ class Admin::TimePeriod::WeeksController < AdminController
   def job
     @week = TimePeriod::Week.find(params[:id])
     WorkEnvironment::WeekJob.perform_later(@week.week_code, cascade: true, force: true, notify: false)
-    redirect_to "/admin/time_period/weeks/#{@week.id}"
+    redirect_to "/legacy_admin/time_period/weeks/#{@week.id}"
     flash[:notice] = "job queued"
   end
 end

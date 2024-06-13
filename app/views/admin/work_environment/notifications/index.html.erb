@@ -35,7 +35,7 @@
             </select>
             <script>
               document.getElementById("filter").addEventListener("change", function() {
-                window.location.href = "/admin/work_environment/notifications?filter=" + this.value;
+                window.location.href = "/legacy_admin/work_environment/notifications?filter=" + this.value;
               });
             </script>
           </div>
@@ -49,7 +49,7 @@
         icon: "fa-solid #{notification.icon}",
         top: {
           text: "#{notification.document.company_name}, #{notification.document.document_code}",
-          href: "/admin/work_environment/notifications/#{notification.id}",
+          href: "/legacy_admin/work_environment/notifications/#{notification.id}",
         },
         bottom: { text: "#{notification.subscription.account.email}, #{notification.created_at}" },
       }
@@ -58,7 +58,7 @@
 
    <%= button_to(
     "retry failed",
-    "/admin/work_environment/notifications/retry_failed",
+    "/legacy_admin/work_environment/notifications/retry_failed",
     method: :post,
     class: "min-w-max-content bg-cyan-300 hover:bg-cyan-200 text-black font-bold py-2 px-4 rounded"
   ) %>
