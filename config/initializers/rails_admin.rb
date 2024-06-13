@@ -10,6 +10,18 @@ RailsAdmin.config do |config|
   config.current_user_method(&:current_user)
   config.authorize_with :cancancan
 
+  config.model "LabourLaw::Element" do
+    field :element_text, :text
+  end
+
+  config.model "LabourLaw::Revision" do
+    edit do
+      configure :elements do
+        orderable true
+      end
+    end
+  end
+
   config.model "TimePeriod::Day" do
     list do
       sort_by :date
@@ -129,6 +141,13 @@ RailsAdmin.config do |config|
           )
           redirect_to back_or_index, notice: "job queued"
         end
+      end
+    end
+
+    member :revision_elements do
+      link_icon do "fa fa-eye" end
+      visible do
+        bindings[:abstract_model].model.name == "LabourLaw::Revision"
       end
     end
   end

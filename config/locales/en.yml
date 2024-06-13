@@ -263,6 +263,8 @@ en:
         menu: "Send"
       retry_failed:
         menu: "Retry failed"
+      revision_elements:
+        menu: "Elements"
       update_day:
         menu: "Update"
       update_week:
