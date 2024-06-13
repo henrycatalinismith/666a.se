@@ -1,6 +1,6 @@
 # https://guides.rubyonrails.org/routing.html
 Rails.application.routes.draw do
-  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
+  mount RailsAdmin::Engine => "/admin", as: "rails_admin"
   root "home#index"
   get "/work-environment", to: "users#dashboard"
   get "/dashboard", to: redirect("/work-environment")
