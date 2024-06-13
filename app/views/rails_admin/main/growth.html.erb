@@ -1,4 +1,4 @@
-<%= line_chart TimePeriod::Day.chronological.map { |d| [
+<%= line_chart TimePeriod::Day.chronological.since_launch.map { |d| [
   d.ymd,
   @abstract_model.model.where('DATE(created_at) <= ?', d.ymd).count] }.to_h
 %>

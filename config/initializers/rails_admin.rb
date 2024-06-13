@@ -10,7 +10,31 @@ RailsAdmin.config do |config|
   config.current_user_method(&:current_user)
   config.authorize_with :cancancan
 
+  config.model "TimePeriod::Day" do
+    list do
+      sort_by :date
+    end
+  end
+
+  config.model "TimePeriod::Week" do
+    list do
+      sort_by :created_at
+    end
+  end
+
   config.model "User::Notification" do
+    list do
+      sort_by :created_at
+    end
+  end
+
+  config.model "WorkEnvironment::Document" do
+    list do
+      sort_by :created_at
+    end
+  end
+
+  config.model "WorkEnvironment::Search" do
     list do
       sort_by :created_at
     end
