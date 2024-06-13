@@ -138,7 +138,7 @@ Rails.application.routes.draw do
     end
   end
 
-  namespace :admin do
+  scope module: :admin, path: "legacy_admin" do
     authenticated :user do
       get "/", to: "dashboard#index"
 

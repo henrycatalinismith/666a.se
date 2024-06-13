@@ -8,7 +8,7 @@ class SessionsController < Devise::SessionsController
 
   def after_sign_in_path_for(resource)
     if current_user.admin? then
-      "/admin"
+      "/legacy_admin"
     elsif !session[:referer].nil? then
       "/#{session[:referer]}"
     else
