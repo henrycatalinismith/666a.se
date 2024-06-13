@@ -2,7 +2,12 @@
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.4.2",
     "flowbite": "^1.8.1",
+    "rails_admin": "3.1.2",
+    "sass": "^1.77.5",
     "stimulus-notification": "^2.2.0",
     "tailwindcss": "^3.3.3"
+  },
+  "scripts": {
+    "build:css": "sass ./app/assets/stylesheets/application.sass.scss:./app/assets/builds/application.css ./app/assets/stylesheets/rails_admin.scss:./app/assets/builds/rails_admin.css --no-source-map --load-path=node_modules"
   }
 }

@@ -5,6 +5,13 @@ class ApplicationController < ActionController::Base
     @field = "w-64 flex flex-col"
   end
 
+  before_action :set_locale
+  def set_locale
+    if [RailsAdmin].include?(self.class)
+      I18n.locale = :en
+    end
+  end
+
   protected
 
     def after_sign_in_path_for(resource)
