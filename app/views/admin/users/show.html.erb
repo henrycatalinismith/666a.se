@@ -8,7 +8,7 @@
       },
       {
         icon: "fa-solid fa-user",
-        href: "/admin/users/",
+        href: "/legacy_admin/users/",
         text: "Users",
       },
     ]
@@ -55,7 +55,7 @@
         icon: "fa-solid fa-bell",
         top: {
           text: notification.subscription.company_code || notification.subscription.workplace_code,
-          href: "/admin/work_environment/notifications/#{notification.id}",
+          href: "/legacy_admin/work_environment/notifications/#{notification.id}",
         },
         bottom: { text: notification.created_at },
       }

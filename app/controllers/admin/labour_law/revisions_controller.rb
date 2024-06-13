@@ -72,7 +72,7 @@ class Admin::LabourLaw::RevisionsController < AdminController
       end
     end
 
-    redirect_to "/admin/labour_law/revisions/#{copy.id}"
+    redirect_to "/legacy_admin/labour_law/revisions/#{copy.id}"
   end
 
   def destroy

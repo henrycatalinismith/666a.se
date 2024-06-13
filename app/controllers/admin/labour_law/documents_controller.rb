@@ -42,7 +42,7 @@ class Admin::LabourLaw::DocumentsController < AdminController
       :document_slug,
     ))
     if @document.valid? then
-      redirect_to "/admin/labour_law/documents/#{@document.id}"
+      redirect_to "/legacy_admin/labour_law/documents/#{@document.id}"
       flash[:notice] = "document created"
     end
   end

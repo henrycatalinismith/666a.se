@@ -11,13 +11,13 @@
 
       {
         icon: "fa-solid fa-file-lines",
-        top: { text: "Work Environment Documents", href: "/admin/work_environment/documents"  },
+        top: { text: "Work Environment Documents", href: "/legacy_admin/work_environment/documents"  },
         bottom: { text: number_with_delimiter(WorkEnvironment::Document.count) },
       },
 
       {
         icon: "fa-solid fa-bell",
-        top: { text: "Work Environment Notifications", href: "/admin/work_environment/notifications"  },
+        top: { text: "Work Environment Notifications", href: "/legacy_admin/work_environment/notifications"  },
         bottom: { text: number_with_delimiter(User::Notification.count) },
       },
 
@@ -29,31 +29,31 @@
 
       {
         icon: "fa-solid fa-calendar-days",
-        top: { text: "Days", href: "/admin/time_period/days"  },
+        top: { text: "Days", href: "/legacy_admin/time_period/days"  },
         bottom: { text: TimePeriod::Day.count },
       },
 
       {
         icon: "fa-solid fa-calendar-week",
-        top: { text: "Weeks", href: "/admin/time_period/weeks"  },
+        top: { text: "Weeks", href: "/legacy_admin/time_period/weeks"  },
         bottom: { text: TimePeriod::Week.count },
       },
 
       {
         icon: "fa-solid fa-chart-line",
-        top: { text: "Statistics", href: "/admin/statistics/"  },
+        top: { text: "Statistics", href: "/legacy_admin/statistics/"  },
         bottom: { text: "#{User::Notification.last.created_at.strftime("%Y-%m-%d")}" },
       },
 
       {
         icon: "fa-solid fa-user",
-        top: { text: "Users", href: "/admin/users/"  },
+        top: { text: "Users", href: "/legacy_admin/users/"  },
         bottom: { text: "#{User::Account.count}" },
       },
 
       {
         icon: "fa-solid fa-book",
-        top: { text: "Labour Law", href: "/admin/labour_law/documents"  },
+        top: { text: "Labour Law", href: "/legacy_admin/labour_law/documents"  },
         bottom: { text: LabourLaw::Document.count },
       },
 

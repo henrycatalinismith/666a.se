@@ -9,7 +9,7 @@
       },
       {
         icon: "fa-solid fa-bell",
-        href: "/admin/work_environment/notifications",
+        href: "/legacy_admin/work_environment/notifications",
         text: "Work Environment Notifications",
       },
     ]
@@ -25,13 +25,13 @@
 
       {
         icon: "fa-solid fa-file-lines",
-        top: { text: @notification.document.document_code, href: "/admin/work_environment/documents/#{@notification.document.id}" },
+        top: { text: @notification.document.document_code, href: "/legacy_admin/work_environment/documents/#{@notification.document.id}" },
         bottom: { text: "#{@notification.document.company_name}", },
       },
 
       {
         icon: "fa-solid fa-user",
-        top: { text: @notification.subscription.account.name, href: "/admin/users/#{@notification.subscription.account.id}" },
+        top: { text: @notification.subscription.account.name, href: "/legacy_admin/users/#{@notification.subscription.account.id}" },
         bottom: { text: "#{@notification.subscription.account.email}", },
       },
 
@@ -59,7 +59,7 @@
 
   <%= button_to(
     "send",
-    "/admin/work_environment/notifications/#{@notification.id}/send",
+    "/legacy_admin/work_environment/notifications/#{@notification.id}/send",
     method: :post,
     class: "min-w-max-content bg-cyan-300 hover:bg-cyan-200 text-black font-bold py-2 px-4 rounded"
   ) %>

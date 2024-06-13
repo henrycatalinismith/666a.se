@@ -19,7 +19,7 @@
     items: @users.map do |user|
       {
         icon: "fa-solid fa-user",
-        top: { text: user.name, href: "/admin/users/#{user.id}"  },
+        top: { text: user.name, href: "/legacy_admin/users/#{user.id}"  },
         bottom: { text: user.email },
       }
     end
