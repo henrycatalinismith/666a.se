@@ -33,17 +33,4 @@ class Admin::WorkEnvironment::NotificationsController < AdminController
   def show
     @notification = User::Notification.find(params[:id])
   end
-
-  def send_email
-    @notification = User::Notification.find(params[:id])
-    User::EmailJob.perform_later(@notification.id)
-    redirect_to "/legacy_admin/work_environment/notifications/#{params[:id]}"
-    flash[:notice] = "job queued"
-  end
-
-  def retry_failed
-    User::RetryFailedEmailsJob.perform_later
-    redirect_to "/legacy_admin/work_environment/notifications"
-    flash[:notice] = "job queued"
-  end
 end

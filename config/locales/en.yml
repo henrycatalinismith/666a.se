@@ -256,6 +256,13 @@ en:
   admin:
     actions:
       growth:
+        breadcrumb: "Growth"
         menu: "Growth"
       send_email:
         menu: "Send"
+      retry_failed:
+        menu: "Retry failed"
+      update_day:
+        menu: "Update"
+      update_week:
+        menu: "Update"
