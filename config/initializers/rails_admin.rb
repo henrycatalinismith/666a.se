@@ -38,7 +38,36 @@ RailsAdmin.config do |config|
     show_in_app
 
     collection :growth do
-      #
+      link_icon do "fa fa-line-chart" end
+      visible do
+        case bindings[:abstract_model].model.name
+        when "LabourLaw::Document" then true
+        when "LabourLaw::Element" then true
+        when "LabourLaw::Revision" then true
+        when "LabourLaw::Translation" then true
+        when "TimePeriod::Day" then true
+        when "TimePeriod::Week" then true
+        when "User::Account" then true
+        when "User::Notification" then true
+        when "User::Role" then true
+        when "User::Subscription" then true
+        else false end
+      end
+    end
+
+    member :send_email do
+      link_icon do "fa fa-envelope" end
+      visible do
+        case bindings[:abstract_model].model.name
+        when "User::Notification" then true
+        else false end
+      end
+      controller do
+        proc do
+          User::EmailJob.perform_later(@object.id)
+          redirect_to back_or_index, notice: "job queued"
+        end
+      end
     end
   end
 end
