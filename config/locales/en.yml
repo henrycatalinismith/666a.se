@@ -252,3 +252,8 @@ en:
     "Övriga handlingar - Överklagande": "Other documents - Appeal"
     "Övriga handlingar administrera anskaffning": "Other documents - Administer procurement"
     "Övriga handlingar inspektion": "Other documents - Inspection"
+
+  admin:
+    actions:
+      growth:
+        menu: "Growth"

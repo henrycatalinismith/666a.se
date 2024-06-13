@@ -1,6 +1,7 @@
 RailsAdmin.config do |config|
+  config.main_app_name = ["666a"]
   config.asset_source = :importmap
-  config.parent_controller = "::ApplicationController"
+  config.parent_controller = "::AdminActionController"
 
   ### Popular gems integration
 
@@ -36,8 +37,8 @@ RailsAdmin.config do |config|
     delete
     show_in_app
 
-    ## With an audit adapter, you can add:
-    # history_index
-    # history_show
+    collection :growth do
+      #
+    end
   end
 end
