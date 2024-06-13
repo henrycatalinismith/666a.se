@@ -58,13 +58,61 @@ RailsAdmin.config do |config|
     member :send_email do
       link_icon do "fa fa-envelope" end
       visible do
-        case bindings[:abstract_model].model.name
-        when "User::Notification" then true
-        else false end
+        bindings[:abstract_model].model.name == "User::Notification"
       end
       controller do
         proc do
           User::EmailJob.perform_later(@object.id)
+          redirect_to back_or_index, notice: "job queued"
+        end
+      end
+    end
+
+    collection :retry_failed do
+      link_icon do "fa fa-refresh" end
+      visible do
+        bindings[:abstract_model].model.name == "User::Notification"
+      end
+      controller do
+        proc do
+          User::RetryFailedEmailsJob.perform_later
+          redirect_to back_or_index, notice: "job queued"
+        end
+      end
+    end
+
+    member :update_day do
+      link_icon do "fa fa-refresh" end
+      visible do
+        bindings[:abstract_model].model.name == "TimePeriod::Day"
+      end
+      controller do
+        proc do
+          WorkEnvironment::DayJob.perform_later(
+            @object.date,
+            cascade: true,
+            force: true,
+            notify: true,
+            purge: true
+          )
+          redirect_to back_or_index, notice: "job queued"
+        end
+      end
+    end
+
+    member :update_week do
+      link_icon do "fa fa-refresh" end
+      visible do
+        bindings[:abstract_model].model.name == "TimePeriod::Week"
+      end
+      controller do
+        proc do
+          WorkEnvironment::WeekJob.perform_later(
+            @object.week_code,
+            cascade: true,
+            force: true,
+            notify: false
+          )
           redirect_to back_or_index, notice: "job queued"
         end
       end
