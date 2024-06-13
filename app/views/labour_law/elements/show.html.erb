@@ -58,13 +58,13 @@
   <% if !current_user.nil? and current_user.admin? %>
     <hr class="my-8">
     <p>
-      <a href="/legacy_admin/labour_law/documents/<%= @document.document_code %>" class="text-blue-700 underline">
+      <a href="/admin/labour_law~document/<%= @document.id %>" class="text-blue-700 underline">
         Document</a>
       |
-      <a href="/legacy_admin/labour_law/revisions/<%= @revision.id %>" class="text-blue-700 underline">
+      <a href="/admin/labour_law~revision/<%= @revision.id %>" class="text-blue-700 underline">
         Revision</a>
       |
-      <a href="/legacy_admin/labour_law/elements/<%= @element.id %>" class="text-blue-700 underline">
+      <a href="/admin/labour_law~element/<%= @element.id %>" class="text-blue-700 underline">
         Element</a>
     </p>
   <% end %>
