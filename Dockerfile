@@ -24,7 +24,7 @@ FROM base as build
 
 # Install packages needed to build gems
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y build-essential pkg-config git openssh-client
+    apt-get install --no-install-recommends -y build-essential pkg-config git openssh-client nodejs yarn
 
 # Install application gems
 COPY --link Gemfile Gemfile.lock ./
