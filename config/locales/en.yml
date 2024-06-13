@@ -258,6 +258,7 @@ en:
       growth:
         breadcrumb: "Growth"
         menu: "Growth"
+        title: "Growth"
       send_email:
         menu: "Send"
       retry_failed:
