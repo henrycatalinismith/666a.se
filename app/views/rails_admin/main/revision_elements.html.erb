@@ -1,0 +1,27 @@
+<table>
+  <thead>
+    <th>Index</th>
+    <th>Type</th>
+    <th>C</th>
+    <th>S</th>
+    <th>P</th>
+    <th>Text</th>
+  </thead>
+
+  <tbody>
+    <% @object.elements.each do |element| %>
+      <tr>
+        <td><%= element.element_index.floor %></td>
+        <td><%= element.element_type %></td>
+        <td><%= element.element_chapter %>
+        <td><%= element.element_section %>
+        <td><%= element.element_paragraph %>
+        <td>
+          <a href="<%= "/admin/labour_law~element/#{element.id}" %>" >
+            <%= element.element_text %>
+          </a>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
