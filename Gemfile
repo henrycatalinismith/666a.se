@@ -48,3 +48,5 @@ gem "rails_admin"
 gem "cssbundling-rails"
 gem "sassc"
 gem "cancancan"
+
+gem "ruby-openai", "~> 7.1"
