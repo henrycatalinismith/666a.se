@@ -4,28 +4,36 @@
       <%= @word.word_text %>
     </span>
     <br />
-    <span class="text-lg leading-1 align-top text-slate-500 font-light">
-      <%= @word.translations.first.translation_text %>
-    </span>
+    <%# <span class="text-lg leading-1 align-top text-slate-500 font-light">
+      Glossary Word
+    </span> %>
   <% end %>
 
-  <hr />
 
   <% @words.each do |word| %>
-    <div>
-      <h2 class="text-xl font-light text-slate-500">
-        <%= word.word_text %>
-      </h2>
+    <div class="mt-4">
+      <% if word.word_text != @word.word_text %>
+        <h2 class="text-xl font-light text-slate-500">
+          <%= word.word_text %>
+        </h2>
+      <% end %>
 
       <% @word.translations.each do |translation| %>
         <div class="flex flex-col">
-          <p class="text-base font-light text-slate-500">
+          <h2 class="text-xl font-light text-slate-500">
             <%= translation.translation_text %>
-          </p>
+          </h2>
+        </div>
+
+        <div class="mt-4">
+          <% translation.references.each do |reference| %>
+            <%= bold_word(reference.source_text, word.word_text).html_safe %>
+            <br />
+            <%= bold_word(reference.target_text, translation.translation_text).html_safe %>
+          <% end %>
         </div>
       <% end %>
     </div>
 
-    <hr />
   <% end %>
 </div>
