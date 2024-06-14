@@ -37,42 +37,42 @@ scheduler.cron("0 11 * * *") do
   )
 end
 
-# scheduler.cron("0 12 * * *") do
-#   WorkEnvironment::DayJob.perform_later(
-#     8.days.ago.strftime("%Y-%m-%d"),
-#     cascade: true,
-#     force: true,
-#     notify: true,
-#     purge: true
-#   )
-# end
+scheduler.cron("0 12 * * *") do
+  WorkEnvironment::DayJob.perform_later(
+    8.days.ago.strftime("%Y-%m-%d"),
+    cascade: true,
+    force: true,
+    notify: true,
+    purge: true
+  )
+end
 
-# scheduler.cron("0 13 * * *") do
-#   WorkEnvironment::DayJob.perform_later(
-#     16.days.ago.strftime("%Y-%m-%d"),
-#     cascade: true,
-#     force: true,
-#     notify: true,
-#     purge: true
-#   )
-# end
+scheduler.cron("0 13 * * *") do
+  WorkEnvironment::DayJob.perform_later(
+    16.days.ago.strftime("%Y-%m-%d"),
+    cascade: true,
+    force: true,
+    notify: true,
+    purge: true
+  )
+end
 
-# scheduler.cron("0 14 * * *") do
-#   WorkEnvironment::DayJob.perform_later(
-#     32.days.ago.strftime("%Y-%m-%d"),
-#     cascade: true,
-#     force: true,
-#     notify: true,
-#     purge: true
-#   )
-# end
+scheduler.cron("0 14 * * *") do
+  WorkEnvironment::DayJob.perform_later(
+    32.days.ago.strftime("%Y-%m-%d"),
+    cascade: true,
+    force: true,
+    notify: true,
+    purge: true
+  )
+end
 
-# scheduler.cron("0 15 * * *") do
-#   WorkEnvironment::DayJob.perform_later(
-#     64.days.ago.strftime("%Y-%m-%d"),
-#     cascade: true,
-#     force: true,
-#     notify: true,
-#     purge: true
-#   )
-# end
+scheduler.cron("0 15 * * *") do
+  WorkEnvironment::DayJob.perform_later(
+    64.days.ago.strftime("%Y-%m-%d"),
+    cascade: true,
+    force: true,
+    notify: true,
+    purge: true
+  )
+end
