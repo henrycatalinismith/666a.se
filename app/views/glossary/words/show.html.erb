@@ -1,3 +1,7 @@
+<% content_for(:opengraph) do %>
+  <meta name="robots" content="noindex">
+<% end %>
+
 <div class="flex flex-col px-4 lg:px-0 pt-8 max-w-5xl w-full">
   <%= h1 do %>
     <span class="font-normal md:font-extralight">
@@ -27,9 +31,19 @@
 
         <div class="mt-4">
           <% translation.references.each do |reference| %>
-            <%= bold_word(reference.source_text, word.word_text).html_safe %>
-            <br />
-            <%= bold_word(reference.target_text, translation.translation_text).html_safe %>
+            <% if reference.element.present? %>
+              <h3>
+                <a class="text-blue-700 underline" href="<%= labour_law_element_path(reference.element.revision.document.document_slug, reference.element.revision.revision_code, reference.element.element_slug) %>">
+                  <%= section_title(reference.element) %>
+                </a>
+              </h3>
+              <p>
+                <%= bold_word(reference.source_text, word.word_text).html_safe %>
+              </p>
+              <p>
+                <%= bold_word(reference.target_text, translation.translation_text).html_safe %>
+              </p>
+            <% end %>
           <% end %>
         </div>
       <% end %>

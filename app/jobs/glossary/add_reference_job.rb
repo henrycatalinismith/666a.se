@@ -9,7 +9,8 @@ class Glossary::AddReferenceJob < ApplicationJob
       word_text:,
       translation_text:,
       source_text:,
-      target_text:
+      target_text:,
+      element_id:,
     }
 
     root_slug = parameterize(root_text)
@@ -50,7 +51,8 @@ class Glossary::AddReferenceJob < ApplicationJob
     if reference.nil?
       reference = translation.references.create!(
         source_text: source_text,
-        target_text: target_text
+        target_text: target_text,
+        element_id: element_id,
       )
     end
   end
