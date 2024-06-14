@@ -10,5 +10,6 @@ class Glossary::WordsController < ApplicationController
     if @word.nil?
       raise ActiveRecord::RecordNotFound
     end
+    @words = [@word]
   end
 end

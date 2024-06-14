@@ -5,7 +5,27 @@
     </span>
     <br />
     <span class="text-lg leading-1 align-top text-slate-500 font-light">
-      Glossary Word
+      <%= @word.translations.first.translation_text %>
     </span>
+  <% end %>
+
+  <hr />
+
+  <% @words.each do |word| %>
+    <div>
+      <h2 class="text-xl font-light text-slate-500">
+        <%= word.word_text %>
+      </h2>
+
+      <% @word.translations.each do |translation| %>
+        <div class="flex flex-col">
+          <p class="text-base font-light text-slate-500">
+            <%= translation.translation_text %>
+          </p>
+        </div>
+      <% end %>
+    </div>
+
+    <hr />
   <% end %>
 </div>
