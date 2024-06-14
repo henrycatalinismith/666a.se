@@ -1,0 +1,13 @@
+<div class="flex flex-col px-4 lg:px-0 pt-8 max-w-5xl w-full">
+  <h1 class="text-3xl font-extralight mb-8 pb-8 border-b border-gray-300 w-full">
+    Glossary
+  </h1>
+
+  <ul>
+    <% @words.each do |word| %>
+      <li>
+        <%= link_to word.word_text, "/translation/glossary/#{word.word_slug}", class: "text-blue-700 underline" %>
+      </li>
+    <% end %>
+  </ul>
+</div>

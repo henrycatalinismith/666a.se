@@ -159,4 +159,9 @@ Rails.application.routes.draw do
   constraints CanAccessFlipperUI do
     mount Flipper::UI.app(Flipper) => "/flipper"
   end
+
+  namespace :translation do
+    get "/glossary", to: "glossary_words#index"
+    get "/glossary/:word_slug", to: "glossary_words#show"
+  end
 end
