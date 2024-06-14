@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_14_081912) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_14_082831) do
   create_table "flipper_features", force: :cascade do |t|
     t.string "key", null: false
     t.datetime "created_at", null: false
@@ -25,6 +25,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_14_081912) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["feature_key", "key", "value"], name: "index_flipper_gates_on_feature_key_and_key_and_value", unique: true
+  end
+
+  create_table "glossary_references", id: :string, default: -> { "ULID()" }, force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "translation_id"
+    t.text "source_text"
+    t.text "target_text"
+    t.index ["translation_id"], name: "index_glossary_references_on_translation_id"
   end
 
   create_table "glossary_translations", id: :string, default: -> { "ULID()" }, force: :cascade do |t|
@@ -210,6 +219,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_14_081912) do
     t.index ["day_id"], name: "index_work_environment_searches_on_day_id"
   end
 
+  add_foreign_key "glossary_references", "glossary_translations", column: "translation_id"
   add_foreign_key "glossary_translations", "glossary_words", column: "word_id"
   add_foreign_key "glossary_words", "glossary_words", column: "parent_id"
   add_foreign_key "labour_law_elements", "labour_law_revisions", column: "revision_id"
