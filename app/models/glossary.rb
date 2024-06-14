@@ -1,5 +1,5 @@
-module Translation
+module Glossary
   def self.table_name_prefix
-    "translation_"
+    "glossary_"
   end
 end
