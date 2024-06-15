@@ -1,6 +1,7 @@
 class LabourLaw::Element < ApplicationRecord
   belongs_to :revision
   has_many :translations, dependent: :destroy
+  has_many :sentences, dependent: :destroy, class_name: "Glossary::Sentence"
   validates :element_index, presence: true
   validates :element_text, presence: true
   validates :element_type, presence: true

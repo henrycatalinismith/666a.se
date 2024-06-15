@@ -150,5 +150,12 @@ RailsAdmin.config do |config|
         bindings[:abstract_model].model.name == "LabourLaw::Revision"
       end
     end
+
+    member :element_sentences do
+      link_icon do "fa fa-eye" end
+      visible do
+        bindings[:abstract_model].model.name == "LabourLaw::Element"
+      end
+    end
   end
 end

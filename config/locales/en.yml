@@ -255,6 +255,10 @@ en:
 
   admin:
     actions:
+      element_sentences:
+        breadcrumb: "Sentences"
+        title: "Sentences"
+        menu: "Sentences"
       growth:
         breadcrumb: "Growth"
         menu: "Growth"
@@ -264,6 +268,8 @@ en:
       retry_failed:
         menu: "Retry failed"
       revision_elements:
+        breadcrumb: "Elements"
+        title: "Elements"
         menu: "Elements"
       update_day:
         menu: "Update"
