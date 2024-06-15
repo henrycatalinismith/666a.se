@@ -1,0 +1,19 @@
+<table>
+  <thead>
+    <th>ID</th>
+    <th>Source Text</th>
+    <th>Target Text</th>
+  </thead>
+
+  <tbody>
+    <% @object.sentences.each do |sentence| %>
+      <tr>
+        <td>
+          <a href="<%= "/admin/glossary~sentence/#{sentence.id}" %>" >
+          <%= sentence.id %></td>
+        <td><%= sentence.source_text %></td>
+        <td><%= sentence.target_text %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
