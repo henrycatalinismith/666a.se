@@ -1,6 +1,6 @@
 require "openai"
 
-class Glossary::ImportLabourLawElementJob < ApplicationJob
+class LabourLaw::ElementSentencesJob < ApplicationJob
   queue_as :default
 
   def perform(id)
@@ -63,7 +63,7 @@ class Glossary::ImportLabourLawElementJob < ApplicationJob
     end
 
     sentence_pairs.each do |pair|
-      Glossary::Sentence.create!(
+      LabourLaw::Sentence.create!(
         element_id: element.id,
         source_text: pair[:source_text],
         target_text: pair[:target_text],
