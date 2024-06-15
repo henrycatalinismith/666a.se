@@ -23,7 +23,7 @@ class Glossary::ImportLabourLawElementJob < ApplicationJob
       The array must be provided in JSON format.
       Exclude sentences of the form "Lag (1994:579)" no matter what numbers are used.
       If a sentence is a list of items, provide each item as a separate sentence pair.
-      Preserve list item numbering and lettering.
+      Preserve list item numbering and lettering, so that if the input text is "Lista:\n\n1. Första punkten" and "List:\n\n1. First point", the output should be [{ "source_text": "Lista:", "target_text": "List:" }, { "source_text": "1. Första punkten", "target_text": "2. First point" }].
       Do not change the text in any way.
       Nest the array in an object with the key "sentence_pairs", like this:
 
