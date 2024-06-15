@@ -271,6 +271,8 @@ en:
         breadcrumb: "Elements"
         title: "Elements"
         menu: "Elements"
+      revision_sentences_job:
+        menu: "Generate Sentences"
       update_day:
         menu: "Update"
       update_week:
