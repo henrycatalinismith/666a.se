@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_15_062207) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_15_174314) do
   create_table "flipper_features", force: :cascade do |t|
     t.string "key", null: false
     t.datetime "created_at", null: false
@@ -25,47 +25,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_15_062207) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["feature_key", "key", "value"], name: "index_flipper_gates_on_feature_key_and_key_and_value", unique: true
-  end
-
-  create_table "glossary_references", id: :string, default: -> { "ULID()" }, force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "translation_id"
-    t.text "source_text"
-    t.text "target_text"
-    t.string "element_id"
-    t.index ["element_id"], name: "index_glossary_references_on_element_id"
-    t.index ["translation_id"], name: "index_glossary_references_on_translation_id"
-  end
-
-  create_table "glossary_sentences", id: :string, default: -> { "ULID()" }, force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "element_id"
-    t.text "source_text"
-    t.text "target_text"
-    t.index ["element_id"], name: "index_glossary_sentences_on_element_id"
-  end
-
-  create_table "glossary_translations", id: :string, default: -> { "ULID()" }, force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "word_id"
-    t.string "translation_text"
-    t.index ["translation_text"], name: "index_glossary_translations_on_translation_text"
-    t.index ["word_id"], name: "index_glossary_translations_on_word_id"
-  end
-
-  create_table "glossary_words", id: :string, default: -> { "ULID()" }, force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "parent_id"
-    t.string "word_text"
-    t.string "word_slug"
-    t.integer "word_type"
-    t.index ["parent_id"], name: "index_glossary_words_on_parent_id"
-    t.index ["word_slug"], name: "index_glossary_words_on_word_slug", unique: true
-    t.index ["word_text"], name: "index_glossary_words_on_word_text", unique: true
   end
 
   create_table "labour_law_documents", id: :string, default: -> { "ULID()" }, force: :cascade do |t|
@@ -108,6 +67,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_15_062207) do
     t.index ["document_id", "revision_code", "revision_status"], name: "idx_on_document_id_revision_code_revision_status_ea69cde4b7"
     t.index ["document_id"], name: "index_labour_law_revisions_on_document_id"
     t.index ["revision_code"], name: "index_labour_law_revisions_on_revision_code"
+  end
+
+  create_table "labour_law_sentences", id: :string, default: -> { "ULID()" }, force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "element_id"
+    t.text "source_text"
+    t.text "target_text"
+    t.index ["element_id"], name: "index_labour_law_sentences_on_element_id"
   end
 
   create_table "labour_law_translations", id: :string, default: -> { "ULID()" }, force: :cascade do |t|
@@ -230,13 +198,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_15_062207) do
     t.index ["day_id"], name: "index_work_environment_searches_on_day_id"
   end
 
-  add_foreign_key "glossary_references", "glossary_translations", column: "translation_id"
-  add_foreign_key "glossary_references", "labour_law_elements", column: "element_id"
-  add_foreign_key "glossary_sentences", "labour_law_elements", column: "element_id"
-  add_foreign_key "glossary_translations", "glossary_words", column: "word_id"
-  add_foreign_key "glossary_words", "glossary_words", column: "parent_id"
   add_foreign_key "labour_law_elements", "labour_law_revisions", column: "revision_id"
   add_foreign_key "labour_law_revisions", "labour_law_documents", column: "document_id"
+  add_foreign_key "labour_law_sentences", "labour_law_elements", column: "element_id"
   add_foreign_key "labour_law_translations", "labour_law_elements", column: "element_id"
   add_foreign_key "time_period_days", "time_period_weeks", column: "week_id"
   add_foreign_key "user_notifications", "user_subscriptions", column: "subscription_id"

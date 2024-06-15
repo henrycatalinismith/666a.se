@@ -1,4 +1,4 @@
-class Glossary::ImportLabourLawRevisionJob < ApplicationJob
+class LabourLaw::RevisionSentencesJob < ApplicationJob
   queue_as :default
 
   def perform(revision_id)
@@ -10,7 +10,7 @@ class Glossary::ImportLabourLawRevisionJob < ApplicationJob
       :document_heading,
     ])
 
-    already_imported = Glossary::Sentence
+    already_imported = LabourLaw::Sentence
       .where(element_id: elements.pluck(:id))
       .pluck(:element_id)
 
@@ -19,7 +19,10 @@ class Glossary::ImportLabourLawRevisionJob < ApplicationJob
     puts elements.count
 
     elements.each do |element|
-      Glossary::ImportLabourLawElementJob.perform_now(element.id)
+      translation = element.translations.first
+      next if translation.nil?
+      next if translation.missing?
+      LabourLaw::ElementSentencesJob.perform_now(element.id)
     end
   end
 end
