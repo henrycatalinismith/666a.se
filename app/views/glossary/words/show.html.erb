@@ -33,7 +33,7 @@
           <% translation.references.each do |reference| %>
             <% if reference.element.present? %>
               <h3>
-                <a class="text-blue-700 underline" href="<%= labour_law_element_path(reference.element.revision.document.document_slug, reference.element.revision.revision_code, reference.element.element_slug) %>">
+                <a class="text-blue-700 underline" href="<%= labour_law_element_path(reference.element.revision.document.document_slug, reference.element.revision.revision_code, section_heading(reference.element).element_slug) %>">
                   <%= section_title(reference.element) %>
                 </a>
               </h3>

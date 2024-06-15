@@ -12,4 +12,12 @@ module LabourLaw::ElementsHelper
       "Section #{element.element_section} of the Working Hours Act"
     end
   end
+
+  def section_heading(element)
+    if element.paragraph_text?
+      index = element.element_index
+      return element.revision.elements.section_heading.where("element_index < ?", index).order(:element_index).last
+    end
+    return element
+  end
 end
