@@ -164,14 +164,14 @@ RailsAdmin.config do |config|
       end
     end
 
-    member :revision_words_job do
+    member :revision_phrases_job do
       link_icon do "fa fa-wand-magic-sparkles" end
       visible do
         bindings[:abstract_model].model.name == "LabourLaw::Revision"
       end
       controller do
         proc do
-          LabourLaw::RevisionWordsJob.perform_later(@object.id)
+          LabourLaw::RevisionPhrasesJob.perform_later(@object.id)
           redirect_to back_or_index, notice: "job queued"
         end
       end
