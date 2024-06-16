@@ -164,6 +164,19 @@ RailsAdmin.config do |config|
       end
     end
 
+    member :revision_words_job do
+      link_icon do "fa fa-wand-magic-sparkles" end
+      visible do
+        bindings[:abstract_model].model.name == "LabourLaw::Revision"
+      end
+      controller do
+        proc do
+          LabourLaw::RevisionWordsJob.perform_later(@object.id)
+          redirect_to back_or_index, notice: "job queued"
+        end
+      end
+    end
+
     member :element_sentences do
       link_icon do "fa fa-eye" end
       visible do
