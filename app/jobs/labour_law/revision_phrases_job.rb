@@ -1,4 +1,4 @@
-class LabourLaw::RevisionWordsJob < ApplicationJob
+class LabourLaw::RevisionPhrasesJob < ApplicationJob
   queue_as :default
 
   def perform(revision_id)
@@ -15,7 +15,7 @@ class LabourLaw::RevisionWordsJob < ApplicationJob
     elements.each do |element|
       sentences = element.sentences
       sentences.each do |sentence|
-        LabourLaw::SentenceWordsJob.perform_now(sentence.id)
+        LabourLaw::SentencePhrasesJob.perform_now(sentence.id)
       end
     end
   end

@@ -273,8 +273,8 @@ en:
         menu: "Elements"
       revision_sentences_job:
         menu: "Generate Sentences"
-      revision_words_job:
-        menu: "Generate Words"
+      revision_phrases_job:
+        menu: "Generate Phrases"
       update_day:
         menu: "Update"
       update_week:
