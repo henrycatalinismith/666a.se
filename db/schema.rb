@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_15_174314) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_15_200834) do
   create_table "flipper_features", force: :cascade do |t|
     t.string "key", null: false
     t.datetime "created_at", null: false
@@ -87,6 +87,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_15_174314) do
     t.integer "translation_status"
     t.index ["element_id"], name: "index_labour_law_translations_on_element_id"
     t.index ["translation_locale"], name: "index_labour_law_translations_on_translation_locale"
+  end
+
+  create_table "labour_law_words", id: :string, default: -> { "ULID()" }, force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "sentence_id"
+    t.text "source_word"
+    t.text "target_word"
+    t.index ["sentence_id"], name: "index_labour_law_words_on_sentence_id"
   end
 
   create_table "posts", id: :string, default: -> { "ULID()" }, force: :cascade do |t|
@@ -202,6 +211,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_15_174314) do
   add_foreign_key "labour_law_revisions", "labour_law_documents", column: "document_id"
   add_foreign_key "labour_law_sentences", "labour_law_elements", column: "element_id"
   add_foreign_key "labour_law_translations", "labour_law_elements", column: "element_id"
+  add_foreign_key "labour_law_words", "labour_law_sentences", column: "sentence_id"
   add_foreign_key "time_period_days", "time_period_weeks", column: "week_id"
   add_foreign_key "user_notifications", "user_subscriptions", column: "subscription_id"
   add_foreign_key "user_notifications", "work_environment_documents", column: "document_id"
