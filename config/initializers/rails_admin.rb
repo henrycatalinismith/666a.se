@@ -144,6 +144,13 @@ RailsAdmin.config do |config|
       end
     end
 
+    member :element_translation_suggestions do
+      link_icon do "fa fa-wand-magic-sparkles" end
+      visible do
+        bindings[:abstract_model].model.name == "LabourLaw::Element"
+      end
+    end
+
     member :revision_elements do
       link_icon do "fa fa-eye" end
       visible do

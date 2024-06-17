@@ -1,0 +1,41 @@
+<blockquote>
+  <%= @object.element_text %>
+</blockquote>
+
+<%
+
+words = @object.element_text.split(" ")
+phrases2 = []
+
+length = words.length
+
+while length > 0
+  offset = 0
+  while offset + length <= words.length
+    phrase = words[offset, length].join(" ")
+    phrases = LabourLaw::Phrase.where("source_phrase LIKE ?", "%#{phrase}%")
+    if length > 1
+      phrases2 += phrases
+    end
+    offset += 1
+  end
+  length -= 1
+end
+
+phrases2.uniq!
+phrases2.uniq { |p| p.source_phrase }
+
+%>
+
+<table>
+  <% phrases2.each do |phrase| %>
+    <tr>
+      <td>
+        <a href="/admin/labour_law~phrase/<%= phrase.id %>">
+          <%= phrase.source_phrase %>
+        </a>
+      </td>
+      <td><%= phrase.target_phrase %></td>
+    </tr>
+  <% end %>
+</table>

@@ -275,6 +275,10 @@ en:
         menu: "Generate Sentences"
       revision_phrases_job:
         menu: "Generate Phrases"
+      element_translation_suggestions:
+        breadcrumb: "Translation suggestions"
+        menu: "Translation suggestions"
+        title: "Translation suggestions"
       update_day:
         menu: "Update"
       update_week:
