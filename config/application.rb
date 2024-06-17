@@ -19,7 +19,7 @@ require "action_cable/engine"
 Bundler.require(*Rails.groups)
 
 if ["development", "test"].include? ENV["RAILS_ENV"]
-  Dotenv::Railtie.load
+  Dotenv.load
 end
 
 module Sixa

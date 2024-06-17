@@ -27,7 +27,7 @@ gem "chartkick", "~> 5.0"
 gem "devise", "~> 4.9"
 gem "discordrb"
 gem "dockerfile-rails", ">= 1.5", group: :development
-gem "dotenv-rails", groups: %i[development test]
+gem "dotenv", groups: [:development, :test]
 gem "dry-schema"
 gem "flipper"
 gem "flipper-active_record", "~> 1.3"
