@@ -255,6 +255,10 @@ en:
 
   admin:
     actions:
+      element_next:
+        menu: "Next"
+      element_prev:
+        menu: "Prev"
       element_sentences:
         breadcrumb: "Sentences"
         title: "Sentences"
