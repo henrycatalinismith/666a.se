@@ -11,7 +11,7 @@ RailsAdmin.config do |config|
   config.authorize_with :cancancan
 
   config.model "LabourLaw::Element" do
-    field :element_text, :text
+    configure :element_text, :text
   end
 
   config.model "LabourLaw::Revision" do
@@ -140,6 +140,38 @@ RailsAdmin.config do |config|
             notify: false
           )
           redirect_to back_or_index, notice: "job queued"
+        end
+      end
+    end
+
+    member :element_prev do
+      link_icon do "fa fa-arrow-left" end
+      visible do
+        bindings[:abstract_model].model.name == "LabourLaw::Element"
+      end
+      controller do
+        proc do
+          if @object.prev.present?
+            redirect_to "/admin/labour_law~element/#{@object.prev.id}"
+          else
+            redirect_to back_or_index, notice: "no prev element"
+          end
+        end
+      end
+    end
+
+    member :element_next do
+      link_icon do "fa fa-arrow-right" end
+      visible do
+        bindings[:abstract_model].model.name == "LabourLaw::Element"
+      end
+      controller do
+        proc do
+          if @object.next.present?
+            redirect_to "/admin/labour_law~element/#{@object.next.id}"
+          else
+            redirect_to back_or_index, notice: "no next element"
+          end
         end
       end
     end
