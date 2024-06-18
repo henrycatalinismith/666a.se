@@ -22,23 +22,6 @@ class LabourLaw::TranslationSuggestionsJob < ApplicationJob
       length -= 1
     end
 
-    puts counts.sort { |a, b| b[1] <=> a[1] }.
-
-    # word_counts = {}
-    # word_phrases = {}
-
-    # words.each do |word|
-    #   phrases = LabourLaw::Phrase.where("source_phrase LIKE ?", "%#{word}%")
-    #   word_counts[word] = phrases.count
-    #   word_phrases[word] = phrases.map(&:target_phrase)
-    # end
-
-    # words.each do |word|
-    #   puts "Word: #{word}"
-    #   puts "Count: #{word_counts[word]}"
-    #   if word_counts[word] < 20
-    #     puts "Phrases: #{word_phrases[word]}"
-    #   end
-    # end
+    puts counts.sort { |a, b| b[1] <=> a[1] }.to_yaml
   end
 end
