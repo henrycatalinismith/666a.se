@@ -14,6 +14,10 @@ RailsAdmin.config do |config|
     configure :element_text, :text
   end
 
+  config.model "LabourLaw::Translation" do
+    configure :translation_text, :text
+  end
+
   config.model "LabourLaw::Revision" do
     edit do
       configure :elements do
