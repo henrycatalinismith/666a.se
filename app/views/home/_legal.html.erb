@@ -20,74 +20,24 @@
       <dl
         class="grid max-w-xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-2 lg:gap-y-16 mb-8"
       >
-        <div class="relative pl-16">
-          <dt class="text-base font-semibold leading-7 text-gray-900">
-            <div
-              class="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-600"
-            >
-              <i class="fa-solid fa-building text-white text-xl"></i>
-            </div>
-            <a href="/labour-law/work-environment-act/2023:349" class="text-indigo-700 underline">
-              The Work Environment Act
-            </a>
-          </dt>
-          <dd class="mt-2 text-base leading-7 text-gray-600">
-            Sweden's Work Environment Act puts influence in the hands of workers even before the formation of a union.
-          </dd>
-        </div>
 
-        <div class="relative pl-16">
-          <dt class="text-base font-semibold leading-7 text-gray-900">
-            <div
-              class="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-600"
-            >
-              <i class="fa-solid fa-scale-balanced text-white text-xl"></i>
-            </div>
-            <a href="/labour-law/codetermination-act/2021:1114"" class="text-indigo-700 underline">
-              The Co-Determination Act
-            </a>
-          </dt>
-          <dd class="mt-2 text-base leading-7 text-gray-600">
-            The Co-Determination Act is the basis for the Swedish model of industrial democracy.
-            It creates legal protections and obligations for unions and employers.
-          </dd>
-        </div>
-
-        <div class="relative pl-16">
-          <dt class="text-base font-semibold leading-7 text-gray-900">
-            <div
-              class="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-600"
-            >
-              <i class="fa-solid fa-umbrella text-white text-xl"></i>
-            </div>
-            <a href="/labour-law/employment-protection-act/2022:836" class="text-indigo-700 underline">
-              The Employment Protection Act
-            </a>
-          </dt>
-          <dd class="mt-2 text-base leading-7 text-gray-600">
-            The Swedish Employment Protection Act provides strong job security
-            by limiting employers' ability to terminate employment contracts
-            without just cause.
-          </dd>
-        </div>
-
-        <div class="relative pl-16">
-          <dt class="text-base font-semibold leading-7 text-gray-900">
-            <div
-              class="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-600"
-            >
-              <i class="fa-solid fa-clock text-white text-xl"></i>
-            </div>
-            <a href="/labour-law/working-hours-act/2013:611" class="text-indigo-700 underline">
-              The Working Hours Act
-            </a>
-          </dt>
-          <dd class="mt-2 text-base leading-7 text-gray-600">
-            The Swedish Working Hours Act emphasizes a flexible approach,
-            allowing employees to have a say in their work schedules and
-            promoting a better work-life balance.
-          </dd>
-        </div>
+        <% @labour_law_documents.each do |document| %>
+          <div class="relative pl-16">
+            <dt class="text-base font-semibold leading-7 text-gray-900">
+              <div
+                class="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-600"
+              >
+                <i class="fa-solid <%= document.document_icon %> text-white text-xl"></i>
+              </div>
+              <a href="/labour-law/work-environment-act/2023:349" class="text-indigo-700 underline">
+                <%= document.document_name %>
+              </a>
+            </dt>
+            <dd class="mt-2 text-base leading-7 text-gray-600">
+              <%= document.document_pitch %>
+            </dd>
+          </div>
+        <% end %>
 
       </dl>
     </div>
