@@ -1,26 +1,12 @@
 <tr>
   <td class="<%= both_sides %> <%= left_classes %>">
-    <% if @document.document_code == "aml" and @revision.revision_code == "2014:659" then %>
-      Source: <a class="text-blue-700 underline" href="https://lagen.nu/aml/konsolidering/2014:659">lagen.nu</a>
-    <% elsif @document.document_code == "aml" and @revision.revision_code == "2023:349" then %>
-      Source: <a class="text-blue-700 underline" href="https://www.riksdagen.se/sv/dokument-och-lagar/dokument/svensk-forfattningssamling/arbetsmiljolag-19771160_sfs-1977-1160/">riksdagen.se</a>
-    <% elsif @document.document_code == "mbl" then %>
-      Source: <a class="text-blue-700 underline" href="https://www.riksdagen.se/sv/dokument-och-lagar/dokument/svensk-forfattningssamling/lag-1976580-om-medbestammande-i-arbetslivet_sfs-1976-580/">riksdagen.se</a>
-    <% elsif @document.document_code == "las" then %>
-      Source: <a class="text-blue-700 underline" href="https://www.riksdagen.se/sv/dokument-och-lagar/dokument/svensk-forfattningssamling/lag-198280-om-anstallningsskydd_sfs-1982-80/">riksdagen.se</a>
-    <% elsif @document.document_code == "atl" then %>
-      Source: <a class="text-blue-700 underline" href="https://lagen.nu/atl/konsolidering/2013:611">lagen.nu</a>
+    <% if @revision.revision_source.present? %>
+      Source:
+      <a class="text-blue-700 underline" href="<%= @revision.revision_source %>">
+        <%= Addressable::URI.parse(@revision.revision_source).host %>
+      </a>
     <% end %>
   </td>
   <td class="<%= both_sides %> <%= right_classes %>">
-    <% if @document.document_code == "aml" and @revision.revision_code == "2014:659" then %>
-      Source: <a class="text-blue-700 underline" href="https://www.government.se/government-policy/labour-law-and-work-environment/19771160-work-environment-act-arbetsmiljolagen/">government.se</a>
-    <% elsif @document.document_code == "mbl" then %>
-      Source: <a class="text-blue-700 underline" href="https://www.government.se/government-policy/labour-law-and-work-environment/1976580-employment-co-determination-in-the-workplace-act-lag-om-medbestammande-i-arbetslivet/">government.se</a>
-    <% elsif @document.document_code == "las" then %>
-      Source: <a class="text-blue-700 underline" href="https://www.government.se/government-policy/labour-law-and-work-environment/198280-employment-protection-act-lag-om-anstallningsskydd/">government.se</a>
-    <% elsif @document.document_code == "atl" then %>
-      Source: <a class="text-blue-700 underline" href="https://www.government.se/government-policy/labour-law-and-work-environment/1982673-working-hours-act-arbetstidslagen/">government.se</a>
-    <% end %>
   </td>
 </tr>
