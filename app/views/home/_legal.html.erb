@@ -29,7 +29,7 @@
               >
                 <i class="fa-solid <%= document.document_icon %> text-white text-xl"></i>
               </div>
-              <a href="/labour-law/work-environment-act/2023:349" class="text-indigo-700 underline">
+              <a href="<%= labour_law_revision_path(document.document_slug, document.published_revision.revision_code) %>" class="text-indigo-700 underline">
                 <%= document.document_name %>
               </a>
             </dt>
