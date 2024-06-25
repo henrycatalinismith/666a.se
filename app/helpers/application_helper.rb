@@ -17,6 +17,10 @@ module ApplicationHelper
   def posts
     [
       {
+        text: "All laws now up to date!",
+        href: "/news/all-laws-now-up-to-date"
+      },
+      {
         text: "Let's update the English translation of the Work Environment Act",
         href: "/news/lets-update-the-english-translation-of-the-work-environment-act"
       },
