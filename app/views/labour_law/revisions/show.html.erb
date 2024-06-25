@@ -9,7 +9,7 @@
 
   <%= render partial: "labour_law/h1", locals: {
     title: @revision.revision_name,
-    subtitle: legal_document_subtitle(@document, @revision),
+    subtitle: "Version #{@revision.revision_code}, English translation"
   } %>
 
   <%= render partial: "labour_law/revisions/notice" %>
