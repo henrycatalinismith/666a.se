@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_25_194159) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_26_172353) do
   create_table "flipper_features", force: :cascade do |t|
     t.string "key", null: false
     t.datetime "created_at", null: false
@@ -35,8 +35,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_25_194159) do
     t.string "document_slug"
     t.text "document_pitch"
     t.string "document_icon"
+    t.integer "document_status", default: 0
     t.index ["document_code"], name: "index_labour_law_documents_on_document_code", unique: true
     t.index ["document_slug"], name: "index_labour_law_documents_on_document_slug", unique: true
+    t.index ["document_status"], name: "index_labour_law_documents_on_document_status"
   end
 
   create_table "labour_law_elements", id: :string, default: -> { "ULID()" }, force: :cascade do |t|
@@ -73,6 +75,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_25_194159) do
     t.integer "revision_status"
     t.text "revision_notice"
     t.string "parent_id"
+    t.string "revision_source"
     t.index "\"element_index\"", name: "index_legal_revisions_on_element_index"
     t.index "\"element_locale\"", name: "index_legal_revisions_on_element_locale"
     t.index ["document_id", "revision_code", "revision_status"], name: "idx_on_document_id_revision_code_revision_status_ea69cde4b7"
