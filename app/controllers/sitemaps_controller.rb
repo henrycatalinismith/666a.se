@@ -1,6 +1,6 @@
 class SitemapsController < ApplicationController
   def show
-    @legal_documents = LabourLaw::Document.all
+    @legal_documents = LabourLaw::Document.published
 
     respond_to do |format|
       format.xml

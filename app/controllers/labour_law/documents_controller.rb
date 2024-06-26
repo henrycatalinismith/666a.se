@@ -3,7 +3,7 @@ class LabourLaw::DocumentsController < ApplicationController
 
   def index
     @page_title = "English Translations of Swedish Labour Law"
-    @documents = LabourLaw::Document.all
+    @documents = LabourLaw::Document.published
   end
 
   def show
