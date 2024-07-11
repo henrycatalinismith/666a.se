@@ -6,6 +6,13 @@ class NotificationMailer < ApplicationMailer
     @user = @notification.subscription.account
     @url = "https://www.av.se/om-oss/diarium-och-allmanna-handlingar/bestall-handlingar/Case/?id=" + @document.case_code
     @unsubscribe_url = "https://666a.se/unsubscribe/#{@notification.subscription.id}"
+
+    headers = {
+      "Precedence": :bulk,
+      "X-Auto-Response-Suppress": :OOF,
+      "Auto-Submitted": :"auto-generated"
+    }
+
     I18n.with_locale(@user.locale) do
       mail(
         to: @user.email,
