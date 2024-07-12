@@ -2,11 +2,18 @@ ar:
 
   home:
     blurb: "إشعارات بريد إلكتروني تلقائية من الهيئة العامة لبيئة العمل."
-    pitch: "توقف عن القلق حول متى آخر مرة تذكرت فيها أن تتحقق. ابدأ في الاستماع إلى أخبار الوثائق الجديدة بمجرد تقديمها."
+    pitch: >-
+      توقف عن القلق حول متى آخر مرة تذكرت فيها أن تتحقق. ابدأ في الاستماع إلى أخبار الوثائق الجديدة بمجرد تقديمها.
     login: "تسجيل الدخول"
     register: "التسجيل"
     dashboard: "لوحة التحكم"
-
+    accessibility: ""
+    privacy: ""
+    terms: ""
+    conduct: ""
+    license: ""
+    security: ""
+  
   quote:
     text: >
       تمثل 666a رؤية القرن الواحد والعشرين لمبدأ الشفافية السويدية (Offentlighetsprincipen) حيث لا تكون المعلومات متاحة فقط، بل يمكن الاشتراك فيها وهي متعددة اللغات.
@@ -18,7 +25,7 @@ ar:
   target_audience:
     title: مصممة لأشخاص مثلك
     text: 666a هو نتاج تجربة العالم الحقيقي على الجبهة الأمامية لحركة العمل السويدية.
-
+  
   target_audience_member:
     safety_officer:
       title: ضابط السلامة
@@ -42,6 +49,8 @@ ar:
   registration:
     title: "تسجيل الدخول"
     button: "تسجيل الدخول"
+    company_code_search: ""
+    workplace_code_search: ""
 
   login:
     title: "تسجيل الدخول"
@@ -51,33 +60,52 @@ ar:
     title: "لوحة التحكم"
     alerts: "تنبيهات"
     follow: "إضافة"
+    company: ""
+    workplace: ""
+    unfollow: ""
+    account: ""
+    name: ""
+    change_name: ""
+    email: ""
+    change_email: ""
+    language: ""
+    change_language: ""
+    password: ""
+    change_password: ""
+    logout: ""
+
+  follow:
+    title: ""
+    company_code_text: |
+    workplace_code_text: |
+    submit: ""
 
   notification_email:
     subject: "تنبيه المستند"
-    title: >
-      تنبيه المستند: %{document_code}
-    greeting:
+    title: "تنبيه المستند: %{document_code}\n"
+    greeting: >-
       مرحبًا %{name}
     subscription: >
       أنت مشترك في تحديثات البريد الإلكتروني للملفات التي تخص الهيئة العامة لبيئة العمل حول %{target}، ورصدنا ملفًا جديدًا اليوم.
     link_preamble: >
       يمكنك طلب نسخة مجانية من الوثيقة من هيئة بيئة العمل إذا بدا لك أنها شيء تحتاج إلى قراءته.
     unsubscribe:
-      إذا لم تعد بحاجة إلى هذه الإشعارات، يمكنك <a href="%{url}">إلغاء الاشتراك</a>.
-
-  locales:
-    en: الإنجليزية
-    sv: السويدية
-    ar: العربية
+      "إذا لم تعد بحاجة إلى هذه الإشعارات، يمكنك <a href=\"%{url}\">إلغاء الاشتراك</a>."
 
   errors:
     messages:
       not_saved:
-        one: "حدثت خطأ واحد ومنع هذا %{resource} من الحفظ:"
-        other: "%{count} أخطاء وقعت ومنعت هذا %{resource} من الحفظ:"
+        zero: ""
+        one: ""
+        two: ""
+        few: ""
+        many: ""
+        other: ""
 
   helpers:
     label:
+      subscription:
+        company_code: ""
       user:
         name: "الاسم"
         locale: "اللغة"
@@ -87,53 +115,15 @@ ar:
         password_confirmation: "تأكيد كلمة المرور"
         remember_me: "تذكرني"
 
+  locales:
+    en: الإنجليزية
+    sv: السويدية
+    ar: العربية
+
   activerecord:
     errors:
       messages:
-        empty: "لا يمكن ان تكون فارغة"
-        blank: "لا يمكن ان تكون فارغة"
         invalid_company_code: "يجب أن يكون بصيغة ستة أرقام، ثم علامة الواصلة (-)، ثم أربعة أرقام، مثل 123456-7890"
-
-
-  datetime:
-    distance_in_words:
-      half_a_minute: "نصف دقيقة"
-      less_than_x_seconds:
-        one:   "أقل من ثانية"
-        other: "ثواني %{count}أقل من "
-      x_seconds:
-        one:   "ثانية"
-        other: "%{count}ثواني "
-      less_than_x_minutes:
-        one:   "أقل من دقيقة"
-        other: "دقائق%{count}أقل من "
-      x_minutes:
-        one:   "دقيقة"
-        other: "%{count} دقائق"
-      about_x_hours:
-        one:   "حوالي ساعة"
-        other: "ساعات %{count}حوالي "
-      x_hours:
-        one:   "%{count} ساعة"
-        other: "%{count} ساعات"
-      x_days:
-        one:   "يوم"
-        other: "%{count} أيام"
-      about_x_months:
-        one:   "حوالي شهر"
-        other: "أشهر  %{count} حوالي"
-      x_months:
-        one:   "شهر"
-        other: "%{count} أشهر"
-      about_x_years:
-        one:   "حوالي سنة"
-        other: "سنوات  %{count}حوالي "
-      over_x_years:
-        one:   "اكثر من سنة"
-        other: "سنوات  %{count}أكثر من "
-      almost_x_years:
-        one:   "تقريبا سنة"
-        other: "سنوات %{count} نقريبا"
 
   document_type:
     "Anbud (vinnande)": "عرض (فائز)"
@@ -174,8 +164,8 @@ ar:
     "Bekräftelse/Svar/Uppmaning till uppgiftslämnare": "تأكيد/رد/تحفيز لمزود المعلومات"
     "Beslut": "قرار"
     "Beslut om att avvisa skyddsombudets begäran": "قرار رفض طلب ممثل العمال للأمان"
-    "Beslut om att inte meddela oمنعمنعمفرضةعلىالعممل الفوري": "قرار عدم إصدار منع فوري"
-    "Beslut om ärende avslutas (avslutsbrev)": "قرار إغلاق القضية (رسالة إغلاق)"
+    "Beslut om att inte meddela omedelbart förbud": ""
+    "Beslut om att ärende avslutas (avslutsbrev)": ""
     "Beslut om avbruten upphandling": "قرار إلغاء العطاء"
     "Beslut om avskrivning av skyddsombudets begäran": "قرار إلغاء طلب ممثل العمال للأمان"
     "Beslut om avslag av skyddsombudets begäran": "قرار رفض طلب ممثل العمال للأمان"
@@ -190,7 +180,7 @@ ar:
     "Beslut om upphävande av tillfälligt förbud": "قرار برفع المنع المؤقت"
     "Beslut om ändring": "قرار بالتعديل"
     "Beslut rörande begäran om förlängd svarstid": "قرار بشأن طلب تمديد الوقت للاستجابة"
-    "Dokumenterad bedömning inklusive brister ومتطلبات": "تقدير موثق بما في ذلك العيوب والمتطلبات"
+    "Dokumenterad bedömning inklusive brister och krav": ""
     "Dom": "حكم"
     "Dom/beslut": "حكم/قرار"
     "Faktaunderlag": "أساس الحقائق"
@@ -216,7 +206,7 @@ ar:
     "Komplettering": "تكميل"
     "Konsekvensutredning/beslut om att ingen behövs": "تقييم التأثير/قرار بعدم الحاجة"
     "Kvittens": "إيصال"
-    "Meddelande om att Arbetsmiljöverkets godtagit invändningarna": "إشعار بقبول الاعتراضات من جهاز بيئة العمل السويدي"
+    "Meddelande om att Arbetsmiljöverket godtagit invändningarna": ""
     "Meddelande om skyddsombudsstopp": "إشعار بإيقاف ممثل العمال للأمان"
     "Missiv till domstol": "رسالة إلى المحكمة"
     "Mötesanteckningar": "محضر الاجتماع"
@@ -254,5 +244,40 @@ ar:
     "Övrig korrespondens (frågor/svar/synpunkter/info)": "مراسلة أخرى (أسئلة/إجابات/ملاحظات/معلومات)"
     "Övriga handlingar - Avgiftsutdömande": "وثائق أخرى - فرض الرسوم"
     "Övriga handlingar - Överklagande": "وثائق أخرى - استئناف"
-    "Övriga handlingar administrera اقتناء": "وثائق أخرى - إدارة الاقتناء"
+    "Övriga handlingar administrera anskaffning": ""
     "Övriga handlingar inspektion": "وثائق أخرى - تفتيش"
+
+  admin:
+    actions:
+      element_next:
+        menu: ""
+      element_prev:
+        menu: ""
+      element_sentences:
+        breadcrumb: ""
+        title: ""
+        menu: ""
+      growth:
+        breadcrumb: ""
+        menu: ""
+        title: ""
+      send_email:
+        menu: ""
+      retry_failed:
+        menu: ""
+      revision_elements:
+        breadcrumb: ""
+        title: ""
+        menu: ""
+      revision_sentences_job:
+        menu: ""
+      revision_phrases_job:
+        menu: ""
+      element_translation_suggestions:
+        breadcrumb: ""
+        menu: ""
+        title: ""
+      update_day:
+        menu: ""
+      update_week:
+        menu: ""
