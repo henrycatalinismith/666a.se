@@ -2,18 +2,21 @@ sv:
 
   home:
     blurb: "Notiser om arbetsmiljön i mejlen"
-    pitch: "Ta del av offentliga handlingar hos Arbetsmiljöverket så snart de publicerats."
+    pitch: >-
+      Ta del av offentliga handlingar hos Arbetsmiljöverket så snart de publicerats.
     login: "Logga in"
     register: "Kom igång"
     dashboard: "Startsida"
     accessibility: Tillgänglighetsutlåtande
     privacy: Integritetspolicy
     terms: Användarvillkor
+    conduct: Uppförandekod
+    license: Licens
+    security: Säkerhetspolicy
   
   quote:
     text: >
-      666a är en modernisering av offentlighetsprincipen som gör viktig
-      information mer tillgänglig, anpassningsbar och på fler språk
+      666a är en modernisering av offentlighetsprincipen som gör viktig information mer tillgänglig, anpassningsbar och på fler språk
     image: Bild på Henry
     name: Henry Catalini Smith
     role: Skapare av 666a
@@ -21,10 +24,8 @@ sv:
 
   target_audience:
     title: Designad för dig
-    text: >
-      666a är en produkt som vänder sig till dig som vill få bättre insikt i
-      organisationer och företags rådande arbetsmiljö.
-      
+    text: "666a är en produkt som vänder sig till dig som vill få bättre insikt i organisationer och företags rådande arbetsmiljö.\n"
+  
   target_audience_member:
     safety_officer:
       title: Skyddsombud
@@ -34,13 +35,13 @@ sv:
       text: Uppdatera dina medlemmar med de senaste nyheterna.
     employee:
       title: Anställd
-      text: Lär dig mer om hur din arbetsplats fungerar och förändras. 
+      text: Lär dig mer om hur din arbetsplats fungerar och förändras.
     ombudsman:
       title: Ombudsman
       text: Stöd lokala fackliga organisatörer genom att hålla dig uppdaterad.
     organizer:
       title: Organisatör
-      text: Håll koll på arbetsmiljöfrågor som påverkar dina kampanjer. 
+      text: Håll koll på arbetsmiljöfrågor som påverkar dina kampanjer.
     journalist:
       title: Journalist
       text: Var först med att få veta hur arbetsplatserna utvecklas och förändras.
@@ -54,7 +55,7 @@ sv:
   login:
     title: "Logga In"
     button: "Logga In"
-  
+
   dashboard:
     title: "Startsidan"
     alerts: "Notiser"
@@ -88,25 +89,26 @@ sv:
 
   notification_email:
     subject: "⛧ Dokumentmeddelande"
-    title: >
-      Ny Dokument: %{document_code}
+    title: "Ny Dokument: %{document_code}\n"
     greeting: >
       Hej %{name},
     subscription: >
-      Du prenumererar på e-postaviseringar för allmänna handlingar hos
-      arbetsmiljöverket avseende %{target}, och vi upptäckte en ny dokument idag.
+      Du prenumererar på e-postaviseringar för allmänna handlingar hos arbetsmiljöverket avseende %{target}, och vi upptäckte en ny dokument idag.
     link_preamble: >
       Du kan beställa en gratis kopia av dokumentet från Arbetsmiljöverket om det verkar som något du behöver läsa.
     unsubscribe:
-      Om du inte längre vill ha dessa aviseringar kan du <a href="%{url}">avsluta prenumerationen</a>.
+      "Om du inte längre vill ha dessa aviseringar kan du <a href=\"%{url}\">avsluta prenumerationen</a>."
 
-  locales:
-    en: Engelska
-    sv: Svenska
-    ar: Arabiska
+  errors:
+    messages:
+      not_saved:
+        one: ""
+        other: ""
 
   helpers:
-    label: 
+    label:
+      subscription:
+        company_code: ""
       user:
         name: "Namn"
         locale: "Språk"
@@ -116,70 +118,169 @@ sv:
         password_confirmation: "Bekräfta lösenord"
         remember_me: "Kom ihåg mig"
 
-  activerecord:
-    attributes:
-      user:
-        name: "Namn"
-        locale: "Språk"
-        company_code: "Organisationsnummer"
-      work_environment/subscription:
-        company_code: "Organisationsnummer / CFAR"
+  locales:
+    en: Engelska
+    sv: Svenska
+    ar: Arabiska
 
+  activerecord:
     errors:
       messages:
-        empty: "får ej vara tom"
-        blank: "måste anges"
         invalid_company_code: "måste vara sex siffror, följt av ett bindestreck, och sedan fyra siffror, t.ex. 123456-7890"
 
-  datetime:
-    distance_in_words:
-      half_a_minute: "en halv minut"
-      less_than_x_seconds:
-        one:   "mindre än en sekund"
-        other: "mindre än %{count} sekunder"
-      x_seconds:
-        one:   "en sekund"
-        other: "%{count} sekunder"
-      less_than_x_minutes:
-        one:   "mindre än en minut"
-        other: "mindre än %{count} minuter"
-      x_minutes:
-        one:   "en minut"
-        other: "%{count} minuter"
-      about_x_hours:
-        one:   "ungefär en timme"
-        other: "ungefär %{count} timmar"
-      x_hours:
-        one:   "1 timme"
-        other: "%{count} timmar"
-      x_days:
-        one:   "en dag"
-        other: "%{count} dagar"
-      about_x_months:
-        one:   "ungefär en månad"
-        other: "ungefär %{count} månader"
-      x_months:
-        one:   "en månad"
-        other: "%{count} månader"
-      about_x_years:
-        one:   "ungefär ett år"
-        other: "ungefär %{count} år"
-      over_x_years:
-        one:   "mer än ett år"
-        other: "mer än %{count} år"
-      almost_x_years:
-        one:   "nästan 1 år"
-        other: "nästan %{count} år"
+  document_type:
+    "Anbud (vinnande)": ""
+    "Anbud (övriga)": ""
+    "Anbudsförfrågan/offertförfrågan": ""
+    "Anmälan": ""
+    "Anmälan av byggarbetsplats": ""
+    "Anmälan om dödsfall": ""
+    "Anmälan om miljöfarlig verksamhet (Kännedomskopia)": ""
+    "Anmälan om misstänkt missförhållande på arbetsplats": ""
+    "Anmälan om olycka": ""
+    "Anmälan om tillbud": ""
+    "Anmälan om uppställning av mobilt krossverk": ""
+    "Anmälan om utstationering": ""
+    "Anmälan till kommissionen": ""
+    "Anmälan, asbest": ""
+    "Anmälan, rapport från medicinsk kontroll": ""
+    "Anmälan, rapport från yrkeshygienisk mätning": ""
+    "Anmälan, smittämnen": ""
+    "Anmälan,Säkerhetsrapport/Tillsynsprogram från miljöfarlig verksamhet/SEVESO": ""
+    "Annons": ""
+    "Anskaffningsbeslut": ""
+    "Ansökan": ""
+    "Ansökan om att inkassera avgift": ""
+    "Ansökan om påförande av avgift": ""
+    "Ansökan om vitesutdömande": ""
+    "Arbetsmiljöverkets författningssamling": ""
+    "Avgiftsföreläggande": ""
+    "Avtal": ""
+    "Begäran från skyddsombud om ingripande": ""
+    "Begäran om avtalsjustering": ""
+    "Begäran om förlängd svarstid": ""
+    "Begäran om kompletterande uppgifter": ""
+    "Begäran om komplettering": ""
+    "Begäran om yttrande": ""
+    "Begäran/Förfrågan om uppgifter/synpunkter": ""
+    "Behovsanalys/marknadsanalys": ""
+    "Bekräftelse/Svar/Uppmaning till uppgiftslämnare": ""
+    "Beslut": ""
+    "Beslut om att avvisa skyddsombudets begäran": ""
+    "Beslut om att inte meddela omedelbart förbud": ""
+    "Beslut om att ärende avslutas (avslutsbrev)": ""
+    "Beslut om avbruten upphandling": ""
+    "Beslut om avskrivning av skyddsombudets begäran": ""
+    "Beslut om avslag av skyddsombudets begäran": ""
+    "Beslut om avvisning": ""
+    "Beslut om förbud med vite": ""
+    "Beslut om förbud utan vite": ""
+    "Beslut om föreläggande med vite": ""
+    "Beslut om föreläggande utan vite": ""
+    "Beslut om prövningstillstånd": ""
+    "Beslut om slutligt omedelbart förbud": ""
+    "Beslut om tillfälligt omedelbart förbud": ""
+    "Beslut om upphävande av tillfälligt förbud": ""
+    "Beslut om ändring": ""
+    "Beslut rörande begäran om förlängd svarstid": ""
+    "Dokumenterad bedömning inklusive brister och krav": ""
+    "Dom": ""
+    "Dom/beslut": ""
+    "Faktaunderlag": ""
+    "Frågor från anbudsgivare och information till anbudsgivare": ""
+    "Föranmälan": ""
+    "Föreskriftsförslag Externt": ""
+    "Föreskriftsförslag Internt": ""
+    "Förfrågan/Information om inträffad arbetsolycka": ""
+    "Förlängd svarstid - Begäran/beslut": ""
+    "Förlängning av avtal": ""
+    "Förrättningsprotokoll": ""
+    "Förstudierapport": ""
+    "Förändring av avtal (justering eller tillägg)": ""
+    "Inbjudan att lämna intresseanmälan": ""
+    "Information om att ärende avslutas": ""
+    "Information ur e-skada": ""
+    "Information ur RAPEX/ICSMS": ""
+    "Inspektionsmeddelande": ""
+    "Intresseanmälan": ""
+    "Intyg återkommande besiktning": ""
+    "Kallelse": ""
+    "Kompletterande uppgifter": ""
+    "Komplettering": ""
+    "Konsekvensutredning/beslut om att ingen behövs": ""
+    "Kvittens": ""
+    "Meddelande om att Arbetsmiljöverket godtagit invändningarna": ""
+    "Meddelande om skyddsombudsstopp": ""
+    "Missiv till domstol": ""
+    "Mötesanteckningar": ""
+    "Notifiering": ""
+    "Omprövningsrapport": ""
+    "Parallelluppställning": ""
+    "Påminnelse": ""
+    "Rapport": ""
+    "Rapport - utredning, olycksfall, tillbud": ""
+    "Registrerat besök": ""
+    "Sammanställning av inkomna externa remissvar": ""
+    "Skyddsombudets återkallande av begäran": ""
+    "Svar på avgiftsföreläggande": ""
+    "Svar på kravskrivelse": ""
+    "Svar/synpunkter på föreskriftsförslag Externt": ""
+    "Svar/synpunkter på föreskriftsförslag Internt": ""
+    "Tilldelningsbeslut": ""
+    "Tillsynsmeddelande": ""
+    "Tips från annan myndighet om misstänkt missförhållande på arbetsplats": ""
+    "Tips om misstänkt missförhållande på arbetsplats": ""
+    "Tjänsteanteckning": ""
+    "Trycklov": ""
+    "Underrättelse": ""
+    "Underrättelse om föreläggande/förbud": ""
+    "Uppdragsdirektiv/plan": ""
+    "Uppföljning av krav": ""
+    "Uppgifter/synpunkter": ""
+    "Upphandlingsprotokoll (utvärdering)": ""
+    "Uppsägning av avtal": ""
+    "Vidarebefordran till annan aktör": ""
+    "Yttrande": ""
+    "Återtagande av ansökan": ""
+    "Öppningsprotokoll": ""
+    "Överklagande": ""
+    "Övrig korrespondens (frågor/svar/synpunkter/info)": ""
+    "Övriga handlingar - Avgiftsutdömande": ""
+    "Övriga handlingar - Överklagande": ""
+    "Övriga handlingar administrera anskaffning": ""
+    "Övriga handlingar inspektion": ""
 
-  devise:
-    failure:
-      invalid: Ogiltigt e-post eller lösenord.
-    registrations:
-      user:
-        signed_up: ""
-    sessions:
-      already_signed_out: Utloggad framgångsrikt.
-      new:
-        sign_in: Logga in
-      signed_in: Inloggad med framgång.
-      signed_out: Utloggad framgångsrikt.
+  admin:
+    actions:
+      element_next:
+        menu: ""
+      element_prev:
+        menu: ""
+      element_sentences:
+        breadcrumb: ""
+        title: ""
+        menu: ""
+      growth:
+        breadcrumb: ""
+        menu: ""
+        title: ""
+      send_email:
+        menu: ""
+      retry_failed:
+        menu: ""
+      revision_elements:
+        breadcrumb: ""
+        title: ""
+        menu: ""
+      revision_sentences_job:
+        menu: ""
+      revision_phrases_job:
+        menu: ""
+      element_translation_suggestions:
+        breadcrumb: ""
+        menu: ""
+        title: ""
+      update_day:
+        menu: ""
+      update_week:
+        menu: ""
