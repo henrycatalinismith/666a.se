@@ -50,3 +50,4 @@ gem "sassc"
 gem "cancancan"
 
 gem "ruby-openai", "~> 7.1"
+gem "foreman"
