@@ -1,13 +1,15 @@
-# frozen_string_literal: true
-
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "3.2.2"
-gem "puma", "~> 5.0"
-gem "rails", "7.1.3.2"
+
+gem "rails", github: "rails/rails", branch: "main", ref: "3e2834604bbdfd6c14bea210d9f9adf2a9132902"
+gem "sqlite3", ">= 2.1"
+
+gem "solid_cache"
+gem "solid_queue"
+gem "puma", ">= 5.0"
 gem "sprockets-rails"
-gem "sqlite3", "~> 1.4"
 gem "tailwindcss-rails"
 gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
 
@@ -22,7 +24,6 @@ group :development, :test do
   gem "webmock"
 end
 
-gem "actionmailer", "~> 7.0"
 gem "chartkick", "~> 5.0"
 gem "devise", "~> 4.9"
 gem "discordrb"
@@ -34,7 +35,6 @@ gem "flipper-active_record", "~> 1.3"
 gem "flipper-ui", "~> 1.3"
 gem "front_matter_parser"
 gem "importmap-rails", "~> 1.2"
-gem "litestack", "~> 0.3.0"
 gem "lookbook"
 gem "redcarpet", "~> 3.6"
 gem "rufus-scheduler", "~> 3.9"
