@@ -11,18 +11,20 @@
 # and losing the page cache
 # 
 default: &default
-  adapter: litedb
+  adapter: sqlite3
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   idle_timeout: 0
-  database: <%= Litesupport.root.join("data.sqlite3") %>
   extensions:
     - sqlite_ulid
 
 development:
   <<: *default
+  database: db/development/data.sqlite3
 
 test:
   <<: *default
+  database: db/test/data.sqlite3
 
 production:
   <<: *default
+  database: db/production/data.sqlite3
