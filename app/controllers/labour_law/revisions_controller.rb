@@ -40,11 +40,7 @@ class LabourLaw::RevisionsController < ApplicationController
       @page_title = "The Swedish Working Hours Act"
     end
 
-    elements = @revision.elements.index_order
-
-    left = elements.map { |e| e.translate("sv") }
-    right = elements.map { |e| e.translate("en") }
-    @elements = left.zip(right)
+    @elements = @revision.elements.index_order
 
     renderer = LabourLawRender.new()
     @redcarpet = Redcarpet::Markdown.new(renderer, tables: true)

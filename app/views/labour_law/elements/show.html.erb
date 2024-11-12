@@ -5,7 +5,7 @@
   <% end %>
   <meta
     property="og:description"
-    content="<%= @elements.map { |l,r| r }.filter {  |e| e.element_type === "md" }.map(&:element_text).join("\n") %>">
+    content="<%= @elements.filter {  |e| e.element_type === "md" }.map(&:element_text_en).join("\n") %>">
   <meta property="og:title" content="<%= @title %>" />
   <% if @revision.draft? %>
     <meta name="robots" content="noindex" />
@@ -42,10 +42,9 @@
     </thead>
 
     <tbody>
-      <% @elements.each do |left, right| %>
+      <% @elements.each do |element| %>
         <%= render partial: "labour_law/elements/row", locals: {
-          left: left,
-          right: right,
+          element: element,
           links: false,
         } %>
       <% end %>

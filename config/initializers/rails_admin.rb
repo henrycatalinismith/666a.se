@@ -10,10 +10,6 @@ RailsAdmin.config do |config|
   config.current_user_method(&:current_user)
   config.authorize_with :cancancan
 
-  config.model "LabourLaw::Element" do
-    configure :element_text, :text
-  end
-
   config.model "LabourLaw::Translation" do
     configure :translation_text, :text
   end
