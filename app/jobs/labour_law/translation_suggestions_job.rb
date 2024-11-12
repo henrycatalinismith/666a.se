@@ -3,7 +3,7 @@ class LabourLaw::TranslationSuggestionsJob < ApplicationJob
 
   def perform(element_id)
     element = LabourLaw::Element.find(element_id)
-    words = element.element_text.split(" ")
+    words = element.element_text_sv.split(" ")
     counts = {}
 
     length = words.length

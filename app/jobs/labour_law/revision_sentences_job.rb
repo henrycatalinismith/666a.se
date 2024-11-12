@@ -19,9 +19,7 @@ class LabourLaw::RevisionSentencesJob < ApplicationJob
     puts elements.count
 
     elements.each do |element|
-      translation = element.translations.first
-      next if translation.nil?
-      next if translation.missing?
+      next if element.element_text_en.blank?
       LabourLaw::ElementSentencesJob.perform_now(element.id)
     end
   end
