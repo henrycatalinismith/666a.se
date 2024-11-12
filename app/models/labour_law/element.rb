@@ -14,6 +14,12 @@ class LabourLaw::Element < ApplicationRecord
     document_heading: 4,
   }
 
+  enum translation_status: {
+    translation_missing: 0,
+    translation_draft: 1,
+    translation_published: 2,
+  }
+
   scope :index_order, -> { order(:element_index) }
 
   def translate(locale)
