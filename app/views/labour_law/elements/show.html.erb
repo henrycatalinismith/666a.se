@@ -55,7 +55,7 @@
     </tbody>
   </table>
 
-  <% if !current_user.nil? and current_user.admin? %>
+  <% if !current_user.nil? and current_user.role?("admin") %>
     <hr class="my-8">
     <p>
       <a href="/admin/labour_law~document/<%= @document.id %>" class="text-blue-700 underline">
