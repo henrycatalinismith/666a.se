@@ -5,7 +5,8 @@
   <% end %>
   <meta
     property="og:description"
-    content="<%= @elements.filter {  |e| e.element_type === "md" }.map(&:element_text_en).join("\n") %>">
+    content="<%= @elements.filter(&:paragraph_text?).map(&:element_text_en).join("\n") %>"
+  >
   <meta property="og:title" content="<%= @title %>" />
   <% if @revision.draft? %>
     <meta name="robots" content="noindex" />
