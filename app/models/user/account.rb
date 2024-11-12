@@ -1,7 +1,8 @@
 class User::Account < ApplicationRecord
   has_many :subscriptions, dependent: :destroy
   has_many :notifications, through: :subscriptions
-  has_many :roles, dependent: :destroy
+  has_many :authorizations, class_name: "User::Authorization", foreign_key: "account_id"
+  has_many :roles, through: :authorizations, class_name: "User::Role", foreign_key: "role_id"
 
   scope :chronological, -> { order(created_at: :asc) }
   scope :reverse_chronological, -> { order(created_at: :desc) }
@@ -17,8 +18,8 @@ class User::Account < ApplicationRecord
     message: :invalid_company_code,
   }
 
-  def admin?
-    !roles.admin.empty?
+  def role?(role)
+    roles.exists?(name: role)
   end
 
   def to_gdpr_json

@@ -6,7 +6,7 @@
     { name: 'News', path: '/news' },
   ]
 
-  if !current_user.nil? and current_user.admin?
+  if !current_user.nil? and current_user.role?("admin")
     links.unshift({ name: 'Admin', path: '/admin' })
   end
 %>

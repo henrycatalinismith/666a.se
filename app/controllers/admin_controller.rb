@@ -4,7 +4,7 @@ class AdminController < ApplicationController
   private
 
     def check_admin_user
-      unless current_user.admin?
+      unless current_user.role?("admin")
         flash[:alert] = "You can't be here!"
         redirect_to root_path
       end

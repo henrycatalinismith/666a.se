@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_11_12_190429) do
+ActiveRecord::Schema[8.0].define(version: 2024_11_12_192156) do
   create_table "flipper_features", force: :cascade do |t|
     t.string "key", null: false
     t.datetime "created_at", null: false
@@ -140,6 +140,15 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_12_190429) do
     t.index ["reset_password_token"], name: "index_user_accounts_on_reset_password_token", unique: true
   end
 
+  create_table "user_authorizations", id: :string, default: -> { "ULID()" }, force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "account_id"
+    t.string "role_id"
+    t.index ["account_id"], name: "index_user_authorizations_on_account_id"
+    t.index ["role_id"], name: "index_user_authorizations_on_role_id"
+  end
+
   create_table "user_notifications", id: :string, default: -> { "ULID()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -154,9 +163,8 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_12_190429) do
   create_table "user_roles", id: :string, default: -> { "ULID()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "account_id", null: false
-    t.integer "name"
-    t.index ["account_id"], name: "index_user_roles_on_account_id"
+    t.string "name", null: false
+    t.string "description", null: false
   end
 
   create_table "user_subscriptions", id: :string, default: -> { "ULID()" }, force: :cascade do |t|
@@ -208,9 +216,10 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_12_190429) do
   add_foreign_key "labour_law_revisions", "labour_law_documents", column: "document_id"
   add_foreign_key "labour_law_sentences", "labour_law_elements", column: "element_id"
   add_foreign_key "time_period_days", "time_period_weeks", column: "week_id"
+  add_foreign_key "user_authorizations", "user_accounts", column: "account_id"
+  add_foreign_key "user_authorizations", "user_roles", column: "role_id"
   add_foreign_key "user_notifications", "user_subscriptions", column: "subscription_id"
   add_foreign_key "user_notifications", "work_environment_documents", column: "document_id"
-  add_foreign_key "user_roles", "user_accounts", column: "account_id"
   add_foreign_key "user_subscriptions", "user_accounts", column: "account_id"
   add_foreign_key "work_environment_searches", "time_period_days", column: "day_id"
 end
