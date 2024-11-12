@@ -1,48 +1,48 @@
 <tr>
-  <% if left.document_heading? %>
+  <% if element.document_heading? %>
     <td class="prose text-base lg:text-2xl font-normal align-top <%= both_sides %> <%= left_classes %>">
-      <%= left.element_text %>
+      <%= element.element_text_sv %>
     </td>
     <td class="prose text-base lg:text-2xl font-normal align-top <%= both_sides %> <%= right_classes %>">
-      <%= right.element_text %>
+      <%= element.element_text_en %>
     </td>
-  <% elsif left.chapter_heading? or left.group_heading? %>
+  <% elsif element.chapter_heading? or element.group_heading? %>
     <td class="prose text-base lg:text-xl font-bold py-4 align-top text-ellipsis <%= both_sides %> <%= left_classes %>">
-      <%= left.element_text %>
+      <%= element.element_text_sv %>
     </td>
     <td class="prose text-base lg:text-xl font-bold py-4 align-top <%= both_sides %> <%= right_classes %>">
-      <%= right.element_text %>
+      <%= element.element_text_en %>
     </td>
-  <% elsif left.section_heading? %>
+  <% elsif element.section_heading? %>
     <td class="prose text-base lg:text-xl font-bold pt-4 align-top <%= both_sides %> <%= left_classes %>">
       <% if links %>
-        <a class="text-blue-700 underline" href="<%= labour_law_element_path(@document.document_slug, @revision.revision_code, left.element_slug) %>">
-          <%= left.element_text %>
+        <a class="text-blue-700 underline" href="<%= labour_law_element_path(@document.document_slug, @revision.revision_code, element.element_slug) %>">
+          <%= element.element_text_sv %>
         </a>
       <% else %>
-        <%= left.element_text %>
+        <%= element.element_text_sv %>
       <% end %>
     </td>
     <td class="prose text-base lg:text-xl font-bold pt-4 align-top <%= both_sides %> <%= right_classes %>">
       <% if links %>
-        <a class="text-blue-700 underline" href="<%= labour_law_element_path(@document.document_slug, @revision.revision_code, left.element_slug) %>">
-          <%= right.element_text %>
+        <a class="text-blue-700 underline" href="<%= labour_law_element_path(@document.document_slug, @revision.revision_code, element.element_slug) %>">
+          <%= element.element_text_en %>
         </a>
       <% else %>
-        <%= right.element_text %>
+        <%= element.element_text_en %>
       <% end %>
     </td>
   <% else %>
     <td class="prose text-xs md:text-base lg:text-lg py-4 align-top <%= both_sides %> <%= left_classes %>">
-      <%= @redcarpet.render(left.element_text).html_safe %>
+      <%= @redcarpet.render(element.element_text_sv).html_safe %>
     </td>
-    <% if left.translations.first.published? %>
+    <% if element.translations.first.published? %>
       <td class="prose text-xs md:text-base lg:text-lg py-4 align-top <<%= both_sides %> <%= right_classes %>">
-        <%= @redcarpet.render(right.element_text).html_safe %>
+        <%= @redcarpet.render(element.element_text_en).html_safe %>
       </td>
-    <% elsif left.translations.first.missing? %>
+    <% elsif element.translations.first.missing? %>
       <td class="prose text-xs md:text-base lg:text-lg py-4 align-top <<%= both_sides %> <%= right_classes %>">
-        <a href="https://github.com/666ase/666a/issues/<%= right.element_text %>" class="text-blue-700 underline">
+        <a href="https://github.com/666ase/666a/issues/<%= element.element_text_en %>" class="text-blue-700 underline">
           Help translate this paragraph to English.
         </a>
       </td>

@@ -21,10 +21,9 @@
     </thead>
 
     <tbody>
-      <% @elements.each do |left, right| %>
+      <% @elements.each do |element| %>
         <%= render partial: "labour_law/elements/row", locals: {
-          left: left,
-          right: right,
+          element: element,
           links: true,
         } %>
       <% end %>
