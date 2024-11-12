@@ -10,10 +10,6 @@ RailsAdmin.config do |config|
   config.current_user_method(&:current_user)
   config.authorize_with :cancancan
 
-  config.model "LabourLaw::Translation" do
-    configure :translation_text, :text
-  end
-
   config.model "LabourLaw::Revision" do
     edit do
       configure :elements do
@@ -70,7 +66,6 @@ RailsAdmin.config do |config|
         when "LabourLaw::Document" then true
         when "LabourLaw::Element" then true
         when "LabourLaw::Revision" then true
-        when "LabourLaw::Translation" then true
         when "TimePeriod::Day" then true
         when "TimePeriod::Week" then true
         when "User::Account" then true

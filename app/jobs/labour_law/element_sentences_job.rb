@@ -12,8 +12,8 @@ class LabourLaw::ElementSentencesJob < ApplicationJob
 
     element = LabourLaw::Element.find(id)
 
-    source_text = element.element_text
-    target_text = element.translations.first.translation_text
+    source_text = element.element_text_sv
+    target_text = element.element_text_en
 
     prompt = <<~EOP
       Given the following Swedish legal text and its English translation, produce a an array of sentence pairs.
