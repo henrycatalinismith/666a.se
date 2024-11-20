@@ -2,7 +2,7 @@
 
 ## Supported Versions
 
-666a operates under a rolling release model. Only the latest version of the `main` branch of [the official 666a repository](https://github.com/666ase/666a) receives security updates.
+666a operates under a rolling release model. Only the latest version of the `main` branch of [the official 666a repository](https://github.com/henrycatalinismith/666a.se) receives security updates.
 
 ## Reporting a Vulnerability
 

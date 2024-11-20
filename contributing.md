@@ -10,4 +10,4 @@ Drop a quick email to [henry@666a.se](mailto:henry@666a.se) and say hi. I care a
 
 ### GitHub
 
-Have a look at the [GitHub issues](https://github.com/666ase/666a/issues). Maybe you'll spot something you'd like to fix! Or maybe create an issue of your own?
+Have a look at the [GitHub issues](https://github.com/henrycatalinismith/666a.se/issues). Maybe you'll spot something you'd like to fix! Or maybe create an issue of your own?
