@@ -177,9 +177,6 @@ GEM
       faraday-net_http (>= 2.0, < 3.4)
       json
       logger
-    faraday-mashify (0.1.1)
-      faraday (~> 2.0)
-      hashie
     faraday-multipart (1.0.4)
       multipart-post (~> 2)
     faraday-net_http (3.3.0)
@@ -205,11 +202,9 @@ GEM
     fugit (1.11.1)
       et-orbi (~> 1, >= 1.2.11)
       raabro (~> 1.4)
-    gli (2.22.0)
     globalid (1.2.1)
       activesupport (>= 6.1)
     hashdiff (1.1.1)
-    hashie (5.0.0)
     htmlbeautifier (1.4.3)
     htmlentities (4.3.4)
     i18n (1.14.6)
@@ -388,12 +383,6 @@ GEM
     sentry-ruby (5.21.0)
       bigdecimal
       concurrent-ruby (~> 1.0, >= 1.0.2)
-    slack-ruby-client (2.4.0)
-      faraday (>= 2.0)
-      faraday-mashify
-      faraday-multipart
-      gli
-      hashie
     solid_cache (1.0.6)
       activejob (>= 7.2)
       activerecord (>= 7.2)
@@ -492,7 +481,6 @@ DEPENDENCIES
   sassc
   sentry-rails (~> 5.11)
   sentry-ruby (~> 5.11)
-  slack-ruby-client
   solid_cache
   solid_queue
   sprockets-rails
