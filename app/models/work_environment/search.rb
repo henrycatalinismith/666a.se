@@ -14,6 +14,24 @@ class WorkEnvironment::Search < ApplicationRecord
   scope :chronological, -> { order(date: :asc) }
   scope :reverse_chronological, -> { order(date: :desc) }
 
+  rails_admin do
+    object_label_method do
+      :search_label
+    end
+
+    list do
+      field :day
+      field :page_number
+      field :created_at
+      field :updated_at
+      sort_by :created_at
+    end
+  end
+
+  def search_label
+    "#{day.date.strftime("%Y-%m-%d")}:#{page_number}"
+  end
+
   def parameters(page = 1)
     {
       FromDate: day.date.strftime("%Y-%m-%d"),

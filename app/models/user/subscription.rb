@@ -18,6 +18,17 @@ class User::Subscription < ApplicationRecord
   normalizes :workplace_code, with: -> workplace_code { workplace_code.strip }
   validates :workplace_code, format: { with: /\A\d{8}\z/, allow_blank: true }
 
+  rails_admin do
+    list do
+      field :account
+      field :company_code
+      field :workplace_code
+      field :created_at
+      field :updated_at
+      sort_by :created_at
+    end
+  end
+
   def has_notification?(document_id)
     notifications.where(document_id:).count > 0
   end

@@ -13,4 +13,19 @@ class WorkEnvironment::Document < ApplicationRecord
     case_ongoing: 0,
     case_concluded: 1,
   }
+
+  rails_admin do
+    object_label_method do
+      :document_code
+    end
+
+    list do
+      field :document_code
+      field :case_name
+      field :company_name
+      field :created_at
+      field :updated_at
+      sort_by :created_at
+    end
+  end
 end
