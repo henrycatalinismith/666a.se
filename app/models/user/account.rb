@@ -36,4 +36,14 @@ class User::Account < ApplicationRecord
       },
     }
   end
+
+  rails_admin do
+    list do
+      field :email
+      field :roles
+      field :created_at
+      field :updated_at
+      sort_by :created_at
+    end
+  end
 end

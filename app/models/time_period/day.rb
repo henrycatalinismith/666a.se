@@ -16,6 +16,19 @@ class TimePeriod::Day < ApplicationRecord
     ingestion_aborted: 4,
   }
 
+  rails_admin do
+    object_label_method do
+      :ymd
+    end
+
+    list do
+      field :date
+      field :created_at
+      field :updated_at
+      sort_by :created_at
+    end
+  end
+
   def ymd
     date.strftime("%Y-%m-%d")
   end

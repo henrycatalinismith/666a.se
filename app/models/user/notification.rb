@@ -1,6 +1,7 @@
 class User::Notification < ApplicationRecord
   belongs_to :document, class_name: "WorkEnvironment::Document"
   belongs_to :subscription
+  has_one :account, through: :subscription
   scope :chronological, -> { order(created_at: :asc) }
   scope :reverse_chronological, -> { order(created_at: :desc) }
 
@@ -10,6 +11,16 @@ class User::Notification < ApplicationRecord
     email_error: 2,
     email_aborted: 3,
   }
+
+  rails_admin do
+    list do
+      field :document
+      field :account
+      field :created_at
+      field :updated_at
+      sort_by :created_at
+    end
+  end
 
   def icon
     if email_error?
