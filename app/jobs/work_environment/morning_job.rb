@@ -19,14 +19,11 @@ class WorkEnvironment::MorningJob < ApplicationJob
       day.ingestion_active!
     end
 
-    active_days = TimePeriod::Day.ingestion_active
-    active_days.each_with_index do |day, index|
-      if options[:cascade]
-        WorkEnvironment::DayJob.set(wait: index.seconds).perform_later(
-          day.date,
-          options
-        )
-      end
+    if options[:cascade]
+      WorkEnvironment::DayJob.perform_later(
+        day.date,
+        options
+      )
     end
   end
 end
