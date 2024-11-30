@@ -8,8 +8,10 @@ class User::NotificationJob < ApplicationJob
     @document = WorkEnvironment::Document.find_by(document_code:)
     return if @document.nil?
 
-    subscriptions =
-      User::Subscription.where(company_code: @document.company_code)
+    subscriptions = User::Subscription.where(
+      company_code: @document.company_code,
+      subscription_status: :active_subscription,
+    )
     notifications = []
     subscriptions.each do |subscription|
       if !subscription.has_notification?(@document.id)
