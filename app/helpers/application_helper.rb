@@ -17,6 +17,10 @@ module ApplicationHelper
   def posts
     [
       {
+        text: "Accidentally Sending Too Many HTTP Requests",
+        href: "/news/accidentally-sending-too-many-http-requests",
+      },
+      {
         text: "All laws now up to date!",
         href: "/news/all-laws-now-up-to-date"
       },
