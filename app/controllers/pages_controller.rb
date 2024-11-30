@@ -13,6 +13,7 @@ class PagesController < ApplicationController
       we-maxed-out-sendgrids-free-tier
       lets-update-the-english-translation-of-the-work-environment-act
       all-laws-now-up-to-date
+      accidentally-sending-too-many-http-requests
     ]
 
     @posts =

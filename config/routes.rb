@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   get "/dashboard", to: redirect("/work-environment")
 
   get "/news",
-    to: redirect("/news/all-laws-now-up-to-date"),
+    to: redirect("/news/accidentally-sending-too-many-http-requests"),
     permanent: false
 
   get "/news/:slug", to: "news#show", as: "news_post"
