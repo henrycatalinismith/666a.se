@@ -141,10 +141,8 @@ Rails.application.routes.draw do
 
   authenticated :user do
     get "/account", to: "users#account"
-
     post "/delete", to: "users#delete"
     post "/download", to: "users#download"
-
     match "/name", to: "users#name", via: %i[get patch]
     match "/email", to: "users#email", via: %i[get patch]
     match "/language", to: "users#language", via: %i[get patch]
