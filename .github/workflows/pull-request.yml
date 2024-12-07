@@ -1,0 +1,24 @@
+on: [pull_request]
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.2.2
+          bundler-cache: true
+
+      - name: rubocop
+        run: bundle exec rubocop
+
+      - name: Run Tests
+        env:
+          RAILS_ENV: test
+        run: |
+          bundle exec rake db:create db:migrate
+          bundle exec rails test
+          bundle exec rspec
