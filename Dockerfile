@@ -2,7 +2,7 @@
 
 # Make sure RUBY_VERSION matches the Ruby version in .ruby-version and Gemfile
 ARG RUBY_VERSION=3.2.2
-FROM ruby:$RUBY_VERSION-slim as base
+FROM ruby:$RUBY_VERSION-bullseye as base
 
 LABEL fly_launch_runtime="rails"
 
