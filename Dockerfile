@@ -17,8 +17,7 @@ ENV RAILS_ENV="production" \
 
 # Update gems and bundler
 RUN gem update --system --no-document && \
-    gem install -N bundler && \
-    bundle config set force_ruby_platform true
+    gem install -N bundler
 
 # Throw-away build stage to reduce size of final image
 FROM base as build
