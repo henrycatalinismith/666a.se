@@ -2,7 +2,7 @@
 
 # Make sure RUBY_VERSION matches the Ruby version in .ruby-version and Gemfile
 ARG RUBY_VERSION=3.2.2
-FROM ruby:$RUBY_VERSION-bookworm as base
+FROM docker.io/library/ruby:$RUBY_VERSION-slim AS base
 
 LABEL fly_launch_runtime="rails"
 
@@ -14,10 +14,6 @@ ENV RAILS_ENV="production" \
     BUNDLE_WITHOUT="development:test" \
     BUNDLE_DEPLOYMENT="1" \
     LITESTACK_DATA_PATH="/data"
-
-# Update gems and bundler
-RUN gem update --system --no-document && \
-    gem install -N bundler
 
 # Throw-away build stage to reduce size of final image
 FROM base as build
