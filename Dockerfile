@@ -24,7 +24,7 @@ FROM base as build
 
 # Install packages needed to build gems
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y build-essential pkg-config git openssh-client gnupg curl glibc-source
+    apt-get install --no-install-recommends -y build-essential pkg-config git openssh-client gnupg curl
 
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
 RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
