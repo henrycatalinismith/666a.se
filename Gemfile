@@ -8,7 +8,6 @@ gem "sqlite3", ">= 2.1"
 
 gem "solid_cache"
 gem "solid_queue"
-gem "puma", ">= 5.0"
 gem "sprockets-rails"
 gem "tailwindcss-rails"
 gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
@@ -49,3 +48,5 @@ gem "cancancan"
 
 gem "ruby-openai", "~> 7.1"
 gem "foreman"
+
+gem "puma", "= 6.5.0"
