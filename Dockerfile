@@ -17,7 +17,7 @@ ENV RAILS_ENV="production" \
 FROM base AS build
 
 # Install Alpine packages needed to build gems
-RUN apk add --no-cache build-base git openssh-client curl libc6-compat sqlite-dev nodejs yarn
+RUN apk add --no-cache build-base git openssh-client curl libc6-compat sqlite-dev nodejs yarn tzdata
 
 # Install application gems
 COPY --link Gemfile Gemfile.lock ./
