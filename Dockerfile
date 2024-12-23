@@ -2,7 +2,7 @@
 # check=error=true
 
 ARG RUBY_VERSION=3.2.2
-FROM ruby:$RUBY_VERSION-alpine AS base
+FROM docker.io/library/ruby:$RUBY_VERSION-slim AS base
 
 # Rails app lives here
 WORKDIR /rails
@@ -16,8 +16,13 @@ ENV RAILS_ENV="production" \
 # Throw-away build stage to reduce size of final image
 FROM base AS build
 
-# Install Alpine packages needed to build gems
-RUN apk add --no-cache build-base git openssh-client curl libc6-compat sqlite-dev nodejs yarn
+# Install packages needed to build gems
+RUN apt-get update -qq && \
+    apt-get install --no-install-recommends -y build-essential pkg-config git openssh-client gnupg curl libc6
+
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+RUN apt-get update -qq && apt-get install --no-install-recommends -y nodejs yarn
 
 # Install application gems
 COPY --link Gemfile Gemfile.lock ./
@@ -33,15 +38,17 @@ RUN SECRET_KEY_BASE=DUMMY ./bin/rails assets:precompile
 # Final stage for app image
 FROM base
 
-# Install runtime packages
-RUN apk add --no-cache curl sqlite-libs
+# Install packages needed for deployment
+RUN apt-get update -qq && \
+    apt-get install --no-install-recommends -y curl libsqlite3-0 && \
+    rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
 # Copy built artifacts: gems, application
 COPY --from=build /usr/local/bundle /usr/local/bundle
 COPY --from=build /rails /rails
 
 # Run and own only the runtime files as a non-root user for security
-RUN adduser -D -h /home/rails rails && \
+RUN useradd rails --create-home --shell /bin/bash && \
     mkdir /data && \
     chown -R rails:rails db log tmp /data
 USER rails:rails
