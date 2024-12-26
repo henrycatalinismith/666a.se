@@ -8,7 +8,7 @@ class TimePeriod::Day < ApplicationRecord
   scope :reverse_chronological, -> { order(date: :desc) }
   scope :last_two_weeks, -> { where("date >= ?", 2.weeks.ago) }
 
-  enum ingestion_status: {
+  enum :ingestion_status, {
     ingestion_pending: 0,
     ingestion_active: 1,
     ingestion_complete: 2,

@@ -5,7 +5,7 @@ class User::Notification < ApplicationRecord
   scope :chronological, -> { order(created_at: :asc) }
   scope :reverse_chronological, -> { order(created_at: :desc) }
 
-  enum email_status: {
+  enum :email_status, {
     email_pending: 0,
     email_success: 1,
     email_error: 2,

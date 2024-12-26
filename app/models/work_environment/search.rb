@@ -1,7 +1,7 @@
 class WorkEnvironment::Search < ApplicationRecord
   belongs_to :day, class_name: "TimePeriod::Day"
 
-  enum result_status: {
+  enum :result_status, {
     result_pending: 0,
     result_fetching: 1,
     result_ready: 2,

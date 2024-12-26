@@ -1,7 +1,7 @@
 class LabourLaw::Document < ApplicationRecord
   has_many :revisions, dependent: :destroy
 
-  enum document_status: {
+  enum :document_status, {
     draft: 0,
     published: 1,
   }

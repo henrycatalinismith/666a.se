@@ -6,7 +6,7 @@ class LabourLaw::Element < ApplicationRecord
   validates :element_text, presence: true
   validates :element_type, presence: true
 
-  enum element_type: {
+  enum :element_type, {
     paragraph_text: 0,
     section_heading: 1,
     chapter_heading: 2,
@@ -14,7 +14,7 @@ class LabourLaw::Element < ApplicationRecord
     document_heading: 4,
   }
 
-  enum translation_status: {
+  enum :translation_status, {
     translation_missing: 0,
     translation_draft: 1,
     translation_published: 2,

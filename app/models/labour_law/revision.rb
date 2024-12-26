@@ -4,7 +4,7 @@ class LabourLaw::Revision < ApplicationRecord
   has_one :child, foreign_key: :parent_id, class_name: "LabourLaw::Revision", dependent: :destroy
   has_many :elements, dependent: :destroy
 
-  enum revision_status: {
+  enum :revision_status, {
     draft: 0,
     published: 1,
     replaced: 2,
