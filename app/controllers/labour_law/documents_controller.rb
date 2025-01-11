@@ -4,6 +4,7 @@ class LabourLaw::DocumentsController < ApplicationController
   def index
     @page_title = "English Translations of Swedish Labour Law"
     @documents = LabourLaw::Document.published
+    redirect_to "https://lagstiftning.github.io/", allow_other_host: true
   end
 
   def show
