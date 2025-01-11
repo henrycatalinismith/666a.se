@@ -112,14 +112,13 @@ Rails.application.routes.draw do
   devise_for :users,
              class_name: "User::Account",
              controllers: {
-               registrations: "registrations",
                sessions: "sessions"
              },
              path: "",
+             skip: [:registrations],
              path_names: {
                sign_in: "login",
                sign_out: "logout",
-               sign_up: "register",
                password: "password"
              }
 
