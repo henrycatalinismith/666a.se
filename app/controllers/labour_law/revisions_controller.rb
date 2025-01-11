@@ -31,6 +31,16 @@ class LabourLaw::RevisionsController < ApplicationController
     end
 
     if @document.document_code == "aml" then
+      redirect_to "https://lagstiftning.github.io/arbetsmiljolagen/2023:349", allow_other_host: true
+    elsif @document.document_code == "mbl" then
+      redirect_to "https://lagstiftning.github.io/medbestammandelagen/2021:1114", allow_other_host: true
+    elsif @document.document_code == "las" then
+      redirect_to "https://lagstiftning.github.io/lagen-om-anstallningsskydd/2022:836", allow_other_host: true
+    elsif @document.document_code == "atl" then
+      redirect_to "https://lagstiftning.github.io/arbetstidslagen/2022:450", allow_other_host: true
+    end
+
+    if @document.document_code == "aml" then
       @page_title = "The Swedish Work Environment Act"
     elsif @document.document_code == "mbl" then
       @page_title = "The Swedish Co-Determination Act"
