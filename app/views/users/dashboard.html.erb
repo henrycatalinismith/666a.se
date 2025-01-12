@@ -18,8 +18,7 @@
     <% if current_user.nil? %>
       <p>
         In order to subscribe to alerts, you must first
-        <%= link_to "log in", new_user_session_path, class: "text-blue-700 underline" %>
-        or <%= link_to "sign up", new_user_registration_path, class: "text-blue-700 underline"  %>.
+        <%= link_to "log in", new_user_session_path, class: "text-blue-700 underline" %>.
       </p>
     <% end %>
 
