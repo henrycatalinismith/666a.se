@@ -73,4 +73,4 @@ But 2023 wasn't a regular year. Of particular note were [Tesla's failed Solna di
 It seems unlikely the Spotify case will come to this. Their stance is clear: they'll instruct their overseas workforce to pick up these tasks rather than engage in collective bargaining with their Swedish workforce.
 
 I think that's a really exciting move – part of a strategy conceived in early 2023, when they filed for their night work ban exemption the day after the formation of the Spotify Unionen club. Back then, it had been years since Unionen had last invoked [section 45 of the Swedish Co-Determination Act
-](/labour-law/codetermination-act/2021:1114/section-45), which I bet made this seem like more of a risk analysis slam dunk than it might seem now.
+](https://lagstiftning.github.io/medbestammandelagen/2021:1114/section-45), which I bet made this seem like more of a risk analysis slam dunk than it might seem now.
