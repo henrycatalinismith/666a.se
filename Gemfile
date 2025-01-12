@@ -49,3 +49,5 @@ gem "cancancan"
 
 gem "ruby-openai", "~> 7.1"
 gem "foreman"
+
+gem "faker", "~> 3.5"
