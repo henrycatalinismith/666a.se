@@ -3,7 +3,7 @@ class NoticeMailer < ApplicationMailer
     @user = params[:user]
     mail(
       to: @user.email,
-      subject: "666a email alerts are temporarily offline",
+      subject: t("notice_mailer.subject"),
       from: '"666a" <henry@666a.se>'
     )
   end
