@@ -1,5 +1,19 @@
 sv:
 
+  notice_mailer:
+    subject: "666a ska stängas"
+    text: >
+      Hej,
+
+      Jag ska stänger ner 666a.
+
+      Det kommer att vara online till slutet av mars och mer information finns på
+      https://henry.catalinismith.com/2025/01/12/shutting-down-666a/
+
+      Tack!
+
+      Henry
+
   home:
     blurb: "Notiser om arbetsmiljön i mejlen"
     pitch: "Ta del av offentliga handlingar hos Arbetsmiljöverket så snart de publicerats."

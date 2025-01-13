@@ -1,5 +1,19 @@
 en:
 
+  notice_mailer:
+    subject: "666a is shutting down"
+    text: >
+      Hey there,
+
+      I'm shutting down 666a.
+
+      It'll be online until the end of March and more details are available at
+      https://henry.catalinismith.com/2025/01/12/shutting-down-666a/
+
+      Thanks!
+
+      Henry
+
   home:
     blurb: "Work Environment Email Alerts"
     pitch: >
