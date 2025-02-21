@@ -70,13 +70,13 @@ class LabourLaw::ElementsController < ApplicationController
     end
 
     if @document.document_code == "aml" then
-      redirect_to "https://lagstiftning.github.io/arbetsmiljolagen/2023:349/#{@element.element_slug}", allow_other_host: true
+      redirect_to "https://lagstiftning.codeberg.page/arbetsmiljolagen/2023:349/#{@element.element_slug}", allow_other_host: true
     elsif @document.document_code == "mbl" then
-      redirect_to "https://lagstiftning.github.io/medbestammandelagen/2021:1114//#{@element.element_slug}", allow_other_host: true
+      redirect_to "https://lagstiftning.codeberg.page/medbestammandelagen/2021:1114//#{@element.element_slug}", allow_other_host: true
     elsif @document.document_code == "las" then
-      redirect_to "https://lagstiftning.github.io/lagen-om-anstallningsskydd/2022:836//#{@element.element_slug}", allow_other_host: true
+      redirect_to "https://lagstiftning.codeberg.page/lagen-om-anstallningsskydd/2022:836//#{@element.element_slug}", allow_other_host: true
     elsif @document.document_code == "atl" then
-      redirect_to "https://lagstiftning.github.io/arbetstidslagen/2022:450//#{@element.element_slug}", allow_other_host: true
+      redirect_to "https://lagstiftning.codeberg.page/arbetstidslagen/2022:450//#{@element.element_slug}", allow_other_host: true
     end
 
     if @document.document_code == "aml" then
