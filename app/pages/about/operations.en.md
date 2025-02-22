@@ -14,7 +14,7 @@ The 666a database is backed up daily to a consumer-grade Samsung SSD.
 
 ## Restore process
 
-Restoring the database requires uploading the SQLite data files to the Fly volume. The following set of instructions is based on [Richard Neil Ilagan's “Copying files to a volume on Fly.io” blog post](https://www.richardneililagan.com/posts/copying-files-to-fly-io-volume/). 
+Restoring the database requires uploading the SQLite data files to the Fly volume. The following set of instructions is based on [Richard Neil Ilagan's “Copying files to a volume on Fly.io” blog post](https://www.richardneililagan.com/posts/copying-files-to-fly-io-volume/).
 
 ### Wireguard config
 
@@ -42,7 +42,7 @@ scp -i 666a.key data.sqlite3-wal root@666a.internal:/data/production/data.sqlite
 
 ### `RAILS_MASTER_KEY`
 
-The Rails master key is for encrypting and decrypting [the credentials file](https://github.com/henrycatalinismith/666a.se/blob/main/config/credentials.yml.enc). In 666a, that file is only used to store the `secret_key_base` which Rails puts in there by default. Rails uses that value to sign and encrypt cookies.
+The Rails master key is for encrypting and decrypting [the credentials file](https://codeberg.org/henrycatalinismith/666a.se/src/branch/main/config/credentials.yml.enc). In 666a, that file is only used to store the `secret_key_base` which Rails puts in there by default. Rails uses that value to sign and encrypt cookies.
 
 666a won't deploy without a `RAILS_MASTER_KEY` value. But it doesn't matter too much to deploy it with a _new_ value. The only downside would be that it'd log everyone out, and 666a isn't really the kind of service you need to interact with often, so who cares.
 
