@@ -13,7 +13,7 @@ Ruby 3.2.2, Node 20.11.1
 ### Clone the repo
 
 ```
-git clone git@github.com:henrycatalinismith/666a.se.git
+git clone git@codeberg.org:henrycatalinismith/666a.se.git
 cd 666a
 ```
 

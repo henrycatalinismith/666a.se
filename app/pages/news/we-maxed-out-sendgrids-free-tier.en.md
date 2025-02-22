@@ -12,7 +12,7 @@ This is a total lyxproblem, and a milestone I've been anticipating for a while. 
 
 Sendgrid performs some kind of background check on your account before they'll let you upgrade your billing tier and start sending larger volumes of email. I'd already completed this process in advance, months ago in fact, because the idea was to avoid an outage entirely and simply upgrade ahead of time shortly before hitting the limit.
 
-I'd calculated that I had another month or two before it would become necessary to pay. What I hadn't counted on was that [my cleanup work](https://github.com/henrycatalinismith/666a.se/issues/46) after the [new Arbetsmiljöverket Webdiarium](/news/about-arbetsmiljoverkets-new-webdiarium) would be enough to tip us over the limit ahead of schedule. I try really hard to keep this thing running as reliably as possible and dropped the ball very slightly in this case.
+I'd calculated that I had another month or two before it would become necessary to pay. What I hadn't counted on was that my cleanup work after the [new Arbetsmiljöverket Webdiarium](/news/about-arbetsmiljoverkets-new-webdiarium) would be enough to tip us over the limit ahead of schedule. I try really hard to keep this thing running as reliably as possible and dropped the ball very slightly in this case.
 
 The extra bill brings 666a's monthly running costs to somewhere in the 300kr range. It's roughly triple what it was before, but still manageable. This Sendgrid billing tier is overpowered for 666a's current scale, so in the near future I'll be looking into cheaper suppliers with smaller limits.
 
